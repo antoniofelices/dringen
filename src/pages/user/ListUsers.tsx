@@ -1,7 +1,6 @@
 // import { useQuery } from '@tanstack/react-query'
 // import Loading from '@components/base/Loading'
 // import ErrorApi from '@components/base/ErrorApi'
-import Container from '@components/base/Container'
 import ButtonBack from '@components/base/ButtonBack'
 // import Card from '@/components/patterns/Card'
 // import { getPerson } from '@/services/moviesService'
@@ -26,7 +25,7 @@ const ListUsers = () => {
     //     return <ErrorApi message={personErrorType.message} />
 
     return (
-        <Container>
+        <>
             <article>
                 <div className="grid lg:grid-cols-3 gap-7 place-content-between">
                     <div className="lg:col-start-2 lg:col-end-4">
@@ -37,7 +36,7 @@ const ListUsers = () => {
                 </div>
             </article>
             <ButtonBack />
-        </Container>
+        </>
     )
 }
 

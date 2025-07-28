@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
 import Header from '@layouts/Header'
-import Footer from '@/layouts/Footer'
+import Aside from '@layouts/Aside'
 
 export const Route = createFileRoute('/_auth')({
     beforeLoad: async () => {
@@ -15,10 +15,12 @@ export const Route = createFileRoute('/_auth')({
 
 function AuthLayout() {
     return (
-        <>
+        <div className="antialiase">
             <Header />
-            <Outlet />
-            <Footer />
-        </>
+            <Aside />
+            <main className="p-4 md:ml-64 h-auto pt-20">
+                <Outlet />
+            </main>
+        </div>
     )
 }

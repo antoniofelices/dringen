@@ -8,10 +8,7 @@ const MenuItems = ({
     content: RoutesProps[]
     variant?: string
 }) => {
-    const classesListElement =
-        variant === 'inverse'
-            ? 'px-4 py-3 lg:py-0'
-            : 'border-t border-gray-500 px-4 py-6 lg:border-t-0 lg:py-0'
+    const classesListElement = variant === 'inverse' ? '' : ''
 
     const menuData = content.toSorted(
         (a, b) => (a.orderMenu ?? 0) - (b.orderMenu ?? 0)
@@ -20,7 +17,7 @@ const MenuItems = ({
     return (
         <>
             {menuData.map((item) => (
-                <li key={item.id} className={`font-bold ${classesListElement}`}>
+                <li key={item.id} className={`${classesListElement}`}>
                     <Link to={`/${item.url}` as any}>{item.text}</Link>
                 </li>
             ))}

@@ -18,6 +18,7 @@ import { Route as AuthHealthConsumerIdRouteImport } from './routes/_auth/health-
 const SignUpLazyRouteImport = createFileRoute('/sign-up')()
 const SignInLazyRouteImport = createFileRoute('/sign-in')()
 const IndexLazyRouteImport = createFileRoute('/')()
+const AuthUserProfileLazyRouteImport = createFileRoute('/_auth/user/profile')()
 const AuthUserListLazyRouteImport = createFileRoute('/_auth/user/list')()
 const AuthHealthConsumerListLazyRouteImport = createFileRoute(
   '/_auth/health-consumer/list',
@@ -42,6 +43,13 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+const AuthUserProfileLazyRoute = AuthUserProfileLazyRouteImport.update({
+  id: '/user/profile',
+  path: '/user/profile',
+  getParentRoute: () => AuthRoute,
+} as any).lazy(() =>
+  import('./routes/_auth/user/profile.lazy').then((d) => d.Route),
+)
 const AuthUserListLazyRoute = AuthUserListLazyRouteImport.update({
   id: '/user/list',
   path: '/user/list',
@@ -76,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/user/$id': typeof AuthUserIdRoute
   '/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
   '/user/list': typeof AuthUserListLazyRoute
+  '/user/profile': typeof AuthUserProfileLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
@@ -85,6 +94,7 @@ export interface FileRoutesByTo {
   '/user/$id': typeof AuthUserIdRoute
   '/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
   '/user/list': typeof AuthUserListLazyRoute
+  '/user/profile': typeof AuthUserProfileLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,6 +106,7 @@ export interface FileRoutesById {
   '/_auth/user/$id': typeof AuthUserIdRoute
   '/_auth/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
   '/_auth/user/list': typeof AuthUserListLazyRoute
+  '/_auth/user/profile': typeof AuthUserProfileLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/health-consumer/list'
     | '/user/list'
+    | '/user/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -116,6 +128,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/health-consumer/list'
     | '/user/list'
+    | '/user/profile'
   id:
     | '__root__'
     | '/'
@@ -126,6 +139,7 @@ export interface FileRouteTypes {
     | '/_auth/user/$id'
     | '/_auth/health-consumer/list'
     | '/_auth/user/list'
+    | '/_auth/user/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,6 +179,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/user/profile': {
+      id: '/_auth/user/profile'
+      path: '/user/profile'
+      fullPath: '/user/profile'
+      preLoaderRoute: typeof AuthUserProfileLazyRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/user/list': {
       id: '/_auth/user/list'
       path: '/user/list'
@@ -201,6 +222,7 @@ interface AuthRouteChildren {
   AuthUserIdRoute: typeof AuthUserIdRoute
   AuthHealthConsumerListLazyRoute: typeof AuthHealthConsumerListLazyRoute
   AuthUserListLazyRoute: typeof AuthUserListLazyRoute
+  AuthUserProfileLazyRoute: typeof AuthUserProfileLazyRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
@@ -208,6 +230,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthUserIdRoute: AuthUserIdRoute,
   AuthHealthConsumerListLazyRoute: AuthHealthConsumerListLazyRoute,
   AuthUserListLazyRoute: AuthUserListLazyRoute,
+  AuthUserProfileLazyRoute: AuthUserProfileLazyRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
