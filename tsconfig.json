@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        /* Vitest */
+        "types": ["@vitest/browser/providers/playwright"],
+        "paths": {
+            "@/*": ["src/*"],
+            "@context/*": ["src/context/*"],
+            "@components/*": ["src/components/*"],
+            "@data/*": ["src/data/*"],
+            "@helpers/*": ["src/helpers/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@layouts/*": ["src/layouts/*"],
+            "@pages/*": ["src/pages/*"],
+            "@tests/*": ["src/__tests__/*"],
+            "@types/*": ["src/types/*"],
+            "@services/*": ["src/services/*"]
+        }
+    },
+    "files": [],
+    "references": [
+        { "path": "./tsconfig.app.json" },
+        { "path": "./tsconfig.node.json" }
+    ]
+}
