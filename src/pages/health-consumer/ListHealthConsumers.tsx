@@ -3,7 +3,7 @@ import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
 // import Card from '@/components/patterns/Card'
-import { getListHealthConsumer } from '@/services/supabaseApiService'
+import { getListHealthConsumer } from '@/services/supabaseService'
 // import { APIMOVIESIMAGESURL } from '@/config/config'
 // import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
@@ -30,9 +30,9 @@ const ListHealthConsumers = () => {
                 <div className="grid lg:grid-cols-3 gap-7 place-content-between">
                     <div className="lg:col-start-2 lg:col-end-4">
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-                            {listData.map((item) => {
-                                ;<h1>{item.profile_id}</h1>
-                            })}
+                            {listData.map((item) => (
+                                <span>{item.profile_id}</span>
+                            ))}
                         </h1>
                     </div>
                 </div>

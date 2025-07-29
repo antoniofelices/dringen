@@ -18,10 +18,10 @@ In order to use the Supabase Auth functionality, you will require an API key [Su
 - Typescript.
 - Vite.
 - Vitest.
-- Axios.
 - TanStack Query.
 - TanStack Router.
 - Taildwind.
+- Supabase.
 
 ## Documentation
 

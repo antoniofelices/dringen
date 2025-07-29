@@ -23,3 +23,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vscode
+
+# Supabase
+supabase/.temp/
+supabase/logs/
+supabase/.branches/
+supabase/.env
+supabase/.env.keys
+supabase/.env.local
+supabase/.env.*.local

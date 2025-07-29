@@ -1,7 +1,8 @@
-import { createClient, type AuthResponse } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
+import type { Database } from '@/types/database.types'
 
-export const supabase = createClient(SUPABASEURL!, SUPABASEANONKEY!)
+export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
 export const registerUser = async (
     email: string,
@@ -25,4 +26,10 @@ export const signInWithPassword = async (
         email: email,
         password: password,
     })
+}
+
+export const getListHealthConsumer = async () => {
+    const { data, error } = await supabase.from('hpi').select('*')
+    if (error) throw error
+    return data
 }
