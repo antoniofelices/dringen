@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import FormAuth from '@/components/patterns/FormAuth'
 import Logo from '@/components/base/Logo'
 import contentForm from '@/data/formAuth'
-import { signInWithPassword } from '@/services/supabaseService'
+import { signInWithPassword } from '@/services/supabaseAuthService'
 import { getUserData } from '@/helpers/formAuthUtils'
 import { useFormErrors } from '@/hooks/useFormErrors'
 

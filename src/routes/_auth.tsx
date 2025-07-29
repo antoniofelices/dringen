@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import { supabase } from '@/services/supabaseService'
+import { supabase } from '@/services/supabaseAuthService'
 import Header from '@layouts/Header'
 import Aside from '@layouts/Aside'
 

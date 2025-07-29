@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { supabase } from '@/services/supabaseService'
+import { supabase } from '@/services/supabaseAuthService'
 import Button from '@components/base/Button'
 import ErrorApi from '@components/base/ErrorApi'
 import content from '@data/pages/singleUser'

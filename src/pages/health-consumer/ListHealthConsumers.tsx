@@ -1,28 +1,28 @@
-// import { useQuery } from '@tanstack/react-query'
-// import Loading from '@components/base/Loading'
-// import ErrorApi from '@components/base/ErrorApi'
+import { useQuery } from '@tanstack/react-query'
+import Loading from '@components/base/Loading'
+import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
 // import Card from '@/components/patterns/Card'
-// import { getPerson } from '@/services/moviesService'
+import { getListHealthConsumer } from '@/services/supabaseApiService'
 // import { APIMOVIESIMAGESURL } from '@/config/config'
 // import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
 
 const ListHealthConsumers = () => {
-    // const {
-    //     data: personData,
-    //     isPending: personLoading,
-    //     isError: personError,
-    //     error: personErrorType,
-    // } = useQuery({
-    //     queryKey: ['singlePerson', id],
-    //     queryFn: () => getPerson(id),
-    // })
+    const {
+        data: listData,
+        isPending: listLoading,
+        isError: listError,
+        error: listErrorType,
+    } = useQuery({
+        queryKey: ['listUsers'],
+        queryFn: () => getListHealthConsumer(),
+    })
 
-    // if (personLoading) return <Loading />
+    if (listLoading) return <Loading />
 
-    // if (personError && personErrorType)
-    //     return <ErrorApi message={personErrorType.message} />
+    if (listError && listErrorType)
+        return <ErrorApi message={listErrorType.message} />
 
     return (
         <>
@@ -30,7 +30,9 @@ const ListHealthConsumers = () => {
                 <div className="grid lg:grid-cols-3 gap-7 place-content-between">
                     <div className="lg:col-start-2 lg:col-end-4">
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-                            {/* {personData.name} */}
+                            {listData.map((item) => {
+                                ;<h1>{item.profile_id}</h1>
+                            })}
                         </h1>
                     </div>
                 </div>
