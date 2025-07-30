@@ -29,7 +29,7 @@ export const signInWithPassword = async (
 }
 
 export const getListHealthConsumer = async () => {
-    const { data, error } = await supabase.from('hpi').select('*')
+    const { data, error } = await supabase.from('profiles').select('*')
     if (error) throw error
     return data
 }
