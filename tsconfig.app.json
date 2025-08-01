@@ -31,7 +31,7 @@
             "@/*": ["src/*"],
             "@context/*": ["src/context/*"],
             "@components/*": ["src/components/*"],
-            "@data/*": ["src/data/*"],
+            "@data/*": ["src/config/data/*"],
             "@helpers/*": ["src/helpers/*"],
             "@hooks/*": ["src/hooks/*"],
             "@layouts/*": ["src/layouts/*"],

@@ -33,3 +33,12 @@ export const getListHealthConsumer = async () => {
     if (error) throw error
     return data
 }
+
+export const getSingleHealthConsumer = async (id: string) => {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select(`*, pfsh("*"), hpi("*")`)
+        .eq('id', id)
+    if (error) throw error
+    return data[0]
+}

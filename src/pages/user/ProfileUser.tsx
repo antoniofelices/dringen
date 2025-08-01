@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
 import Button from '@components/base/Button'
 import ErrorApi from '@components/base/ErrorApi'
-import content from '@data/pages/singleUser'
+import content from '@/config/data/pages/singleUser'
 
 const ProfileUser = () => {
     const navigate = useNavigate()

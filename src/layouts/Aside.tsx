@@ -1,6 +1,6 @@
 import MenuItems from '@/components/base/Menutems'
-import healthConsumers from '@/data/menus/healthConsumers'
-import users from '@data/menus/users'
+import healthConsumers from '@/config/data/menus/healthConsumers'
+import users from '@/config/data/menus/users'
 import { Link } from '@tanstack/react-router'
 
 const Aside = () => {

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
 import { getListHealthConsumer } from '@/services/supabaseService'
-import content from '@data/pages/listHealthConsumer'
+import content from '@/config/data/pages/listHealthConsumer'
 // import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
 
@@ -18,6 +18,8 @@ const ListHealthConsumers = () => {
         queryKey: ['listUsers'],
         queryFn: () => getListHealthConsumer(),
     })
+
+    const navigate = useNavigate()
 
     if (listLoading) return <Loading />
 
@@ -51,7 +53,16 @@ const ListHealthConsumers = () => {
                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
                                 >
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <Link to="/">{content.edit}</Link>
+                                        <button
+                                            onClick={() =>
+                                                navigate({
+                                                    to: `/health-consumer/${item.id}`,
+                                                })
+                                            }
+                                            role="button"
+                                        >
+                                            {content.edit}
+                                        </button>
                                     </td>
                                     <td className="px-6 py-4">
                                         {item.user_name}
