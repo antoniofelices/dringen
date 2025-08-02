@@ -1,255 +1,82 @@
 import { useState } from 'react'
 import Diagnosis from '@components/sections/Diagnosis'
+import Examination from '@components/sections/Examination'
 import { transformDate } from '@helpers/utils'
 
-const Tabs = ({ content }) => {
-    const [value, setValue] = useState()
+const MedicalRecord = ({ content }: { content: any }) => {
+    const [activeTabs, setActiveTabs] = useState({})
 
-    // const currentDisease = {
-    //     examination: content.examination
-    // }
+    const tabs = [
+        { id: 'examination', label: 'Examination' },
+        { id: 'diagnosis', label: 'Diagnosis' },
+        { id: 'auxiliary', label: 'Auxiliary exams' },
+        { id: 'treatments', label: 'Treatments' },
+    ]
+
+    const setActiveTab = (itemId: string, tabId: string) => {
+        setActiveTabs((prev) => ({
+            ...prev,
+            [itemId]: tabId,
+        }))
+    }
+
+    const getActiveTab = (itemId: string) => {
+        return activeTabs[itemId] || 'examination'
+    }
+
+    const renderContent = (item: any, activeTab: string) => {
+        switch (activeTab) {
+            case 'examination':
+                return <Examination content={item} />
+            case 'diagnosis':
+                return <Diagnosis id={item.id} />
+            case 'auxiliary':
+                return <p>{item.additional_tests}</p>
+            case 'treatments':
+                return <p>{item.treatment}</p>
+            default:
+                return null
+        }
+    }
 
     return (
-        <>
-            {content.dn_hpi.map((item) => (
-                <details key={item.id} className="my-5">
-                    <summary>{transformDate(item.date_of)}</summary>
-                    <div className="grid grid-cols-4 gap-4">
-                        <div>
-                            <button>Examinataion</button>
-                            <div>
-                                <div className="mt-4">
-                                    <h4>Explain</h4>
-                                    <p>{item.examination}</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h4>Mood</h4>
-                                    <p>{item.mood}</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h4>Exam</h4>
-                                    <p>ADD FIELD TEST</p>
-                                </div>
-                                <div className="mt-4">
-                                    <h4>FB</h4>
-                                    <table className="w-full text-sm text-left rtl:text-right">
-                                        <thead className="text-xs bg-gray-200 dark:bg-gray-700">
-                                            <tr>
-                                                <th className="px-6 py-3">
-                                                    Eating
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Thirst
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Urine
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Feces
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Sleep
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                                <td className="px-6 py-4">
-                                                    {item.eating}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.thirst}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.urine}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.feces}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.sleep}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="mt-4">
-                                    <h4>Vital functions</h4>
-                                    <table className="w-full text-sm text-left rtl:text-right">
-                                        <thead className="text-xs bg-gray-200 dark:bg-gray-700">
-                                            <tr>
-                                                <th className="px-6 py-3">T</th>
-                                                <th className="px-6 py-3">
-                                                    PAS
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    PAD
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    FC
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    FR
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Oximetry
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                                <td className="px-6 py-4">
-                                                    {item.heat ? (
-                                                        <>{item.heat}</>
-                                                    ) : (
-                                                        <>0</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.pas ? (
-                                                        <>{item.pas}</>
-                                                    ) : (
-                                                        <>0</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.pad ? (
-                                                        <>{item.pad}</>
-                                                    ) : (
-                                                        <>0</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.fc ? (
-                                                        <>{item.fc}</>
-                                                    ) : (
-                                                        <>0</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.fr ? (
-                                                        <>{item.fr}</>
-                                                    ) : (
-                                                        <>0</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.oximetry ? (
-                                                        <>{item.oximetry}</>
-                                                    ) : (
-                                                        <>0%</>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="mt-4">
-                                    <h4>Nutrition indicators</h4>
-                                    <table className="w-full text-sm text-left rtl:text-right">
-                                        <thead className="text-xs bg-gray-200 dark:bg-gray-700">
-                                            <tr>
-                                                <th className="px-6 py-3">
-                                                    Weight
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Height
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    IMC
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    Waist
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    BFP
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    MMP
-                                                </th>
-                                                <th className="px-6 py-3">
-                                                    GFP
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                                <td className="px-6 py-4">
-                                                    {item.person_weight ? (
-                                                        <>
-                                                            {item.person_weight}
-                                                        </>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.person_height ? (
-                                                        <>
-                                                            {item.person_height}
-                                                        </>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.imc ? (
-                                                        <>{item.imc}</>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.waist ? (
-                                                        <>{item.waist}</>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.bfp ? (
-                                                        <>{item.bfp}</>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.mmp ? (
-                                                        <>{item.mmp}</>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {item.gfp ? (
-                                                        <>{item.gfp}</>
-                                                    ) : (
-                                                        <>NaN</>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+        <div>
+            {content.dn_hpi.map((item: any) => {
+                const activeTab = getActiveTab(item.id)
+
+                return (
+                    <details key={item.id} className="my-5">
+                        <summary>
+                            {transformDate(item.date_of)} - CERTAINTY: DIAGNOSIS
+                        </summary>
+                        <div className="grid gap-4">
+                            <div className="menu-tabs mb-2 grid py-4 text-base lg:grid-cols-4">
+                                {tabs.map((tab) => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() =>
+                                            setActiveTab(item.id, tab.id)
+                                        }
+                                        className={`px-4 py-2 font-medium transition-colors ${
+                                            activeTab === tab.id
+                                                ? 'border-b-2 bg-blue-500'
+                                                : 'text-gray-300 border-b hover:text-gray-800 hover:bg-gray-50'
+                                        }`}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="tab-content p-4 bg-gray-50 rounded-lg">
+                                {renderContent(item, activeTab)}
                             </div>
                         </div>
-                        <div>
-                            <button>Diagnosis</button>
-                            <Diagnosis id={item.id} />
-                        </div>
-                        <div>
-                            <button>Auxiliary exams</button>
-                            <p>{item.additional_tests}</p>
-                        </div>
-                        <div>
-                            <button>Treatments</button>
-                            <p>{item.treatment}</p>
-                        </div>
-                    </div>
-                </details>
-            ))}
-        </>
+                    </details>
+                )
+            })}
+        </div>
     )
 }
 
-export default Tabs
+export default MedicalRecord

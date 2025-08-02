@@ -9,6 +9,8 @@ import { getSingleHealthConsumer } from '@/services/supabaseService'
 // import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
 
+import { v4 as uuidv4 } from 'uuid'
+
 const SingleHealthConsumer = ({ id }: { id: string }) => {
     const {
         data: personData,
@@ -25,9 +27,9 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
 
-    // console.log(personData)
-
     const pfsh = personData.dn_pfsh[0]
+
+    console.log(uuidv4())
 
     return (
         <>
