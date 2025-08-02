@@ -32,7 +32,7 @@ const ListHealthConsumers = () => {
                 <div className="flex py-4 w-xl gap-4">{/* Filters */}</div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left rtl:text-right">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <thead className="text-xs bg-gray-200 dark:bg-gray-700">
                             <tr>
                                 <th scope="col" className="px-6 py-3"></th>
                                 <th scope="col" className="px-6 py-3">
@@ -50,7 +50,7 @@ const ListHealthConsumers = () => {
                             {listData.map((item) => (
                                 <tr
                                     key={item.id}
-                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
                                 >
                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <button

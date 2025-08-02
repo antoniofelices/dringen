@@ -25,9 +25,9 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
 
-    console.log(personData)
+    // console.log(personData)
 
-    const pfsh = personData.pfsh[0]
+    const pfsh = personData.dn_pfsh[0]
 
     return (
         <>
