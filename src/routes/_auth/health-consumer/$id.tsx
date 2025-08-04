@@ -5,7 +5,7 @@ export const Route = createFileRoute('/_auth/health-consumer/$id')({
     component: RouteComponent,
     params: {
         parse: (params) => ({
-            id: Number(params.id),
+            id: params.id,
         }),
     },
 })

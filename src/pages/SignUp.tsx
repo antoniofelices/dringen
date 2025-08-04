@@ -2,11 +2,11 @@ import { useNavigate } from '@tanstack/react-router'
 import FormAuth from '@/components/patterns/FormAuth'
 import Logo from '@/components/base/Logo'
 import contentForm from '@/config/data/formAuth'
-import { signInWithPassword } from '@/services/supabaseService'
+import { registerUser } from '@/services/supabaseService'
 import { getUserData } from '@/helpers/formAuthUtils'
 import { useFormErrors } from '@/hooks/useFormErrors'
 
-const SignIn = () => {
+const SignUp = () => {
     const navigate = useNavigate()
     const { errors, errorHandler, resetErrors } = useFormErrors()
 
@@ -14,15 +14,17 @@ const SignIn = () => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const client = getUserData(formData)
-        await loginHandler(client)
+        await registerHandler(client)
     }
 
-    const loginHandler = async ({
+    const registerHandler = async ({
         email,
         password,
+        username,
     }: {
         email: string
         password: string
+        username: string
     }) => {
         resetErrors()
 
@@ -31,26 +33,30 @@ const SignIn = () => {
             return
         }
 
-        const { error } = await signInWithPassword(email, password)
+        const { error } = await registerUser(email, password, username)
 
         if (error) {
-            errorHandler({
-                isError: true,
-                message: error.message,
-            })
+            if (error.message.includes('User already registered')) {
+                errorHandler({ repeatEmail: true })
+            } else {
+                errorHandler({
+                    isError: true,
+                    message: error.message,
+                })
+            }
             return
         }
 
-        navigate({ to: '/health-consumer/list' })
+        navigate({ to: '/profile' })
     }
 
     return (
         <div className="grid h-screen place-items-center">
             <div>
                 <Logo />
-                <h1 className="sr-only">Sign In</h1>
+                <h1 className="sr-only">Sign Up</h1>
                 <FormAuth
-                    actionType="sign-in"
+                    actionType="sign-up"
                     content={contentForm}
                     errors={errors}
                     onSubmit={submitHandler}
@@ -60,4 +66,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignUp

@@ -1,4 +1,4 @@
-import content from '@/data/pages/index'
+import content from '@/config/data/pages/index'
 import Container from '@components/base/Container'
 import Button from '@/components/base/Button'
 import { useIsAuth } from '@/hooks/useIsAuth'

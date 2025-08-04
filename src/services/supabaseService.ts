@@ -29,7 +29,25 @@ export const signInWithPassword = async (
 }
 
 export const getListHealthConsumer = async () => {
-    const { data, error } = await supabase.from('hpi').select('*')
+    const { data, error } = await supabase.from('dn_profiles').select('*')
     if (error) throw error
     return data
+}
+
+export const getSingleHealthConsumer = async (id: string) => {
+    const { data, error } = await supabase
+        .from('dn_profiles')
+        .select(`*, dn_pfsh("*"), dn_hpi("*")`)
+        .eq('id', id)
+    if (error) throw error
+    return data[0]
+}
+
+export const getDiagnosis = async (id: string) => {
+    const { data, error } = await supabase
+        .from('dn_hpi')
+        .select(`id, dn_hpi_diagnosis("*")`)
+        .eq('id', id)
+    if (error) throw error
+    return data[0]
 }
