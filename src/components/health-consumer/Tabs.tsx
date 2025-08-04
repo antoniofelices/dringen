@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Diagnosis from '@components/sections/Diagnosis'
-import Examination from '@components/sections/Examination'
+import Diagnosis from '@components/health-consumer/Diagnosis'
+import Examination from '@components/health-consumer/Examination'
 import { transformDate } from '@helpers/utils'
 
 const MedicalRecord = ({ content }: { content: any }) => {

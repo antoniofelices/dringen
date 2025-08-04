@@ -2,7 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
-import Tabs from '@/components/sections/Tabs'
+import Tabs from '@/components/health-consumer/Tabs'
+import Info from '@components/health-consumer/Info'
+import Pfsh from '@/components/health-consumer/Pfsh'
 
 import { getSingleHealthConsumer } from '@/services/supabaseService'
 // import { APIMOVIESIMAGESURL } from '@/config/config'
@@ -34,50 +36,27 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     return (
         <>
             <article>
-                <div className="grid lg:grid-cols-6 gap-7 place-content-between">
+                <div className="grid lg:grid-cols-6 gap-10 place-content-between">
                     <div className="col-span-6">
                         <h1 className="font-extrabold">
                             {personData.user_name} {personData.user_last_name}
                         </h1>
                     </div>
                     <div className="col-span-3">
-                        <h2 className="font-extrabold mb-2">General info</h2>
-                        <ul className="">
-                            <li>Birthday: {personData.birthday}</li>
-                            <li>Gender: {personData.gender}</li>
-                            <li>Birthplace: {personData.birthplace}</li>
-                            <li>
-                                Place of residence:{' '}
-                                {personData.place_of_residence}
-                            </li>
-                            <li>Occupation: {personData.occupation}</li>
-                        </ul>
+                        <Info content={personData} />
+                        <div className="mt-6">
+                            <Pfsh content={pfsh} />
+                        </div>
                     </div>
                     <div className="col-span-3">
-                        <div className="flex justify-between mb-2">
-                            <h2 className="font-extrabold ">
-                                Past Family and Social History
-                            </h2>
-                            <button className="text-xs">Editar</button>
-                        </div>
-                        <ul className="">
-                            <li>Family History: {pfsh.family_history}</li>
-                            <li>
-                                Past Medical History:{' '}
-                                {pfsh.past_medical_history}
-                            </li>
-                            <li>Social History: {pfsh.social_history}</li>
-                        </ul>
+                        <h2 className="font-extrabold">Previous revisions</h2>
+                        <Tabs content={personData} />
                     </div>
                     <div className="col-span-6">
                         <h2 className="font-extrabold">
                             History of Present Illness
                         </h2>
                         Form infinito!
-                    </div>
-                    <div className="col-span-6">
-                        <h2 className="font-extrabold">Previous revisions</h2>
-                        <Tabs content={personData} />
                     </div>
                 </div>
             </article>
