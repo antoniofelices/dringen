@@ -1,6 +1,8 @@
+import { Card } from 'flowbite-react'
+
 const Pfsh = ({ content }) => {
     return (
-        <>
+        <Card className="">
             <div className="flex justify-between mb-2">
                 <h2 className="font-extrabold ">
                     Past Family and Social History
@@ -12,7 +14,7 @@ const Pfsh = ({ content }) => {
                 <li>Past Medical History: {content.past_medical_history}</li>
                 <li>Social History: {content.social_history}</li>
             </ul>
-        </>
+        </Card>
     )
 }
 

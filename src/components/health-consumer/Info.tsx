@@ -1,6 +1,8 @@
+import { Card } from 'flowbite-react'
+
 const Info = ({ content }) => {
     return (
-        <>
+        <Card className="">
             <h2 className="font-extrabold mb-2">General info</h2>
             <ul className="">
                 <li>Birthday: {content.birthday}</li>
@@ -9,7 +11,7 @@ const Info = ({ content }) => {
                 <li>Place of residence: {content.place_of_residence}</li>
                 <li>Occupation: {content.occupation}</li>
             </ul>
-        </>
+        </Card>
     )
 }
 

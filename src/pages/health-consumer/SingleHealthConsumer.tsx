@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '@components/base/Loading'
 import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
-import Tabs from '@/components/health-consumer/Tabs'
+import MedicalRecord from '@/components/health-consumer/MedicalRecord'
 import Info from '@components/health-consumer/Info'
 import Pfsh from '@/components/health-consumer/Pfsh'
 
@@ -43,14 +43,15 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                         </h1>
                     </div>
                     <div className="col-span-3">
-                        <Info content={personData} />
+                        <div>
+                            <Info content={personData} />
+                        </div>
                         <div className="mt-6">
                             <Pfsh content={pfsh} />
                         </div>
                     </div>
                     <div className="col-span-3">
-                        <h2 className="font-extrabold">Previous revisions</h2>
-                        <Tabs content={personData} />
+                        <MedicalRecord content={personData} />
                     </div>
                     <div className="col-span-6">
                         <h2 className="font-extrabold">
