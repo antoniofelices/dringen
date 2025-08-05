@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -34,7 +33,7 @@ const Diagnosis = ({ id }: { id: string }) => {
             <tbody>
                 {diagnosisData.dn_hpi_diagnosis.map((item) => (
                     <tr
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+                        className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200"
                         key={uuidv4()}
                     >
                         <td className="px-6 py-4">{item.cie10}</td>

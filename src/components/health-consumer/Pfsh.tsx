@@ -10,9 +10,18 @@ const Pfsh = ({ content }) => {
                 <button className="text-xs">Editar</button>
             </div>
             <ul className="">
-                <li>Family History: {content.family_history}</li>
-                <li>Past Medical History: {content.past_medical_history}</li>
-                <li>Social History: {content.social_history}</li>
+                <li className="my-2">
+                    <span className="font-bold">Past Medical History</span>:{' '}
+                    {content.past_medical_history}
+                </li>
+                <li className="my-2">
+                    <span className="font-bold">Family History</span>:{' '}
+                    {content.family_history}
+                </li>
+                <li className="my-2">
+                    <span className="font-bold">Social History</span>:{' '}
+                    {content.social_history}
+                </li>
             </ul>
         </Card>
     )

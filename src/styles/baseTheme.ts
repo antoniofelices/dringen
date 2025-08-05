@@ -11,6 +11,13 @@ const baseTheme = createTheme({
             xl: 'h-[88px] px-6 py-3 text-base',
         },
     },
+    modal: {
+        root: {},
+        content: {
+            base: 'relative h-full w-full p-4 md:h-auto',
+            inner: 'relative flex min-h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-gray-800 dark:text-white',
+        },
+    },
 })
 
 export default baseTheme
