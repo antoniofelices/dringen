@@ -1,8 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
-import Button from '@components/base/Button'
 import ErrorApi from '@components/base/ErrorApi'
 import content from '@/config/data/pages/singleUser'
+import { Button } from '@/components/ui/button'
 
 const SingleUser = ({ id }: { id: number }) => {
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ const SingleUser = ({ id }: { id: number }) => {
     return (
         <>
             <h1 className="mb-8">{content.title} Lorem</h1>
-            <Button onClick={handleLogout} text={content.textButtonSignOut} />
+            <Button onClick={handleLogout}>{content.textButtonSignOut}</Button>
         </>
     )
 }

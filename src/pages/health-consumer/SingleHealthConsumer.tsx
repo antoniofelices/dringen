@@ -13,7 +13,17 @@ import { getSingleHealthConsumer } from '@/services/supabaseService'
 // import { APIMOVIESIMAGESURL } from '@/config/config'
 // import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
-import { Button, Drawer } from 'flowbite-react'
+import { Button } from '@/components/ui/button'
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from '@/components/ui/drawer'
 
 const SingleHealthConsumer = ({ id }: { id: string }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -40,42 +50,43 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     return (
         <>
             <article>
-                <div className="grid lg:grid-cols-6 gap-6 place-content-between">
-                    <div className="col-span-6 mt-6">
-                        <div className="flex justify-between  items-center">
-                            <h1 className="font-extrabold text-xl">
-                                {personData.user_name}{' '}
-                                {personData.user_last_name}
-                            </h1>
-                            <Button size="sm" onClick={() => setIsOpen(true)}>
-                                Add History of Present Illness
-                            </Button>
+                <Drawer>
+                    <div className="grid lg:grid-cols-6 gap-6 place-content-between">
+                        <div className="col-span-6 mt-6">
+                            <div className="flex justify-between items-center">
+                                <h1 className="font-extrabold text-xl">
+                                    {personData.user_name}{' '}
+                                    {personData.user_last_name}
+                                </h1>
+                                <DrawerTrigger>
+                                    Add History of Present Illness
+                                </DrawerTrigger>
+                            </div>
                         </div>
+                        <div className="col-span-3">
+                            <div>
+                                <Info content={personData} />
+                            </div>
+                            <div className="mt-6">
+                                <Pfsh content={pfsh} />
+                            </div>
+                        </div>
+                        <div className="col-span-3">
+                            <MedicalRecord content={personData} />
+                        </div>
+                        <DrawerContent>
+                            <DrawerHeader>
+                                <DrawerTitle>
+                                    History of Present Illness
+                                </DrawerTitle>
+                                <DrawerDescription>
+                                    A History of Present Illness form
+                                </DrawerDescription>
+                            </DrawerHeader>
+                            <div className="">Form infinito!</div>
+                        </DrawerContent>
                     </div>
-                    <div className="col-span-3">
-                        <div>
-                            <Info content={personData} />
-                        </div>
-                        <div className="mt-6">
-                            <Pfsh content={pfsh} />
-                        </div>
-                    </div>
-                    <div className="col-span-3">
-                        <MedicalRecord content={personData} />
-                    </div>
-                    <Drawer
-                        open={isOpen}
-                        onClose={handleClose}
-                        position="bottom"
-                    >
-                        <div className="">
-                            <h2 className="font-extrabold">
-                                History of Present Illness
-                            </h2>
-                            Form infinito!
-                        </div>
-                    </Drawer>
-                </div>
+                </Drawer>
             </article>
             <ButtonBack />
         </>

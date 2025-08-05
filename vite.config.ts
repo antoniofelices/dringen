@@ -4,14 +4,17 @@ import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import path from 'path'
-import flowbiteReact from "flowbite-react/plugin/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-    plugins: [tanstackRouter({
-        target: 'react',
-        autoCodeSplitting: true,
-    }), react(), tailwindcss(), flowbiteReact()],
+    plugins: [
+        tanstackRouter({
+            target: 'react',
+            autoCodeSplitting: true,
+        }),
+        react(),
+        tailwindcss(),
+    ],
 
     test: {
         globals: true,

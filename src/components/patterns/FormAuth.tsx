@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import { Link } from '@tanstack/react-router'
-import Button from '@components/base/Button'
+import { Button } from '@/components/ui/button'
 import type { Form, FormErrors } from '@/types/interfaces'
 
 const FormAuth = ({
@@ -91,11 +91,9 @@ const FormAuth = ({
                             />
                         </div>
                     )}
-                    <Button
-                        type="submit"
-                        classes={`w-full col-span-12 my-4`}
-                        text={textButton}
-                    />
+                    <Button type="submit" className={`w-full col-span-12 my-4`}>
+                        {textButton}
+                    </Button>
                 </div>
             </form>
             <div>

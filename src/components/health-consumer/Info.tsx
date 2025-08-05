@@ -1,16 +1,46 @@
-import { Card } from 'flowbite-react'
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card'
 
 const Info = ({ content }) => {
     return (
-        <Card className="">
-            <h2 className="font-extrabold mb-2">General info</h2>
-            <ul className="">
-                <li>Birthday: {content.birthday}</li>
-                <li>Gender: {content.gender}</li>
-                <li>Birthplace: {content.birthplace}</li>
-                <li>Place of residence: {content.place_of_residence}</li>
-                <li>Occupation: {content.occupation}</li>
-            </ul>
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    <h2 className="font-extrabold ">General info</h2>
+                </CardTitle>
+                <CardAction>
+                    <button className="text-xs">Editar</button>
+                </CardAction>
+            </CardHeader>
+            <CardContent>
+                <ul className="">
+                    <li className="my-1">
+                        <span className="font-bold">Birthday</span>:{' '}
+                        {content.birthday}
+                    </li>
+                    <li className="my-1">
+                        <span className="font-bold">Gender</span>:{' '}
+                        {content.gender}
+                    </li>
+                    <li className="my-1">
+                        <span className="font-bold">Birthplace</span>:{' '}
+                        {content.birthplace}
+                    </li>
+                    <li className="my-1">
+                        <span className="font-bold">Place of residence</span>:{' '}
+                        {content.place_of_residence}
+                    </li>
+                    <li className="my-1">
+                        <span className="font-bold">Occupation</span>:{' '}
+                        {content.occupation}
+                    </li>
+                </ul>
+            </CardContent>
         </Card>
     )
 }

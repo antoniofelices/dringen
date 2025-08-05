@@ -1,5 +1,16 @@
 import { useState } from 'react'
-import { Card, Modal, ModalBody, TabItem, Tabs } from 'flowbite-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+    Dialog,
+    DialogClose,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogContent,
+    DialogTrigger,
+} from '@/components/ui/dialog'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
 
 import Diagnosis from '@components/health-consumer/Diagnosis'
 import Examination from '@components/health-consumer/Examination'
@@ -11,49 +22,82 @@ const MedicalRecord = ({ content }: { content: any }) => {
 
     return (
         <Card>
-            <h2 className="font-extrabold">Previous revisions</h2>
+            <CardHeader>
+                <CardTitle>
+                    <h2 className="font-extrabold">Previous revisions</h2>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                {content.dn_hpi.map((item: any) => {
+                    const isModalOpen = openModal === item.id
 
-            {content.dn_hpi.map((item: any) => {
-                const isModalOpen = openModal === item.id
-
-                return (
-                    <div key={item.id}>
-                        <button onClick={() => setOpenModal(item.id)}>
-                            {transformDate(item.date_of)} - CERTAINTY: DIAGNOSIS
-                        </button>
-                        <Modal
-                            show={isModalOpen}
-                            onClose={() => setOpenModal(false)}
-                            size="5xl"
-                            dismissible
-                            position="top-center"
+                    return (
+                        <Dialog
+                            key={item.id}
+                            open={isModalOpen}
+                            onOpenChange={() => setOpenModal(item.id)}
                         >
-                            <ModalBody>
+                            <DialogTrigger>
+                                {transformDate(item.date_of)} - CERTAINTY:
+                                DIAGNOSIS
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-6xl">
+                                <DialogHeader className="sr-only">
+                                    <DialogTitle>
+                                        {transformDate(item.date_of)} -
+                                        CERTAINTY: DIAGNOSIS
+                                    </DialogTitle>
+                                    <DialogDescription>
+                                        A single review
+                                    </DialogDescription>
+                                </DialogHeader>
                                 <Tabs
                                     aria-label="Previous revision"
-                                    variant="underline"
+                                    defaultValue="examination"
                                 >
-                                    <TabItem active title="Examination">
+                                    <TabsList>
+                                        <TabsTrigger value="examination">
+                                            Examination
+                                        </TabsTrigger>
+                                        <TabsTrigger value="examination-data">
+                                            Examination Data
+                                        </TabsTrigger>
+                                        <TabsTrigger value="diagnosis">
+                                            Diagnosis
+                                        </TabsTrigger>
+                                        <TabsTrigger value="aditional-tests">
+                                            Aditional Tests
+                                        </TabsTrigger>
+                                        <TabsTrigger value="treatment">
+                                            Treatment
+                                        </TabsTrigger>
+                                    </TabsList>
+                                    <TabsContent value="examination">
                                         <Examination content={item} />
-                                    </TabItem>
-                                    <TabItem active title="Examination Data">
+                                    </TabsContent>
+                                    <TabsContent value="examination-Data">
                                         <ExaminationData content={item} />
-                                    </TabItem>
-                                    <TabItem title="Diagnosis">
+                                    </TabsContent>
+                                    <TabsContent value="diagnosis">
                                         <Diagnosis id={item.id} />
-                                    </TabItem>
-                                    <TabItem title="Aditional Tests">
+                                    </TabsContent>
+                                    <TabsContent value="aditional-tests">
                                         <p>{item.additional_tests}</p>
-                                    </TabItem>
-                                    <TabItem title="Treatment">
+                                    </TabsContent>
+                                    <TabsContent value="treatment">
                                         <p>{item.treatment}</p>
-                                    </TabItem>
+                                    </TabsContent>
                                 </Tabs>
-                            </ModalBody>
-                        </Modal>
-                    </div>
-                )
-            })}
+                                <DialogClose asChild>
+                                    <Button type="button" variant="secondary">
+                                        Close
+                                    </Button>
+                                </DialogClose>
+                            </DialogContent>
+                        </Dialog>
+                    )
+                })}
+            </CardContent>
         </Card>
     )
 }
