@@ -37,10 +37,12 @@ const MedicalRecord = ({ content }: { content: any }) => {
                             open={isModalOpen}
                             onOpenChange={() => setOpenModal(item.id)}
                         >
-                            <DialogTrigger>
-                                {transformDate(item.date_of)} - CERTAINTY:
-                                DIAGNOSIS
-                            </DialogTrigger>
+                            <h3 className="my-3">
+                                <DialogTrigger>
+                                    {transformDate(item.date_of)} - CERTAINTY:
+                                    DIAGNOSIS
+                                </DialogTrigger>
+                            </h3>
                             <DialogContent className="sm:max-w-6xl">
                                 <DialogHeader className="sr-only">
                                     <DialogTitle>
