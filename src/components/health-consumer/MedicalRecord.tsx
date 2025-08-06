@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
     Dialog,
-    DialogClose,
     DialogHeader,
     DialogTitle,
     DialogDescription,
@@ -10,7 +9,6 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
 
 import Diagnosis from '@components/health-consumer/Diagnosis'
 import Examination from '@components/health-consumer/Examination'
@@ -27,6 +25,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
                     <h2 className="font-extrabold">Previous revisions</h2>
                 </CardTitle>
             </CardHeader>
+
             <CardContent>
                 {content.dn_hpi.map((item: any) => {
                     const isModalOpen = openModal === item.id
@@ -35,7 +34,9 @@ const MedicalRecord = ({ content }: { content: any }) => {
                         <Dialog
                             key={item.id}
                             open={isModalOpen}
-                            onOpenChange={() => setOpenModal(item.id)}
+                            onOpenChange={(open) =>
+                                setOpenModal(open ? item.id : null)
+                            }
                         >
                             <h3 className="my-3">
                                 <DialogTrigger>
@@ -43,7 +44,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
                                     DIAGNOSIS
                                 </DialogTrigger>
                             </h3>
-                            <DialogContent className="sm:max-w-6xl">
+                            <DialogContent className="sm:max-w-6xl top-0 translate-y-0">
                                 <DialogHeader className="sr-only">
                                     <DialogTitle>
                                         {transformDate(item.date_of)} -
@@ -77,7 +78,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
                                     <TabsContent value="examination">
                                         <Examination content={item} />
                                     </TabsContent>
-                                    <TabsContent value="examination-Data">
+                                    <TabsContent value="examination-data">
                                         <ExaminationData content={item} />
                                     </TabsContent>
                                     <TabsContent value="diagnosis">
@@ -90,11 +91,6 @@ const MedicalRecord = ({ content }: { content: any }) => {
                                         <p>{item.treatment}</p>
                                     </TabsContent>
                                 </Tabs>
-                                <DialogClose asChild>
-                                    <Button type="button" variant="secondary">
-                                        Close
-                                    </Button>
-                                </DialogClose>
                             </DialogContent>
                         </Dialog>
                     )
