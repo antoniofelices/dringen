@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import ListUsers from '@/pages/authz/user/ListUsers'
+import List from '@/pages/authz/user/List'
 
 export const Route = createLazyFileRoute('/_authz/user/list')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    return <ListUsers />
+    return <List />
 }

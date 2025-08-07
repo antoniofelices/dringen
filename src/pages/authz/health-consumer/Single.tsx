@@ -17,7 +17,7 @@ import {
     DrawerTrigger,
 } from '@/components/ui/drawer'
 
-const SingleHealthConsumer = ({ id }: { id: string }) => {
+const Single = ({ id }: { id: string }) => {
     const {
         data: personData,
         isPending: personLoading,
@@ -81,4 +81,4 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     )
 }
 
-export default SingleHealthConsumer
+export default Single

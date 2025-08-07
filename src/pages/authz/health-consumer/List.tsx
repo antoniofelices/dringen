@@ -5,10 +5,9 @@ import ErrorApi from '@components/base/ErrorApi'
 import ButtonBack from '@components/base/ButtonBack'
 import { getListHealthConsumer } from '@/services/supabaseService'
 import content from '@/config/data/authz/listHealthConsumer'
-// import type { PersonCreditProps, PersonMovieProps } from '@/types/interfaces'
 // import { filterArrayOfObjects } from '@helpers/utils'
 
-const ListHealthConsumers = () => {
+const List = () => {
     const {
         data: listData,
         isPending: listLoading,
@@ -82,4 +81,4 @@ const ListHealthConsumers = () => {
     )
 }
 
-export default ListHealthConsumers
+export default List

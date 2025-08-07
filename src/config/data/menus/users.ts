@@ -9,15 +9,9 @@ const user: RoutesProps[] = [
     },
     {
         id: 2,
-        url: 'user/stadistics',
-        text: 'Stadistics',
-        orderMenu: 2,
-    },
-    {
-        id: 3,
         url: 'user/profile',
-        text: 'Your Profile',
-        orderMenu: 3,
+        text: 'My Profile',
+        orderMenu: 2,
     },
 ]
 

@@ -1,10 +1,10 @@
 import { useNavigate } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
 import ErrorApi from '@components/base/ErrorApi'
-import content from '@/config/data/authz/singleUser'
+import content from '@/config/data/authz/userSingle'
 import { Button } from '@/components/ui/button'
 
-const SingleUser = ({ id }: { id: number }) => {
+const MyProfileUser = () => {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
@@ -22,4 +22,4 @@ const SingleUser = ({ id }: { id: number }) => {
     )
 }
 
-export default SingleUser
+export default MyProfileUser

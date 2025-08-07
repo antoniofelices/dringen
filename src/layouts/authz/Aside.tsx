@@ -12,7 +12,7 @@ const Aside = () => {
                 id="drawer-navigation"
             >
                 <div className="overflow-y-auto py-5 px-3 h-full">
-                    <Link to="/">Home</Link>
+                    <Link to="/dashboard">Home</Link>
                     <div className="py-4">
                         <h2 className="text-xs mb-1 text-gray-500">
                             Health Consumers
