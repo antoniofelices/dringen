@@ -13,7 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Diagnosis from '@components/health-consumer/Diagnosis'
 import Examination from '@components/health-consumer/Examination'
 import ExaminationData from '@components/health-consumer/ExaminationData'
-import { transformDate } from '@helpers/utils'
+import { transformDate } from '@/lib/utils'
 
 const MedicalRecord = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)
