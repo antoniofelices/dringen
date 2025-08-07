@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import content from '@/config/data/authn/checkEmail'
+import { Link } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
 
 const CheckEmail = () => {
     return (
@@ -7,7 +9,12 @@ const CheckEmail = () => {
             <CardHeader className="text-center">
                 <CardTitle className="text-2xl">{content.title}</CardTitle>
             </CardHeader>
-            <CardContent></CardContent>
+            <CardContent>
+                <p className="text-center pb-4">{content.text}</p>
+                <Button className="w-full">
+                    <Link to="/sign-in">{content.textButtonSignIn}</Link>
+                </Button>
+            </CardContent>
         </Card>
     )
 }

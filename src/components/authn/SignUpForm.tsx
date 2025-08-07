@@ -74,7 +74,7 @@ const SignUpForm = () => {
             return
         }
 
-        navigate({ to: '/health-consumer/list' })
+        navigate({ to: '/check-email' })
     }
 
     return (

@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import SignUpForm from '@/components/authn/SignUpForm'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import content from '@/config/data/authn/signUp'
@@ -10,6 +11,10 @@ const SignUp = () => {
             </CardHeader>
             <CardContent>
                 <SignUpForm />
+                <p className="text-xs mt-4 text-center">
+                    {content.textToSignIn}{' '}
+                    <Link to="/sign-in">{content.textButtonSignIn}</Link>
+                </p>
             </CardContent>
         </Card>
     )
