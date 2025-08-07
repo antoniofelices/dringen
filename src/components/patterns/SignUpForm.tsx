@@ -3,28 +3,50 @@ import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Mail, Lock } from 'lucide-react'
+import { Mail, Lock, User } from 'lucide-react'
 
-import content from '@/config/data/signInForm'
+import content from '@/config/data/signUpForm'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { signInWithPassword } from '@/services/supabaseService'
+import { registerUser } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 
-const signInSchema = z.object({
-    email: z
-        .string()
-        .min(1, content.errorEmailRequired)
-        .email(content.errorEmailInvalid),
-    password: z.string().min(6, content.errorPasswordTooShort),
-})
+const signUpSchema = z
+    .object({
+        username: z
+            .string()
+            .min(3, content.errorUserNameTooShort)
+            .max(20, content.errorUserNameTooLong)
+            .regex(
+                /^[a-zA-Z0-9_]+$/,
+                content.errorUserNameDisallowedCharacters
+            ),
+        email: z
+            .string()
+            .email(content.errorEmailInvalid)
+            .min(1, content.errorEmailRequired),
+        password: z
+            .string()
+            .min(8, content.errorPasswordTooShort)
+            .regex(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                content.errorPasswordMustContain
+            ),
+        confirmPassword: z.string().min(1, content.confirmPassword),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: content.errorPasswordNoMatch,
+        path: ['confirmPassword'],
+    })
 
-type FormData = z.infer<typeof signInSchema>
+type FormData = z.infer<typeof signUpSchema>
 
-const SignInForm = () => {
+const SignUpForm = () => {
+    const userNameId = useId()
     const emailId = useId()
     const passwordId = useId()
+    const confirmPasswordId = useId()
     const navigate = useNavigate()
 
     const {
@@ -33,11 +55,15 @@ const SignInForm = () => {
         setError,
         formState: { errors, isSubmitting },
     } = useForm<FormData>({
-        resolver: zodResolver(signInSchema),
+        resolver: zodResolver(signUpSchema),
     })
 
     const onSubmit = async (data: FormData) => {
-        const { error } = await signInWithPassword(data.email, data.password)
+        const { error } = await registerUser(
+            data.email,
+            data.password,
+            data.username
+        )
 
         if (error) {
             const { field, message } = mapSupabaseError(error.message)
@@ -54,6 +80,26 @@ const SignInForm = () => {
     return (
         <>
             <form className="" onSubmit={handleSubmit(onSubmit)}>
+                <div className="mb-5">
+                    <Label
+                        htmlFor={userNameId}
+                        className="text-sm font-bold flex items-center gap-2 mb-1"
+                    >
+                        <User className="w-4 h-4" />
+                        {content.labelUserName}
+                    </Label>
+                    <Input
+                        id={userNameId}
+                        type="text"
+                        {...register('username')}
+                        placeholder={content.labelUserName}
+                    />
+                    {errors.username && (
+                        <span className="text-red text-sm mt-1">
+                            {errors.username?.message}
+                        </span>
+                    )}
+                </div>
                 <div className="mb-5">
                     <Label
                         htmlFor={emailId}
@@ -94,6 +140,26 @@ const SignInForm = () => {
                         </span>
                     )}
                 </div>
+                <div className="my-5">
+                    <Label
+                        htmlFor={confirmPasswordId}
+                        className="text-sm font-bold flex items-center gap-2 mb-1"
+                    >
+                        <Lock className="w-4 h-4" />
+                        {content.labelConfirmPassword}
+                    </Label>
+                    <Input
+                        id={confirmPasswordId}
+                        type="password"
+                        {...register('confirmPassword')}
+                        placeholder={content.labelConfirmPassword}
+                    />
+                    {errors.confirmPassword && (
+                        <span className="text-red text-sm mt-1">
+                            {errors.confirmPassword?.message}
+                        </span>
+                    )}
+                </div>
                 <Button type="submit" className="w-full">
                     {isSubmitting
                         ? content.textButtonSending
@@ -109,4 +175,4 @@ const SignInForm = () => {
     )
 }
 
-export default SignInForm
+export default SignUpForm

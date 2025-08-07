@@ -1,9 +1,9 @@
 type SignInForm = {
     labelEmail: string
     labelPassword: string
-    errorPasswordTooShort: string
     errorEmailInvalid: string
     errorEmailRequired: string
+    errorPasswordTooShort: string
     textButtonSend: string
     textButtonSending: string
 }
@@ -11,9 +11,9 @@ type SignInForm = {
 const allData: SignInForm = {
     labelEmail: 'Email',
     labelPassword: 'Password',
-    errorPasswordTooShort: 'The password must contain at least six characters',
     errorEmailInvalid: 'Please use a valid email address',
     errorEmailRequired: 'The email address is required',
+    errorPasswordTooShort: 'The password must contain at least six characters',
     textButtonSend: 'Sign in',
     textButtonSending: 'Sending',
 }
