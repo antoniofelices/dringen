@@ -22,7 +22,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">Previous revisions</h2>
+                    <h2 className="font-extrabold">Medical Record</h2>
                 </CardTitle>
             </CardHeader>
 

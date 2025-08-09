@@ -1,6 +1,16 @@
-const AddHpi = () => {
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+const NewHpi = () => {
     return (
         <div>
+            <Tabs aria-label="Previous revision" defaultValue="examination">
+                <TabsList>
+                    <TabsTrigger value="examination">Examination</TabsTrigger>
+                </TabsList>
+                <TabsContent value="examination"></TabsContent>
+            </Tabs>
             <div>
                 <h4 className="text-xs mb-2 text-gray-500">FB</h4>
                 <table className="w-full text-sm text-left rtl:text-right">
@@ -15,7 +25,21 @@ const AddHpi = () => {
                     </thead>
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4">
+                                <FormItem>
+                                    <FormLabel>Eating</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="shadcn"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            </td>
                             <td className="px-6 py-4"></td>
                             <td className="px-6 py-4"></td>
                             <td className="px-6 py-4"></td>
@@ -39,28 +63,12 @@ const AddHpi = () => {
                     </thead>
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                            <td className="px-6 py-4">
-                                {content.heat ? <>{content.heat}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.pas ? <>{content.pas}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.pad ? <>{content.pad}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.fc ? <>{content.fc}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.fr ? <>{content.fr}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.oximetry ? (
-                                    <>{content.oximetry}</>
-                                ) : (
-                                    <>0%</>
-                                )}
-                            </td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,39 +91,13 @@ const AddHpi = () => {
                     </thead>
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                            <td className="px-6 py-4">
-                                {content.person_weight ? (
-                                    <>{content.person_weight}</>
-                                ) : (
-                                    <>NaN</>
-                                )}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.person_height ? (
-                                    <>{content.person_height}</>
-                                ) : (
-                                    <>NaN</>
-                                )}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.imc ? <>{content.imc}</> : <>NaN</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.waist ? (
-                                    <>{content.waist}</>
-                                ) : (
-                                    <>NaN</>
-                                )}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.bfp ? <>{content.bfp}</> : <>NaN</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.mmp ? <>{content.mmp}</> : <>NaN</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.gfp ? <>{content.gfp}</> : <>NaN</>}
-                            </td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
+                            <td className="px-6 py-4"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -124,4 +106,4 @@ const AddHpi = () => {
     )
 }
 
-export const AddHpi
+export default NewHpi

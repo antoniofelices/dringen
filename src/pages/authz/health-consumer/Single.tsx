@@ -5,6 +5,7 @@ import ButtonBack from '@components/base/ButtonBack'
 import MedicalRecord from '@/components/health-consumer/MedicalRecord'
 import Info from '@components/health-consumer/Info'
 import Pfsh from '@/components/health-consumer/Pfsh'
+import NewHpi from '@components/health-consumer/NewHpi'
 
 import { getSingleHealthConsumer } from '@/services/supabaseService'
 
@@ -67,11 +68,11 @@ const Single = ({ id }: { id: string }) => {
                                 <DrawerTitle>
                                     History of Present Illness
                                 </DrawerTitle>
-                                <DrawerDescription>
+                                <DrawerDescription className="sr-only">
                                     A History of Present Illness form
                                 </DrawerDescription>
                             </DrawerHeader>
-                            <div className="">Form infinito!</div>
+                            <NewHpi />
                         </DrawerContent>
                     </div>
                 </Drawer>
