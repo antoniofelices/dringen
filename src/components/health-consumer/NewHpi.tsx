@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import AddDiagnosis from '@components/health-consumer/AddDiagnosis'
 
 import {
     Tabs,
@@ -207,7 +208,9 @@ const NewHpi = () => {
                         </div>
                     </div>
                 </TabsContent>
-                <TabsContent value="diagnosis">Diagnossis</TabsContent>
+                <TabsContent value="diagnosis">
+                    <AddDiagnosis errors={errors} register={register} />
+                </TabsContent>
                 <TabsContent value="aditional-tests">
                     <FormFieldTextarea
                         errors={errors}
