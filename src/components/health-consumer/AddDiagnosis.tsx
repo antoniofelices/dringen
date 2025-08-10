@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { CirclePlus } from 'lucide-react'
 import FormFieldInput from '@components/ui/FormFieldInput'
 
@@ -38,13 +39,15 @@ const AddDiagnosis = ({ register, errors }) => {
             </div>
         )
     }
+
     const addDiagnosisHandler = () => {
         setAddDiagnosis((prev) => [...prev, prev.length + 1])
     }
+
     return (
         <>
-            {addDiagnosis.map((containerId) => (
-                <div key={containerId} id={`container-${containerId}`}>
+            {addDiagnosis.map((singleId) => (
+                <div key={singleId} id={`diagnosis-${singleId}`}>
                     <NewDiagnosis />
                 </div>
             ))}
