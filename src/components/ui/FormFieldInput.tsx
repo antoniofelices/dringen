@@ -1,5 +1,5 @@
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/base/input'
+import { Label } from '@/components/ui/base/label'
 import { useId } from 'react'
 import type { UseFormRegister, FieldErrors } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
@@ -9,26 +9,25 @@ type FormValues = {
 }
 
 type FormFieldProps = {
-    label: string
-    type?: string
-    placeholder?: string
-    register: UseFormRegister<FormValues>
+    className?: string
     errors: FieldErrors<FormValues>
     fieldName: string
     icon?: LucideIcon
-
-    className?: string
+    label: string
+    placeholder?: string
+    register: UseFormRegister<FormValues>
+    type?: string
 }
 
-const FormField = ({
-    type = 'text',
-    label,
-    fieldName,
-    register,
-    errors,
-    icon: Icon,
-    placeholder,
+const FormFieldInput = ({
     className = 'mb-5',
+    errors,
+    fieldName,
+    icon: Icon,
+    label,
+    placeholder,
+    register,
+    type = 'text',
 }: FormFieldProps) => {
     const inputId = useId()
     const error = errors?.[fieldName]
@@ -57,4 +56,4 @@ const FormField = ({
     )
 }
 
-export default FormField
+export default FormFieldInput

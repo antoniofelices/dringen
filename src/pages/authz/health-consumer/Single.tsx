@@ -18,6 +18,8 @@ import {
     DrawerTrigger,
 } from '@/components/ui/base/drawer'
 
+import { Button } from '@/components/ui/base/button'
+
 const Single = ({ id }: { id: string }) => {
     const {
         data: personData,
@@ -47,9 +49,11 @@ const Single = ({ id }: { id: string }) => {
                                     {personData.user_name}{' '}
                                     {personData.user_last_name}
                                 </h1>
-                                <DrawerTrigger>
-                                    Add History of Present Illness
-                                </DrawerTrigger>
+                                <Button asChild size="sm">
+                                    <DrawerTrigger>
+                                        Add History of Present Illness
+                                    </DrawerTrigger>
+                                </Button>
                             </div>
                         </div>
                         <div className="col-span-3">
@@ -63,8 +67,8 @@ const Single = ({ id }: { id: string }) => {
                         <div className="col-span-3">
                             <MedicalRecord content={personData} />
                         </div>
-                        <DrawerContent>
-                            <DrawerHeader>
+                        <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh]">
+                            <DrawerHeader className="sr-only">
                                 <DrawerTitle>
                                     History of Present Illness
                                 </DrawerTitle>
