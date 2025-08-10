@@ -1,8 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
-import ErrorApi from '@components/base/ErrorApi'
+import ErrorApi from '@components/ui/ErrorApi'
 import content from '@/config/data/authz/userSingle'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/base/button'
 
 const MyProfileUser = () => {
     const navigate = useNavigate()

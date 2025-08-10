@@ -1,4 +1,4 @@
-import MenuItems from '@/components/base/Menutems'
+import MenuItems from '@/components/ui/Menutems'
 import healthConsumers from '@/config/data/menus/healthConsumers'
 import users from '@/config/data/menus/users'
 import { Link } from '@tanstack/react-router'

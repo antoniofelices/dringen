@@ -6,9 +6,9 @@ import { z } from 'zod'
 import { Mail, Lock } from 'lucide-react'
 
 import content from '@/config/data/authn/signInForm'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/base/button'
+import { Input } from '@/components/ui/base/input'
+import { Label } from '@/components/ui/base/label'
 import { signInWithPassword } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 

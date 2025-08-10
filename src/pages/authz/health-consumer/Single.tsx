@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import Loading from '@components/base/Loading'
-import ErrorApi from '@components/base/ErrorApi'
-import ButtonBack from '@components/base/ButtonBack'
+import Loading from '@components/ui/Loading'
+import ErrorApi from '@components/ui/ErrorApi'
+import ButtonBack from '@components/ui/ButtonBack'
 import MedicalRecord from '@/components/health-consumer/MedicalRecord'
 import Info from '@components/health-consumer/Info'
 import Pfsh from '@/components/health-consumer/Pfsh'
@@ -16,7 +16,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/components/ui/drawer'
+} from '@/components/ui/base/drawer'
 
 const Single = ({ id }: { id: string }) => {
     const {

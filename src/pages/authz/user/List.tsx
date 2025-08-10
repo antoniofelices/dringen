@@ -1,4 +1,4 @@
-import ButtonBack from '@components/base/ButtonBack'
+import ButtonBack from '@components/ui/ButtonBack'
 import content from '@/config/data/authz/userList'
 
 const List = () => {

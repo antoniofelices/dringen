@@ -1,4 +1,4 @@
-import Logo from '@/components/base/Logo'
+import Logo from '@/components/ui/Logo'
 // import MenuItems from '@/components/base/Menutems'
 // import main from '@/data/menus/main'
 // import action from '@/data/menus/action'

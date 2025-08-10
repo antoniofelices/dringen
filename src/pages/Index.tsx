@@ -1,6 +1,11 @@
 import Main from '@layouts/authn/Main'
 import SignInForm from '@/components/authn/SignInForm'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/base/card'
 import content from '@/config/data/authn/signIn'
 
 const Index = () => {
