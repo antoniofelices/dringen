@@ -1,5 +1,10 @@
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/base/card'
 import {
     Dialog,
     DialogHeader,
@@ -7,13 +12,18 @@ import {
     DialogDescription,
     DialogContent,
     DialogTrigger,
-} from '@/components/ui/dialog'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+} from '@/components/ui/base/dialog'
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from '@/components/ui/base/tabs'
 
 import Diagnosis from '@components/health-consumer/Diagnosis'
 import Examination from '@components/health-consumer/Examination'
 import ExaminationData from '@components/health-consumer/ExaminationData'
-import { transformDate } from '@helpers/utils'
+import { transformDate } from '@/lib/utils'
 
 const MedicalRecord = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)
@@ -22,7 +32,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">Previous revisions</h2>
+                    <h2 className="font-extrabold">Medical Record</h2>
                 </CardTitle>
             </CardHeader>
 

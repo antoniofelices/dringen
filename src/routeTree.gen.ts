@@ -11,31 +11,31 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/_auth'
-import { Route as AuthUserIdRouteImport } from './routes/_auth/user/$id'
-import { Route as AuthHealthConsumerIdRouteImport } from './routes/_auth/health-consumer/$id'
+import { Route as AuthzRouteImport } from './routes/_authz'
+import { Route as AuthnRouteImport } from './routes/_authn'
+import { Route as AuthzUserIdRouteImport } from './routes/_authz/user/$id'
+import { Route as AuthzHealthConsumerIdRouteImport } from './routes/_authz/health-consumer/$id'
 
-const SignUpLazyRouteImport = createFileRoute('/sign-up')()
-const SignInLazyRouteImport = createFileRoute('/sign-in')()
 const IndexLazyRouteImport = createFileRoute('/')()
-const AuthUserProfileLazyRouteImport = createFileRoute('/_auth/user/profile')()
-const AuthUserListLazyRouteImport = createFileRoute('/_auth/user/list')()
-const AuthHealthConsumerListLazyRouteImport = createFileRoute(
-  '/_auth/health-consumer/list',
+const AuthzMyProfileLazyRouteImport = createFileRoute('/_authz/my-profile')()
+const AuthzDashboardLazyRouteImport = createFileRoute('/_authz/dashboard')()
+const AuthnSignUpLazyRouteImport = createFileRoute('/_authn/sign-up')()
+const AuthnSignInLazyRouteImport = createFileRoute('/_authn/sign-in')()
+const AuthnCheckEmailLazyRouteImport = createFileRoute('/_authn/check-email')()
+const AuthzUserListLazyRouteImport = createFileRoute('/_authz/user/list')()
+const AuthzHealthConsumerStadisticsLazyRouteImport = createFileRoute(
+  '/_authz/health-consumer/stadistics',
+)()
+const AuthzHealthConsumerListLazyRouteImport = createFileRoute(
+  '/_authz/health-consumer/list',
 )()
 
-const SignUpLazyRoute = SignUpLazyRouteImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
+const AuthzRoute = AuthzRouteImport.update({
+  id: '/_authz',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/sign-up.lazy').then((d) => d.Route))
-const SignInLazyRoute = SignInLazyRouteImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/sign-in.lazy').then((d) => d.Route))
-const AuthRoute = AuthRouteImport.update({
-  id: '/_auth',
+} as any)
+const AuthnRoute = AuthnRouteImport.update({
+  id: '/_authn',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexLazyRoute = IndexLazyRouteImport.update({
@@ -43,133 +43,183 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
-const AuthUserProfileLazyRoute = AuthUserProfileLazyRouteImport.update({
-  id: '/user/profile',
-  path: '/user/profile',
-  getParentRoute: () => AuthRoute,
+const AuthzMyProfileLazyRoute = AuthzMyProfileLazyRouteImport.update({
+  id: '/my-profile',
+  path: '/my-profile',
+  getParentRoute: () => AuthzRoute,
 } as any).lazy(() =>
-  import('./routes/_auth/user/profile.lazy').then((d) => d.Route),
+  import('./routes/_authz/my-profile.lazy').then((d) => d.Route),
 )
-const AuthUserListLazyRoute = AuthUserListLazyRouteImport.update({
+const AuthzDashboardLazyRoute = AuthzDashboardLazyRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthzRoute,
+} as any).lazy(() =>
+  import('./routes/_authz/dashboard.lazy').then((d) => d.Route),
+)
+const AuthnSignUpLazyRoute = AuthnSignUpLazyRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => AuthnRoute,
+} as any).lazy(() =>
+  import('./routes/_authn/sign-up.lazy').then((d) => d.Route),
+)
+const AuthnSignInLazyRoute = AuthnSignInLazyRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => AuthnRoute,
+} as any).lazy(() =>
+  import('./routes/_authn/sign-in.lazy').then((d) => d.Route),
+)
+const AuthnCheckEmailLazyRoute = AuthnCheckEmailLazyRouteImport.update({
+  id: '/check-email',
+  path: '/check-email',
+  getParentRoute: () => AuthnRoute,
+} as any).lazy(() =>
+  import('./routes/_authn/check-email.lazy').then((d) => d.Route),
+)
+const AuthzUserListLazyRoute = AuthzUserListLazyRouteImport.update({
   id: '/user/list',
   path: '/user/list',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthzRoute,
 } as any).lazy(() =>
-  import('./routes/_auth/user/list.lazy').then((d) => d.Route),
+  import('./routes/_authz/user/list.lazy').then((d) => d.Route),
 )
-const AuthHealthConsumerListLazyRoute =
-  AuthHealthConsumerListLazyRouteImport.update({
+const AuthzHealthConsumerStadisticsLazyRoute =
+  AuthzHealthConsumerStadisticsLazyRouteImport.update({
+    id: '/health-consumer/stadistics',
+    path: '/health-consumer/stadistics',
+    getParentRoute: () => AuthzRoute,
+  } as any).lazy(() =>
+    import('./routes/_authz/health-consumer/stadistics.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+const AuthzHealthConsumerListLazyRoute =
+  AuthzHealthConsumerListLazyRouteImport.update({
     id: '/health-consumer/list',
     path: '/health-consumer/list',
-    getParentRoute: () => AuthRoute,
+    getParentRoute: () => AuthzRoute,
   } as any).lazy(() =>
-    import('./routes/_auth/health-consumer/list.lazy').then((d) => d.Route),
+    import('./routes/_authz/health-consumer/list.lazy').then((d) => d.Route),
   )
-const AuthUserIdRoute = AuthUserIdRouteImport.update({
+const AuthzUserIdRoute = AuthzUserIdRouteImport.update({
   id: '/user/$id',
   path: '/user/$id',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthzRoute,
 } as any)
-const AuthHealthConsumerIdRoute = AuthHealthConsumerIdRouteImport.update({
+const AuthzHealthConsumerIdRoute = AuthzHealthConsumerIdRouteImport.update({
   id: '/health-consumer/$id',
   path: '/health-consumer/$id',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthzRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/sign-in': typeof SignInLazyRoute
-  '/sign-up': typeof SignUpLazyRoute
-  '/health-consumer/$id': typeof AuthHealthConsumerIdRoute
-  '/user/$id': typeof AuthUserIdRoute
-  '/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
-  '/user/list': typeof AuthUserListLazyRoute
-  '/user/profile': typeof AuthUserProfileLazyRoute
+  '/check-email': typeof AuthnCheckEmailLazyRoute
+  '/sign-in': typeof AuthnSignInLazyRoute
+  '/sign-up': typeof AuthnSignUpLazyRoute
+  '/dashboard': typeof AuthzDashboardLazyRoute
+  '/my-profile': typeof AuthzMyProfileLazyRoute
+  '/health-consumer/$id': typeof AuthzHealthConsumerIdRoute
+  '/user/$id': typeof AuthzUserIdRoute
+  '/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
+  '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/sign-in': typeof SignInLazyRoute
-  '/sign-up': typeof SignUpLazyRoute
-  '/health-consumer/$id': typeof AuthHealthConsumerIdRoute
-  '/user/$id': typeof AuthUserIdRoute
-  '/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
-  '/user/list': typeof AuthUserListLazyRoute
-  '/user/profile': typeof AuthUserProfileLazyRoute
+  '/check-email': typeof AuthnCheckEmailLazyRoute
+  '/sign-in': typeof AuthnSignInLazyRoute
+  '/sign-up': typeof AuthnSignUpLazyRoute
+  '/dashboard': typeof AuthzDashboardLazyRoute
+  '/my-profile': typeof AuthzMyProfileLazyRoute
+  '/health-consumer/$id': typeof AuthzHealthConsumerIdRoute
+  '/user/$id': typeof AuthzUserIdRoute
+  '/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
+  '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/sign-in': typeof SignInLazyRoute
-  '/sign-up': typeof SignUpLazyRoute
-  '/_auth/health-consumer/$id': typeof AuthHealthConsumerIdRoute
-  '/_auth/user/$id': typeof AuthUserIdRoute
-  '/_auth/health-consumer/list': typeof AuthHealthConsumerListLazyRoute
-  '/_auth/user/list': typeof AuthUserListLazyRoute
-  '/_auth/user/profile': typeof AuthUserProfileLazyRoute
+  '/_authn': typeof AuthnRouteWithChildren
+  '/_authz': typeof AuthzRouteWithChildren
+  '/_authn/check-email': typeof AuthnCheckEmailLazyRoute
+  '/_authn/sign-in': typeof AuthnSignInLazyRoute
+  '/_authn/sign-up': typeof AuthnSignUpLazyRoute
+  '/_authz/dashboard': typeof AuthzDashboardLazyRoute
+  '/_authz/my-profile': typeof AuthzMyProfileLazyRoute
+  '/_authz/health-consumer/$id': typeof AuthzHealthConsumerIdRoute
+  '/_authz/user/$id': typeof AuthzUserIdRoute
+  '/_authz/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
+  '/_authz/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/_authz/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/check-email'
     | '/sign-in'
     | '/sign-up'
+    | '/dashboard'
+    | '/my-profile'
     | '/health-consumer/$id'
     | '/user/$id'
     | '/health-consumer/list'
+    | '/health-consumer/stadistics'
     | '/user/list'
-    | '/user/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/check-email'
     | '/sign-in'
     | '/sign-up'
+    | '/dashboard'
+    | '/my-profile'
     | '/health-consumer/$id'
     | '/user/$id'
     | '/health-consumer/list'
+    | '/health-consumer/stadistics'
     | '/user/list'
-    | '/user/profile'
   id:
     | '__root__'
     | '/'
-    | '/_auth'
-    | '/sign-in'
-    | '/sign-up'
-    | '/_auth/health-consumer/$id'
-    | '/_auth/user/$id'
-    | '/_auth/health-consumer/list'
-    | '/_auth/user/list'
-    | '/_auth/user/profile'
+    | '/_authn'
+    | '/_authz'
+    | '/_authn/check-email'
+    | '/_authn/sign-in'
+    | '/_authn/sign-up'
+    | '/_authz/dashboard'
+    | '/_authz/my-profile'
+    | '/_authz/health-consumer/$id'
+    | '/_authz/user/$id'
+    | '/_authz/health-consumer/list'
+    | '/_authz/health-consumer/stadistics'
+    | '/_authz/user/list'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  AuthRoute: typeof AuthRouteWithChildren
-  SignInLazyRoute: typeof SignInLazyRoute
-  SignUpLazyRoute: typeof SignUpLazyRoute
+  AuthnRoute: typeof AuthnRouteWithChildren
+  AuthzRoute: typeof AuthzRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sign-up': {
-      id: '/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof SignUpLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sign-in': {
-      id: '/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof SignInLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_auth': {
-      id: '/_auth'
+    '/_authz': {
+      id: '/_authz'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthRouteImport
+      preLoaderRoute: typeof AuthzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authn': {
+      id: '/_authn'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -179,67 +229,120 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/user/profile': {
-      id: '/_auth/user/profile'
-      path: '/user/profile'
-      fullPath: '/user/profile'
-      preLoaderRoute: typeof AuthUserProfileLazyRouteImport
-      parentRoute: typeof AuthRoute
+    '/_authz/my-profile': {
+      id: '/_authz/my-profile'
+      path: '/my-profile'
+      fullPath: '/my-profile'
+      preLoaderRoute: typeof AuthzMyProfileLazyRouteImport
+      parentRoute: typeof AuthzRoute
     }
-    '/_auth/user/list': {
-      id: '/_auth/user/list'
+    '/_authz/dashboard': {
+      id: '/_authz/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthzDashboardLazyRouteImport
+      parentRoute: typeof AuthzRoute
+    }
+    '/_authn/sign-up': {
+      id: '/_authn/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof AuthnSignUpLazyRouteImport
+      parentRoute: typeof AuthnRoute
+    }
+    '/_authn/sign-in': {
+      id: '/_authn/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof AuthnSignInLazyRouteImport
+      parentRoute: typeof AuthnRoute
+    }
+    '/_authn/check-email': {
+      id: '/_authn/check-email'
+      path: '/check-email'
+      fullPath: '/check-email'
+      preLoaderRoute: typeof AuthnCheckEmailLazyRouteImport
+      parentRoute: typeof AuthnRoute
+    }
+    '/_authz/user/list': {
+      id: '/_authz/user/list'
       path: '/user/list'
       fullPath: '/user/list'
-      preLoaderRoute: typeof AuthUserListLazyRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthzUserListLazyRouteImport
+      parentRoute: typeof AuthzRoute
     }
-    '/_auth/health-consumer/list': {
-      id: '/_auth/health-consumer/list'
+    '/_authz/health-consumer/stadistics': {
+      id: '/_authz/health-consumer/stadistics'
+      path: '/health-consumer/stadistics'
+      fullPath: '/health-consumer/stadistics'
+      preLoaderRoute: typeof AuthzHealthConsumerStadisticsLazyRouteImport
+      parentRoute: typeof AuthzRoute
+    }
+    '/_authz/health-consumer/list': {
+      id: '/_authz/health-consumer/list'
       path: '/health-consumer/list'
       fullPath: '/health-consumer/list'
-      preLoaderRoute: typeof AuthHealthConsumerListLazyRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthzHealthConsumerListLazyRouteImport
+      parentRoute: typeof AuthzRoute
     }
-    '/_auth/user/$id': {
-      id: '/_auth/user/$id'
+    '/_authz/user/$id': {
+      id: '/_authz/user/$id'
       path: '/user/$id'
       fullPath: '/user/$id'
-      preLoaderRoute: typeof AuthUserIdRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthzUserIdRouteImport
+      parentRoute: typeof AuthzRoute
     }
-    '/_auth/health-consumer/$id': {
-      id: '/_auth/health-consumer/$id'
+    '/_authz/health-consumer/$id': {
+      id: '/_authz/health-consumer/$id'
       path: '/health-consumer/$id'
       fullPath: '/health-consumer/$id'
-      preLoaderRoute: typeof AuthHealthConsumerIdRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof AuthzHealthConsumerIdRouteImport
+      parentRoute: typeof AuthzRoute
     }
   }
 }
 
-interface AuthRouteChildren {
-  AuthHealthConsumerIdRoute: typeof AuthHealthConsumerIdRoute
-  AuthUserIdRoute: typeof AuthUserIdRoute
-  AuthHealthConsumerListLazyRoute: typeof AuthHealthConsumerListLazyRoute
-  AuthUserListLazyRoute: typeof AuthUserListLazyRoute
-  AuthUserProfileLazyRoute: typeof AuthUserProfileLazyRoute
+interface AuthnRouteChildren {
+  AuthnCheckEmailLazyRoute: typeof AuthnCheckEmailLazyRoute
+  AuthnSignInLazyRoute: typeof AuthnSignInLazyRoute
+  AuthnSignUpLazyRoute: typeof AuthnSignUpLazyRoute
 }
 
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthHealthConsumerIdRoute: AuthHealthConsumerIdRoute,
-  AuthUserIdRoute: AuthUserIdRoute,
-  AuthHealthConsumerListLazyRoute: AuthHealthConsumerListLazyRoute,
-  AuthUserListLazyRoute: AuthUserListLazyRoute,
-  AuthUserProfileLazyRoute: AuthUserProfileLazyRoute,
+const AuthnRouteChildren: AuthnRouteChildren = {
+  AuthnCheckEmailLazyRoute: AuthnCheckEmailLazyRoute,
+  AuthnSignInLazyRoute: AuthnSignInLazyRoute,
+  AuthnSignUpLazyRoute: AuthnSignUpLazyRoute,
 }
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthnRouteWithChildren = AuthnRoute._addFileChildren(AuthnRouteChildren)
+
+interface AuthzRouteChildren {
+  AuthzDashboardLazyRoute: typeof AuthzDashboardLazyRoute
+  AuthzMyProfileLazyRoute: typeof AuthzMyProfileLazyRoute
+  AuthzHealthConsumerIdRoute: typeof AuthzHealthConsumerIdRoute
+  AuthzUserIdRoute: typeof AuthzUserIdRoute
+  AuthzHealthConsumerListLazyRoute: typeof AuthzHealthConsumerListLazyRoute
+  AuthzHealthConsumerStadisticsLazyRoute: typeof AuthzHealthConsumerStadisticsLazyRoute
+  AuthzUserListLazyRoute: typeof AuthzUserListLazyRoute
+}
+
+const AuthzRouteChildren: AuthzRouteChildren = {
+  AuthzDashboardLazyRoute: AuthzDashboardLazyRoute,
+  AuthzMyProfileLazyRoute: AuthzMyProfileLazyRoute,
+  AuthzHealthConsumerIdRoute: AuthzHealthConsumerIdRoute,
+  AuthzUserIdRoute: AuthzUserIdRoute,
+  AuthzHealthConsumerListLazyRoute: AuthzHealthConsumerListLazyRoute,
+  AuthzHealthConsumerStadisticsLazyRoute:
+    AuthzHealthConsumerStadisticsLazyRoute,
+  AuthzUserListLazyRoute: AuthzUserListLazyRoute,
+}
+
+const AuthzRouteWithChildren = AuthzRoute._addFileChildren(AuthzRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  AuthRoute: AuthRouteWithChildren,
-  SignInLazyRoute: SignInLazyRoute,
-  SignUpLazyRoute: SignUpLazyRoute,
+  AuthnRoute: AuthnRouteWithChildren,
+  AuthzRoute: AuthzRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

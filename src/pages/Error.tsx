@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/base/button'
 import { Link } from '@tanstack/react-router'
 import content from '@/config/data/pages/error'
 import pictureColleDelleFinestre from '@/assets/images/error404-finestre.webp'

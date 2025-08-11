@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { v4 as uuidv4 } from 'uuid'
 
-import Loading from '@components/base/Loading'
-import ErrorApi from '@components/base/ErrorApi'
+import Loading from '@components/ui/Loading'
+import ErrorApi from '@components/ui/ErrorApi'
 import { getDiagnosis } from '@/services/supabaseService'
 
 const Diagnosis = ({ id }: { id: string }) => {
