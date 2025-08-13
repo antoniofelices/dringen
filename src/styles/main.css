@@ -64,7 +64,7 @@
     --text-5xl--line-height: 1;
 
     /* Spacing */
-    --spacing-0: 0;
+    /* --spacing-0: 0;
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
     --spacing-3: 0.75rem;
@@ -83,7 +83,7 @@
     --spacing-50vh: 50vh;
     --spacing-100vh: 100vh;
     --spacing-50vw: 50vw;
-    --spacing-100vw: 100vw;
+    --spacing-100vw: 100vw; */
 }
 
 @utility container {

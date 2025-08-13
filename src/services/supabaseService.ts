@@ -62,7 +62,7 @@ export const getListUsers = async () => {
 
 export const getSingleUser = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_users')
+        .from('dn_users_all_data')
         .select('*')
         .eq('id', id)
     if (error) throw error

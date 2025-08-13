@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
-import ButtonBack from '@components/ui/ButtonBack'
 import { getListHealthConsumer } from '@/services/supabaseService'
 import content from '@/config/data/authz/listHealthConsumer'
 // import { filterArrayOfObjects } from '@helpers/utils'
@@ -78,7 +77,6 @@ const List = () => {
                     </table>
                 </div>
             </article>
-            <ButtonBack />
         </>
     )
 }
