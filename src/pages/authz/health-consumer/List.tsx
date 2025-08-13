@@ -14,7 +14,7 @@ const List = () => {
         isError: listError,
         error: listErrorType,
     } = useQuery({
-        queryKey: ['listUsers'],
+        queryKey: ['listHealthConsumers'],
         queryFn: () => getListHealthConsumer(),
     })
 
@@ -24,6 +24,8 @@ const List = () => {
 
     if (listError && listErrorType)
         return <ErrorApi message={listErrorType.message} />
+
+    console.log(listData)
 
     return (
         <>

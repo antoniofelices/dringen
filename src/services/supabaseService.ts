@@ -29,14 +29,16 @@ export const signInWithPassword = async (
 }
 
 export const getListHealthConsumer = async () => {
-    const { data, error } = await supabase.from('dn_profiles').select('*')
+    const { data, error } = await supabase
+        .from('dn_health_consumer')
+        .select('*')
     if (error) throw error
     return data
 }
 
 export const getSingleHealthConsumer = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_profiles')
+        .from('dn_health_consumer')
         .select(`*, dn_pfsh("*"), dn_hpi("*")`)
         .eq('id', id)
     if (error) throw error
@@ -47,6 +49,21 @@ export const getDiagnosis = async (id: string) => {
     const { data, error } = await supabase
         .from('dn_hpi')
         .select(`id, dn_hpi_diagnosis("*")`)
+        .eq('id', id)
+    if (error) throw error
+    return data[0]
+}
+
+export const getListUsers = async () => {
+    const { data, error } = await supabase.from('dn_users').select('*')
+    if (error) throw error
+    return data
+}
+
+export const getSingleUser = async (id: string) => {
+    const { data, error } = await supabase
+        .from('dn_users')
+        .select('*')
         .eq('id', id)
     if (error) throw error
     return data[0]

@@ -27,7 +27,7 @@ const Single = ({ id }: { id: string }) => {
         isError: personError,
         error: personErrorType,
     } = useQuery({
-        queryKey: ['singlePerson', id],
+        queryKey: ['singleHealthConsumer', id],
         queryFn: () => getSingleHealthConsumer(id),
     })
 

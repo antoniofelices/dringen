@@ -1,23 +1,45 @@
-import { useNavigate } from '@tanstack/react-router'
-import { supabase } from '@/services/supabaseService'
+import { useQuery } from '@tanstack/react-query'
+import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
+import ButtonBack from '@components/ui/ButtonBack'
+
+import { getSingleUser } from '@/services/supabaseService'
+
 import content from '@/config/data/authz/userSingle'
-import { Button } from '@/components/ui/base/button'
 
-const Single = ({ id }: { id: number }) => {
-    const navigate = useNavigate()
+const Single = ({ id }: { id: string }) => {
+    const {
+        data: personData,
+        isPending: personLoading,
+        isError: personError,
+        error: personErrorType,
+    } = useQuery({
+        queryKey: ['singleUser', id],
+        queryFn: () => getSingleUser(id),
+    })
 
-    const handleLogout = async () => {
-        const { error } = await supabase.auth.signOut()
+    if (personLoading) return <Loading />
 
-        if (error) return <ErrorApi message={error.message} />
-        navigate({ to: '/' })
-    }
+    if (personError && personErrorType)
+        return <ErrorApi message={personErrorType.message} />
+
+    console.log(personData)
 
     return (
         <>
-            <h1 className="mb-8">{content.title} Lorem</h1>
-            <Button onClick={handleLogout}>{content.textButtonSignOut}</Button>
+            <h1 className="mb-8">
+                {content.title}: {personData.user_name}{' '}
+                {personData.user_last_name}
+            </h1>
+            <ul>
+                <li>
+                    {content.textRole}: {personData.role}
+                </li>
+                <li>
+                    {content.textCreatedAt}: {personData.created_at}
+                </li>
+            </ul>
+            <ButtonBack />
         </>
     )
 }

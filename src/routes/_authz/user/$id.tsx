@@ -5,7 +5,7 @@ export const Route = createFileRoute('/_authz/user/$id')({
     component: RouteComponent,
     params: {
         parse: (params) => ({
-            id: Number(params.id),
+            id: params.id,
         }),
     },
 })
