@@ -1,3 +1,6 @@
+// TODO: deleted.
+// This app will never have new users signing up. The registration process is always managed by an admin user.
+
 import { useId } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'

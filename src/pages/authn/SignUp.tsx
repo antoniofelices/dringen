@@ -1,3 +1,6 @@
+// TODO: deleted.
+// This app will never have new users signing up. The registration process is always managed by an admin user.
+
 import { Link } from '@tanstack/react-router'
 import SignUpForm from '@/components/authn/SignUpForm'
 import {
