@@ -1,6 +1,11 @@
 import type { RoutesProps } from '@/types/interfaces'
 import { Link } from '@tanstack/react-router'
 
+import {
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/base/sidebar'
+
 const MenuItems = ({
     content,
     variant,
@@ -17,9 +22,17 @@ const MenuItems = ({
     return (
         <>
             {menuData.map((item) => (
-                <li key={item.id} className={`${classesListElement}`}>
-                    <Link to={`/${item.url}` as any}>{item.text}</Link>
-                </li>
+                <SidebarMenuItem
+                    key={item.id}
+                    className={`${classesListElement}`}
+                >
+                    <SidebarMenuButton asChild>
+                        <Link to={`/${item.url}` as any}>
+                            {item.icon && <item.icon />}
+                            {item.text}
+                        </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
             ))}
         </>
     )

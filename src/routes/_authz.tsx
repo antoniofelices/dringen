@@ -1,8 +1,6 @@
-import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
-import Header from '@layouts/authz/Header'
-import Aside from '@layouts/authz/Aside'
-import Main from '@/layouts/authz/Main'
+import All from '@layouts/authz/All'
 
 export const Route = createFileRoute('/_authz')({
     beforeLoad: async () => {
@@ -15,13 +13,5 @@ export const Route = createFileRoute('/_authz')({
 })
 
 function RouteComponent() {
-    return (
-        <>
-            <Header />
-            <Aside />
-            <Main>
-                <Outlet />
-            </Main>
-        </>
-    )
+    return <All />
 }

@@ -29,9 +29,8 @@ const List = () => {
     return (
         <>
             <article>
-                <div className="flex py-4 w-xl gap-4">{/* Filters */}</div>
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left rtl:text-right">
+                <div className="relative shadow-md sm:rounded-lg">
+                    <table className="text-sm text-left rtl:text-right">
                         <thead className="text-xs bg-gray-200 dark:bg-gray-700">
                             <tr>
                                 <th scope="col" className="px-6 py-3"></th>
