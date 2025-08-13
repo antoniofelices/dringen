@@ -1,3 +1,6 @@
+// TODO: deleted.
+// This app will never have new users signing up. The registration process is always managed by an admin user.
+
 import { useId } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
@@ -42,7 +45,7 @@ const signUpSchema = z
 
 type FormData = z.infer<typeof signUpSchema>
 
-const SignUpForm = () => {
+const SignUpFormOriginal = () => {
     const userNameId = useId()
     const emailId = useId()
     const passwordId = useId()
@@ -175,4 +178,4 @@ const SignUpForm = () => {
     )
 }
 
-export default SignUpForm
+export default SignUpFormOriginal

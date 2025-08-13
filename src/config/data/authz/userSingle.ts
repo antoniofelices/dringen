@@ -1,6 +1,16 @@
 const allData = {
-    title: 'Hello',
+    title: 'Account',
+    textName: 'Name',
     textButtonSignOut: 'Sign Out',
+    textRole: 'Role',
+    textEmail: 'Email',
+    textCreatedAt: 'Created at',
+    textUpdatedAt: 'Updated at',
+    titleActions: 'Actions',
+    textDeactiveAccount: 'Deactive account',
+    textButtonDeactive: 'Deactive account',
+    textDeleteAccount: 'Delete account',
+    textButtonDelete: 'Delete account',
 }
 
 export default allData

@@ -1,4 +1,4 @@
-type SignUpForm = {
+type RegisterUserForm = {
     confirmPassword: string
     errorUserNameTooShort: string
     errorUserNameTooLong: string
@@ -12,14 +12,16 @@ type SignUpForm = {
     errorPasswordMustContain: string
     errorPasswordNoMatch: string
     labelUserName: string
+    labelUserLastName: string
     labelEmail: string
     labelPassword: string
     labelConfirmPassword: string
+    labelSelectRole: string
     textButtonSend: string
     textButtonSending: string
 }
 
-const allData: SignUpForm = {
+const allData: RegisterUserForm = {
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
@@ -37,11 +39,13 @@ const allData: SignUpForm = {
     errorPasswordMustContain:
         'It must contain at least one uppercase letter, one lowercase letter, and one number',
     errorPasswordNoMatch: 'Passwords do not match',
-    labelUserName: 'Username',
+    labelUserName: 'Name',
+    labelUserLastName: 'Last Name',
     labelEmail: 'Email',
     labelPassword: 'Password',
     labelConfirmPassword: 'Confirm Password',
-    textButtonSend: 'Sign Up',
+    labelSelectRole: 'Select Role',
+    textButtonSend: 'Register new user',
     textButtonSending: 'Sending',
 }
 
