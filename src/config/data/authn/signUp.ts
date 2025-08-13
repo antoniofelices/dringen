@@ -1,3 +1,6 @@
+// TODO: deleted.
+// This app will never have new users signing up. The registration process is always managed by an admin user.
+
 const allData = {
     title: 'Sign Up',
     textToSignIn: 'Already have and account?',
