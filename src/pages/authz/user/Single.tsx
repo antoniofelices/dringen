@@ -4,11 +4,12 @@ import ErrorApi from '@components/ui/ErrorApi'
 import ButtonBack from '@components/ui/ButtonBack'
 
 import { getSingleUser } from '@/services/supabaseService'
-
+import { transformDate } from '@/lib/utils'
 import content from '@/config/data/authz/userSingle'
 
 import {
     Card,
+    CardAction,
     CardContent,
     CardHeader,
     CardTitle,
@@ -41,24 +42,29 @@ const Single = ({ id }: { id: string }) => {
                     <CardTitle>
                         <h1 className="mb-8">{content.title}</h1>
                     </CardTitle>
+                    <CardAction>
+                        <button className="text-xs">Editar</button>
+                    </CardAction>
                 </CardHeader>
                 <CardContent>
                     <ul>
-                        <li>
+                        <li className="my-2">
                             {content.textName}: {personData.user_name}{' '}
                             {personData.user_last_name}
                         </li>
-                        <li>
+                        <li className="my-2">
                             {content.textRole}: {personData.role}
                         </li>
-                        <li>
+                        <li className="my-2">
                             {content.textEmail}: {personData.email}
                         </li>
-                        <li>
-                            {content.textCreatedAt}: {personData.created_at}
+                        <li className="my-2">
+                            {content.textCreatedAt}:{' '}
+                            {transformDate(`${personData.created_at}`)}
                         </li>
-                        <li>
-                            {content.textUpdatedAt}: {personData.updated_at}
+                        <li className="my-2">
+                            {content.textUpdatedAt}:{' '}
+                            {transformDate(`${personData.updated_at}`)}
                         </li>
                     </ul>
                 </CardContent>

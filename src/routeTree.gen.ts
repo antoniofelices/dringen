@@ -23,6 +23,7 @@ const AuthnSignUpLazyRouteImport = createFileRoute('/_authn/sign-up')()
 const AuthnSignInLazyRouteImport = createFileRoute('/_authn/sign-in')()
 const AuthnCheckEmailLazyRouteImport = createFileRoute('/_authn/check-email')()
 const AuthzUserListLazyRouteImport = createFileRoute('/_authz/user/list')()
+const AuthzUserAddLazyRouteImport = createFileRoute('/_authz/user/add')()
 const AuthzHealthConsumerStadisticsLazyRouteImport = createFileRoute(
   '/_authz/health-consumer/stadistics',
 )()
@@ -85,6 +86,13 @@ const AuthzUserListLazyRoute = AuthzUserListLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/_authz/user/list.lazy').then((d) => d.Route),
 )
+const AuthzUserAddLazyRoute = AuthzUserAddLazyRouteImport.update({
+  id: '/user/add',
+  path: '/user/add',
+  getParentRoute: () => AuthzRoute,
+} as any).lazy(() =>
+  import('./routes/_authz/user/add.lazy').then((d) => d.Route),
+)
 const AuthzHealthConsumerStadisticsLazyRoute =
   AuthzHealthConsumerStadisticsLazyRouteImport.update({
     id: '/health-consumer/stadistics',
@@ -125,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/user/$id': typeof AuthzUserIdRoute
   '/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
   '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRoutesByTo {
@@ -138,6 +147,7 @@ export interface FileRoutesByTo {
   '/user/$id': typeof AuthzUserIdRoute
   '/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
   '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRoutesById {
@@ -154,6 +164,7 @@ export interface FileRoutesById {
   '/_authz/user/$id': typeof AuthzUserIdRoute
   '/_authz/health-consumer/list': typeof AuthzHealthConsumerListLazyRoute
   '/_authz/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
+  '/_authz/user/add': typeof AuthzUserAddLazyRoute
   '/_authz/user/list': typeof AuthzUserListLazyRoute
 }
 export interface FileRouteTypes {
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/health-consumer/list'
     | '/health-consumer/stadistics'
+    | '/user/add'
     | '/user/list'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -182,6 +194,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/health-consumer/list'
     | '/health-consumer/stadistics'
+    | '/user/add'
     | '/user/list'
   id:
     | '__root__'
@@ -197,6 +210,7 @@ export interface FileRouteTypes {
     | '/_authz/user/$id'
     | '/_authz/health-consumer/list'
     | '/_authz/health-consumer/stadistics'
+    | '/_authz/user/add'
     | '/_authz/user/list'
   fileRoutesById: FileRoutesById
 }
@@ -271,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthzUserListLazyRouteImport
       parentRoute: typeof AuthzRoute
     }
+    '/_authz/user/add': {
+      id: '/_authz/user/add'
+      path: '/user/add'
+      fullPath: '/user/add'
+      preLoaderRoute: typeof AuthzUserAddLazyRouteImport
+      parentRoute: typeof AuthzRoute
+    }
     '/_authz/health-consumer/stadistics': {
       id: '/_authz/health-consumer/stadistics'
       path: '/health-consumer/stadistics'
@@ -323,6 +344,7 @@ interface AuthzRouteChildren {
   AuthzUserIdRoute: typeof AuthzUserIdRoute
   AuthzHealthConsumerListLazyRoute: typeof AuthzHealthConsumerListLazyRoute
   AuthzHealthConsumerStadisticsLazyRoute: typeof AuthzHealthConsumerStadisticsLazyRoute
+  AuthzUserAddLazyRoute: typeof AuthzUserAddLazyRoute
   AuthzUserListLazyRoute: typeof AuthzUserListLazyRoute
 }
 
@@ -334,6 +356,7 @@ const AuthzRouteChildren: AuthzRouteChildren = {
   AuthzHealthConsumerListLazyRoute: AuthzHealthConsumerListLazyRoute,
   AuthzHealthConsumerStadisticsLazyRoute:
     AuthzHealthConsumerStadisticsLazyRoute,
+  AuthzUserAddLazyRoute: AuthzUserAddLazyRoute,
   AuthzUserListLazyRoute: AuthzUserListLazyRoute,
 }
 

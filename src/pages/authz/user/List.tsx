@@ -23,8 +23,6 @@ const List = () => {
     if (listError && listErrorType)
         return <ErrorApi message={listErrorType.message} />
 
-    console.log(listData)
-
     return (
         <>
             <article>
