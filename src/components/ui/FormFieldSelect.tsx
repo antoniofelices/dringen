@@ -53,7 +53,9 @@ const FormFieldSelect = ({
                 </SelectTrigger>
                 <SelectContent className="w-full">
                     {options.map((option) => (
-                        <SelectItem value={option}>{option}</SelectItem>
+                        <SelectItem value={option} key={option}>
+                            {option}
+                        </SelectItem>
                     ))}
                 </SelectContent>
                 {/* <Input

@@ -1,4 +1,4 @@
-import SignUpForm from '@/components/authn/SignUpForm'
+import RegisterUserForm from '@/components/user/RegisterUserForm'
 import {
     Card,
     CardContent,
@@ -11,10 +11,10 @@ const Add = () => {
     return (
         <Card className="max-w-2xl mx-auto">
             <CardHeader>
-                <CardTitle className="text-2xl">{content.title}</CardTitle>
+                <CardTitle>{content.title}</CardTitle>
             </CardHeader>
             <CardContent>
-                <SignUpForm />
+                <RegisterUserForm />
             </CardContent>
         </Card>
     )

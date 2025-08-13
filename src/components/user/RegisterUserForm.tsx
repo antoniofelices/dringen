@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Mail, Lock, LockKeyhole, User, UserRoundCog } from 'lucide-react'
 
-import content from '@/config/data/authn/signUpForm'
+import content from '@/config/data/authz/registerUserForm'
 import { Button } from '@/components/ui/base/button'
 
 import FormFieldInput from '@components/ui/FormFieldInput'
@@ -11,7 +11,7 @@ import FormFieldSelect from '@components/ui/FormFieldSelect'
 // import { registerUser } from '@/services/supabaseService'
 // import mapSupabaseError from '@/services/mapSupabaseErrors'
 
-const signUpSchema = z
+const registerUserSchema = z
     .object({
         userName: z
             .string()
@@ -47,16 +47,16 @@ const signUpSchema = z
         path: ['confirmPassword'],
     })
 
-type FormData = z.infer<typeof signUpSchema>
+type FormData = z.infer<typeof registerUserSchema>
 
-const SignUpForm = () => {
+const RegisterUserForm = () => {
     const {
         register,
         handleSubmit,
         setError,
         formState: { errors, isSubmitting },
     } = useForm<FormData>({
-        resolver: zodResolver(signUpSchema),
+        resolver: zodResolver(registerUserSchema),
     })
 
     const onSubmit = async (data: FormData) => {
@@ -82,7 +82,7 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="userName"
                     icon={User}
-                    label="User Name"
+                    label={content.labelUserName}
                     placeholder="Manolo"
                     register={register}
                     type="text"
@@ -91,8 +91,8 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="userLastName"
                     icon={User}
-                    label="User Last Name"
-                    placeholder="Cabezabolo"
+                    label={content.labelUserLastName}
+                    placeholder="Kabezabolo"
                     register={register}
                     type="text"
                 />
@@ -100,8 +100,8 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="email"
                     icon={Mail}
-                    label="Email"
-                    placeholder="nf@nf.com"
+                    label={content.labelEmail}
+                    placeholder="nf@manolo.es"
                     register={register}
                     type="email"
                 />
@@ -109,7 +109,7 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="password"
                     icon={Lock}
-                    label="Password"
+                    label={content.labelPassword}
                     register={register}
                     type="password"
                 />
@@ -117,7 +117,7 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="confirmPassword"
                     icon={LockKeyhole}
-                    label="Confirm Password"
+                    label={content.labelConfirmPassword}
                     register={register}
                     type="password"
                 />
@@ -125,7 +125,7 @@ const SignUpForm = () => {
                     errors={errors}
                     fieldName="role"
                     icon={UserRoundCog}
-                    label="Select Role"
+                    label={content.labelSelectRole}
                     options={['user', 'medical_office', 'physician', 'admin']}
                     placeholder="User"
                     register={register}
@@ -145,4 +145,4 @@ const SignUpForm = () => {
     )
 }
 
-export default SignUpForm
+export default RegisterUserForm
