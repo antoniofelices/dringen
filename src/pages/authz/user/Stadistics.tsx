@@ -1,4 +1,4 @@
-import content from '@/config/data/authz/health-consumer/stadistics'
+import content from '@/config/data/authz/user/stadistics'
 
 const Stadistics = () => {
     return <>{content.title}</>

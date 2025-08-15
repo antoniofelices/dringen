@@ -8,7 +8,7 @@ type SignInForm = {
     textButtonSending: string
 }
 
-const allData: SignInForm = {
+const content: SignInForm = {
     labelEmail: 'Email',
     labelPassword: 'Password',
     errorEmailInvalid: 'Please use a valid email address',
@@ -18,4 +18,4 @@ const allData: SignInForm = {
     textButtonSending: 'Sending',
 }
 
-export default allData
+export default content

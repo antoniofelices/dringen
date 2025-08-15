@@ -40,47 +40,45 @@ const Single = ({ id }: { id: string }) => {
 
     return (
         <>
-            <article>
-                <Drawer>
-                    <div className="grid lg:grid-cols-6 gap-6 place-content-between">
-                        <div className="col-span-6 mt-6">
-                            <div className="flex justify-between items-center">
-                                <h1 className="font-extrabold text-xl">
-                                    {personData.user_name}{' '}
-                                    {personData.user_last_name}
-                                </h1>
-                                <Button asChild size="sm">
-                                    <DrawerTrigger>
-                                        Add History of Present Illness
-                                    </DrawerTrigger>
-                                </Button>
-                            </div>
+            <Drawer>
+                <div className="grid lg:grid-cols-6 gap-6 place-content-between">
+                    <div className="col-span-6 mt-6">
+                        <div className="flex justify-between items-center">
+                            <h1 className="font-extrabold text-xl">
+                                {personData.user_name}{' '}
+                                {personData.user_last_name}
+                            </h1>
+                            <Button asChild size="sm">
+                                <DrawerTrigger>
+                                    Add History of Present Illness
+                                </DrawerTrigger>
+                            </Button>
                         </div>
-                        <div className="col-span-3">
-                            <div>
-                                <Info content={personData} />
-                            </div>
-                            <div className="mt-6">
-                                <Pfsh content={pfsh} />
-                            </div>
-                        </div>
-                        <div className="col-span-3">
-                            <MedicalRecord content={personData} />
-                        </div>
-                        <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh]">
-                            <DrawerHeader className="sr-only">
-                                <DrawerTitle>
-                                    History of Present Illness
-                                </DrawerTitle>
-                                <DrawerDescription className="sr-only">
-                                    A History of Present Illness form
-                                </DrawerDescription>
-                            </DrawerHeader>
-                            <NewHpi />
-                        </DrawerContent>
                     </div>
-                </Drawer>
-            </article>
+                    <div className="col-span-3">
+                        <div>
+                            <Info content={personData} />
+                        </div>
+                        <div className="mt-6">
+                            <Pfsh content={pfsh} />
+                        </div>
+                    </div>
+                    <div className="col-span-3">
+                        <MedicalRecord content={personData} />
+                    </div>
+                    <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh]">
+                        <DrawerHeader className="sr-only">
+                            <DrawerTitle>
+                                History of Present Illness
+                            </DrawerTitle>
+                            <DrawerDescription className="sr-only">
+                                A History of Present Illness form
+                            </DrawerDescription>
+                        </DrawerHeader>
+                        <NewHpi />
+                    </DrawerContent>
+                </div>
+            </Drawer>
             <ButtonBack />
         </>
     )

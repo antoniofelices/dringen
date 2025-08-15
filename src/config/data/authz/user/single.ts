@@ -1,4 +1,4 @@
-const allData = {
+const content = {
     title: 'Account',
     textName: 'Name',
     textButtonSignOut: 'Sign Out',
@@ -13,4 +13,4 @@ const allData = {
     textButtonDelete: 'Delete account',
 }
 
-export default allData
+export default content
