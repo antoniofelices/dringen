@@ -17,7 +17,7 @@ import {
 import { Button } from '@/components/ui/base/button'
 import { Switch } from '@/components/ui/base/switch'
 
-const Single = ({ id }: { id: string }) => {
+const SingleUser = ({ id }: { id: string }) => {
     const {
         data: personData,
         isPending: personLoading,
@@ -95,4 +95,4 @@ const Single = ({ id }: { id: string }) => {
     )
 }
 
-export default Single
+export default SingleUser

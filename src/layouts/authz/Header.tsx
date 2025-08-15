@@ -1,14 +1,7 @@
 import Logo from '@/components/ui/Logo'
-// import MenuItems from '@/components/base/Menutems'
-// import main from '@/data/menus/main'
-// import action from '@/data/menus/action'
-// import user from '@/data/menus/profile'
 import { Link } from '@tanstack/react-router'
-// import { useIsAuth } from '@/hooks/useIsAuth'
 
 const Header = () => {
-    // const { isLoggedIn } = useIsAuth()
-
     return (
         <nav className="border-b bg-gray-100 dark:bg-gray-900 border-gray-300 px-4 py-2.5 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
             <div className="flex flex-wrap justify-between items-center">

@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router'
 // import Header from '@layouts/authz/Header'
-import Main from '@/layouts/authz/Main'
+import MainAuthz from '@/layouts/authz/Main'
 import { SidebarProvider } from '@/components/ui/base/sidebar'
 import Aside from '@/layouts/authz/Aside'
 
@@ -9,9 +9,9 @@ const All = () => {
         <SidebarProvider>
             <Aside />
             {/* <Header /> */}
-            <Main>
+            <MainAuthz>
                 <Outlet />
-            </Main>
+            </MainAuthz>
         </SidebarProvider>
     )
 }

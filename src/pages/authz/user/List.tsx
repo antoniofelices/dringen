@@ -5,7 +5,7 @@ import ErrorApi from '@components/ui/ErrorApi'
 import { getListUsers } from '@/services/supabaseService'
 import content from '@/config/data/authz/user/list'
 
-const List = () => {
+const ListUser = () => {
     const {
         data: listData,
         isPending: listLoading,
@@ -74,4 +74,4 @@ const List = () => {
     )
 }
 
-export default List
+export default ListUser

@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/base/card'
 import content from '@/config/data/authz/user/add'
 
-const Add = () => {
+const AddUser = () => {
     return (
         <Card className="max-w-2xl mx-auto">
             <CardHeader>
@@ -20,4 +20,4 @@ const Add = () => {
     )
 }
 
-export default Add
+export default AddUser

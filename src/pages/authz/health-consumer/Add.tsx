@@ -1,6 +1,6 @@
 import content from '@/config/data/authz/health-consumer/add'
 
-const Add = () => {
+const AddHealthConsumer = () => {
     return (
         <>
             <h1>{content.title}</h1>
@@ -8,4 +8,4 @@ const Add = () => {
     )
 }
 
-export default Add
+export default AddHealthConsumer
