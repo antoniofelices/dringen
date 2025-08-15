@@ -22,6 +22,9 @@ const AuthzDashboardLazyRouteImport = createFileRoute('/_authz/dashboard')()
 const AuthnSignUpLazyRouteImport = createFileRoute('/_authn/sign-up')()
 const AuthnSignInLazyRouteImport = createFileRoute('/_authn/sign-in')()
 const AuthnCheckEmailLazyRouteImport = createFileRoute('/_authn/check-email')()
+const AuthzUserStadisticsLazyRouteImport = createFileRoute(
+  '/_authz/user/stadistics',
+)()
 const AuthzUserListLazyRouteImport = createFileRoute('/_authz/user/list')()
 const AuthzUserAddLazyRouteImport = createFileRoute('/_authz/user/add')()
 const AuthzHealthConsumerStadisticsLazyRouteImport = createFileRoute(
@@ -81,6 +84,13 @@ const AuthnCheckEmailLazyRoute = AuthnCheckEmailLazyRouteImport.update({
   getParentRoute: () => AuthnRoute,
 } as any).lazy(() =>
   import('./routes/_authn/check-email.lazy').then((d) => d.Route),
+)
+const AuthzUserStadisticsLazyRoute = AuthzUserStadisticsLazyRouteImport.update({
+  id: '/user/stadistics',
+  path: '/user/stadistics',
+  getParentRoute: () => AuthzRoute,
+} as any).lazy(() =>
+  import('./routes/_authz/user/stadistics.lazy').then((d) => d.Route),
 )
 const AuthzUserListLazyRoute = AuthzUserListLazyRouteImport.update({
   id: '/user/list',
@@ -147,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
   '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
+  '/user/stadistics': typeof AuthzUserStadisticsLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
@@ -162,6 +173,7 @@ export interface FileRoutesByTo {
   '/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
   '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
+  '/user/stadistics': typeof AuthzUserStadisticsLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -180,6 +192,7 @@ export interface FileRoutesById {
   '/_authz/health-consumer/stadistics': typeof AuthzHealthConsumerStadisticsLazyRoute
   '/_authz/user/add': typeof AuthzUserAddLazyRoute
   '/_authz/user/list': typeof AuthzUserListLazyRoute
+  '/_authz/user/stadistics': typeof AuthzUserStadisticsLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -197,6 +210,7 @@ export interface FileRouteTypes {
     | '/health-consumer/stadistics'
     | '/user/add'
     | '/user/list'
+    | '/user/stadistics'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -212,6 +226,7 @@ export interface FileRouteTypes {
     | '/health-consumer/stadistics'
     | '/user/add'
     | '/user/list'
+    | '/user/stadistics'
   id:
     | '__root__'
     | '/'
@@ -229,6 +244,7 @@ export interface FileRouteTypes {
     | '/_authz/health-consumer/stadistics'
     | '/_authz/user/add'
     | '/_authz/user/list'
+    | '/_authz/user/stadistics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -294,6 +310,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/check-email'
       preLoaderRoute: typeof AuthnCheckEmailLazyRouteImport
       parentRoute: typeof AuthnRoute
+    }
+    '/_authz/user/stadistics': {
+      id: '/_authz/user/stadistics'
+      path: '/user/stadistics'
+      fullPath: '/user/stadistics'
+      preLoaderRoute: typeof AuthzUserStadisticsLazyRouteImport
+      parentRoute: typeof AuthzRoute
     }
     '/_authz/user/list': {
       id: '/_authz/user/list'
@@ -371,6 +394,7 @@ interface AuthzRouteChildren {
   AuthzHealthConsumerStadisticsLazyRoute: typeof AuthzHealthConsumerStadisticsLazyRoute
   AuthzUserAddLazyRoute: typeof AuthzUserAddLazyRoute
   AuthzUserListLazyRoute: typeof AuthzUserListLazyRoute
+  AuthzUserStadisticsLazyRoute: typeof AuthzUserStadisticsLazyRoute
 }
 
 const AuthzRouteChildren: AuthzRouteChildren = {
@@ -384,6 +408,7 @@ const AuthzRouteChildren: AuthzRouteChildren = {
     AuthzHealthConsumerStadisticsLazyRoute,
   AuthzUserAddLazyRoute: AuthzUserAddLazyRoute,
   AuthzUserListLazyRoute: AuthzUserListLazyRoute,
+  AuthzUserStadisticsLazyRoute: AuthzUserStadisticsLazyRoute,
 }
 
 const AuthzRouteWithChildren = AuthzRoute._addFileChildren(AuthzRouteChildren)

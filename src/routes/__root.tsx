@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Error404 from '@pages/Error'
@@ -16,7 +16,7 @@ function RootComponent() {
         <div className="antialiased bg-gray-100 text-gray-900 dark:text-white dark:bg-gray-900 min-h-dvh">
             <QueryClientProvider client={queryClient}>
                 <Outlet />
-                <TanStackRouterDevtools />
+                {/* <TanStackRouterDevtools /> */}
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </div>

@@ -19,7 +19,7 @@ const user: RoutesProps[] = [
     {
         id: 3,
         icon: ChartColumnIncreasing,
-        url: 'user/profile',
+        url: 'user/stadistics',
         text: 'Stadistics',
         orderMenu: 3,
     },
