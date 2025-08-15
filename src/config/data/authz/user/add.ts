@@ -1,6 +1,6 @@
-const allData = {
+const content = {
     title: 'Add new user',
     textName: 'Name',
 }
 
-export default allData
+export default content

@@ -19,7 +19,7 @@ type SignUpForm = {
     textButtonSending: string
 }
 
-const allData: SignUpForm = {
+const content: SignUpForm = {
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
@@ -45,4 +45,4 @@ const allData: SignUpForm = {
     textButtonSending: 'Sending',
 }
 
-export default allData
+export default content

@@ -1,4 +1,4 @@
-const allData = {
+const content = {
     title: 'Users List',
     edit: 'Edit',
     userName: 'Name',
@@ -6,4 +6,4 @@ const allData = {
     dni: 'DNI',
 }
 
-export default allData
+export default content

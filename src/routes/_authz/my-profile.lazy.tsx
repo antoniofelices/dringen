@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import MyProfileUser from '@pages/authz/user/MyProfileUser'
+import MyProfile from '@pages/authz/MyProfile'
 
 export const Route = createLazyFileRoute('/_authz/my-profile')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    return <MyProfileUser />
+    return <MyProfile />
 }

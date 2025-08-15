@@ -1,4 +1,4 @@
-const allData = {
+const content = {
     title: 'We are lost',
     textIntro:
         'In the middle of nowhere, where there is nothing but silence and solitude.',
@@ -7,4 +7,4 @@ const allData = {
     textButtonMovieList: 'Search Movies',
 }
 
-export default allData
+export default content

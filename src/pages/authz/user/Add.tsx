@@ -5,7 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
-import content from '@/config/data/authz/userAdd'
+import content from '@/config/data/authz/user/add'
 
 const Add = () => {
     return (

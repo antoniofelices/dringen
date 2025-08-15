@@ -1,5 +1,5 @@
 import type { RoutesProps } from '@/types/interfaces'
-import { Users, UserRoundPlus, ShieldUser } from 'lucide-react'
+import { Users, UserRoundPlus, ChartColumnIncreasing } from 'lucide-react'
 
 const user: RoutesProps[] = [
     {
@@ -18,9 +18,9 @@ const user: RoutesProps[] = [
     },
     {
         id: 3,
-        icon: ShieldUser,
+        icon: ChartColumnIncreasing,
         url: 'user/profile',
-        text: 'My Profile',
+        text: 'Stadistics',
         orderMenu: 3,
     },
 ]

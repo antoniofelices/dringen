@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Mail, Lock, LockKeyhole, User, UserRoundCog } from 'lucide-react'
 
-import content from '@/config/data/authz/registerUserForm'
+import content from '@/config/data/authz/user/registerForm'
 import { Button } from '@/components/ui/base/button'
 
 import FormFieldInput from '@components/ui/FormFieldInput'

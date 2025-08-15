@@ -1,5 +1,9 @@
 import type { RoutesProps } from '@/types/interfaces'
-import { ClipboardPlus, ChartColumnIncreasing } from 'lucide-react'
+import {
+    ClipboardPlus,
+    ChartColumnIncreasing,
+    PlusCircleIcon,
+} from 'lucide-react'
 
 const healthConsumers: RoutesProps[] = [
     {
@@ -11,10 +15,17 @@ const healthConsumers: RoutesProps[] = [
     },
     {
         id: 2,
+        icon: PlusCircleIcon,
+        url: 'health-consumer/add',
+        text: 'Add Health Consumer',
+        orderMenu: 2,
+    },
+    {
+        id: 3,
         icon: ChartColumnIncreasing,
         url: 'health-consumer/stadistics',
         text: 'Stadistics',
-        orderMenu: 2,
+        orderMenu: 3,
     },
 ]
 

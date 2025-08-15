@@ -5,7 +5,7 @@ import ButtonBack from '@components/ui/ButtonBack'
 
 import { getSingleUser } from '@/services/supabaseService'
 import { transformDate } from '@/lib/utils'
-import content from '@/config/data/authz/userSingle'
+import content from '@/config/data/authz/user/single'
 
 import {
     Card,
@@ -36,7 +36,7 @@ const Single = ({ id }: { id: string }) => {
     console.log(personData)
 
     return (
-        <div className="">
+        <>
             <Card>
                 <CardHeader>
                     <CardTitle>
@@ -91,7 +91,7 @@ const Single = ({ id }: { id: string }) => {
                 </CardContent>
             </Card>
             <ButtonBack />
-        </div>
+        </>
     )
 }
 
