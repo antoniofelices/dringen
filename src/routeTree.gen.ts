@@ -13,10 +13,10 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthzRouteImport } from './routes/_authz'
 import { Route as AuthnRouteImport } from './routes/_authn'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthzUserIdRouteImport } from './routes/_authz/user/$id'
 import { Route as AuthzHealthConsumerIdRouteImport } from './routes/_authz/health-consumer/$id'
 
-const IndexLazyRouteImport = createFileRoute('/')()
 const AuthzMyProfileLazyRouteImport = createFileRoute('/_authz/my-profile')()
 const AuthzDashboardLazyRouteImport = createFileRoute('/_authz/dashboard')()
 const AuthnSignUpLazyRouteImport = createFileRoute('/_authn/sign-up')()
@@ -45,11 +45,11 @@ const AuthnRoute = AuthnRouteImport.update({
   id: '/_authn',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexLazyRoute = IndexLazyRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any)
 const AuthzMyProfileLazyRoute = AuthzMyProfileLazyRouteImport.update({
   id: '/my-profile',
   path: '/my-profile',
@@ -144,7 +144,7 @@ const AuthzHealthConsumerIdRoute = AuthzHealthConsumerIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/check-email': typeof AuthnCheckEmailLazyRoute
   '/sign-in': typeof AuthnSignInLazyRoute
   '/sign-up': typeof AuthnSignUpLazyRoute
@@ -160,7 +160,7 @@ export interface FileRoutesByFullPath {
   '/user/stadistics': typeof AuthzUserStadisticsLazyRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/check-email': typeof AuthnCheckEmailLazyRoute
   '/sign-in': typeof AuthnSignInLazyRoute
   '/sign-up': typeof AuthnSignUpLazyRoute
@@ -177,7 +177,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexLazyRoute
+  '/': typeof IndexRoute
   '/_authn': typeof AuthnRouteWithChildren
   '/_authz': typeof AuthzRouteWithChildren
   '/_authn/check-email': typeof AuthnCheckEmailLazyRoute
@@ -248,7 +248,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
+  IndexRoute: typeof IndexRoute
   AuthnRoute: typeof AuthnRouteWithChildren
   AuthzRoute: typeof AuthzRouteWithChildren
 }
@@ -273,7 +273,7 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexLazyRouteImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authz/my-profile': {
@@ -414,7 +414,7 @@ const AuthzRouteChildren: AuthzRouteChildren = {
 const AuthzRouteWithChildren = AuthzRoute._addFileChildren(AuthzRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
+  IndexRoute: IndexRoute,
   AuthnRoute: AuthnRouteWithChildren,
   AuthzRoute: AuthzRouteWithChildren,
 }
