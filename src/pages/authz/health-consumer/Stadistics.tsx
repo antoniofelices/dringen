@@ -1,7 +1,7 @@
 import content from '@/config/data/authz/health-consumer/stadistics'
 
-const Stadistics = () => {
+const StadisticsHealthConsumer = () => {
     return <>{content.title}</>
 }
 
-export default Stadistics
+export default StadisticsHealthConsumer

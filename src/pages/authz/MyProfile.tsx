@@ -4,7 +4,7 @@ import ErrorApi from '@components/ui/ErrorApi'
 import content from '@/config/data/authz/myProfile'
 import { Button } from '@/components/ui/base/button'
 
-const MyProfileUser = () => {
+const MyProfile = () => {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
@@ -22,4 +22,4 @@ const MyProfileUser = () => {
     )
 }
 
-export default MyProfileUser
+export default MyProfile

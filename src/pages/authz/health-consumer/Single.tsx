@@ -20,14 +20,14 @@ import {
 
 import { Button } from '@/components/ui/base/button'
 
-const Single = ({ id }: { id: string }) => {
+const SingleHealthConsumer = ({ id }: { id: string }) => {
     const {
         data: personData,
         isPending: personLoading,
         isError: personError,
         error: personErrorType,
     } = useQuery({
-        queryKey: ['singleHealthConsumer', id],
+        queryKey: ['singleHealthConsumerQuery', id],
         queryFn: () => getSingleHealthConsumer(id),
     })
 
@@ -84,4 +84,4 @@ const Single = ({ id }: { id: string }) => {
     )
 }
 
-export default Single
+export default SingleHealthConsumer

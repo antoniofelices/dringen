@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
-const Main = ({ children }: PropsWithChildren) => {
+const MainAuthz = ({ children }: PropsWithChildren) => {
     return (
         <main className="lg:px-6 lg:py-12 w-full">
             <article className="w-full">{children}</article>
@@ -8,4 +8,4 @@ const Main = ({ children }: PropsWithChildren) => {
     )
 }
 
-export default Main
+export default MainAuthz

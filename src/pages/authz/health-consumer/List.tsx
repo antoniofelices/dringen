@@ -4,9 +4,8 @@ import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
 import { getListHealthConsumer } from '@/services/supabaseService'
 import content from '@/config/data/authz/health-consumer/list'
-// import { filterArrayOfObjects } from '@helpers/utils'
 
-const List = () => {
+const ListHealthConsumer = () => {
     const {
         data: listData,
         isPending: listLoading,
@@ -72,4 +71,4 @@ const List = () => {
     )
 }
 
-export default List
+export default ListHealthConsumer
