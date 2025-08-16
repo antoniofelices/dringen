@@ -1,4 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
+// import type { DataTableHealthConsumer } from '@/types/interfaces'
 
 import {
     flexRender,
@@ -15,15 +16,12 @@ import {
     TableRow,
 } from '@/components/ui/base/table'
 
-type DataTableProps<TData, TValue> = {
-    columns: ColumnDef<TData, TValue>[]
+type DataTableProps<TData> = {
+    columns: ColumnDef<TData>[]
     data: TData[]
 }
 
-const DataTable = <TData, TValue>({
-    columns,
-    data,
-}: DataTableProps<TData, TValue>) => {
+const DataTable = <TData,>({ columns, data }: DataTableProps<TData>) => {
     const table = useReactTable({
         data,
         columns,

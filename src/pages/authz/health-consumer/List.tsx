@@ -3,7 +3,9 @@ import { useNavigate } from '@tanstack/react-router'
 import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
 import { getListHealthConsumer } from '@/services/supabaseService'
-import content from '@/config/data/authz/health-consumer/list'
+import { createHealthConsumerColumns } from '@/config/tables'
+import DataTable from '@/components/ui/DataTable'
+import type { DataTableHealthConsumer } from '@/types/interfaces'
 
 const ListHealthConsumer = () => {
     const {
@@ -26,48 +28,10 @@ const ListHealthConsumer = () => {
     console.log(listData)
 
     return (
-        <div className="relative shadow-md sm:rounded-lg">
-            <table className="text-sm text-left rtl:text-right">
-                <thead className="text-xs bg-gray-200 dark:bg-gray-700">
-                    <tr>
-                        <th scope="col" className="px-6 py-3"></th>
-                        <th scope="col" className="px-6 py-3">
-                            {content.userName}
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            {content.userLastName}
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            {content.dni}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {listData.map((item) => (
-                        <tr
-                            key={item.id}
-                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-                        >
-                            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <button
-                                    onClick={() =>
-                                        navigate({
-                                            to: `/health-consumer/${item.id}`,
-                                        })
-                                    }
-                                    role="button"
-                                >
-                                    {content.edit}
-                                </button>
-                            </td>
-                            <td className="px-6 py-4">{item.user_name}</td>
-                            <td className="px-6 py-4">{item.user_last_name}</td>
-                            <td className="px-6 py-4">{item.dni}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <DataTable<DataTableHealthConsumer>
+            columns={createHealthConsumerColumns(navigate)}
+            data={listData || []}
+        />
     )
 }
 
