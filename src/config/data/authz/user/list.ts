@@ -1,9 +1,6 @@
 const content = {
-    title: 'User List',
-    edit: 'Edit',
-    userName: 'Name',
-    userLastName: 'Last name',
-    role: 'Role',
+    title: 'Users List',
+    textCaptionTable: 'A list of users',
 }
 
 export default content
