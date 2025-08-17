@@ -12,7 +12,7 @@ import FormFieldTextarea from '@components/ui/FormFieldTextarea'
 
 import { Button } from '@components/ui/base/button'
 
-const NewHpi = () => {
+const AddHpi = () => {
     const {
         register,
         handleSubmit,
@@ -232,4 +232,4 @@ const NewHpi = () => {
     )
 }
 
-export default NewHpi
+export default AddHpi

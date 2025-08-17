@@ -25,12 +25,11 @@ const ListHealthConsumer = () => {
     if (listError && listErrorType)
         return <ErrorApi message={listErrorType.message} />
 
-    console.log(listData)
-
     return (
         <DataTable<DataTableHealthConsumer>
             columns={createHealthConsumerColumns(navigate)}
             data={listData || []}
+            caption="A list of all health consumers"
         />
     )
 }

@@ -6,20 +6,6 @@ export const createHealthConsumerColumns = (
     navigate: NavigateFn
 ): ColumnDef<DataTableHealthConsumer>[] => [
     {
-        accessorKey: 'id',
-        header: 'Editar',
-        cell: ({ row }) => {
-            const idj = row.original.id
-            return (
-                <button
-                    onClick={() => navigate({ to: `/health-consumer/${idj}` })}
-                >
-                    Editar
-                </button>
-            )
-        },
-    },
-    {
         accessorKey: 'user_name',
         header: 'Name',
     },
@@ -30,5 +16,19 @@ export const createHealthConsumerColumns = (
     {
         accessorKey: 'dni',
         header: 'DNI',
+    },
+    {
+        accessorKey: 'id',
+        header: '',
+        cell: ({ row }) => {
+            const idj = row.original.id
+            return (
+                <button
+                    onClick={() => navigate({ to: `/health-consumer/${idj}` })}
+                >
+                    Editar
+                </button>
+            )
+        },
     },
 ]

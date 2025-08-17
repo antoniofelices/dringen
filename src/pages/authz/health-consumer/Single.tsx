@@ -5,7 +5,7 @@ import ButtonBack from '@components/ui/ButtonBack'
 import MedicalRecord from '@/components/health-consumer/MedicalRecord'
 import Info from '@components/health-consumer/Info'
 import Pfsh from '@/components/health-consumer/Pfsh'
-import NewHpi from '@components/health-consumer/NewHpi'
+import AddHpi from '@/components/health-consumer/AddHpi'
 
 import { getSingleHealthConsumer } from '@/services/supabaseService'
 
@@ -75,7 +75,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                                 A History of Present Illness form
                             </DrawerDescription>
                         </DrawerHeader>
-                        <NewHpi />
+                        <AddHpi />
                     </DrawerContent>
                 </div>
             </Drawer>
