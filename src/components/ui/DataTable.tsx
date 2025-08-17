@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import type { ColumnDef } from '@tanstack/react-table'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import {
     flexRender,
     getCoreRowModel,
+    getFilteredRowModel,
     getPaginationRowModel,
+    getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
 
@@ -17,6 +21,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/base/table'
+
+import { Label } from '@components/ui/base/label'
+import { Input } from '@/components/ui/base/input'
+import content from '@data/ui/dataTable'
 
 type DataTableProps<TData> = {
     columns: ColumnDef<TData>[]
@@ -32,6 +40,9 @@ const DataTable = <TData,>({
     const initialPageIndex = 0
     const initialPageSize = 15
 
+    const [sorting, setSorting] = useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
     const table = useReactTable({
         data,
         columns,
@@ -43,12 +54,36 @@ const DataTable = <TData,>({
         },
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        state: {
+            sorting,
+            columnFilters,
+        },
     })
 
     const paginationArray = table.getPageOptions()
 
     return (
         <>
+            <div className="flex items-center py-4">
+                <Label className="sr-only">{content.textFilterByDNI}</Label>
+                <Input
+                    placeholder={`${content.textFilterByDNI}…`}
+                    value={
+                        (table.getColumn('dni')?.getFilterValue() as string) ??
+                        ''
+                    }
+                    onChange={(event) =>
+                        table
+                            .getColumn('dni')
+                            ?.setFilterValue(event.target.value)
+                    }
+                    className="max-w-sm"
+                />
+            </div>
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableCaption className="sr-only">{caption}</TableCaption>
@@ -96,14 +131,14 @@ const DataTable = <TData,>({
                                     colSpan={columns.length}
                                     className="h-24 text-center"
                                 >
-                                    No results.
+                                    {content.textNoResult}
                                 </TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
             </div>
-            {paginationArray.length > 0 && (
+            {paginationArray.length > 1 && (
                 <div className="flex mt-4 text-sm">
                     <button
                         onClick={() => table.previousPage()}
