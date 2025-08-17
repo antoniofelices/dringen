@@ -6,6 +6,7 @@ import { getListHealthConsumer } from '@/services/supabaseService'
 import { createHealthConsumerColumns } from '@/config/tables'
 import DataTable from '@/components/ui/DataTable'
 import type { DataTableHealthConsumer } from '@/types/interfaces'
+import content from '@data/authz/health-consumer/list'
 
 const ListHealthConsumer = () => {
     const {
@@ -29,7 +30,7 @@ const ListHealthConsumer = () => {
         <DataTable<DataTableHealthConsumer>
             columns={createHealthConsumerColumns(navigate)}
             data={listData || []}
-            caption="A list of all health consumers"
+            caption={content.textCaptionTable}
         />
     )
 }

@@ -1,3 +1,5 @@
+import content from '@data/ui/loading'
+
 const Loading = () => {
     return (
         <div className="grid h-screen place-items-center">
@@ -17,7 +19,7 @@ const Loading = () => {
                     fill="currentFill"
                 />
             </svg>
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">{content.textLoading}…</span>
         </div>
     )
 }
