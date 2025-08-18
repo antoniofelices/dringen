@@ -37,7 +37,6 @@ const Aside = () => {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarSeparator />
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Health Consumers</SidebarGroupLabel>
@@ -63,7 +62,7 @@ const Aside = () => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to={'/dashboard'}>
+                            <Link to={'/my-profile'}>
                                 <Circle />
                                 Profile
                             </Link>

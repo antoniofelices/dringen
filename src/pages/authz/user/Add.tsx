@@ -1,4 +1,6 @@
 import RegisterUserForm from '@/components/user/RegisterUserForm'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import ContentArticle from '@/components/ui/ContentArticle'
 import {
     Card,
     CardContent,
@@ -9,14 +11,18 @@ import content from '@/config/data/authz/user/add'
 
 const AddUser = () => {
     return (
-        <Card className="max-w-2xl mx-auto">
-            <CardHeader>
-                <CardTitle>{content.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <RegisterUserForm />
-            </CardContent>
-        </Card>
+        <>
+            <HeaderArticle title={content.title} />
+            <ContentArticle>
+                <CardContent>
+                    <Card className="max-w-2xl mx-auto">
+                        <CardContent>
+                            <RegisterUserForm />
+                        </CardContent>
+                    </Card>
+                </CardContent>
+            </ContentArticle>
+        </>
     )
 }
 

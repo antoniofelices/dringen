@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import ContentArticle from '@/components/ui/ContentArticle'
+
 import { getListHealthConsumer } from '@/services/supabaseService'
 import { createHealthConsumerColumns } from '@/config/tables'
 import DataTable from '@/components/ui/DataTable'
@@ -27,11 +30,16 @@ const ListHealthConsumer = () => {
         return <ErrorApi message={listErrorType.message} />
 
     return (
-        <DataTable<DataTableHealthConsumer>
-            columns={createHealthConsumerColumns(navigate)}
-            data={listData || []}
-            caption={content.textCaptionTable}
-        />
+        <>
+            <HeaderArticle title="List of health consumers"></HeaderArticle>
+            <ContentArticle>
+                <DataTable<DataTableHealthConsumer>
+                    columns={createHealthConsumerColumns(navigate)}
+                    data={listData || []}
+                    caption={content.textCaptionTable}
+                />
+            </ContentArticle>
+        </>
     )
 }
 
