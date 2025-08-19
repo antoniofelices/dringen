@@ -1,6 +1,12 @@
 import { Link } from '@tanstack/react-router'
-import { Home, Settings } from 'lucide-react'
-
+import { ChevronUp, Circle, Home } from 'lucide-react'
+import { useCurrentUser } from '@hooks/useCurrentUser'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/base/dropdown-menu'
 import {
     Sidebar,
     SidebarContent,
@@ -16,12 +22,14 @@ import {
     SidebarSeparator,
     SidebarRail,
 } from '@/components/ui/base/sidebar'
+import ButtonSignOut from '@components/ui/ButtonSignOut'
 import Logo from '@/components/ui/Logo'
 import MenuItems from '@/components/ui/Menutems'
 import healthConsumers from '@/config/data/menus/healthConsumers'
 import users from '@/config/data/menus/users'
 
 const Aside = () => {
+    const { userData } = useCurrentUser()
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -62,12 +70,24 @@ const Aside = () => {
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <Link to={'/settings'}>
-                                <Settings />
-                                Settings
-                            </Link>
-                        </SidebarMenuButton>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <SidebarMenuButton>
+                                    <Circle />
+                                    {userData?.user_name}
+                                    <ChevronUp className="ml-auto" />
+                                </SidebarMenuButton>
+                            </DropdownMenuTrigger>
+                            {/* w-[--radix-popper-anchor-width]  */}
+                            <DropdownMenuContent side="top" className="w-56">
+                                <DropdownMenuItem>
+                                    <Link to={'/settings'}>Settings</Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <ButtonSignOut asbutton={false} />
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>

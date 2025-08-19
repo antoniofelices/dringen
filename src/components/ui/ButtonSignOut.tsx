@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/base/button'
 import ErrorApi from '@components/ui/ErrorApi'
 import content from '@data/ui/buttonSignOut'
 
-const ButtonSignOut = () => {
+const ButtonSignOut = ({ asbutton = true }: { asbutton: boolean }) => {
     const navigate = useNavigate()
 
     const handleLogout = async () => {
@@ -14,7 +14,15 @@ const ButtonSignOut = () => {
         navigate({ to: '/' })
     }
 
-    return <Button onClick={handleLogout}>{content.textButton}</Button>
+    return (
+        <>
+            {asbutton ? (
+                <Button onClick={handleLogout}>{content.textButton}</Button>
+            ) : (
+                <button onClick={handleLogout}>{content.textButton}</button>
+            )}
+        </>
+    )
 }
 
 export default ButtonSignOut
