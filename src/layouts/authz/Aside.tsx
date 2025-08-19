@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Circle, Home } from 'lucide-react'
+import { Home, Settings } from 'lucide-react'
 
 import {
     Sidebar,
@@ -12,7 +12,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger,
+    // SidebarTrigger,
     SidebarSeparator,
     SidebarRail,
 } from '@/components/ui/base/sidebar'
@@ -63,9 +63,9 @@ const Aside = () => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to={'/my-profile'}>
-                                <Circle />
-                                Profile
+                            <Link to={'/settings'}>
+                                <Settings />
+                                Settings
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

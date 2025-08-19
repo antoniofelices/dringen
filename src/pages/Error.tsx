@@ -1,26 +1,23 @@
-import { Button } from '@/components/ui/base/button'
 import { Link } from '@tanstack/react-router'
+import { useIsAuth } from '@/hooks/useIsAuth'
+import Main from '@layouts/authn/Main'
+import { Button } from '@/components/ui/base/button'
 import content from '@/config/data/pages/error'
 import pictureColleDelleFinestre from '@/assets/images/error404-finestre.webp'
-import { useIsAuth } from '@/hooks/useIsAuth'
 
 const Error404 = () => {
     const { isLoggedIn } = useIsAuth()
     return (
-        <>
+        <Main>
             <img src={pictureColleDelleFinestre} alt={content.altimage} />
-            <h1 className="max-w-2xl my-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
-                {content.title}
-            </h1>
-            <p className="max-w-2xl my-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                {content.textIntro}
-            </p>
+            <h1 className="my-4 font-extrabold">{content.title}</h1>
+            <p className="font-light lg:mb-8 ">{content.textIntro}</p>
             {!isLoggedIn && (
                 <Button className="mr-4">
                     <Link to="/sign-in">{content.textButtonSignIn}</Link>
                 </Button>
             )}
-        </>
+        </Main>
     )
 }
 

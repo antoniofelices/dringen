@@ -1,5 +1,5 @@
 const content = {
-    title: 'My Profile',
+    title: 'Settings',
     textButtonSignOut: 'Sign Out',
 }
 
