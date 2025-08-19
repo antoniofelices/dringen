@@ -1,6 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
 import ErrorApi from '@components/ui/ErrorApi'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import ContentArticle from '@/components/ui/ContentArticle'
 import content from '@/config/data/authz/myProfile'
 import { Button } from '@/components/ui/base/button'
 
@@ -16,8 +18,12 @@ const MyProfile = () => {
 
     return (
         <>
-            <h1 className="mb-8">{content.title}</h1>
-            <Button onClick={handleLogout}>{content.textButtonSignOut}</Button>
+            <HeaderArticle title={content.title} />
+            <ContentArticle>
+                <Button onClick={handleLogout}>
+                    {content.textButtonSignOut}
+                </Button>
+            </ContentArticle>
         </>
     )
 }

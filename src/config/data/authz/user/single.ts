@@ -1,5 +1,6 @@
 const content = {
-    title: 'Account',
+    title: 'Account Settings',
+    textDetails: 'Details',
     textName: 'Name',
     textButtonSignOut: 'Sign Out',
     textRole: 'Role',

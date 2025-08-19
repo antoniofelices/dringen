@@ -1,3 +1,6 @@
+import { useId } from 'react'
+import type { UseFormRegister, FieldErrors } from 'react-hook-form'
+import type { LucideIcon } from 'lucide-react'
 import {
     Select,
     SelectContent,
@@ -6,9 +9,6 @@ import {
     SelectValue,
 } from '@/components/ui/base/select'
 import { Label } from '@/components/ui/base/label'
-import { useId } from 'react'
-import type { UseFormRegister, FieldErrors } from 'react-hook-form'
-import type { LucideIcon } from 'lucide-react'
 
 type FormValues = {
     [key: string]: string

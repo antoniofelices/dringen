@@ -18,10 +18,17 @@ export type RoutesProps = {
     orderMenu?: number
 }
 
-export type FormErrors = {
-    isError?: boolean
-    noEmailPassword?: boolean
-    repeatEmail?: boolean
-    register?: boolean
-    message?: string
+export type DataTableHealthConsumer = {
+    id: string
+    user_name: string
+    user_last_name: string
+    dni?: string
+}
+
+export type DataTableUser = {
+    id: string
+    user_name: string
+    user_last_name: string
+    dni?: string
+    role?: string
 }

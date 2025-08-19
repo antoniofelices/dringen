@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { transformDate } from '@/lib/utils'
 import {
     Card,
     CardContent,
@@ -23,7 +24,6 @@ import {
 import Diagnosis from '@components/health-consumer/Diagnosis'
 import Examination from '@components/health-consumer/Examination'
 import ExaminationData from '@components/health-consumer/ExaminationData'
-import { transformDate } from '@/lib/utils'
 
 const MedicalRecord = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)

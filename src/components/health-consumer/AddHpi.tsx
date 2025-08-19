@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
-import AddDiagnosis from '@components/health-consumer/AddDiagnosis'
-
+import { Button } from '@components/ui/base/button'
 import {
     Tabs,
     TabsContent,
@@ -9,10 +8,9 @@ import {
 } from '@components/ui/base/tabs'
 import FormFieldInput from '@components/ui/FormFieldInput'
 import FormFieldTextarea from '@components/ui/FormFieldTextarea'
+import AddDiagnosis from '@components/health-consumer/AddDiagnosis'
 
-import { Button } from '@components/ui/base/button'
-
-const NewHpi = () => {
+const AddHpi = () => {
     const {
         register,
         handleSubmit,
@@ -232,4 +230,4 @@ const NewHpi = () => {
     )
 }
 
-export default NewHpi
+export default AddHpi

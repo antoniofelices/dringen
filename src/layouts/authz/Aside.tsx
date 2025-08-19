@@ -16,7 +16,7 @@ import {
     SidebarSeparator,
     SidebarRail,
 } from '@/components/ui/base/sidebar'
-
+import Logo from '@/components/ui/Logo'
 import MenuItems from '@/components/ui/Menutems'
 import healthConsumers from '@/config/data/menus/healthConsumers'
 import users from '@/config/data/menus/users'
@@ -25,7 +25,8 @@ const Aside = () => {
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
-                <SidebarTrigger />
+                {/* <SidebarTrigger /> */}
+                <Logo customClasses="ml-2" />
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
@@ -37,7 +38,6 @@ const Aside = () => {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarSeparator />
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Health Consumers</SidebarGroupLabel>
@@ -63,7 +63,7 @@ const Aside = () => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to={'/dashboard'}>
+                            <Link to={'/my-profile'}>
                                 <Circle />
                                 Profile
                             </Link>

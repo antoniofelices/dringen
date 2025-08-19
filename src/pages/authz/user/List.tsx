@@ -1,9 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
-import { useNavigate } from '@tanstack/react-router'
-import Loading from '@components/ui/Loading'
-import ErrorApi from '@components/ui/ErrorApi'
+import { useNavigate, Link } from '@tanstack/react-router'
+import type { DataTableUser } from '@/types/interfaces'
 import { getListUsers } from '@/services/supabaseService'
-import content from '@/config/data/authz/user/list'
+import { createUserColumns } from '@/config/tables'
+import { Button } from '@/components/ui/base/button'
+import ContentArticle from '@/components/ui/ContentArticle'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import DataTable from '@/components/ui/DataTable'
+import ErrorApi from '@components/ui/ErrorApi'
+import Loading from '@components/ui/Loading'
+import content from '@data/authz/user/list'
 
 const ListUser = () => {
     const {
@@ -25,51 +31,18 @@ const ListUser = () => {
 
     return (
         <>
-            <div className="flex py-4 w-xl gap-4">{/* Filters */}</div>
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right">
-                    <thead className="text-xs bg-gray-200 dark:bg-gray-700">
-                        <tr>
-                            <th scope="col" className="px-6 py-3"></th>
-                            <th scope="col" className="px-6 py-3">
-                                {content.userName}
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                {content.userLastName}
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                {content.role}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listData.map((item) => (
-                            <tr
-                                key={item.id}
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-                            >
-                                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <button
-                                        onClick={() =>
-                                            navigate({
-                                                to: `/user/${item.id}`,
-                                            })
-                                        }
-                                        role="button"
-                                    >
-                                        {content.edit}
-                                    </button>
-                                </td>
-                                <td className="px-6 py-4">{item.user_name}</td>
-                                <td className="px-6 py-4">
-                                    {item.user_last_name}
-                                </td>
-                                <td className="px-6 py-4">{item.role}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <HeaderArticle title="List of health consumers">
+                <Button asChild size="sm">
+                    <Link to="/user/add">{content.textButtonAddNew}</Link>
+                </Button>
+            </HeaderArticle>
+            <ContentArticle>
+                <DataTable<DataTableUser>
+                    columns={createUserColumns(navigate)}
+                    data={listData || []}
+                    caption={content.textCaptionTable}
+                />
+            </ContentArticle>
         </>
     )
 }
