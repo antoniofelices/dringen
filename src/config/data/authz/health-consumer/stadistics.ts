@@ -1,5 +1,5 @@
 const content = {
-    title: 'Hello Stadistics Health consumers!',
+    title: 'Health Consumers Stadistics',
 }
 
 export default content

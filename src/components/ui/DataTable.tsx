@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { ColumnDef } from '@tanstack/react-table'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { ColumnDef } from '@tanstack/react-table'
 import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import {

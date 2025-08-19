@@ -1,11 +1,11 @@
 import { Link } from '@tanstack/react-router'
-import SignInForm from '@/components/authn/SignInForm'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
+import SignInForm from '@/components/authn/SignInForm'
 import content from '@/config/data/authn/signIn'
 
 const SignIn = () => {

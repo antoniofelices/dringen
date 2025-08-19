@@ -1,16 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import Loading from '@components/ui/Loading'
-import ErrorApi from '@components/ui/ErrorApi'
-import ButtonBack from '@components/ui/ButtonBack'
-import HeaderArticle from '@/components/ui/HeaderArticle'
-import ContentArticle from '@/components/ui/ContentArticle'
-import MedicalRecord from '@/components/health-consumer/MedicalRecord'
-import Info from '@components/health-consumer/Info'
-import Pfsh from '@/components/health-consumer/Pfsh'
-import AddHpi from '@/components/health-consumer/AddHpi'
-
 import { getSingleHealthConsumer } from '@/services/supabaseService'
-
+import { Button } from '@/components/ui/base/button'
 import {
     Drawer,
     DrawerContent,
@@ -19,8 +9,15 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from '@/components/ui/base/drawer'
-
-import { Button } from '@/components/ui/base/button'
+import ButtonBack from '@components/ui/ButtonBack'
+import ContentArticle from '@/components/ui/ContentArticle'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import ErrorApi from '@components/ui/ErrorApi'
+import Loading from '@components/ui/Loading'
+import AddHpi from '@/components/health-consumer/AddHpi'
+import Info from '@components/health-consumer/Info'
+import MedicalRecord from '@/components/health-consumer/MedicalRecord'
+import Pfsh from '@/components/health-consumer/Pfsh'
 
 const SingleHealthConsumer = ({ id }: { id: string }) => {
     const {
@@ -78,9 +75,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                         </DrawerContent>
                     </div>
                 </ContentArticle>
-                <footer className="fixed bottom-4 right-4 xl:right-6">
-                    <ButtonBack />
-                </footer>
+                <ButtonBack />
             </Drawer>
         </>
     )

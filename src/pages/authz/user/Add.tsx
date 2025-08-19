@@ -1,12 +1,7 @@
-import RegisterUserForm from '@/components/user/RegisterUserForm'
-import HeaderArticle from '@/components/ui/HeaderArticle'
+import { Card, CardContent } from '@/components/ui/base/card'
 import ContentArticle from '@/components/ui/ContentArticle'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/base/card'
+import HeaderArticle from '@/components/ui/HeaderArticle'
+import RegisterUserForm from '@/components/user/RegisterUserForm'
 import content from '@/config/data/authz/user/add'
 
 const AddUser = () => {

@@ -16,7 +16,7 @@ import {
     SidebarSeparator,
     SidebarRail,
 } from '@/components/ui/base/sidebar'
-
+import Logo from '@/components/ui/Logo'
 import MenuItems from '@/components/ui/Menutems'
 import healthConsumers from '@/config/data/menus/healthConsumers'
 import users from '@/config/data/menus/users'
@@ -25,7 +25,8 @@ const Aside = () => {
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
-                <SidebarTrigger />
+                {/* <SidebarTrigger /> */}
+                <Logo customClasses="ml-2" />
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>

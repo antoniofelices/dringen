@@ -10,13 +10,15 @@ const ButtonBack = () => {
     }
 
     return (
-        <button
-            onClick={backHandler}
-            className="flex gap-2 items-center mt-8 text-sm"
-        >
-            <ChevronLeft size="18" />
-            {content.textButton}
-        </button>
+        <footer className="lg:fixed lg:bottom-3 xxl:bottom-4 lg:right-4 xl:right-6">
+            <button
+                onClick={backHandler}
+                className="flex gap-2 items-center mt-8 text-sm"
+            >
+                <ChevronLeft size="18" />
+                {content.textButton}
+            </button>
+        </footer>
     )
 }
 

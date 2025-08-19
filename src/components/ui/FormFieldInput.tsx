@@ -1,8 +1,8 @@
-import { Input } from '@/components/ui/base/input'
-import { Label } from '@/components/ui/base/label'
 import { useId } from 'react'
 import type { UseFormRegister, FieldErrors } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
+import { Input } from '@/components/ui/base/input'
+import { Label } from '@/components/ui/base/label'
 
 type FormValues = {
     [key: string]: string

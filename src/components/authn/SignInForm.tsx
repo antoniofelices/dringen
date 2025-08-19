@@ -1,16 +1,15 @@
 import { useId } from 'react'
-import { useNavigate } from '@tanstack/react-router'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { Mail, Lock } from 'lucide-react'
-
-import content from '@/config/data/authn/signInForm'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from '@tanstack/react-router'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signInWithPassword } from '@/services/supabaseService'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
 import { Input } from '@/components/ui/base/input'
 import { Label } from '@/components/ui/base/label'
-import { signInWithPassword } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
+import content from '@/config/data/authn/signInForm'
 
 const signInSchema = z.object({
     email: z

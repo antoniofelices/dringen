@@ -1,6 +1,7 @@
 const content = {
-    title: 'Users List',
+    title: 'List of health consumers',
     textCaptionTable: 'A list of health consumers',
+    textButtonAddNew: 'Add Health Consumer',
 }
 
 export default content

@@ -1,6 +1,7 @@
 const content = {
-    title: 'Users List',
+    title: 'List of Users',
     textCaptionTable: 'A list of users',
+    textButtonAddNew: 'Add User',
 }
 
 export default content
