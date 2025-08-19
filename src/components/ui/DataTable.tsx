@@ -87,7 +87,7 @@ const DataTable = <TData,>({
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableCaption className="sr-only">{caption}</TableCaption>
-                    <TableHeader className="bg-gray-200">
+                    <TableHeader className="bg-gray-200 dark:bg-gray-800">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
