@@ -5,114 +5,68 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-    /* --color-*: initial;
-    --color-transparent: transparent;
-    --color-current: currentColor;
-    --color-black: #000000;
-    --color-white: #ffffff;
-
-    --color-blue: #00b3e5;
-    --color-blue-100: #e5f7fc;
-    --color-blue-200: #cceff9;
-    --color-blue-300: #99e0f4;
-    --color-blue-400: #32c2ea;
-    --color-blue-500: #032541;
-    --color-blue-600: #005972;
-    --color-blue-700: #003544;
-    --color-blue-800: #00232d;
-    --color-blue-900: #00181f;
-
-    --color-red: #d00000;
-    --color-yellow: #ffba08;
-
-    --color-gray: #808080;
-    --color-gray-100: #f1f1f1;
-    --color-gray-200: #e5e5e5;
-    --color-gray-300: #d8d8d8;
-    --color-gray-400: #cccccc;
-    --color-gray-500: #737373;
-    --color-gray-600: #4c4c4c;
-    --color-gray-700: #404040;
-    --color-gray-800: #262626;
-    --color-gray-900: #0c0c0c; */
-
-    --font-*: initial;
     --font-sans:
         'Proxima Nova', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
-
-    --text-*: initial;
-    --text-xs: 0.79rem;
-    --text-sm: 0.889rem;
-    --text-base: 1.125rem;
-    --text-lg: 1.266rem;
-    --text-xl: 1.424rem;
-    --text-2xl: 1.602rem;
-    --text-3xl: 2.027rem;
-    --text-4xl: 3.247rem;
-    --text-5xl: 4.11rem;
-
-    --text-xs--line-height: 1.6;
-    --text-sm--line-height: 1.6;
-    --text-base--line-height: 1.45;
-    --text-l--line-height: 1.45;
-    --text-xl--line-height: 1.2;
-    --text-2xl--line-height: 1.2;
-    --text-3xl--line-height: 1;
-    --text-4xl--line-height: 1;
-    --text-5xl--line-height: 1;
-
-    /* Spacing */
-    /* --spacing-0: 0;
-    --spacing-1: 0.25rem;
-    --spacing-2: 0.5rem;
-    --spacing-3: 0.75rem;
-    --spacing-4: 1rem;
-    --spacing-5: 1.25rem;
-    --spacing-6: 1.5rem;
-    --spacing-7: 2rem;
-    --spacing-8: 3rem;
-    --spacing-9: 4rem;
-    --spacing-10: clamp(2rem, 2vw, 5rem);
-    --spacing-11: clamp(3rem, 4vw, 6rem);
-    --spacing-12: clamp(3rem, 6vw, 7rem);
-    --spacing-13: clamp(3rem, 6vw, 8rem);
-    --spacing-14: clamp(4rem, 6vw, 9rem);
-    --spacing-15: clamp(4rem, 6vw, 10rem);
-    --spacing-50vh: 50vh;
-    --spacing-100vh: 100vh;
-    --spacing-50vw: 50vw;
-    --spacing-100vw: 100vw; */
-}
-
-@utility container {
-    margin-inline: auto;
-    padding-inline: 2rem;
+    --color-gray-50: oklch(0.985 0.002 210);
+    --color-gray-100: oklch(0.967 0.003 210);
+    --color-gray-200: oklch(0.922 0.005 210);
+    --color-gray-300: oklch(0.875 0.008 210);
+    --color-gray-400: oklch(0.738 0.01 210);
+    --color-gray-500: oklch(0.596 0.012 210);
+    --color-gray-600: oklch(0.477 0.014 210);
+    --color-gray-700: oklch(0.375 0.02 210);
+    --color-gray-800: oklch(0.275 0.014 210);
+    --color-gray-900: oklch(0.185 0.012 210);
+    --color-gray-950: oklch(0.125 0.008 210);
 }
 
 @layer base {
+    :root {
+        --default-border-color: var(--color-gray-300, currentColor);
+        --default-text-color: var(--color-gray-950);
+        --default-bg-color: var(--color-gray-100);
+
+        --sidebar: var(--color-gray-50);
+        --sidebar-foreground: var(--color-gray-950);
+        --sidebar-primary: var(--color-gray-100);
+        --sidebar-primary-foreground: oklch(0.97 0 0);
+        --sidebar-accent: oklch(0.97 0 0);
+        --sidebar-accent-foreground: var(--color-gray-950);
+        --sidebar-border: var(--default-border-color);
+        --sidebar-ring: var(--default-border-color);
+    }
+
+    .dark {
+        --default-border-color: var(--color-gray-800, currentColor);
+        --default-text-color: var(--color-gray-200);
+        --default-bg-color: var(--color-gray-900);
+
+        --sidebar: var(--color-gray-950);
+        --sidebar-foreground: var(--color-gray-200);
+        --sidebar-primary: var(--color-gray-950);
+        --sidebar-primary-foreground: oklch(0.97 0 0);
+        --sidebar-accent: var(--color-gray-950);
+        --sidebar-accent-foreground: var(--color-gray-50);
+        --sidebar-border: var(--default-border-color);
+        --sidebar-ring: var(--default-border-color);
+        /* --sidebar-border: transparent;
+        --sidebar-ring: transparent; */
+    }
     *,
     ::after,
     ::before,
     ::backdrop,
     ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-        /* @apply border-border outline-ring/50; */
+        border-color: var(--default-border-color);
     }
     body {
-        color: var(--color-gray-700);
-        /* @apply bg-background text-foreground; */
+        background-color: var(--default-bg-color);
+        color: var(--default-text-color);
     }
     body:has(button.navigation-open) {
         overflow: hidden;
-    }
-    details[open] summary svg {
-        transform: rotate(180deg);
-        transition: transform 0.25s ease-in-out;
-    }
-    .show {
-        display: block !important;
     }
 }
 
@@ -129,35 +83,4 @@
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar: var(--sidebar);
-}
-
-:root {
-    --radius: 0.5rem;
-    --sidebar: hsl(0 0% 98%);
-    --sidebar-foreground: hsl(240 5.3% 26.1%);
-    --sidebar-primary: hsl(240 5.9% 10%);
-    --sidebar-primary-foreground: hsl(0 0% 98%);
-    --sidebar-accent: hsl(240 4.8% 95.9%);
-    --sidebar-accent-foreground: hsl(240 5.9% 10%);
-    --sidebar-border: hsl(220 13% 91%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
-}
-
-.dark {
-
-    --sidebar: hsl(240 5.9% 10%);
-
-    --sidebar-foreground: hsl(240 4.8% 95.9%);
-
-    --sidebar-primary: hsl(224.3 76.3% 48%);
-
-    --sidebar-primary-foreground: hsl(0 0% 100%);
-
-    --sidebar-accent: hsl(240 3.7% 15.9%);
-
-    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-
-    --sidebar-border: hsl(240 3.7% 15.9%);
-
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
