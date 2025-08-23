@@ -14,3 +14,12 @@ export function transformDate(value: string): string {
     if (isNaN(date.getTime())) return ''
     return date.toLocaleDateString('es-ES')
 }
+
+export function transformToId(value: string): string {
+    return value
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/--+/g, '-')
+}

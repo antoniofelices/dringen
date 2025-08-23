@@ -1,4 +1,4 @@
-import content from '@/config/data/authz/dashboard'
+import content from '@/config/data/dashboard'
 
 const Dashboard = () => {
     return (
