@@ -33,7 +33,7 @@ const signUpSchema = z
             .string()
             .min(8, content.errorPasswordTooShort)
             .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
                 content.errorPasswordMustContain
             ),
         confirmPassword: z.string().min(1, content.confirmPassword),

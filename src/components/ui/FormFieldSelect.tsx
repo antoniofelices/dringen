@@ -40,18 +40,18 @@ const FormFieldSelect = ({
 
     return (
         <div className={className}>
-            <Label
-                htmlFor={selectId}
-                className="text-sm font-bold flex items-center gap-2 mb-1"
-            >
+            <Label htmlFor={selectId} className="font-bold">
                 {Icon && <Icon className="w-4 h-4" />}
                 {label}
             </Label>
-            <Select id={selectId}>
-                <SelectTrigger className="w-full">
+            <Select
+                id={selectId}
+                className="border-gray-300 dark:border-gray-600"
+            >
+                <SelectTrigger className="w-full border-gray-300 dark:border-gray-600">
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
-                <SelectContent className="w-full">
+                <SelectContent>
                     {options.map((option) => (
                         <SelectItem value={option} key={option}>
                             {option}

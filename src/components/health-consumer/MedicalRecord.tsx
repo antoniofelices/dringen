@@ -12,6 +12,7 @@ import {
     DialogTitle,
     DialogDescription,
     DialogContent,
+    DialogOverlay,
     DialogTrigger,
 } from '@/components/ui/base/dialog'
 import {
@@ -41,68 +42,75 @@ const MedicalRecord = ({ content }: { content: any }) => {
                     const isModalOpen = openModal === item.id
 
                     return (
-                        <Dialog
-                            key={item.id}
-                            open={isModalOpen}
-                            onOpenChange={(open) =>
-                                setOpenModal(open ? item.id : null)
-                            }
-                        >
-                            <h3 className="my-3">
-                                <DialogTrigger>
-                                    {transformDate(item.date_of)} - CERTAINTY:
-                                    DIAGNOSIS
-                                </DialogTrigger>
-                            </h3>
-                            <DialogContent className="sm:max-w-6xl top-0 translate-y-0">
-                                <DialogHeader className="sr-only">
-                                    <DialogTitle>
+                        <>
+                            <Dialog
+                                key={item.id}
+                                open={isModalOpen}
+                                onOpenChange={(open) =>
+                                    setOpenModal(open ? item.id : null)
+                                }
+                            >
+                                <h3 className="my-3">
+                                    <DialogTrigger>
                                         {transformDate(item.date_of)} -
                                         CERTAINTY: DIAGNOSIS
-                                    </DialogTitle>
-                                    <DialogDescription>
-                                        A single review
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <Tabs
-                                    aria-label="Previous revision"
-                                    defaultValue="examination"
-                                >
-                                    <TabsList>
-                                        <TabsTrigger value="examination">
-                                            Examination
-                                        </TabsTrigger>
-                                        <TabsTrigger value="examination-data">
-                                            Examination Data
-                                        </TabsTrigger>
-                                        <TabsTrigger value="diagnosis">
-                                            Diagnosis
-                                        </TabsTrigger>
-                                        <TabsTrigger value="aditional-tests">
-                                            Aditional Tests
-                                        </TabsTrigger>
-                                        <TabsTrigger value="treatment">
-                                            Treatment
-                                        </TabsTrigger>
-                                    </TabsList>
-                                    <TabsContent value="examination">
-                                        <Examination content={item} />
-                                    </TabsContent>
-                                    <TabsContent value="examination-data">
-                                        <ExaminationData content={item} />
-                                    </TabsContent>
-                                    <TabsContent value="diagnosis">
-                                        <Diagnosis id={item.id} />
-                                    </TabsContent>
-                                    <TabsContent value="aditional-tests">
-                                        <p>{item.additional_tests}</p>
-                                    </TabsContent>
-                                    <TabsContent value="treatment">
-                                        <p>{item.treatment}</p>
-                                    </TabsContent>
-                                </Tabs>
-                            </DialogContent>
-                        </Dialog>
+                                    </DialogTrigger>
+                                </h3>
+                                <DialogOverlay className="bg-black/60" />
+                                <DialogContent className="sm:max-w-6xl top-0 translate-y-0 dark:bg-black">
+                                    <DialogHeader className="sr-only">
+                                        <DialogTitle>
+                                            {transformDate(item.date_of)} -
+                                            CERTAINTY: DIAGNOSIS
+                                        </DialogTitle>
+                                        <DialogDescription>
+                                            A single review
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <Tabs
+                                        aria-label="Previous revision"
+                                        defaultValue="examination"
+                                    >
+                                        <TabsList>
+                                            <TabsTrigger value="examination">
+                                                Examination
+                                            </TabsTrigger>
+                                            <TabsTrigger value="examination-data">
+                                                Examination Data
+                                            </TabsTrigger>
+                                            <TabsTrigger value="diagnosis">
+                                                Diagnosis
+                                            </TabsTrigger>
+                                            <TabsTrigger value="aditional-tests">
+                                                Aditional Tests
+                                            </TabsTrigger>
+                                            <TabsTrigger value="treatment">
+                                                Treatment
+                                            </TabsTrigger>
+                                        </TabsList>
+                                        <div className="mt-4">
+                                            <TabsContent value="examination">
+                                                <Examination content={item} />
+                                            </TabsContent>
+                                            <TabsContent value="examination-data">
+                                                <ExaminationData
+                                                    content={item}
+                                                />
+                                            </TabsContent>
+                                            <TabsContent value="diagnosis">
+                                                <Diagnosis id={item.id} />
+                                            </TabsContent>
+                                            <TabsContent value="aditional-tests">
+                                                <p>{item.additional_tests}</p>
+                                            </TabsContent>
+                                            <TabsContent value="treatment">
+                                                <p>{item.treatment}</p>
+                                            </TabsContent>
+                                        </div>
+                                    </Tabs>
+                                </DialogContent>
+                            </Dialog>
+                        </>
                     )
                 })}
             </CardContent>

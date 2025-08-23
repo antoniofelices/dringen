@@ -46,6 +46,7 @@ const FormFieldInput = ({
                 type={type}
                 {...register(fieldName)}
                 placeholder={placeholder}
+                className="border-gray-300 dark:border-gray-600"
             />
             {error && (
                 <span className="text-sm text-red-500 mt-1">
