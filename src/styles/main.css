@@ -9,23 +9,24 @@
         'Proxima Nova', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
-    --color-gray-50: oklch(0.985 0.002 240);
-    --color-gray-100: oklch(0.967 0.003 240);
-    --color-gray-200: oklch(0.922 0.005 240);
-    --color-gray-300: oklch(0.875 0.008 240);
-    --color-gray-400: oklch(0.738 0.01 240);
-    --color-gray-500: oklch(0.596 0.012 240);
-    --color-gray-600: oklch(0.477 0.014 240);
-    --color-gray-700: oklch(0.375 0.02 240);
-    --color-gray-800: oklch(0.275 0.014 240);
-    --color-gray-900: oklch(0.185 0.012 240);
-    --color-gray-950: oklch(0.125 0.008 240);
+    --color-gray-50: oklch(0.985 0.002 210);
+    --color-gray-100: oklch(0.967 0.003 210);
+    --color-gray-200: oklch(0.922 0.005 210);
+    --color-gray-300: oklch(0.875 0.008 210);
+    --color-gray-400: oklch(0.738 0.01 210);
+    --color-gray-500: oklch(0.596 0.012 210);
+    --color-gray-600: oklch(0.477 0.014 210);
+    --color-gray-700: oklch(0.375 0.02 210);
+    --color-gray-800: oklch(0.275 0.014 210);
+    --color-gray-900: oklch(0.185 0.012 210);
+    --color-gray-950: oklch(0.125 0.008 210);
 }
 
 @layer base {
     :root {
         --default-border-color: var(--color-gray-300, currentColor);
         --default-text-color: var(--color-gray-950);
+        --default-bg-color: var(--color-gray-100);
 
         --sidebar: var(--color-gray-50);
         --sidebar-foreground: var(--color-gray-950);
@@ -40,6 +41,7 @@
     .dark {
         --default-border-color: var(--color-gray-700, currentColor);
         --default-text-color: var(--color-gray-200);
+        --default-bg-color: var(--color-gray-900);
 
         --sidebar: var(--color-gray-950);
         --sidebar-foreground: var(--color-gray-50);
@@ -50,7 +52,6 @@
         --sidebar-border: var(--default-border-color);
         --sidebar-ring: var(--default-border-color);
     }
-
     *,
     ::after,
     ::before,
@@ -59,17 +60,11 @@
         border-color: var(--default-border-color);
     }
     body {
+        background-color: var(--default-bg-color);
         color: var(--default-text-color);
     }
     body:has(button.navigation-open) {
         overflow: hidden;
-    }
-    details[open] summary svg {
-        transform: rotate(180deg);
-        transition: transform 0.25s ease-in-out;
-    }
-    .show {
-        display: block !important;
     }
 }
 

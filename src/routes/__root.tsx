@@ -13,7 +13,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
     return (
-        <div className="antialiased bg-gray-100 text-gray-900 dark:text-white dark:bg-gray-900 min-h-dvh">
+        <div className="antialiased min-h-dvh">
             <QueryClientProvider client={queryClient}>
                 <Outlet />
                 {/* <TanStackRouterDevtools /> */}
