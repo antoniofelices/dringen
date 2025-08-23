@@ -1,7 +1,7 @@
 import ButtonBack from '@components/ui/ButtonBack'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
-import content from '@/config/data/authz/health-consumer/stadistics'
+import content from '@/config/data/health-consumer/stadistics'
 
 const StadisticsHealthConsumer = () => {
     return (

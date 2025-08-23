@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
 import type { DataTableUser } from '@/types/interfaces'
 import { getListUsers } from '@/services/supabaseService'
-import { createUserColumns } from '@/config/tables'
+import { createUserColumns } from '@/config/Tables'
 import { Button } from '@/components/ui/base/button'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import DataTable from '@/components/ui/DataTable'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import content from '@data/authz/user/list'
+import content from '@data/user/list'
 
 const ListUser = () => {
     const {

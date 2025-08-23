@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
 import { supabase } from '@/services/supabaseService'
-import Main from '@layouts/authn/Main'
+import MainAuthn from '@layouts/authn/Main'
 
 export const Route = createFileRoute('/_authn')({
     beforeLoad: async () => {
@@ -14,8 +14,8 @@ export const Route = createFileRoute('/_authn')({
 
 function RouteComponent() {
     return (
-        <Main>
+        <MainAuthn>
             <Outlet />
-        </Main>
+        </MainAuthn>
     )
 }

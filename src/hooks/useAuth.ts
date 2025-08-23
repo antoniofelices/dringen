@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react'
 import type { User } from '@supabase/supabase-js'
 import { supabase } from '@/services/supabaseService'
 
-export const useIsAuth = () => {
+export const useAuth = () => {
     const [user, setUser] = useState<User | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const getInitialSession = async () => {
+        const getUser = async () => {
             const {
-                data: { session },
-            } = await supabase.auth.getSession()
-            setUser(session?.user ?? null)
+                data: { user },
+            } = await supabase.auth.getUser()
+            setUser(user)
             setLoading(false)
         }
 
-        getInitialSession()
+        getUser()
 
         const {
             data: { subscription },
