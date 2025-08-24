@@ -12,7 +12,7 @@ import content from '@/config/data/authn/signUpForm'
 import { Button } from '@/components/ui/base/button'
 import { Input } from '@/components/ui/base/input'
 import { Label } from '@/components/ui/base/label'
-import { registerUser } from '@/services/supabaseService'
+import { registerUserOriginal } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 
 const signUpSchema = z
@@ -62,7 +62,7 @@ const SignUpFormOriginal = () => {
     })
 
     const onSubmit = async (data: FormData) => {
-        const { error } = await registerUser(
+        const { error } = await registerUserOriginal(
             data.email,
             data.password,
             data.username

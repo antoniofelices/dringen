@@ -13,6 +13,7 @@ type RegisterUserForm = {
     errorPasswordNoMatch: string
     labelUserName: string
     labelUserLastName: string
+    labelDNI: string
     labelEmail: string
     labelPassword: string
     labelConfirmPassword: string
@@ -37,10 +38,11 @@ const content: RegisterUserForm = {
     errorPasswordTooShort:
         'The password must contain at least eight characters',
     errorPasswordMustContain:
-        'It must contain at least one uppercase letter, one lowercase letter, and one number',
+        'It must contain at least one uppercase letter, one lowercase letter, one number and one special character.',
     errorPasswordNoMatch: 'Passwords do not match',
     labelUserName: 'Name',
     labelUserLastName: 'Last Name',
+    labelDNI: 'DNI',
     labelEmail: 'Email',
     labelPassword: 'Password',
     labelConfirmPassword: 'Confirm Password',

@@ -1,51 +1,45 @@
+import { IdCard, Mail, User, UserRoundCog } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Mail, Lock, LockKeyhole, User, UserRoundCog } from 'lucide-react'
-
-import content from '@/config/data/user/registerForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { registerUser } from '@/services/supabaseService'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
-
 import FormFieldInput from '@components/ui/FormFieldInput'
 import FormFieldSelect from '@components/ui/FormFieldSelect'
-// import { registerUser } from '@/services/supabaseService'
-// import mapSupabaseError from '@/services/mapSupabaseErrors'
+import content from '@/config/data/user/registerForm'
 
-const registerUserSchema = z
-    .object({
-        userName: z
-            .string()
-            .min(3, content.errorUserNameTooShort)
-            .max(20, content.errorUserNameTooLong)
-            .regex(
-                /^[a-zA-Z0-9_]+$/,
-                content.errorUserNameDisallowedCharacters
-            ),
-        userLastName: z
-            .string()
-            .min(3, content.errorUserLastNameTooShort)
-            .max(20, content.errorUserLastNameTooLong)
-            .regex(
-                /^[a-zA-Z0-9_]+$/,
-                content.errorUserLastNameDisallowedCharacters
-            ),
-        email: z
-            .string()
-            .email(content.errorEmailInvalid)
-            .min(1, content.errorEmailRequired),
-        password: z
-            .string()
-            .min(8, content.errorPasswordTooShort)
-            .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
-                content.errorPasswordMustContain
-            ),
-        confirmPassword: z.string().min(1, content.confirmPassword),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: content.errorPasswordNoMatch,
-        path: ['confirmPassword'],
-    })
+const registerUserSchema = z.object({
+    userName: z
+        .string()
+        .min(3, content.errorUserNameTooShort)
+        .max(20, content.errorUserNameTooLong)
+        .regex(/^[a-zA-Z0-9_]+$/, content.errorUserNameDisallowedCharacters),
+    userLastName: z
+        .string()
+        .min(3, content.errorUserLastNameTooShort)
+        .max(20, content.errorUserLastNameTooLong)
+        .regex(
+            /^[a-zA-Z0-9_]+$/,
+            content.errorUserLastNameDisallowedCharacters
+        ),
+    email: z
+        .string()
+        .email(content.errorEmailInvalid)
+        .min(1, content.errorEmailRequired),
+    // password: z
+    //     .string()
+    //     .min(8, content.errorPasswordTooShort)
+    //     .regex(
+    //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
+    //         content.errorPasswordMustContain
+    //     ),
+    // confirmPassword: z.string().min(1, content.confirmPassword),
+})
+// .refine((data) => data.password === data.confirmPassword, {
+//     message: content.errorPasswordNoMatch,
+//     path: ['confirmPassword'],
+// })
 
 type FormData = z.infer<typeof registerUserSchema>
 
@@ -60,19 +54,20 @@ const RegisterUserForm = () => {
     })
 
     const onSubmit = async (data: FormData) => {
-        // const { error } = await registerUser(
-        //     data.email,
-        //     data.password,
-        //     data.username
-        // )
-        // if (error) {
-        //     const { field, message } = mapSupabaseError(error.message)
-        //     setError(field, {
-        //         type: 'server',
-        //         message,
-        //     })
-        //     return
-        // }
+        const { error } = await registerUser(
+            data.userName,
+            data.userLastName,
+            data.email,
+            data.role
+        )
+        if (error) {
+            const { field, message } = mapSupabaseError(error.message)
+            setError(field, {
+                type: 'server',
+                message,
+            })
+            return
+        }
     }
 
     return (
@@ -107,6 +102,15 @@ const RegisterUserForm = () => {
                 />
                 <FormFieldInput
                     errors={errors}
+                    fieldName="dni"
+                    icon={IdCard}
+                    label={content.labelDNI}
+                    placeholder="12121212P"
+                    register={register}
+                    type="text"
+                />
+                {/* <FormFieldInput
+                    errors={errors}
                     fieldName="password"
                     icon={Lock}
                     label={content.labelPassword}
@@ -120,7 +124,7 @@ const RegisterUserForm = () => {
                     label={content.labelConfirmPassword}
                     register={register}
                     type="password"
-                />
+                /> */}
                 <FormFieldSelect
                     errors={errors}
                     fieldName="role"

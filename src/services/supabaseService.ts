@@ -4,7 +4,7 @@ import type { Database } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
-export const registerUser = async (
+export const registerUserOriginal = async <AuthResponse>(
     email: string,
     password: string,
     username: string
@@ -18,7 +18,7 @@ export const registerUser = async (
     })
 }
 
-export const signInWithPassword = async (
+export const signInWithPassword = async <AuthResponse>(
     email: string,
     password: string
 ): Promise<AuthResponse> => {
@@ -67,4 +67,27 @@ export const getSingleUser = async (id: string) => {
         .eq('id', id)
     if (error) throw error
     return data[0]
+}
+
+export const registerUser = async (
+    userName: string,
+    userLastName: string,
+    dni: string,
+    email: string,
+    role: string
+) => {
+    const { data, error } = await supabase
+        .from('dn_users_all_data')
+        .insert([
+            {
+                user_name: userName,
+                user_last_name: userLastName,
+                dni: dni,
+                email: email,
+                role: role,
+            },
+        ])
+        .select()
+    if (error) throw error
+    return data
 }
