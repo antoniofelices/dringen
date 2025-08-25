@@ -1,28 +1,4 @@
-type RegisterUserForm = {
-    confirmPassword: string
-    errorUserNameTooShort: string
-    errorUserNameTooLong: string
-    errorUserNameDisallowedCharacters: string
-    errorUserLastNameTooShort: string
-    errorUserLastNameTooLong: string
-    errorUserLastNameDisallowedCharacters: string
-    errorEmailInvalid: string
-    errorEmailRequired: string
-    errorPasswordTooShort: string
-    errorPasswordMustContain: string
-    errorPasswordNoMatch: string
-    labelUserName: string
-    labelUserLastName: string
-    labelDNI: string
-    labelEmail: string
-    labelPassword: string
-    labelConfirmPassword: string
-    labelSelectRole: string
-    textButtonSend: string
-    textButtonSending: string
-}
-
-const content: RegisterUserForm = {
+const content = {
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
@@ -40,6 +16,9 @@ const content: RegisterUserForm = {
     errorPasswordMustContain:
         'It must contain at least one uppercase letter, one lowercase letter, one number and one special character.',
     errorPasswordNoMatch: 'Passwords do not match',
+    errorUserDniTooShort: 'DNI to short',
+    errorUserDniTooLong: 'DNI too long',
+    errorUserDniInvalidFormat: 'Invalid DNI format',
     labelUserName: 'Name',
     labelUserLastName: 'Last Name',
     labelDNI: 'DNI',

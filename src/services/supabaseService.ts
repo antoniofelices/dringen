@@ -1,10 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
+import type { AuthResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
-export const registerUserOriginal = async <AuthResponse>(
+export const registerUserOriginal = async (
     email: string,
     password: string,
     username: string
@@ -17,8 +18,7 @@ export const registerUserOriginal = async <AuthResponse>(
         },
     })
 }
-
-export const signInWithPassword = async <AuthResponse>(
+export const signInWithPassword = async (
     email: string,
     password: string
 ): Promise<AuthResponse> => {
@@ -27,7 +27,6 @@ export const signInWithPassword = async <AuthResponse>(
         password: password,
     })
 }
-
 export const getListHealthConsumer = async () => {
     const { data, error } = await supabase
         .from('dn_health_consumer')
@@ -62,32 +61,28 @@ export const getListUsers = async () => {
 
 export const getSingleUser = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_users_all_data')
+        .from('dn_users')
         .select('*')
         .eq('id', id)
-    if (error) throw error
-    return data[0]
-}
-
-export const registerUser = async (
-    userName: string,
-    userLastName: string,
-    dni: string,
-    email: string,
-    role: string
-) => {
-    const { data, error } = await supabase
-        .from('dn_users_all_data')
-        .insert([
-            {
-                user_name: userName,
-                user_last_name: userLastName,
-                dni: dni,
-                email: email,
-                role: role,
-            },
-        ])
-        .select()
+        .single()
     if (error) throw error
     return data
 }
+
+// export const registerUser = async (
+//     userName: string,
+//     userLastName: string,
+//     dni: string,
+//     email: string,
+//     role: string
+// ) => {
+//     const { data, error } = await supabaseAdmin.auth.admin.createUser({
+//         user_name: userName,
+//         user_last_name: userLastName,
+//         dni: dni,
+//         email: email,
+//         role: role,
+//     })
+//     if (error) throw error
+//     return data
+// }
