@@ -12,7 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createUser } from '@/services/supabaseAdmin'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
-import FormFieldInput from '@components/ui/FormFieldInput'
+import { Form } from '@components/ui/base/form'
+import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelect from '@components/ui/FormFieldSelect'
 import content from '@/config/data/user/registerForm'
 
@@ -61,15 +62,14 @@ const registerUserSchema = z
 type FormData = z.infer<typeof registerUserSchema>
 
 const RegisterUserForm = () => {
-    const {
-        control,
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
         resolver: zodResolver(registerUserSchema),
         defaultValues: {
+            email: '',
+            password: '',
+            userName: '',
+            userLastName: '',
+            dni: '',
             role: 'user',
         },
     })
@@ -89,7 +89,7 @@ const RegisterUserForm = () => {
             if (error) {
                 console.error('Error de Supabase:', error)
                 const { field, message } = mapSupabaseError(error.message)
-                setError(field, {
+                form.setError(field, {
                     type: 'server',
                     message,
                 })
@@ -98,7 +98,7 @@ const RegisterUserForm = () => {
             console.log('Usuario creado exitosamente!')
         } catch (err) {
             console.error('Error en onSubmit:', err)
-            setError('root', {
+            form.setError('root', {
                 type: 'server',
                 message: 'Error inesperado al crear el usuario',
             })
@@ -106,81 +106,75 @@ const RegisterUserForm = () => {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormFieldInput
-                    errors={errors}
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userName"
                     icon={User}
                     label={content.labelUserName}
                     placeholder="Manolo"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userLastName"
                     icon={User}
                     label={content.labelUserLastName}
                     placeholder="Kabezabolo"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="email"
                     icon={Mail}
                     label={content.labelEmail}
                     placeholder="nf@manolo.es"
-                    register={register}
                     type="email"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="dni"
                     icon={IdCard}
                     label={content.labelDNI}
                     placeholder="12121212P"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="password"
                     icon={Lock}
                     label={content.labelPassword}
-                    register={register}
                     type="password"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="confirmPassword"
                     icon={LockKeyhole}
                     label={content.labelConfirmPassword}
-                    register={register}
                     type="password"
                 />
                 <FormFieldSelect
-                    errors={errors}
+                    control={form.control}
+                    errors={form.formState.errors}
                     fieldName="role"
                     icon={UserRoundCog}
                     label={content.labelSelectRole}
                     options={['user', 'medical_office', 'physician', 'admin']}
                     placeholder="User"
-                    control={control}
                 />
                 <Button type="submit" className="w-full">
-                    {isSubmitting
+                    {form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
                 </Button>
             </form>
-            {errors.root && (
+            {form.formState.errors.root && (
                 <div className="text-red text-sm mt-2 text-center">
-                    {errors.root.message}
+                    {form.formState.errors.root.message}
                 </div>
             )}
-        </>
+        </Form>
     )
 }
 

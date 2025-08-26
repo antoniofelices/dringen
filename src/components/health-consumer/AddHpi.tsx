@@ -6,7 +6,7 @@ import {
     TabsList,
     TabsTrigger,
 } from '@components/ui/base/tabs'
-import FormFieldInput from '@components/ui/FormFieldInput'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import FormFieldTextarea from '@components/ui/FormFieldTextarea'
 import AddDiagnosis from '@components/health-consumer/AddDiagnosis'
 

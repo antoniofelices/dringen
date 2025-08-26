@@ -6,7 +6,8 @@ import { registerHealthConsumer } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
-import FormFieldInput from '@components/ui/FormFieldInput'
+import { Form } from '@components/ui/base/form'
+import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import content from '@/config/data/health-consumer/registerForm'
 
 const registerHealthConsumerSchema = z.object({
@@ -41,13 +42,16 @@ type FormData = z.infer<typeof registerHealthConsumerSchema>
 const RegisterHealthConsumerForm = () => {
     const navigate = useNavigate()
 
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
         resolver: zodResolver(registerHealthConsumerSchema),
+        defaultValues: {
+            userName: '',
+            userLastName: '',
+            dni: '',
+            email: '',
+            phone: '',
+            placeOfResidence: '',
+        },
     })
 
     const onSubmit = async (formData: FormData) => {
@@ -64,7 +68,7 @@ const RegisterHealthConsumerForm = () => {
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
-            setError(field, {
+            form.setError(field, {
                 type: 'server',
                 message,
             })
@@ -73,68 +77,62 @@ const RegisterHealthConsumerForm = () => {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormFieldInput
-                    errors={errors}
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userName"
                     label={content.labelUserName}
                     placeholder=""
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
                     placeholder=""
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="email"
                     label={content.labelEmail}
                     placeholder=""
-                    register={register}
                     type="email"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="dni"
                     label={content.labelDNI}
                     placeholder="12121212P"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="phone"
                     label={content.labelPhone}
                     placeholder=""
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="placeOfResidence"
                     label={content.labelPlaceOfResidence}
                     placeholder=""
-                    register={register}
                     type="text"
                 />
                 <Button type="submit" className="w-full mt-4">
-                    {isSubmitting
+                    {form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
                 </Button>
             </form>
-            {errors.root && (
+            {form.formState.errors.root && (
                 <div className="text-red text-sm mt-2 text-center">
-                    {errors.root.message}
+                    {form.formState.errors.root.message}
                 </div>
             )}
-        </>
+        </Form>
     )
 }
 
