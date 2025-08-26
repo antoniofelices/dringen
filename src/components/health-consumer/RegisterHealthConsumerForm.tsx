@@ -1,13 +1,12 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerHealthConsumer } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
+import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
-import { Separator } from '@/components/ui/base/separator'
 import FormFieldInput from '@components/ui/FormFieldInput'
-import FormFieldSelect from '@components/ui/FormFieldSelect'
-// import FormFieldCalendar from '@components/ui/FormFieldCalendar'
 import content from '@/config/data/health-consumer/registerForm'
 
 const registerHealthConsumerSchema = z.object({
@@ -40,8 +39,9 @@ const registerHealthConsumerSchema = z.object({
 type FormData = z.infer<typeof registerHealthConsumerSchema>
 
 const RegisterHealthConsumerForm = () => {
+    const navigate = useNavigate()
+
     const {
-        // control,
         register,
         handleSubmit,
         setError,
@@ -50,50 +50,36 @@ const RegisterHealthConsumerForm = () => {
         resolver: zodResolver(registerHealthConsumerSchema),
     })
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (formData: FormData) => {
         try {
-            console.log('Datos enviados:', data)
-            const { error } = await registerHealthConsumer(
-                data.userName,
-                data.userLastName,
-                data.dni,
-                data.email,
-                data.phone,
-                data.placeOfResidence
-
-                // data.birthday,
-                // data.gender,
-                // data.birthplace,
-                // data.occupation
+            const data = await registerHealthConsumer(
+                formData.userName,
+                formData.userLastName,
+                formData.dni,
+                formData.email,
+                formData.phone,
+                formData.placeOfResidence
             )
-            if (error) {
-                console.error('Error de Supabase:', error)
-                const { field, message } = mapSupabaseError(error.message)
-                setError(field, {
-                    type: 'server',
-                    message,
-                })
-                return
-            }
-            console.log('Usuario creado exitosamente!')
-        } catch (err) {
-            console.error('Error en onSubmit:', err)
-            setError('root', {
+            navigate({ to: `/health-consumer/${data[0].id}` })
+        } catch (error) {
+            const postgrestError = error as PostgrestError
+            const { field, message } = mapSupabaseError(postgrestError.message)
+            setError(field, {
                 type: 'server',
-                message: 'Error inesperado al crear el usuario',
+                message,
             })
+            return
         }
     }
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {/* <h2 className="mb-6">Basic information</h2> */}
                 <FormFieldInput
                     errors={errors}
                     fieldName="userName"
                     label={content.labelUserName}
-                    placeholder="Manolo"
+                    placeholder=""
                     register={register}
                     type="text"
                 />
@@ -101,7 +87,7 @@ const RegisterHealthConsumerForm = () => {
                     errors={errors}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
-                    placeholder="Kabezabolo"
+                    placeholder=""
                     register={register}
                     type="text"
                 />
@@ -109,7 +95,7 @@ const RegisterHealthConsumerForm = () => {
                     errors={errors}
                     fieldName="email"
                     label={content.labelEmail}
-                    placeholder="nf@manolo.es"
+                    placeholder=""
                     register={register}
                     type="email"
                 />
@@ -137,47 +123,6 @@ const RegisterHealthConsumerForm = () => {
                     register={register}
                     type="text"
                 />
-                {/* <Separator className="my-12" /> */}
-                {/* <h2 className="mb-6">Optional information</h2>
-                <FormFieldSelect
-                    errors={errors}
-                    fieldName="gender"
-                    label={content.labelGender}
-                    options={['other', 'female', 'male']}
-                    placeholder="Other"
-                    control={control}
-                />
-
-                <FormFieldInput
-                    errors={errors}
-                    fieldName="birthplace"
-                    label={content.labelBirthplace}
-                    placeholder=""
-                    register={register}
-                    type="text"
-                />
-                <FormFieldInput
-                    errors={errors}
-                    fieldName="placeOfResidence"
-                    label={content.labelPlaceOfResidence}
-                    placeholder=""
-                    register={register}
-                    type="text"
-                />
-                <FormFieldInput
-                    errors={errors}
-                    fieldName="occupation"
-                    label={content.labelOccupation}
-                    placeholder=""
-                    register={register}
-                    type="text"
-                /> */}
-                {/* <FormFieldCalendar
-                    errors={errors}
-                    fieldName="birthday"
-                    label={content.labelBirthday}
-                    control={control}
-                /> */}
                 <Button type="submit" className="w-full mt-4">
                     {isSubmitting
                         ? content.textButtonSending
