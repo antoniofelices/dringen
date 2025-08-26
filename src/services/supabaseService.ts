@@ -76,12 +76,13 @@ export const registerHealthConsumer = async (
     userLastName: string,
     dni: string,
     email: string,
-    birthday?: string,
-    gender?: string,
     phone?: string,
-    birthplace?: string,
-    placeOfResidence?: string,
-    occupation?: string
+    placeOfResidence?: string
+
+    // birthday?: string,
+    // gender?: string,
+    // birthplace?: string,
+    // occupation?: string
 ) => {
     const { data, error } = await supabase
         .from('dn_health_consumer')
@@ -91,12 +92,13 @@ export const registerHealthConsumer = async (
                 user_last_name: userLastName,
                 dni: dni,
                 email: email,
-                birthday: birthday,
-                gender: gender,
                 phone: phone,
-                birthplace: birthplace,
                 place_of_residence: placeOfResidence,
-                occupation: occupation,
+
+                // birthday: birthday,
+                // gender: gender,
+                // birthplace: birthplace,
+                // occupation: occupation,
             },
         ])
         .select()

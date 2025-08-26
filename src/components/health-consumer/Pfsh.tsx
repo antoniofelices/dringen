@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/base/card'
 
 const Pfsh = ({ content }) => {
-    const firstContent = content ? content : null
+    const hasContent = content ? content : null
 
     return (
         <Card>
@@ -22,7 +22,7 @@ const Pfsh = ({ content }) => {
                 </CardAction>
             </CardHeader>
             <CardContent>
-                {firstContent ? (
+                {hasContent ? (
                     <ul className="">
                         <li className="my-2">
                             <span className="font-bold">

@@ -33,19 +33,15 @@ const registerHealthConsumerSchema = z.object({
         .string()
         .email(content.errorEmailInvalid)
         .min(1, content.errorEmailRequired),
-    gender: z.string().optional(),
     phone: z.string().optional(),
-    birthplace: z.string().optional(),
     placeOfResidence: z.string().optional(),
-    occupation: z.string().optional(),
-    // birthday: z.date().optional(),
 })
 
 type FormData = z.infer<typeof registerHealthConsumerSchema>
 
 const RegisterHealthConsumerForm = () => {
     const {
-        control,
+        // control,
         register,
         handleSubmit,
         setError,
@@ -62,12 +58,13 @@ const RegisterHealthConsumerForm = () => {
                 data.userLastName,
                 data.dni,
                 data.email,
-                // data.birthday,
-                data.gender,
                 data.phone,
-                data.birthplace,
-                data.placeOfResidence,
-                data.occupation
+                data.placeOfResidence
+
+                // data.birthday,
+                // data.gender,
+                // data.birthplace,
+                // data.occupation
             )
             if (error) {
                 console.error('Error de Supabase:', error)
@@ -91,7 +88,7 @@ const RegisterHealthConsumerForm = () => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="mb-6">Basic information</h2>
+                {/* <h2 className="mb-6">Basic information</h2> */}
                 <FormFieldInput
                     errors={errors}
                     fieldName="userName"
@@ -124,16 +121,6 @@ const RegisterHealthConsumerForm = () => {
                     register={register}
                     type="text"
                 />
-                <Separator className="my-12" />
-                <h2 className="mb-6">Optional information</h2>
-                <FormFieldSelect
-                    errors={errors}
-                    fieldName="gender"
-                    label={content.labelGender}
-                    options={['other', 'female', 'male']}
-                    placeholder="Other"
-                    control={control}
-                />
                 <FormFieldInput
                     errors={errors}
                     fieldName="phone"
@@ -142,6 +129,25 @@ const RegisterHealthConsumerForm = () => {
                     register={register}
                     type="text"
                 />
+                <FormFieldInput
+                    errors={errors}
+                    fieldName="placeOfResidence"
+                    label={content.labelPlaceOfResidence}
+                    placeholder=""
+                    register={register}
+                    type="text"
+                />
+                {/* <Separator className="my-12" /> */}
+                {/* <h2 className="mb-6">Optional information</h2>
+                <FormFieldSelect
+                    errors={errors}
+                    fieldName="gender"
+                    label={content.labelGender}
+                    options={['other', 'female', 'male']}
+                    placeholder="Other"
+                    control={control}
+                />
+
                 <FormFieldInput
                     errors={errors}
                     fieldName="birthplace"
@@ -165,7 +171,7 @@ const RegisterHealthConsumerForm = () => {
                     placeholder=""
                     register={register}
                     type="text"
-                />
+                /> */}
                 {/* <FormFieldCalendar
                     errors={errors}
                     fieldName="birthday"
