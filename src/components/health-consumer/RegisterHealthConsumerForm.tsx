@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-// import { createUser } from '@/services/supabaseAdmin'
-// import mapSupabaseError from '@/services/mapSupabaseErrors'
+import { registerHealthConsumer } from '@/services/supabaseService'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
 import { Separator } from '@/components/ui/base/separator'
 import FormFieldInput from '@components/ui/FormFieldInput'
 import FormFieldSelect from '@components/ui/FormFieldSelect'
-import FormFieldCalendar from '@components/ui/FormFieldCalendar'
+// import FormFieldCalendar from '@components/ui/FormFieldCalendar'
 import content from '@/config/data/health-consumer/registerForm'
 
 const registerHealthConsumerSchema = z.object({
@@ -38,7 +38,7 @@ const registerHealthConsumerSchema = z.object({
     birthplace: z.string().optional(),
     placeOfResidence: z.string().optional(),
     occupation: z.string().optional(),
-    birthday: z.date().optional(),
+    // birthday: z.date().optional(),
 })
 
 type FormData = z.infer<typeof registerHealthConsumerSchema>
@@ -48,38 +48,44 @@ const RegisterHealthConsumerForm = () => {
         control,
         register,
         handleSubmit,
-        // setError,
+        setError,
         formState: { errors, isSubmitting },
     } = useForm<FormData>({
         resolver: zodResolver(registerHealthConsumerSchema),
     })
 
     const onSubmit = async (data: FormData) => {
-        // try {
-        //     console.log('Datos enviados:', data)
-        //     const { error } = await createUser({
-        //         email: data.email,
-        //         user_name: data.userName,
-        //         user_last_name: data.userLastName,
-        //         dni: data.dni,
-        //     })
-        //     if (error) {
-        //         console.error('Error de Supabase:', error)
-        //         const { field, message } = mapSupabaseError(error.message)
-        //         setError(field, {
-        //             type: 'server',
-        //             message,
-        //         })
-        //         return
-        //     }
-        //     console.log('Usuario creado exitosamente!')
-        // } catch (err) {
-        //     console.error('Error en onSubmit:', err)
-        //     setError('root', {
-        //         type: 'server',
-        //         message: 'Error inesperado al crear el usuario',
-        //     })
-        // }
+        try {
+            console.log('Datos enviados:', data)
+            const { error } = await registerHealthConsumer(
+                data.userName,
+                data.userLastName,
+                data.dni,
+                data.email,
+                // data.birthday,
+                data.gender,
+                data.phone,
+                data.birthplace,
+                data.placeOfResidence,
+                data.occupation
+            )
+            if (error) {
+                console.error('Error de Supabase:', error)
+                const { field, message } = mapSupabaseError(error.message)
+                setError(field, {
+                    type: 'server',
+                    message,
+                })
+                return
+            }
+            console.log('Usuario creado exitosamente!')
+        } catch (err) {
+            console.error('Error en onSubmit:', err)
+            setError('root', {
+                type: 'server',
+                message: 'Error inesperado al crear el usuario',
+            })
+        }
     }
 
     return (
@@ -160,12 +166,12 @@ const RegisterHealthConsumerForm = () => {
                     register={register}
                     type="text"
                 />
-                <FormFieldCalendar
+                {/* <FormFieldCalendar
                     errors={errors}
                     fieldName="birthday"
                     label={content.labelBirthday}
                     control={control}
-                />
+                /> */}
                 <Button type="submit" className="w-full mt-4">
                     {isSubmitting
                         ? content.textButtonSending

@@ -40,8 +40,9 @@ export const getSingleHealthConsumer = async (id: string) => {
         .from('dn_health_consumer')
         .select(`*, dn_pfsh("*"), dn_hpi("*")`)
         .eq('id', id)
+        .single()
     if (error) throw error
-    return data[0]
+    return data
 }
 
 export const getDiagnosis = async (id: string) => {
@@ -49,8 +50,9 @@ export const getDiagnosis = async (id: string) => {
         .from('dn_hpi')
         .select(`id, dn_hpi_diagnosis("*")`)
         .eq('id', id)
+        .single()
     if (error) throw error
-    return data[0]
+    return data
 }
 
 export const getListUsers = async () => {
@@ -69,20 +71,35 @@ export const getSingleUser = async (id: string) => {
     return data
 }
 
-// export const registerUser = async (
-//     userName: string,
-//     userLastName: string,
-//     dni: string,
-//     email: string,
-//     role: string
-// ) => {
-//     const { data, error } = await supabaseAdmin.auth.admin.createUser({
-//         user_name: userName,
-//         user_last_name: userLastName,
-//         dni: dni,
-//         email: email,
-//         role: role,
-//     })
-//     if (error) throw error
-//     return data
-// }
+export const registerHealthConsumer = async (
+    userName: string,
+    userLastName: string,
+    dni: string,
+    email: string,
+    birthday?: string,
+    gender?: string,
+    phone?: string,
+    birthplace?: string,
+    placeOfResidence?: string,
+    occupation?: string
+) => {
+    const { data, error } = await supabase
+        .from('dn_health_consumer')
+        .insert([
+            {
+                user_name: userName,
+                user_last_name: userLastName,
+                dni: dni,
+                email: email,
+                birthday: birthday,
+                gender: gender,
+                phone: phone,
+                birthplace: birthplace,
+                place_of_residence: placeOfResidence,
+                occupation: occupation,
+            },
+        ])
+        .select()
+    if (error) throw error
+    return data
+}
