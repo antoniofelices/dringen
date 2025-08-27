@@ -7,17 +7,17 @@ export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
 // Health Consumers
 export const getListHealthConsumer = async () => {
-    const { data, error } = await supabase
-        .from('dn_health_consumer')
-        .select('*')
+    const { data, error } = await supabase.from('medical_patient').select('*')
     if (error) throw error
     return data
 }
 
 export const getSingleHealthConsumer = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_health_consumer')
-        .select(`*, dn_pfsh("*"), dn_hpi("*")`)
+        .from('medical_patient')
+        .select(
+            `*, medical_clinical_history("*"), medical_patient_history("*")`
+        )
         .eq('id', id)
         .single()
     if (error) throw error
@@ -32,7 +32,7 @@ export const registerHealthConsumer = async (
     placeOfResidence?: string
 ) => {
     const { data, error } = await supabase
-        .from('dn_health_consumer')
+        .from('medical_patient')
         .insert([
             {
                 user_name: userName,
@@ -50,8 +50,8 @@ export const registerHealthConsumer = async (
 
 export const getDiagnosis = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_hpi')
-        .select(`id, dn_hpi_diagnosis("*")`)
+        .from('medical_patient_history')
+        .select(`id, medical_diagnosis("*")`)
         .eq('id', id)
         .single()
     if (error) throw error
@@ -60,14 +60,14 @@ export const getDiagnosis = async (id: string) => {
 
 // Users
 export const getListUsers = async () => {
-    const { data, error } = await supabase.from('dn_users').select('*')
+    const { data, error } = await supabase.from('medical_user').select('*')
     if (error) throw error
     return data
 }
 
 export const getSingleUser = async (id: string) => {
     const { data, error } = await supabase
-        .from('dn_users')
+        .from('medical_user')
         .select('*')
         .eq('id', id)
         .single()

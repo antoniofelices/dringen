@@ -38,7 +38,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
             </CardHeader>
 
             <CardContent>
-                {content.dn_hpi.map((item: any) => {
+                {content.medical_clinical_history.map((item: any) => {
                     const isModalOpen = openModal === item.id
 
                     return (

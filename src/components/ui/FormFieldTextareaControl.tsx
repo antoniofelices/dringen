@@ -1,4 +1,5 @@
 import type { Control, FieldValues, Path } from 'react-hook-form'
+// import type { UseFormRegister, FieldErrors } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
 import {
     FormControl,
@@ -8,13 +9,7 @@ import {
     FormLabel,
     FormMessage,
 } from '@/components/ui/base/form'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/base/select'
+import { Textarea } from '@components/ui/base/textarea'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string
@@ -24,10 +19,9 @@ type FormFieldProps<T extends FieldValues> = {
     icon?: LucideIcon
     label: string
     placeholder?: string
-    options: string[]
 }
 
-const FormFieldSelect = <T extends FieldValues>({
+const FormFieldTextareaControl = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
@@ -35,7 +29,6 @@ const FormFieldSelect = <T extends FieldValues>({
     icon: Icon,
     label,
     placeholder,
-    options,
 }: FormFieldProps<T>) => {
     return (
         <div className={className}>
@@ -48,23 +41,13 @@ const FormFieldSelect = <T extends FieldValues>({
                             {Icon && <Icon className="w-4 h-4" />}
                             {label}
                         </FormLabel>
-                        <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                        >
-                            <FormControl>
-                                <SelectTrigger className="w-full border-gray-300 dark:border-gray-600">
-                                    <SelectValue placeholder={placeholder} />
-                                </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                                {options.map((option) => (
-                                    <SelectItem value={option} key={option}>
-                                        {option}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        <FormControl>
+                            <Textarea
+                                {...field}
+                                placeholder={placeholder}
+                                className="border-gray-300 dark:border-gray-600"
+                            />
+                        </FormControl>
                         {description && (
                             <FormDescription>{description}</FormDescription>
                         )}
@@ -76,4 +59,4 @@ const FormFieldSelect = <T extends FieldValues>({
     )
 }
 
-export default FormFieldSelect
+export default FormFieldTextareaControl

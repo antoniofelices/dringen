@@ -83,21 +83,18 @@ const RegisterHealthConsumerForm = () => {
                     control={form.control}
                     fieldName="userName"
                     label={content.labelUserName}
-                    placeholder=""
                     type="text"
                 />
                 <FormFieldInputControl
                     control={form.control}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
-                    placeholder=""
                     type="text"
                 />
                 <FormFieldInputControl
                     control={form.control}
                     fieldName="email"
                     label={content.labelEmail}
-                    placeholder=""
                     type="email"
                 />
                 <FormFieldInputControl
@@ -111,14 +108,12 @@ const RegisterHealthConsumerForm = () => {
                     control={form.control}
                     fieldName="phone"
                     label={content.labelPhone}
-                    placeholder=""
                     type="text"
                 />
                 <FormFieldInputControl
                     control={form.control}
                     fieldName="placeOfResidence"
                     label={content.labelPlaceOfResidence}
-                    placeholder=""
                     type="text"
                 />
                 <Button type="submit" className="w-full mt-4">

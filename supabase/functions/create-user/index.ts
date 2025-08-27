@@ -57,7 +57,7 @@ serve(async (req) => {
         }
 
         // const { data: currentUser, error: profileError } = await supabaseClient
-        //     .from('dn_users')
+        //     .from('medical_user')
         //     .select('role')
         //     .eq('id', user.id)
         //     .single()
@@ -101,7 +101,7 @@ serve(async (req) => {
         }
 
         const { data: existingUser } = await supabaseAdmin
-            .from('dn_users')
+            .from('medical_user')
             .select('email')
             .eq('email', email)
             .single()
@@ -122,7 +122,7 @@ serve(async (req) => {
         }
 
         const { data: existingDni } = await supabaseAdmin
-            .from('dn_users')
+            .from('medical_user')
             .select('dni')
             .eq('dni', dni)
             .single()
@@ -170,7 +170,7 @@ serve(async (req) => {
         }
 
         const { data: userData, error: insertError } = await supabaseAdmin
-            .from('dn_users')
+            .from('medical_user')
             .insert({
                 id: authUser.user.id,
                 user_name,

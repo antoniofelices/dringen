@@ -14,7 +14,7 @@ import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldSelect from '@components/ui/FormFieldSelect'
+import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
 import content from '@/config/data/user/registerForm'
 
 const registerUserSchema = z
@@ -74,17 +74,17 @@ const RegisterUserForm = () => {
         },
     })
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (formData: FormData) => {
         try {
-            console.log('Datos enviados:', data)
+            console.log('Datos enviados:', formData)
 
             const { error } = await createUser({
-                email: data.email,
-                password: data.password,
-                user_name: data.userName,
-                user_last_name: data.userLastName,
-                dni: data.dni,
-                role: data.role,
+                email: formData.email,
+                password: formData.password,
+                user_name: formData.userName,
+                user_last_name: formData.userLastName,
+                dni: formData.dni,
+                role: formData.role,
             })
             if (error) {
                 console.error('Error de Supabase:', error)
@@ -154,9 +154,8 @@ const RegisterUserForm = () => {
                     label={content.labelConfirmPassword}
                     type="password"
                 />
-                <FormFieldSelect
+                <FormFieldSelectControl
                     control={form.control}
-                    errors={form.formState.errors}
                     fieldName="role"
                     icon={UserRoundCog}
                     label={content.labelSelectRole}

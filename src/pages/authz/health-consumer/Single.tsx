@@ -36,7 +36,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
 
-    const pfsh = personData.dn_pfsh[0]
+    const pfsh = personData.medical_clinical_history[0]
 
     return (
         <Drawer>
@@ -56,7 +56,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                             <Info content={personData} />
                         </div>
                         <div className="mt-6">
-                            <Pfsh content={pfsh} />
+                            <Pfsh contentPfsh={pfsh} />
                         </div>
                     </div>
                     <div className="col-span-3">
