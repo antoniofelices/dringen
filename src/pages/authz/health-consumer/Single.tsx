@@ -18,7 +18,7 @@ import Loading from '@components/ui/Loading'
 import AddHpi from '@/components/health-consumer/AddHpi'
 import Info from '@components/health-consumer/Info'
 import MedicalRecord from '@/components/health-consumer/MedicalRecord'
-import Pfsh from '@/components/health-consumer/Pfsh'
+import PatientHistory from '@/components/health-consumer/PatientHistory'
 
 const SingleHealthConsumer = ({ id }: { id: string }) => {
     const {
@@ -56,7 +56,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                             <Info content={personData} />
                         </div>
                         <div className="mt-6">
-                            <Pfsh contentPfsh={pfsh} />
+                            <PatientHistory contentPfsh={pfsh} />
                         </div>
                     </div>
                     <div className="col-span-3">

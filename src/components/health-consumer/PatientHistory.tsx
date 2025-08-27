@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
+import { Toaster, toast } from 'sonner'
 import { updateMedicalPatientHistory } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
@@ -29,12 +30,20 @@ type FormData = {
     socialHistory: string
 }
 
-const FormAdd = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
+type UpdatedMedicalHistory = ContentPfsh[]
+
+const FormAdd = ({
+    contentPfsh,
+    onSuccess,
+}: {
+    contentPfsh: ContentPfsh
+    onSuccess: (updatedData: UpdatedMedicalHistory) => void
+}) => {
     const form = useForm<FormData>({
         defaultValues: {
-            pastMedicalHistory: contentPfsh.past_medical_history ?? '',
-            familyHistory: contentPfsh.family_history ?? '',
-            socialHistory: contentPfsh.social_history ?? '',
+            pastMedicalHistory: contentPfsh.past_medical_history || '',
+            familyHistory: contentPfsh.family_history || '',
+            socialHistory: contentPfsh.social_history || '',
         },
     })
 
@@ -46,7 +55,8 @@ const FormAdd = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
                 formData.familyHistory,
                 formData.socialHistory
             )
-            console.log('Data updated successfully:', data)
+            toast.success('Patient history updated successfully')
+            onSuccess(data)
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -54,6 +64,7 @@ const FormAdd = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
                 type: 'server',
                 message,
             })
+            toast.error(`Failed to update patient history: ${message}`)
             return
         }
     }
@@ -116,22 +127,32 @@ const LoadData = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
     )
 }
 
-const Pfsh = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
-    const displayContent = contentPfsh ? true : false
-
+const PatientHistory = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
     const [toggle, setToggle] = useState(true)
+    const [currentData, setCurrentData] = useState(contentPfsh)
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         setToggle(!toggle)
-    }
+    }, [toggle])
+
+    const handleFormSuccess = useCallback(
+        (updatedData: UpdatedMedicalHistory) => {
+            if (updatedData && updatedData.length > 0) {
+                setCurrentData(updatedData[0])
+            }
+            setToggle(true)
+        },
+        []
+    )
 
     return (
         <Card>
+            <Toaster />
             <CardHeader>
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                {displayContent && (
+                {contentPfsh && (
                     <CardAction>
                         <Button
                             size="xs"
@@ -144,14 +165,19 @@ const Pfsh = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
                 )}
             </CardHeader>
             <CardContent>
-                {displayContent === false || toggle === false ? (
-                    <FormAdd contentPfsh={contentPfsh} />
-                ) : (
-                    <LoadData contentPfsh={contentPfsh} />
-                )}
+                <>
+                    {!contentPfsh || !toggle ? (
+                        <FormAdd
+                            contentPfsh={currentData}
+                            onSuccess={handleFormSuccess}
+                        />
+                    ) : (
+                        <LoadData contentPfsh={currentData} />
+                    )}
+                </>
             </CardContent>
         </Card>
     )
 }
 
-export default Pfsh
+export default PatientHistory
