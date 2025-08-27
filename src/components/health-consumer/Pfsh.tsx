@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
+import { updateMedicalPatientHistory } from '@/services/supabaseService'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
+import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
 import {
     Card,
@@ -13,16 +16,47 @@ import { Form } from '@components/ui/base/form'
 import FormFieldTextareaControl from '@/components/ui/FormFieldTextareaControl'
 import content from '@/config/data/health-consumer/pfsh'
 
-const FormAdd = () => {
-    const form = useForm({
+type ContentPfsh = {
+    id: string
+    family_history?: string
+    past_medical_history?: string
+    social_history?: string
+}
+
+type FormData = {
+    pastMedicalHistory: string
+    familyHistory: string
+    socialHistory: string
+}
+
+const FormAdd = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
+    const form = useForm<FormData>({
         defaultValues: {
-            pastMedicalHistory: '',
-            familyHistory: '',
-            socialHistory: '',
+            pastMedicalHistory: contentPfsh.past_medical_history ?? '',
+            familyHistory: contentPfsh.family_history ?? '',
+            socialHistory: contentPfsh.social_history ?? '',
         },
     })
 
-    const onSubmit = async (formData) => {}
+    const onSubmit = async (formData: FormData) => {
+        try {
+            const data = await updateMedicalPatientHistory(
+                contentPfsh.id,
+                formData.pastMedicalHistory,
+                formData.familyHistory,
+                formData.socialHistory
+            )
+            console.log('Data updated successfully:', data)
+        } catch (error) {
+            const postgrestError = error as PostgrestError
+            const { field, message } = mapSupabaseError(postgrestError.message)
+            form.setError(field as keyof FormData, {
+                type: 'server',
+                message,
+            })
+            return
+        }
+    }
 
     return (
         <Form {...form}>
@@ -42,7 +76,12 @@ const FormAdd = () => {
                     fieldName="socialHistory"
                     label={content.labelSocialHistory}
                 />
-                <Button type="submit" className="w-full mt-4">
+                <Button
+                    type="submit"
+                    className="mt-4"
+                    size="sm"
+                    disabled={form.formState.isSubmitting}
+                >
                     {form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
@@ -52,10 +91,10 @@ const FormAdd = () => {
     )
 }
 
-const LoadData = ({ contentPfsh }) => {
-    const contentPastMedicalHistory = contentPfsh.past_medical_history ?? ''
-    const contentFamilyHistory = contentPfsh.family_history ?? ''
-    const contentSocialHistory = contentPfsh.social_history ?? ''
+const LoadData = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
+    const contentPastMedicalHistory = contentPfsh.past_medical_history
+    const contentFamilyHistory = contentPfsh.family_history
+    const contentSocialHistory = contentPfsh.social_history
 
     return (
         <ul className="">
@@ -77,7 +116,7 @@ const LoadData = ({ contentPfsh }) => {
     )
 }
 
-const Pfsh = ({ contentPfsh }) => {
+const Pfsh = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
     const displayContent = contentPfsh ? true : false
 
     const [toggle, setToggle] = useState(true)
@@ -106,7 +145,7 @@ const Pfsh = ({ contentPfsh }) => {
             </CardHeader>
             <CardContent>
                 {displayContent === false || toggle === false ? (
-                    <FormAdd />
+                    <FormAdd contentPfsh={contentPfsh} />
                 ) : (
                     <LoadData contentPfsh={contentPfsh} />
                 )}

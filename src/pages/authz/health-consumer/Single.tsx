@@ -36,7 +36,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
 
-    const pfsh = personData.medical_clinical_history[0]
+    const pfsh = personData.medical_patient_history
 
     return (
         <Drawer>

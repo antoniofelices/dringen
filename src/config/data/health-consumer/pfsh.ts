@@ -4,8 +4,8 @@ const content = {
     labelPastMedicalHistory: 'Past Medical History',
     labelFamilyHistory: 'Family History',
     labelSocialHistory: 'Social History',
-    textButtonSending: 'Save',
-    textButtonSend: 'Saving',
+    textButtonSend: 'Save',
+    textButtonSending: 'Saving',
 }
 
 export default content
