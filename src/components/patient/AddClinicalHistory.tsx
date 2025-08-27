@@ -8,9 +8,9 @@ import {
 } from '@components/ui/base/tabs'
 import FormFieldInput from '@/components/ui/FormFieldInput'
 import FormFieldTextarea from '@components/ui/FormFieldTextarea'
-import AddDiagnosis from '@components/health-consumer/AddDiagnosis'
+import AddDiagnosis from '@components/patient/AddDiagnosis'
 
-const AddHpi = () => {
+const AddClinicalHistory = () => {
     const {
         register,
         handleSubmit,
@@ -232,4 +232,4 @@ const AddHpi = () => {
     )
 }
 
-export default AddHpi
+export default AddClinicalHistory

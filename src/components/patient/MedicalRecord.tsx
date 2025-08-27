@@ -23,9 +23,9 @@ import {
     TabsTrigger,
 } from '@/components/ui/base/tabs'
 
-import Diagnosis from '@components/health-consumer/Diagnosis'
-import Examination from '@components/health-consumer/Examination'
-import ExaminationData from '@components/health-consumer/ExaminationData'
+import Diagnosis from '@components/patient/Diagnosis'
+import Examination from '@components/patient/Examination'
+import ExaminationData from '@components/patient/ExaminationData'
 
 const MedicalRecord = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)

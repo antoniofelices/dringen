@@ -25,7 +25,7 @@ import {
 import ButtonSignOut from '@components/ui/ButtonSignOut'
 import Logo from '@/components/ui/Logo'
 import MenuItems from '@/components/ui/Menutems'
-import healthConsumers from '@/config/data/menus/healthConsumers'
+import patientMenu from '@/config/data/menus/patient'
 import users from '@/config/data/menus/users'
 
 const Aside = () => {
@@ -51,7 +51,7 @@ const Aside = () => {
                     <SidebarGroupLabel>Health Consumers</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <MenuItems content={healthConsumers} />
+                            <MenuItems content={patientMenu} />
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

@@ -6,7 +6,7 @@ import {
     CardTitle,
 } from '@/components/ui/base/card'
 
-const Info = ({ content }) => {
+const PatientGeneralData = ({ content }) => {
     return (
         <Card>
             <CardHeader>
@@ -45,4 +45,4 @@ const Info = ({ content }) => {
     )
 }
 
-export default Info
+export default PatientGeneralData

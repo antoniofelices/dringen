@@ -1,10 +1,10 @@
 import { Card, CardContent } from '@/components/ui/base/card'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
-import RegisterHealthConsumerForm from '@/components/health-consumer/RegisterHealthConsumerForm'
-import content from '@/config/data/health-consumer/add'
+import RegisterPatientForm from '@/components/patient/RegisterPatientForm'
+import content from '@/config/data/patient/add'
 
-const AddHealthConsumer = () => {
+const AddPatient = () => {
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -12,7 +12,7 @@ const AddHealthConsumer = () => {
                 <CardContent>
                     <Card className="max-w-2xl mx-auto">
                         <CardContent>
-                            <RegisterHealthConsumerForm />
+                            <RegisterPatientForm />
                         </CardContent>
                     </Card>
                 </CardContent>
@@ -21,4 +21,4 @@ const AddHealthConsumer = () => {
     )
 }
 
-export default AddHealthConsumer
+export default AddPatient

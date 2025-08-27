@@ -5,14 +5,14 @@ import type { Database } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
-// Health Consumers
-export const getListHealthConsumer = async () => {
+// Patients
+export const getListPatients = async () => {
     const { data, error } = await supabase.from('medical_patient').select('*')
     if (error) throw error
     return data
 }
 
-export const getSingleHealthConsumer = async (id: string) => {
+export const getSinglePatient = async (id: string) => {
     const { data, error } = await supabase
         .from('medical_patient')
         .select(
@@ -23,7 +23,7 @@ export const getSingleHealthConsumer = async (id: string) => {
     if (error) throw error
     return data
 }
-export const registerHealthConsumer = async (
+export const registerPatient = async (
     userName: string,
     userLastName: string,
     dni: string,

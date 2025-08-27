@@ -18,7 +18,7 @@ export type RoutesProps = {
     orderMenu?: number
 }
 
-export type DataTableHealthConsumer = {
+export type DataTablePatient = {
     id: string
     user_name: string
     user_last_name: string
