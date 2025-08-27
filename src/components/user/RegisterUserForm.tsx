@@ -1,15 +1,21 @@
+import {
+    IdCard,
+    Lock,
+    LockKeyhole,
+    Mail,
+    User,
+    UserRoundCog,
+} from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Mail, Lock, LockKeyhole, User, UserRoundCog } from 'lucide-react'
-
-import content from '@/config/data/user/registerForm'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { createUser } from '@/services/supabaseAdmin'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
-
-import FormFieldInput from '@components/ui/FormFieldInput'
-import FormFieldSelect from '@components/ui/FormFieldSelect'
-// import { registerUser } from '@/services/supabaseService'
-// import mapSupabaseError from '@/services/mapSupabaseErrors'
+import { Form } from '@components/ui/base/form'
+import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
+import content from '@/config/data/user/registerForm'
 
 const registerUserSchema = z
     .object({
@@ -29,15 +35,21 @@ const registerUserSchema = z
                 /^[a-zA-Z0-9_]+$/,
                 content.errorUserLastNameDisallowedCharacters
             ),
+        dni: z
+            .string()
+            .min(9, content.errorUserDniTooShort)
+            .max(9, content.errorUserDniTooLong)
+            .regex(/^\d{8}[A-Z]$/, content.errorUserDniInvalidFormat),
         email: z
             .string()
             .email(content.errorEmailInvalid)
             .min(1, content.errorEmailRequired),
+        role: z.enum(['user', 'medical_office', 'physician', 'admin']),
         password: z
             .string()
             .min(8, content.errorPasswordTooShort)
             .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
                 content.errorPasswordMustContain
             ),
         confirmPassword: z.string().min(1, content.confirmPassword),
@@ -50,98 +62,118 @@ const registerUserSchema = z
 type FormData = z.infer<typeof registerUserSchema>
 
 const RegisterUserForm = () => {
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
         resolver: zodResolver(registerUserSchema),
+        defaultValues: {
+            email: '',
+            password: '',
+            userName: '',
+            userLastName: '',
+            dni: '',
+            role: 'user',
+        },
     })
 
-    const onSubmit = async (data: FormData) => {
-        // const { error } = await registerUser(
-        //     data.email,
-        //     data.password,
-        //     data.username
-        // )
-        // if (error) {
-        //     const { field, message } = mapSupabaseError(error.message)
-        //     setError(field, {
-        //         type: 'server',
-        //         message,
-        //     })
-        //     return
-        // }
+    const onSubmit = async (formData: FormData) => {
+        try {
+            console.log('Datos enviados:', formData)
+
+            const { error } = await createUser({
+                email: formData.email,
+                password: formData.password,
+                user_name: formData.userName,
+                user_last_name: formData.userLastName,
+                dni: formData.dni,
+                role: formData.role,
+            })
+            if (error) {
+                console.error('Error de Supabase:', error)
+                const { field, message } = mapSupabaseError(error.message)
+                form.setError(field, {
+                    type: 'server',
+                    message,
+                })
+                return
+            }
+            console.log('Usuario creado exitosamente!')
+        } catch (err) {
+            console.error('Error en onSubmit:', err)
+            form.setError('root', {
+                type: 'server',
+                message: 'Error inesperado al crear el usuario',
+            })
+        }
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormFieldInput
-                    errors={errors}
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userName"
                     icon={User}
                     label={content.labelUserName}
                     placeholder="Manolo"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="userLastName"
                     icon={User}
                     label={content.labelUserLastName}
                     placeholder="Kabezabolo"
-                    register={register}
                     type="text"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="email"
                     icon={Mail}
                     label={content.labelEmail}
                     placeholder="nf@manolo.es"
-                    register={register}
                     type="email"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
+                    fieldName="dni"
+                    icon={IdCard}
+                    label={content.labelDNI}
+                    placeholder="12121212P"
+                    type="text"
+                />
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="password"
                     icon={Lock}
                     label={content.labelPassword}
-                    register={register}
                     type="password"
                 />
-                <FormFieldInput
-                    errors={errors}
+                <FormFieldInputControl
+                    control={form.control}
                     fieldName="confirmPassword"
                     icon={LockKeyhole}
                     label={content.labelConfirmPassword}
-                    register={register}
                     type="password"
                 />
-                <FormFieldSelect
-                    errors={errors}
+                <FormFieldSelectControl
+                    control={form.control}
                     fieldName="role"
                     icon={UserRoundCog}
                     label={content.labelSelectRole}
                     options={['user', 'medical_office', 'physician', 'admin']}
                     placeholder="User"
-                    register={register}
                 />
                 <Button type="submit" className="w-full">
-                    {isSubmitting
+                    {form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
                 </Button>
             </form>
-            {errors.root && (
+            {form.formState.errors.root && (
                 <div className="text-red text-sm mt-2 text-center">
-                    {errors.root.message}
+                    {form.formState.errors.root.message}
                 </div>
             )}
-        </>
+        </Form>
     )
 }
 

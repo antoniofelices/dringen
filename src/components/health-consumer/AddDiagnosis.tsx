@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CirclePlus } from 'lucide-react'
-import FormFieldInput from '@components/ui/FormFieldInput'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 
 const AddDiagnosis = ({ register, errors }) => {
     const [addDiagnosis, setAddDiagnosis] = useState([1])

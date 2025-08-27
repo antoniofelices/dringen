@@ -12,7 +12,7 @@ import content from '@/config/data/authn/signUpForm'
 import { Button } from '@/components/ui/base/button'
 import { Input } from '@/components/ui/base/input'
 import { Label } from '@/components/ui/base/label'
-import { registerUser } from '@/services/supabaseService'
+import { registerUserOriginal } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 
 const signUpSchema = z
@@ -33,7 +33,7 @@ const signUpSchema = z
             .string()
             .min(8, content.errorPasswordTooShort)
             .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
                 content.errorPasswordMustContain
             ),
         confirmPassword: z.string().min(1, content.confirmPassword),
@@ -62,7 +62,7 @@ const SignUpFormOriginal = () => {
     })
 
     const onSubmit = async (data: FormData) => {
-        const { error } = await registerUser(
+        const { error } = await registerUserOriginal(
             data.email,
             data.password,
             data.username

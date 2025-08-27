@@ -1,25 +1,30 @@
 import { useId } from 'react'
-import type { UseFormRegister, FieldErrors } from 'react-hook-form'
+import type {
+    UseFormRegister,
+    FieldErrors,
+    FieldValues,
+    Path,
+} from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
 import { Input } from '@/components/ui/base/input'
 import { Label } from '@/components/ui/base/label'
 
-type FormValues = {
-    [key: string]: string
-}
+// type FormValues = {
+//     [key: string]: string
+// }
 
-type FormFieldProps = {
+type FormFieldProps<T extends FieldValues> = {
     className?: string
-    errors: FieldErrors<FormValues>
-    fieldName: string
+    errors: FieldErrors<T>
+    fieldName: Path<T>
     icon?: LucideIcon
     label: string
     placeholder?: string
-    register: UseFormRegister<FormValues>
+    register: UseFormRegister<T>
     type?: string
 }
 
-const FormFieldInput = ({
+const FormFieldInput = <T extends FieldValues>({
     className = 'mb-5',
     errors,
     fieldName,
@@ -28,7 +33,7 @@ const FormFieldInput = ({
     placeholder,
     register,
     type = 'text',
-}: FormFieldProps) => {
+}: FormFieldProps<T>) => {
     const inputId = useId()
     const error = errors?.[fieldName]
 
@@ -46,6 +51,7 @@ const FormFieldInput = ({
                 type={type}
                 {...register(fieldName)}
                 placeholder={placeholder}
+                className="border-gray-300 dark:border-gray-600"
             />
             {error && (
                 <span className="text-sm text-red-500 mt-1">

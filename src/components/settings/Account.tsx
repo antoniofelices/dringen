@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/base/card'
 import ButtonSignOut from '@/components/ui/ButtonSignOut'
 import ErrorApi from '@components/ui/ErrorApi'
-import FormFieldInput from '@components/ui/FormFieldInput'
+import FormFieldInput from '@/components/ui/FormFieldInputControl'
 import Loading from '@components/ui/Loading'
 import content from '@data/settings/account'
 
