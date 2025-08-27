@@ -50,7 +50,7 @@ export const registerHealthConsumer = async (
 
 export const getDiagnosis = async (id: string) => {
     const { data, error } = await supabase
-        .from('medical_patient_history')
+        .from('medical_clinical_history')
         .select(`id, medical_diagnosis("*")`)
         .eq('id', id)
         .single()

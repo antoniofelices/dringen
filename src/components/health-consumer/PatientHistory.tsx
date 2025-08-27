@@ -56,7 +56,7 @@ const FormAdd = ({
                 formData.socialHistory
             )
             toast.success('Patient history updated successfully')
-            onSuccess(data)
+            onSuccess(data as ContentPfsh[])
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)

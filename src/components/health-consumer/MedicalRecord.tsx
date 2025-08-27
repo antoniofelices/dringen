@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { transformDate } from '@/lib/utils'
 import {
     Card,
@@ -42,7 +43,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
                     const isModalOpen = openModal === item.id
 
                     return (
-                        <>
+                        <div key={uuidv4()}>
                             <Dialog
                                 key={item.id}
                                 open={isModalOpen}
@@ -110,7 +111,7 @@ const MedicalRecord = ({ content }: { content: any }) => {
                                     </Tabs>
                                 </DialogContent>
                             </Dialog>
-                        </>
+                        </div>
                     )
                 })}
             </CardContent>
