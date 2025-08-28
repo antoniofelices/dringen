@@ -23,7 +23,7 @@ import content from '@/config/data/pages/singleUser'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const {
-        data: personData,
+        data: patientData,
         isPending: personLoading,
         isError: personError,
         error: personErrorType,
@@ -37,12 +37,12 @@ const SinglePatient = ({ id }: { id: string }) => {
     if (personError && personErrorType)
         return <ErrorApi message={personErrorType.message} />
 
-    const pfsh = personData.medical_patient_history
+    const pfsh = patientData.medical_patient_history
 
     return (
         <Drawer>
             <HeaderArticle
-                title={`${personData.user_name} ${personData.user_last_name}`}
+                title={`${patientData.user_name} ${patientData.user_last_name}`}
             >
                 <Button asChild size="sm">
                     <DrawerTrigger>
@@ -54,14 +54,14 @@ const SinglePatient = ({ id }: { id: string }) => {
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
                         <PatientGeneralData
-                            contentPatientGeneralData={personData}
+                            contentPatientGeneralData={patientData}
                         />
                     </div>
                     <div className="col-span-3">
                         <PatientHistory contentPatientHistory={pfsh} />
                     </div>
                     <div className="col-span-6">
-                        <DisplayAllClinicalHistory content={personData} />
+                        <DisplayAllClinicalHistory content={patientData} />
                     </div>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">

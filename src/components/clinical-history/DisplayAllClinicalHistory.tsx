@@ -30,6 +30,8 @@ import DisplayExaminationData from '@components/clinical-history/DisplayExaminat
 const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)
 
+    console.log(content)
+
     return (
         <Card>
             <CardHeader>
@@ -53,23 +55,26 @@ const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
                             >
                                 <h3 className="my-3">
                                     <DialogTrigger>
-                                        {transformDate(item.date_of)} -
-                                        CERTAINTY: DIAGNOSIS
+                                        {transformDate(item.created_at)} -{' '}
+                                        {item.medical_diagnosis[0].diagnosis}
                                     </DialogTrigger>
                                 </h3>
                                 <DialogOverlay className="bg-black/60" />
                                 <DialogContent className="sm:max-w-6xl top-0 translate-y-0 dark:bg-black">
                                     <DialogHeader className="sr-only">
                                         <DialogTitle>
-                                            {transformDate(item.date_of)} -
-                                            CERTAINTY: DIAGNOSIS
+                                            {transformDate(item.created_at)} -{' '}
+                                            {
+                                                item.medical_diagnosis[0]
+                                                    .diagnosis
+                                            }
                                         </DialogTitle>
                                         <DialogDescription>
                                             A single review
                                         </DialogDescription>
                                     </DialogHeader>
                                     <Tabs
-                                        aria-label="Previous revision"
+                                        aria-label="Clinical history"
                                         defaultValue="examination"
                                     >
                                         <TabsList>
