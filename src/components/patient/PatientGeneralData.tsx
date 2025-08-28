@@ -5,6 +5,7 @@ import { Toaster, toast } from 'sonner'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
+import { transformDate } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -15,6 +16,7 @@ import {
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
+import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
 import content from '@/config/data/patient/patientGeneralData'
 
 type ContentPatientGeneralDataType = {
@@ -81,7 +83,7 @@ const FormAdd = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldCalendarControl
                     control={form.control}
                     fieldName="birthday"
                     label={content.labelBirthday}
@@ -126,7 +128,7 @@ const LoadData = ({
 }: {
     contentPatientGeneralData: ContentPatientGeneralDataType
 }) => {
-    const contentBirthday = contentPatientGeneralData.birthday
+    const contentBirthday = transformDate(contentPatientGeneralData.birthday)
     const contentGender = contentPatientGeneralData.gender
     const contentBirthplace = contentPatientGeneralData.birthplace
     const contentPlaceOfResidence = contentPatientGeneralData.place_of_residence
