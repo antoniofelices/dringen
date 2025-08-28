@@ -15,6 +15,17 @@ export function transformDate(value: string): string {
     return date.toLocaleDateString('es-ES')
 }
 
+export function normalizeDate(value: unknown): string | null {
+    if (!value) return null
+    if (typeof value === 'string') {
+        return value.trim() === '' ? null : value
+    }
+    if (value instanceof Date && !isNaN(value.getTime())) {
+        return value.toISOString().split('T')[0]
+    }
+    return null
+}
+
 export function transformToId(value: string): string {
     return value
         .toLowerCase()

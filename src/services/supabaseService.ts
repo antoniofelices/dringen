@@ -81,11 +81,11 @@ export const updateMedicalPatientHistory = async (
 
 export const updateMedicalPatientGeneralData = async (
     id: string,
-    birthday: string,
-    gender: string,
-    birthplace: string,
-    placeOfResidence: string,
-    occupation: string
+    birthday?: string | null,
+    gender?: string,
+    birthplace?: string,
+    placeOfResidence?: string,
+    occupation?: string
 ) => {
     if (!id) throw new Error('ID is required')
 
