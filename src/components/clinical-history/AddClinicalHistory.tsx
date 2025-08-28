@@ -8,7 +8,7 @@ import {
 } from '@components/ui/base/tabs'
 import FormFieldInput from '@/components/ui/FormFieldInput'
 import FormFieldTextarea from '@components/ui/FormFieldTextarea'
-import AddDiagnosis from '@components/patient/AddDiagnosis'
+import AddDiagnosis from '@components/clinical-history/AddDiagnosis'
 
 const AddClinicalHistory = () => {
     const {

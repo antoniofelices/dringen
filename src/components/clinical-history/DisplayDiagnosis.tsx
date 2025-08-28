@@ -4,7 +4,7 @@ import { getDiagnosis } from '@/services/supabaseService'
 import Loading from '@components/ui/Loading'
 import ErrorApi from '@components/ui/ErrorApi'
 
-const Diagnosis = ({ id }: { id: string }) => {
+const DisplayDiagnosis = ({ id }: { id: string }) => {
     const {
         data: diagnosisData,
         isPending: diagnosisLoading,
@@ -45,4 +45,4 @@ const Diagnosis = ({ id }: { id: string }) => {
     )
 }
 
-export default Diagnosis
+export default DisplayDiagnosis

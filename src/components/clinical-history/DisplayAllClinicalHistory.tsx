@@ -23,18 +23,18 @@ import {
     TabsTrigger,
 } from '@/components/ui/base/tabs'
 
-import Diagnosis from '@components/patient/Diagnosis'
-import Examination from '@components/patient/Examination'
-import ExaminationData from '@components/patient/ExaminationData'
+import DisplayDiagnosis from '@components/clinical-history/DisplayDiagnosis'
+import DisplayExamination from '@components/clinical-history/DisplayExamination'
+import DisplayExaminationData from '@components/clinical-history/DisplayExaminationData'
 
-const MedicalRecord = ({ content }: { content: any }) => {
+const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">Medical Record</h2>
+                    <h2 className="font-extrabold">Clinical History</h2>
                 </CardTitle>
             </CardHeader>
 
@@ -91,15 +91,19 @@ const MedicalRecord = ({ content }: { content: any }) => {
                                         </TabsList>
                                         <div className="mt-4">
                                             <TabsContent value="examination">
-                                                <Examination content={item} />
+                                                <DisplayExamination
+                                                    content={item}
+                                                />
                                             </TabsContent>
                                             <TabsContent value="examination-data">
-                                                <ExaminationData
+                                                <DisplayExaminationData
                                                     content={item}
                                                 />
                                             </TabsContent>
                                             <TabsContent value="diagnosis">
-                                                <Diagnosis id={item.id} />
+                                                <DisplayDiagnosis
+                                                    id={item.id}
+                                                />
                                             </TabsContent>
                                             <TabsContent value="aditional-tests">
                                                 <p>{item.additional_tests}</p>
@@ -119,4 +123,4 @@ const MedicalRecord = ({ content }: { content: any }) => {
     )
 }
 
-export default MedicalRecord
+export default DisplayAllClinicalHistory

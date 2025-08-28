@@ -1,4 +1,4 @@
-import content from '@/config/data/dashboard'
+import content from '@/config/data/pages/dashboard'
 
 const Dashboard = () => {
     return (
