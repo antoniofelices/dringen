@@ -1,4 +1,9 @@
+// import { usePatientContext } from '@/hooks/usePatientContext'
+
 const DisplayExamination = ({ content }) => {
+    // const dataUser = usePatientContext()
+    // console.log(dataUser.calar)
+
     return (
         <div>
             <div>

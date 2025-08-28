@@ -76,8 +76,6 @@ const RegisterUserForm = () => {
 
     const onSubmit = async (formData: FormData) => {
         try {
-            console.log('Datos enviados:', formData)
-
             const { error } = await createUser({
                 email: formData.email,
                 password: formData.password,

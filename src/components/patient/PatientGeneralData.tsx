@@ -2,9 +2,11 @@ import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
+import { usePatientContext } from '@/hooks/usePatientContext'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
+import type { PatientWithRelations } from '@/types/interfaces'
 import { transformDate, normalizeDate } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
@@ -19,15 +21,6 @@ import FormFieldInputControl from '@components/ui/FormFieldInputControl'
 import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
 import content from '@/config/data/patient/patientGeneralData'
 
-type ContentPatientGeneralDataType = {
-    id: string
-    birthday?: string | null
-    gender?: string
-    birthplace?: string
-    place_of_residence?: string
-    occupation?: string
-}
-
 type FormData = {
     birthday?: string | null
     gender?: string
@@ -36,14 +29,12 @@ type FormData = {
     occupation?: string
 }
 
-type UpdatePatientGeneralData = ContentPatientGeneralDataType[]
-
 const FormAdd = ({
     contentPatientGeneralData,
     onSuccess,
 }: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
-    onSuccess: (updatedData: UpdatePatientGeneralData) => void
+    contentPatientGeneralData: PatientWithRelations
+    onSuccess: () => void
 }) => {
     const form = useForm<FormData>({
         defaultValues: {
@@ -58,7 +49,7 @@ const FormAdd = ({
 
     const onSubmit = async (formData: FormData) => {
         try {
-            const data = await updateMedicalPatientGeneralData(
+            await updateMedicalPatientGeneralData(
                 contentPatientGeneralData.id,
                 normalizeDate(formData.birthday),
                 formData.gender,
@@ -67,7 +58,7 @@ const FormAdd = ({
                 formData.occupation
             )
             toast.success('Patient general data updated successfully')
-            onSuccess(data as ContentPatientGeneralDataType[])
+            onSuccess()
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -126,7 +117,7 @@ const FormAdd = ({
 const LoadData = ({
     contentPatientGeneralData,
 }: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
+    contentPatientGeneralData: PatientWithRelations
 }) => {
     const contentBirthday = contentPatientGeneralData.birthday
         ? transformDate(contentPatientGeneralData.birthday)
@@ -164,35 +155,27 @@ const LoadData = ({
     )
 }
 
-const PatientGeneralData = ({
-    contentPatientGeneralData,
-}: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
-}) => {
+const PatientGeneralData = () => {
+    const { patientData, refetchPatient } = usePatientContext()
+
     const isDataComplete = Boolean(
-        contentPatientGeneralData.birthday ||
-            contentPatientGeneralData.gender ||
-            contentPatientGeneralData.birthplace ||
-            contentPatientGeneralData.place_of_residence ||
-            contentPatientGeneralData.occupation
+        patientData?.birthday ||
+            patientData?.gender ||
+            patientData?.birthplace ||
+            patientData?.place_of_residence ||
+            patientData?.occupation
     )
 
-    const [toggle, setToggle] = useState(isDataComplete)
-    const [currentData, setCurrentData] = useState(contentPatientGeneralData)
+    const [isEditing, setIsEditing] = useState(!isDataComplete)
 
-    const handleClick = useCallback(() => {
-        setToggle(!toggle)
-    }, [toggle])
+    const handleEditToggle = useCallback(() => {
+        setIsEditing(!isEditing)
+    }, [isEditing])
 
-    const handleFormSuccess = useCallback(
-        (updatedData: UpdatePatientGeneralData) => {
-            if (updatedData && updatedData.length > 0) {
-                setCurrentData(updatedData[0])
-            }
-            setToggle(true)
-        },
-        []
-    )
+    const handleFormSuccess = useCallback(() => {
+        refetchPatient()
+        setIsEditing(false)
+    }, [refetchPatient])
 
     return (
         <Card className="h-full">
@@ -200,28 +183,28 @@ const PatientGeneralData = ({
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                {contentPatientGeneralData && (
+                {patientData && (
                     <CardAction>
                         <Button
                             size="xs"
                             variant="outline"
-                            onClick={handleClick}
+                            onClick={handleEditToggle}
                         >
-                            {toggle ? <>{content.textButtonEdit}</> : <X />}
+                            {!isEditing ? <>{content.textButtonEdit}</> : <X />}
                         </Button>
                     </CardAction>
                 )}
             </CardHeader>
             <CardContent>
                 <>
-                    {toggle ? (
-                        <LoadData contentPatientGeneralData={currentData} />
-                    ) : (
+                    {!isEditing && patientData ? (
+                        <LoadData contentPatientGeneralData={patientData} />
+                    ) : patientData ? (
                         <FormAdd
-                            contentPatientGeneralData={currentData}
+                            contentPatientGeneralData={patientData}
                             onSuccess={handleFormSuccess}
                         />
-                    )}
+                    ) : null}
                 </>
             </CardContent>
             <Toaster />

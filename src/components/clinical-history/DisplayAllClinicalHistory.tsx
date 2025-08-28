@@ -30,8 +30,6 @@ import DisplayExaminationData from '@components/clinical-history/DisplayExaminat
 const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
     const [openModal, setOpenModal] = useState<string | null>(null)
 
-    console.log(content)
-
     return (
         <Card>
             <CardHeader>
