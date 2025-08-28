@@ -52,16 +52,14 @@ const SinglePatient = ({ id }: { id: string }) => {
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
-                        <div>
-                            <PatientGeneralData
-                                contentPatientGeneralData={personData}
-                            />
-                        </div>
-                        <div className="mt-6">
-                            <PatientHistory contentPatientHistory={pfsh} />
-                        </div>
+                        <PatientGeneralData
+                            contentPatientGeneralData={personData}
+                        />
                     </div>
                     <div className="col-span-3">
+                        <PatientHistory contentPatientHistory={pfsh} />
+                    </div>
+                    <div className="col-span-6">
                         <MedicalRecord content={personData} />
                     </div>
                     <DrawerOverlay className="bg-black/60" />

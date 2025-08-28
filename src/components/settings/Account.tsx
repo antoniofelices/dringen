@@ -76,13 +76,13 @@ const Account = () => {
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <FormFieldInput
+                            {/* <FormFieldInput
                                 label="Reset Password"
                                 fieldName="resetPassword"
                                 type="password"
                                 register={register}
                                 errors={errors}
-                            />
+                            /> */}
                             <Button type="submit" className="mr-2">
                                 {isSubmitting ? 'Reset' : 'Saving'}
                             </Button>

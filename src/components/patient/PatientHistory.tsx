@@ -137,7 +137,13 @@ const PatientHistory = ({
 }: {
     contentPatientHistory: ContentPatientHistoryType
 }) => {
-    const [toggle, setToggle] = useState(true)
+    const isDataComplete = Boolean(
+        contentPatientHistory.past_medical_history ||
+            contentPatientHistory.family_history ||
+            contentPatientHistory.social_history
+    )
+
+    const [toggle, setToggle] = useState(isDataComplete)
     const [currentData, setCurrentData] = useState(contentPatientHistory)
 
     const handleClick = useCallback(() => {
@@ -155,8 +161,7 @@ const PatientHistory = ({
     )
 
     return (
-        <Card>
-            <Toaster />
+        <Card className="h-full">
             <CardHeader>
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
@@ -175,16 +180,17 @@ const PatientHistory = ({
             </CardHeader>
             <CardContent>
                 <>
-                    {!contentPatientHistory || !toggle ? (
+                    {toggle ? (
+                        <LoadData contentPatientHistory={currentData} />
+                    ) : (
                         <FormAdd
                             contentPatientHistory={currentData}
                             onSuccess={handleFormSuccess}
                         />
-                    ) : (
-                        <LoadData contentPatientHistory={currentData} />
                     )}
                 </>
             </CardContent>
+            <Toaster />
         </Card>
     )
 }

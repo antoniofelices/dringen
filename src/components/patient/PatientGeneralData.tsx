@@ -5,6 +5,7 @@ import { Toaster, toast } from 'sonner'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
+import { transformDate, normalizeDate } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -15,11 +16,12 @@ import {
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
+import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
 import content from '@/config/data/patient/patientGeneralData'
 
 type ContentPatientGeneralDataType = {
     id: string
-    birthday?: string
+    birthday?: string | null
     gender?: string
     birthplace?: string
     place_of_residence?: string
@@ -27,11 +29,11 @@ type ContentPatientGeneralDataType = {
 }
 
 type FormData = {
-    birthday: string
-    gender: string
-    birthplace: string
-    placeOfResidence: string
-    occupation: string
+    birthday?: string | null
+    gender?: string
+    birthplace?: string
+    placeOfResidence?: string
+    occupation?: string
 }
 
 type UpdatePatientGeneralData = ContentPatientGeneralDataType[]
@@ -58,7 +60,7 @@ const FormAdd = ({
         try {
             const data = await updateMedicalPatientGeneralData(
                 contentPatientGeneralData.id,
-                formData.birthday,
+                normalizeDate(formData.birthday),
                 formData.gender,
                 formData.birthplace,
                 formData.placeOfResidence,
@@ -81,7 +83,7 @@ const FormAdd = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldCalendarControl
                     control={form.control}
                     fieldName="birthday"
                     label={content.labelBirthday}
@@ -127,6 +129,8 @@ const LoadData = ({
     contentPatientGeneralData: ContentPatientGeneralDataType
 }) => {
     const contentBirthday = contentPatientGeneralData.birthday
+        ? transformDate(contentPatientGeneralData.birthday)
+        : ''
     const contentGender = contentPatientGeneralData.gender
     const contentBirthplace = contentPatientGeneralData.birthplace
     const contentPlaceOfResidence = contentPatientGeneralData.place_of_residence
@@ -165,7 +169,15 @@ const PatientGeneralData = ({
 }: {
     contentPatientGeneralData: ContentPatientGeneralDataType
 }) => {
-    const [toggle, setToggle] = useState(true)
+    const isDataComplete = Boolean(
+        contentPatientGeneralData.birthday ||
+            contentPatientGeneralData.gender ||
+            contentPatientGeneralData.birthplace ||
+            contentPatientGeneralData.place_of_residence ||
+            contentPatientGeneralData.occupation
+    )
+
+    const [toggle, setToggle] = useState(isDataComplete)
     const [currentData, setCurrentData] = useState(contentPatientGeneralData)
 
     const handleClick = useCallback(() => {
@@ -183,11 +195,10 @@ const PatientGeneralData = ({
     )
 
     return (
-        <Card>
-            <Toaster />
+        <Card className="h-full">
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold ">{content.title}</h2>
+                    <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
                 {contentPatientGeneralData && (
                     <CardAction>
@@ -203,16 +214,17 @@ const PatientGeneralData = ({
             </CardHeader>
             <CardContent>
                 <>
-                    {!contentPatientGeneralData || !toggle ? (
+                    {toggle ? (
+                        <LoadData contentPatientGeneralData={currentData} />
+                    ) : (
                         <FormAdd
                             contentPatientGeneralData={currentData}
                             onSuccess={handleFormSuccess}
                         />
-                    ) : (
-                        <LoadData contentPatientGeneralData={currentData} />
                     )}
                 </>
             </CardContent>
+            <Toaster />
         </Card>
     )
 }
