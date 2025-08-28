@@ -16,7 +16,14 @@ export const getSinglePatient = async (id: string) => {
     const { data, error } = await supabase
         .from('medical_patient')
         .select(
-            `*, medical_clinical_history("*"), medical_patient_history("*")`
+            `
+                *, 
+                medical_clinical_history(
+                    "*", 
+                    medical_diagnosis("*")
+                ), 
+                medical_patient_history("*")
+            `
         )
         .eq('id', id)
         .single()
