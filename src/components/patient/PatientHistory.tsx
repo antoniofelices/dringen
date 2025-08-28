@@ -161,8 +161,7 @@ const PatientHistory = ({
     )
 
     return (
-        <Card>
-            <Toaster />
+        <Card className="h-full">
             <CardHeader>
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
@@ -191,6 +190,7 @@ const PatientHistory = ({
                     )}
                 </>
             </CardContent>
+            <Toaster />
         </Card>
     )
 }

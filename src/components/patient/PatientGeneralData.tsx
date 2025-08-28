@@ -195,11 +195,10 @@ const PatientGeneralData = ({
     )
 
     return (
-        <Card>
-            <Toaster />
+        <Card className="h-full">
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold ">{content.title}</h2>
+                    <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
                 {contentPatientGeneralData && (
                     <CardAction>
@@ -225,6 +224,7 @@ const PatientGeneralData = ({
                     )}
                 </>
             </CardContent>
+            <Toaster />
         </Card>
     )
 }
