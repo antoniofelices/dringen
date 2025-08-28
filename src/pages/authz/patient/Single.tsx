@@ -53,7 +53,9 @@ const SinglePatient = ({ id }: { id: string }) => {
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
                         <div>
-                            <PatientGeneralData content={personData} />
+                            <PatientGeneralData
+                                contentPatientGeneralData={personData}
+                            />
                         </div>
                         <div className="mt-6">
                             <PatientHistory contentPatientHistory={pfsh} />

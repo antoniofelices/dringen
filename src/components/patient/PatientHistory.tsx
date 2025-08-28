@@ -113,7 +113,7 @@ const LoadData = ({
     const contentSocialHistory = contentPatientHistory.social_history
 
     return (
-        <ul className="">
+        <ul>
             <li className="my-2">
                 <span className="font-bold">
                     {content.labelPastMedicalHistory}

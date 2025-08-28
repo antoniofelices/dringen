@@ -79,6 +79,31 @@ export const updateMedicalPatientHistory = async (
     return data
 }
 
+export const updateMedicalPatientGeneralData = async (
+    id: string,
+    birthday: string,
+    gender: string,
+    birthplace: string,
+    placeOfResidence: string,
+    occupation: string
+) => {
+    if (!id) throw new Error('ID is required')
+
+    const { data, error } = await supabase
+        .from('medical_patient')
+        .update({
+            birthday: birthday,
+            gender: gender,
+            birthplace: birthplace,
+            place_of_residence: placeOfResidence,
+            occupation: occupation,
+        })
+        .eq('id', id)
+        .select()
+    if (error) throw error
+    return data
+}
+
 // Users
 export const getListUsers = async () => {
     const { data, error } = await supabase.from('medical_user').select('*')
