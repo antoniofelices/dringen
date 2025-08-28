@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import SinglePatient from '@/pages/authz/patient/Single'
+import SinglePatient from '@/pages/authz/SinglePatient'
 
 export const Route = createFileRoute('/_authz/patient/$id')({
     component: RouteComponent,

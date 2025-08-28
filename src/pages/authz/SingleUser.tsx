@@ -15,7 +15,7 @@ import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import content from '@/config/data/user/single'
+import content from '@/config/data/pages/singleUser'
 
 const SingleUser = ({ id }: { id: string }) => {
     const {

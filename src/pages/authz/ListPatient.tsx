@@ -9,7 +9,7 @@ import HeaderArticle from '@/components/ui/HeaderArticle'
 import DataTable from '@/components/ui/DataTable'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import content from '@/config/data/patient/list'
+import content from '@/config/data/pages/listUser'
 
 const ListPatient = () => {
     const {

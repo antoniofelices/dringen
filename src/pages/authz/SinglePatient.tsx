@@ -15,10 +15,11 @@ import ContentArticle from '@components/ui/ContentArticle'
 import HeaderArticle from '@components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import AddClinicalHistory from '@components/patient/AddClinicalHistory'
+import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
-import MedicalRecord from '@components/patient/MedicalRecord'
+import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
 import PatientHistory from '@components/patient/PatientHistory'
+import content from '@/config/data/pages/singleUser'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const {
@@ -45,7 +46,7 @@ const SinglePatient = ({ id }: { id: string }) => {
             >
                 <Button asChild size="sm">
                     <DrawerTrigger>
-                        Add History of Present Illness
+                        {content.textButtonAddClinicalHistory}
                     </DrawerTrigger>
                 </Button>
             </HeaderArticle>
@@ -60,16 +61,16 @@ const SinglePatient = ({ id }: { id: string }) => {
                         <PatientHistory contentPatientHistory={pfsh} />
                     </div>
                     <div className="col-span-6">
-                        <MedicalRecord content={personData} />
+                        <DisplayAllClinicalHistory content={personData} />
                     </div>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                         <DrawerHeader className="sr-only">
                             <DrawerTitle>
-                                History of Present Illness
+                                {content.textPresentIllnes}
                             </DrawerTitle>
                             <DrawerDescription className="sr-only">
-                                A History of Present Illness form
+                                {content.textPesentIllnesForm}
                             </DrawerDescription>
                         </DrawerHeader>
                         <AddClinicalHistory />

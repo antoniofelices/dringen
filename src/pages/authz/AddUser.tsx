@@ -1,10 +1,10 @@
 import { Card, CardContent } from '@/components/ui/base/card'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
-import RegisterPatientForm from '@/components/patient/RegisterPatientForm'
-import content from '@/config/data/patient/add'
+import RegisterUserForm from '@/components/user/RegisterUserForm'
+import content from '@/config/data/pages/addUser'
 
-const AddPatient = () => {
+const AddUser = () => {
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -12,7 +12,7 @@ const AddPatient = () => {
                 <CardContent>
                     <Card className="max-w-2xl mx-auto">
                         <CardContent>
-                            <RegisterPatientForm />
+                            <RegisterUserForm />
                         </CardContent>
                     </Card>
                 </CardContent>
@@ -21,4 +21,4 @@ const AddPatient = () => {
     )
 }
 
-export default AddPatient
+export default AddUser

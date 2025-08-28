@@ -1,4 +1,4 @@
-const Examination = ({ content }) => {
+const DisplayExamination = ({ content }) => {
     return (
         <div>
             <div>
@@ -17,4 +17,4 @@ const Examination = ({ content }) => {
     )
 }
 
-export default Examination
+export default DisplayExamination
