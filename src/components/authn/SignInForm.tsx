@@ -47,7 +47,7 @@ const SignInForm = () => {
             return
         }
 
-        navigate({ to: '/health-consumer/list' })
+        navigate({ to: '/patient/list' })
     }
 
     return (

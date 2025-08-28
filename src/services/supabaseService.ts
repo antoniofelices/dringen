@@ -5,14 +5,14 @@ import type { Database } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
-// Health Consumers
-export const getListHealthConsumer = async () => {
+// Patients
+export const getListPatients = async () => {
     const { data, error } = await supabase.from('medical_patient').select('*')
     if (error) throw error
     return data
 }
 
-export const getSingleHealthConsumer = async (id: string) => {
+export const getSinglePatient = async (id: string) => {
     const { data, error } = await supabase
         .from('medical_patient')
         .select(
@@ -23,7 +23,7 @@ export const getSingleHealthConsumer = async (id: string) => {
     if (error) throw error
     return data
 }
-export const registerHealthConsumer = async (
+export const registerPatient = async (
     userName: string,
     userLastName: string,
     dni: string,
@@ -72,6 +72,31 @@ export const updateMedicalPatientHistory = async (
             past_medical_history: pastMedicalHistory,
             family_history: familyHistory,
             social_history: socialHistory,
+        })
+        .eq('id', id)
+        .select()
+    if (error) throw error
+    return data
+}
+
+export const updateMedicalPatientGeneralData = async (
+    id: string,
+    birthday: string,
+    gender: string,
+    birthplace: string,
+    placeOfResidence: string,
+    occupation: string
+) => {
+    if (!id) throw new Error('ID is required')
+
+    const { data, error } = await supabase
+        .from('medical_patient')
+        .update({
+            birthday: birthday,
+            gender: gender,
+            birthplace: birthplace,
+            place_of_residence: placeOfResidence,
+            occupation: occupation,
         })
         .eq('id', id)
         .select()

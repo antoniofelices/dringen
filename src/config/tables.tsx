@@ -1,11 +1,11 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { DataTableHealthConsumer, DataTableUser } from '@/types/interfaces'
+import type { DataTablePatient, DataTableUser } from '@/types/interfaces'
 import type { NavigateFn } from '@tanstack/react-router'
 import { ArrowUpDown, Ellipsis } from 'lucide-react'
 
-const createHealthConsumerColumns = (
+const createPatientColumns = (
     navigate: NavigateFn
-): ColumnDef<DataTableHealthConsumer>[] => [
+): ColumnDef<DataTablePatient>[] => [
     {
         accessorKey: 'user_name',
         header: ({ column }) => {
@@ -63,9 +63,7 @@ const createHealthConsumerColumns = (
         cell: ({ row }) => {
             const id = row.original.id
             return (
-                <button
-                    onClick={() => navigate({ to: `/health-consumer/${id}` })}
-                >
+                <button onClick={() => navigate({ to: `/patient/${id}` })}>
                     <Ellipsis size="16" />
                 </button>
             )
@@ -158,4 +156,4 @@ const createUserColumns = (
     },
 ]
 
-export { createHealthConsumerColumns, createUserColumns }
+export { createPatientColumns, createUserColumns }

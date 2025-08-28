@@ -1,17 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
-import type { DataTableHealthConsumer } from '@/types/interfaces'
-import { getListHealthConsumer } from '@/services/supabaseService'
-import { createHealthConsumerColumns } from '@/config/Tables'
+import type { DataTablePatient } from '@/types/interfaces'
+import { getListPatients } from '@/services/supabaseService'
+import { createPatientColumns } from '@/config/Tables'
 import { Button } from '@/components/ui/base/button'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import DataTable from '@/components/ui/DataTable'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import content from '@data/health-consumer/list'
+import content from '@/config/data/patient/list'
 
-const ListHealthConsumer = () => {
+const ListPatient = () => {
     const {
         data: listData,
         isPending: listLoading,
@@ -19,7 +19,7 @@ const ListHealthConsumer = () => {
         error: listErrorType,
     } = useQuery({
         queryKey: ['listHealthConsumers'],
-        queryFn: () => getListHealthConsumer(),
+        queryFn: () => getListPatients(),
     })
 
     const navigate = useNavigate()
@@ -33,14 +33,12 @@ const ListHealthConsumer = () => {
         <>
             <HeaderArticle title={content.title}>
                 <Button asChild size="sm">
-                    <Link to="/health-consumer/add">
-                        {content.textButtonAddNew}
-                    </Link>
+                    <Link to="/patient/add">{content.textButtonAddNew}</Link>
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <DataTable<DataTableHealthConsumer>
-                    columns={createHealthConsumerColumns(navigate)}
+                <DataTable<DataTablePatient>
+                    columns={createPatientColumns(navigate)}
                     data={listData || []}
                     caption={content.textCaptionTable}
                 />
@@ -49,4 +47,4 @@ const ListHealthConsumer = () => {
     )
 }
 
-export default ListHealthConsumer
+export default ListPatient

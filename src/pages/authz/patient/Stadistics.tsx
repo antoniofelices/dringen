@@ -1,9 +1,9 @@
 import ButtonBack from '@components/ui/ButtonBack'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
-import content from '@/config/data/health-consumer/stadistics'
+import content from '@/config/data/patient/stadistics'
 
-const StadisticsHealthConsumer = () => {
+const StadisticsPatient = () => {
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -13,4 +13,4 @@ const StadisticsHealthConsumer = () => {
     )
 }
 
-export default StadisticsHealthConsumer
+export default StadisticsPatient

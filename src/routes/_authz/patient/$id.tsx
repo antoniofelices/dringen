@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import SingleHealthConsumer from '@/pages/authz/health-consumer/Single'
+import SinglePatient from '@/pages/authz/patient/Single'
 
-export const Route = createFileRoute('/_authz/health-consumer/$id')({
+export const Route = createFileRoute('/_authz/patient/$id')({
     component: RouteComponent,
     params: {
         parse: (params) => ({
@@ -12,5 +12,5 @@ export const Route = createFileRoute('/_authz/health-consumer/$id')({
 
 function RouteComponent() {
     const { id } = Route.useParams()
-    return <SingleHealthConsumer id={id} />
+    return <SinglePatient id={id} />
 }

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSingleHealthConsumer } from '@/services/supabaseService'
-import { Button } from '@/components/ui/base/button'
+import { getSinglePatient } from '@services/supabaseService'
+import { Button } from '@components/ui/base/button'
 import {
     Drawer,
     DrawerContent,
@@ -9,18 +9,18 @@ import {
     DrawerOverlay,
     DrawerTitle,
     DrawerTrigger,
-} from '@/components/ui/base/drawer'
+} from '@components/ui/base/drawer'
 import ButtonBack from '@components/ui/ButtonBack'
-import ContentArticle from '@/components/ui/ContentArticle'
-import HeaderArticle from '@/components/ui/HeaderArticle'
+import ContentArticle from '@components/ui/ContentArticle'
+import HeaderArticle from '@components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import AddHpi from '@/components/health-consumer/AddHpi'
-import Info from '@components/health-consumer/Info'
-import MedicalRecord from '@/components/health-consumer/MedicalRecord'
-import PatientHistory from '@/components/health-consumer/PatientHistory'
+import AddClinicalHistory from '@components/patient/AddClinicalHistory'
+import PatientGeneralData from '@components/patient/PatientGeneralData'
+import MedicalRecord from '@components/patient/MedicalRecord'
+import PatientHistory from '@components/patient/PatientHistory'
 
-const SingleHealthConsumer = ({ id }: { id: string }) => {
+const SinglePatient = ({ id }: { id: string }) => {
     const {
         data: personData,
         isPending: personLoading,
@@ -28,7 +28,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
         error: personErrorType,
     } = useQuery({
         queryKey: ['singleHealthConsumerQuery', id],
-        queryFn: () => getSingleHealthConsumer(id),
+        queryFn: () => getSinglePatient(id),
     })
 
     if (personLoading) return <Loading />
@@ -53,10 +53,12 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
                         <div>
-                            <Info content={personData} />
+                            <PatientGeneralData
+                                contentPatientGeneralData={personData}
+                            />
                         </div>
                         <div className="mt-6">
-                            <PatientHistory contentPfsh={pfsh} />
+                            <PatientHistory contentPatientHistory={pfsh} />
                         </div>
                     </div>
                     <div className="col-span-3">
@@ -72,7 +74,7 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
                                 A History of Present Illness form
                             </DrawerDescription>
                         </DrawerHeader>
-                        <AddHpi />
+                        <AddClinicalHistory />
                     </DrawerContent>
                 </div>
             </ContentArticle>
@@ -81,4 +83,4 @@ const SingleHealthConsumer = ({ id }: { id: string }) => {
     )
 }
 
-export default SingleHealthConsumer
+export default SinglePatient

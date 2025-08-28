@@ -2,15 +2,15 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { registerHealthConsumer } from '@/services/supabaseService'
+import { registerPatient } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import content from '@/config/data/health-consumer/registerForm'
+import content from '@/config/data/patient/registerForm'
 
-const registerHealthConsumerSchema = z.object({
+const registerPatientSchema = z.object({
     userName: z
         .string()
         .min(3, content.errorUserNameTooShort)
@@ -37,13 +37,13 @@ const registerHealthConsumerSchema = z.object({
     placeOfResidence: z.string().optional(),
 })
 
-type FormData = z.infer<typeof registerHealthConsumerSchema>
+type FormData = z.infer<typeof registerPatientSchema>
 
-const RegisterHealthConsumerForm = () => {
+const RegisterPatientForm = () => {
     const navigate = useNavigate()
 
     const form = useForm<FormData>({
-        resolver: zodResolver(registerHealthConsumerSchema),
+        resolver: zodResolver(registerPatientSchema),
         defaultValues: {
             userName: '',
             userLastName: '',
@@ -56,7 +56,7 @@ const RegisterHealthConsumerForm = () => {
 
     const onSubmit = async (formData: FormData) => {
         try {
-            const data = await registerHealthConsumer(
+            const data = await registerPatient(
                 formData.userName,
                 formData.userLastName,
                 formData.dni,
@@ -64,7 +64,7 @@ const RegisterHealthConsumerForm = () => {
                 formData.phone,
                 formData.placeOfResidence
             )
-            navigate({ to: `/health-consumer/${data[0].id}` })
+            navigate({ to: `/patient/${data[0].id}` })
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -131,4 +131,4 @@ const RegisterHealthConsumerForm = () => {
     )
 }
 
-export default RegisterHealthConsumerForm
+export default RegisterPatientForm

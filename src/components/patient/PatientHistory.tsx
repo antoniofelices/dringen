@@ -2,22 +2,22 @@ import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
-import { updateMedicalPatientHistory } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
+import { updateMedicalPatientHistory } from '@services/supabaseService'
+import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
-import { Button } from '@/components/ui/base/button'
+import { Button } from '@components/ui/base/button'
 import {
     Card,
     CardAction,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
+} from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
-import FormFieldTextareaControl from '@/components/ui/FormFieldTextareaControl'
-import content from '@/config/data/health-consumer/pfsh'
+import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
+import content from '@/config/data/patient/patientHistory'
 
-type ContentPfsh = {
+type ContentPatientHistoryType = {
     id: string
     family_history?: string
     past_medical_history?: string
@@ -30,33 +30,34 @@ type FormData = {
     socialHistory: string
 }
 
-type UpdatedMedicalHistory = ContentPfsh[]
+type UpdatedMedicalHistory = ContentPatientHistoryType[]
 
 const FormAdd = ({
-    contentPfsh,
+    contentPatientHistory,
     onSuccess,
 }: {
-    contentPfsh: ContentPfsh
+    contentPatientHistory: ContentPatientHistoryType
     onSuccess: (updatedData: UpdatedMedicalHistory) => void
 }) => {
     const form = useForm<FormData>({
         defaultValues: {
-            pastMedicalHistory: contentPfsh.past_medical_history || '',
-            familyHistory: contentPfsh.family_history || '',
-            socialHistory: contentPfsh.social_history || '',
+            pastMedicalHistory:
+                contentPatientHistory.past_medical_history || '',
+            familyHistory: contentPatientHistory.family_history || '',
+            socialHistory: contentPatientHistory.social_history || '',
         },
     })
 
     const onSubmit = async (formData: FormData) => {
         try {
             const data = await updateMedicalPatientHistory(
-                contentPfsh.id,
+                contentPatientHistory.id,
                 formData.pastMedicalHistory,
                 formData.familyHistory,
                 formData.socialHistory
             )
             toast.success('Patient history updated successfully')
-            onSuccess(data as ContentPfsh[])
+            onSuccess(data as ContentPatientHistoryType[])
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -102,13 +103,17 @@ const FormAdd = ({
     )
 }
 
-const LoadData = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
-    const contentPastMedicalHistory = contentPfsh.past_medical_history
-    const contentFamilyHistory = contentPfsh.family_history
-    const contentSocialHistory = contentPfsh.social_history
+const LoadData = ({
+    contentPatientHistory,
+}: {
+    contentPatientHistory: ContentPatientHistoryType
+}) => {
+    const contentPastMedicalHistory = contentPatientHistory.past_medical_history
+    const contentFamilyHistory = contentPatientHistory.family_history
+    const contentSocialHistory = contentPatientHistory.social_history
 
     return (
-        <ul className="">
+        <ul>
             <li className="my-2">
                 <span className="font-bold">
                     {content.labelPastMedicalHistory}
@@ -127,9 +132,13 @@ const LoadData = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
     )
 }
 
-const PatientHistory = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
+const PatientHistory = ({
+    contentPatientHistory,
+}: {
+    contentPatientHistory: ContentPatientHistoryType
+}) => {
     const [toggle, setToggle] = useState(true)
-    const [currentData, setCurrentData] = useState(contentPfsh)
+    const [currentData, setCurrentData] = useState(contentPatientHistory)
 
     const handleClick = useCallback(() => {
         setToggle(!toggle)
@@ -152,7 +161,7 @@ const PatientHistory = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                {contentPfsh && (
+                {contentPatientHistory && (
                     <CardAction>
                         <Button
                             size="xs"
@@ -166,13 +175,13 @@ const PatientHistory = ({ contentPfsh }: { contentPfsh: ContentPfsh }) => {
             </CardHeader>
             <CardContent>
                 <>
-                    {!contentPfsh || !toggle ? (
+                    {!contentPatientHistory || !toggle ? (
                         <FormAdd
-                            contentPfsh={currentData}
+                            contentPatientHistory={currentData}
                             onSuccess={handleFormSuccess}
                         />
                     ) : (
-                        <LoadData contentPfsh={currentData} />
+                        <LoadData contentPatientHistory={currentData} />
                     )}
                 </>
             </CardContent>
