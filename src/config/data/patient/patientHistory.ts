@@ -6,6 +6,8 @@ const content = {
     labelSocialHistory: 'Social History',
     textButtonSend: 'Save',
     textButtonSending: 'Saving',
+    textToastSuccess: 'Patient history updated successfully',
+    textToastFail: 'Failed to update patient history',
 }
 
 export default content

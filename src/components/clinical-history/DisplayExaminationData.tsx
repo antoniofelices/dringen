@@ -1,4 +1,10 @@
-const DisplayExaminationData = ({ content }) => {
+import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
+
+const DisplayExaminationData = ({
+    item,
+}: {
+    item: ClinicalHistoryWithDiagnosisType
+}) => {
     return (
         <div>
             <div>
@@ -15,11 +21,11 @@ const DisplayExaminationData = ({ content }) => {
                     </thead>
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                            <td className="px-6 py-4">{content.eating}</td>
-                            <td className="px-6 py-4">{content.thirst}</td>
-                            <td className="px-6 py-4">{content.urine}</td>
-                            <td className="px-6 py-4">{content.feces}</td>
-                            <td className="px-6 py-4">{content.sleep}</td>
+                            <td className="px-6 py-4">{item.eating}</td>
+                            <td className="px-6 py-4">{item.thirst}</td>
+                            <td className="px-6 py-4">{item.urine}</td>
+                            <td className="px-6 py-4">{item.feces}</td>
+                            <td className="px-6 py-4">{item.sleep}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -40,26 +46,26 @@ const DisplayExaminationData = ({ content }) => {
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                             <td className="px-6 py-4">
-                                {content.heat ? <>{content.heat}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.pas ? <>{content.pas}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.pad ? <>{content.pad}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.fc ? <>{content.fc}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.fr ? <>{content.fr}</> : <>0</>}
-                            </td>
-                            <td className="px-6 py-4">
-                                {content.oximetry ? (
-                                    <>{content.oximetry}</>
+                                {item.temperature ? (
+                                    <>{item.temperature}</>
                                 ) : (
-                                    <>0%</>
+                                    <>0</>
                                 )}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.pas ? <>{item.pas}</> : <>0</>}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.pad ? <>{item.pad}</> : <>0</>}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.fc ? <>{item.fc}</> : <>0</>}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.fr ? <>{item.fr}</> : <>0</>}
+                            </td>
+                            <td className="px-6 py-4">
+                                {item.oximetry ? <>{item.oximetry}</> : <>0%</>}
                             </td>
                         </tr>
                     </tbody>
@@ -84,37 +90,33 @@ const DisplayExaminationData = ({ content }) => {
                     <tbody>
                         <tr className="bg-white border-b border-x dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                             <td className="px-6 py-4">
-                                {content.person_weight ? (
-                                    <>{content.person_weight}</>
+                                {item.person_weight ? (
+                                    <>{item.person_weight}</>
                                 ) : (
                                     <>NaN</>
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                {content.person_height ? (
-                                    <>{content.person_height}</>
+                                {item.person_height ? (
+                                    <>{item.person_height}</>
                                 ) : (
                                     <>NaN</>
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                {content.imc ? <>{content.imc}</> : <>NaN</>}
+                                {item.imc ? <>{item.imc}</> : <>NaN</>}
                             </td>
                             <td className="px-6 py-4">
-                                {content.waist ? (
-                                    <>{content.waist}</>
-                                ) : (
-                                    <>NaN</>
-                                )}
+                                {item.waist ? <>{item.waist}</> : <>NaN</>}
                             </td>
                             <td className="px-6 py-4">
-                                {content.bfp ? <>{content.bfp}</> : <>NaN</>}
+                                {item.bfp ? <>{item.bfp}</> : <>NaN</>}
                             </td>
                             <td className="px-6 py-4">
-                                {content.mmp ? <>{content.mmp}</> : <>NaN</>}
+                                {item.mmp ? <>{item.mmp}</> : <>NaN</>}
                             </td>
                             <td className="px-6 py-4">
-                                {content.gfp ? <>{content.gfp}</> : <>NaN</>}
+                                {item.gfp ? <>{item.gfp}</> : <>NaN</>}
                             </td>
                         </tr>
                     </tbody>

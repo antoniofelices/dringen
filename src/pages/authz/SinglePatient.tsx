@@ -1,5 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
-import { getSinglePatient } from '@services/supabaseService'
+import { usePatientContext } from '@/hooks/usePatientContext'
 import { Button } from '@components/ui/base/button'
 import {
     Drawer,
@@ -18,31 +17,27 @@ import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
-import PatientHistory from '@components/patient/PatientHistory'
+import PatientHistoryP from '@components/patient/PatientHistory'
 import content from '@/config/data/pages/singleUser'
 
-const SinglePatient = ({ id }: { id: string }) => {
+const SinglePatient = () => {
     const {
-        data: patientData,
-        isPending: personLoading,
-        isError: personError,
-        error: personErrorType,
-    } = useQuery({
-        queryKey: ['singleHealthConsumerQuery', id],
-        queryFn: () => getSinglePatient(id),
-    })
+        patientData,
+        clinicalHistory,
+        patientLoading,
+        patientError,
+        patientErrorType,
+    } = usePatientContext()
 
-    if (personLoading) return <Loading />
+    if (patientLoading) return <Loading />
 
-    if (personError && personErrorType)
-        return <ErrorApi message={personErrorType.message} />
-
-    const pfsh = patientData.medical_patient_history
+    if (patientError && patientErrorType)
+        return <ErrorApi message={patientErrorType.message} />
 
     return (
         <Drawer>
             <HeaderArticle
-                title={`${patientData.user_name} ${patientData.user_last_name}`}
+                title={`${patientData?.user_name} ${patientData?.user_last_name}`}
             >
                 <Button asChild size="sm">
                     <DrawerTrigger>
@@ -53,16 +48,17 @@ const SinglePatient = ({ id }: { id: string }) => {
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
-                        <PatientGeneralData
-                            contentPatientGeneralData={patientData}
-                        />
+                        <PatientGeneralData />
                     </div>
                     <div className="col-span-3">
-                        <PatientHistory contentPatientHistory={pfsh} />
+                        <PatientHistoryP />
                     </div>
-                    <div className="col-span-6">
-                        <DisplayAllClinicalHistory content={patientData} />
-                    </div>
+                    {clinicalHistory?.[0] && (
+                        <div className="col-span-6">
+                            <DisplayAllClinicalHistory />
+                        </div>
+                    )}
+
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                         <DrawerHeader className="sr-only">

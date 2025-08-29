@@ -76,8 +76,6 @@ const RegisterUserForm = () => {
 
     const onSubmit = async (formData: FormData) => {
         try {
-            console.log('Datos enviados:', formData)
-
             const { error } = await createUser({
                 email: formData.email,
                 password: formData.password,
@@ -95,7 +93,6 @@ const RegisterUserForm = () => {
                 })
                 return
             }
-            console.log('Usuario creado exitosamente!')
         } catch (err) {
             console.error('Error en onSubmit:', err)
             form.setError('root', {

@@ -1,14 +1,6 @@
-import type { ButtonHTMLAttributes } from 'react'
 import type { LucideIcon } from 'lucide-react'
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    text: string | undefined
-    classes?: string
-    url?: string
-    variant?: 'blue' | 'transparent'
-    icon?: boolean
-    orientationIcon?: 'right' | 'left'
-}
+import type { Tables, TablesInsert } from '@/types/database.types'
+// import type { Control } from 'react-hook-form'
 
 export type RoutesProps = {
     id: number
@@ -32,3 +24,60 @@ export type DataTableUser = {
     dni?: string
     role?: string
 }
+
+export type PatientType = Tables<'medical_patient'>
+export type ClinicalHistoryType = Tables<'medical_clinical_history'>
+export type PatientHistoryType = Tables<'medical_patient_history'>
+export type DiagnosisType = Tables<'medical_diagnosis'>
+
+export interface ClinicalHistoryWithDiagnosisType extends ClinicalHistoryType {
+    medical_diagnosis: DiagnosisType[]
+}
+
+export interface PatientWithRelationsType extends PatientType {
+    medical_clinical_history: ClinicalHistoryWithDiagnosisType[]
+    medical_patient_history: PatientHistoryType | null
+}
+
+export type ClinicalHistoryFormDataType =
+    TablesInsert<'medical_clinical_history'>
+
+// export type ExaminationFormType = Pick<
+//     ClinicalHistoryFormDataType,
+//     'examination' | 'mood' | 'test'
+// >
+
+// export type ExaminationDataFormType = Pick<
+//     ClinicalHistoryFormDataType,
+//     | 'eating'
+//     | 'thirst'
+//     | 'urine'
+//     | 'feces'
+//     | 'sleep'
+//     | 'temperature'
+//     | 'pas'
+//     | 'pad'
+//     | 'fc'
+//     | 'fr'
+//     | 'oximetry'
+//     | 'person_weight'
+//     | 'person_height'
+//     | 'imc'
+//     | 'waist'
+//     | 'bfp'
+//     | 'mmp'
+//     | 'gfp'
+// >
+
+// export type AdditionalTestFormType = Pick<
+//     ClinicalHistoryFormDataType,
+//     'additional_tests'
+// >
+
+// export type TreatmentFormData = Pick<ClinicalHistoryFormDataType, 'treatment'>
+
+// export interface TabComponentProps {
+//     control: Control<ClinicalHistoryFormDataType>
+// }
+
+// export type { Control } from 'react-hook-form'

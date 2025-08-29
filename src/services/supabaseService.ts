@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
+import type { PatientWithRelationsType } from '@/types/interfaces'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
@@ -12,24 +13,110 @@ export const getListPatients = async () => {
     return data
 }
 
-export const getSinglePatient = async (id: string) => {
+// export const getSinglePatient = async (
+//     id: string
+// ): Promise<PatientWithRelationsType> => {
+//     const { data, error } = await supabase
+//         .from('medical_patient')
+//         .select(
+//             `
+//       *,
+//       medical_clinical_history(
+//         id,
+//         additional_tests,
+//         bfp,
+//         created_at,
+//         eating,
+//         examination,
+//         fc,
+//         feces,
+//         fr,
+//         gfp,
+//         imc,
+//         mmp,
+//         mood,
+//         oximetry,
+//         pad,
+//         pas,
+//         patient_id,
+//         person_height,
+//         person_weight,
+//         sleep,
+//         temperature,
+//         test,
+//         thirst,
+//         treatment,
+//         type_of,
+//         updated_at,
+//         urine,
+//         waist,
+//         medical_diagnosis(
+//           id,
+//           certainty,
+//           cie10,
+//           clinical_history_id,
+//           created_at,
+//           diagnosis,
+//           updated_at
+//         )
+//       ),
+//       medical_patient_history(
+//         id,
+//         created_at,
+//         family_history,
+//         past_medical_history,
+//         patient_id,
+//         social_history,
+//         updated_at
+//       )
+//     `
+//         )
+//         .eq('id', id)
+//         .single()
+//     if (error) throw error
+//     return data
+// }
+
+export const getSinglePatient = async (
+    id: string
+): Promise<PatientWithRelationsType> => {
+    if (!id) {
+        throw new Error('Patient ID is required')
+    }
+
     const { data, error } = await supabase
         .from('medical_patient')
         .select(
             `
-                *, 
-                medical_clinical_history(
-                    "*", 
-                    medical_diagnosis("*")
-                ), 
-                medical_patient_history("*")
-            `
+      *,
+      medical_clinical_history(
+        *,
+        medical_diagnosis(*)
+      ),
+      medical_patient_history(*)
+    `
         )
         .eq('id', id)
         .single()
-    if (error) throw error
-    return data
+
+    if (error) {
+        throw new Error(`Failed to fetch patient: ${error.message}`)
+    }
+
+    const transformedData: PatientWithRelationsType = {
+        ...data,
+        medical_clinical_history: (data.medical_clinical_history || []).map(
+            (history) => ({
+                ...history,
+                medical_diagnosis: history.medical_diagnosis || [],
+            })
+        ),
+        medical_patient_history: data.medical_patient_history || null,
+    }
+
+    return transformedData
 }
+
 export const registerPatient = async (
     userName: string,
     userLastName: string,
@@ -51,16 +138,6 @@ export const registerPatient = async (
             },
         ])
         .select()
-    if (error) throw error
-    return data
-}
-
-export const getDiagnosis = async (id: string) => {
-    const { data, error } = await supabase
-        .from('medical_clinical_history')
-        .select(`id, medical_diagnosis("*")`)
-        .eq('id', id)
-        .single()
     if (error) throw error
     return data
 }
@@ -106,6 +183,72 @@ export const updateMedicalPatientGeneralData = async (
             occupation: occupation,
         })
         .eq('id', id)
+        .select()
+    if (error) throw error
+    return data
+}
+
+// Clinical History
+export const registerClinicalHistory = async (
+    patientId?: string,
+    type_of?: string,
+    examination?: string,
+    mood?: string,
+    test?: string,
+    temperature?: number,
+    pas?: number,
+    pad?: number,
+    fc?: number,
+    fr?: number,
+    oximetry?: number,
+    eating?: string,
+    thirst?: string,
+    urine?: string,
+    feces?: string,
+    sleep?: string,
+    person_weight?: number,
+    person_height?: number,
+    imc?: number,
+    waist?: number,
+    bfp?: number,
+    mmp?: number,
+    gfp?: number,
+    additional_tests?: string,
+    treatment?: string
+) => {
+    if (!patientId) throw new Error('ID is required')
+
+    const { data, error } = await supabase
+        .from('medical_clinical_history')
+        .insert([
+            {
+                patient_id: patientId,
+                type_of: type_of,
+                examination: examination,
+                mood: mood,
+                test: test,
+                temperature: temperature,
+                pas: pas,
+                pad: pad,
+                fc: fc,
+                fr: fr,
+                oximetry: oximetry,
+                eating: eating,
+                thirst: thirst,
+                urine: urine,
+                feces: feces,
+                sleep: sleep,
+                person_weight: person_weight,
+                person_height: person_height,
+                imc: imc,
+                waist: waist,
+                bfp: bfp,
+                mmp: mmp,
+                gfp: gfp,
+                additional_tests: additional_tests,
+                treatment: treatment,
+            },
+        ])
         .select()
     if (error) throw error
     return data

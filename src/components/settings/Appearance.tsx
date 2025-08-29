@@ -1,4 +1,4 @@
-import { useTheme } from '@hooks/useTheme'
+import { useThemeContext } from '@/hooks/useThemeContext'
 import {
     Card,
     CardContent,
@@ -8,7 +8,7 @@ import {
 import content from '@data/settings/appearance'
 
 const Appearance = () => {
-    const { setTheme } = useTheme()
+    const { setTheme } = useThemeContext()
 
     return (
         <Card>

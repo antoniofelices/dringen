@@ -8,6 +8,8 @@ const content = {
     labelOccupation: 'Occupation',
     textButtonSend: 'Save',
     textButtonSending: 'Saving',
+    textToastSuccess: 'Patient general data updated successfully',
+    textToastFail: 'Failed to update patient general info',
 }
 
 export default content

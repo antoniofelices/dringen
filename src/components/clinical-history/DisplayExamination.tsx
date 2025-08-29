@@ -1,17 +1,23 @@
-const DisplayExamination = ({ content }) => {
+import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
+
+const DisplayExamination = ({
+    item,
+}: {
+    item: ClinicalHistoryWithDiagnosisType
+}) => {
     return (
         <div>
             <div>
                 <h4 className="text-xs mb-2 text-gray-500">Explain</h4>
-                <p>{content.examination}</p>
+                <p>{item.examination}</p>
             </div>
             <div className="my-7">
                 <h4 className="text-xs mb-2 text-gray-500">Mood</h4>
-                <p>{content.mood}</p>
+                <p>{item.mood}</p>
             </div>
             <div className="my-7">
                 <h4 className="text-xs mb-2 text-gray-500">Exam</h4>
-                <p>{content.test}</p>
+                <p>{item.test}</p>
             </div>
         </div>
     )

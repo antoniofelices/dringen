@@ -1,10 +1,12 @@
-import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
+import { usePatientContext } from '@/hooks/usePatientContext'
+import { useEditableForm } from '@/hooks/useEditableForm'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
+import type { PatientWithRelationsType } from '@/types/interfaces'
 import { transformDate, normalizeDate } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
@@ -15,18 +17,10 @@ import {
     CardTitle,
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
+import DataDisplayList from '@components/ui/DataDisplayList'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
 import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
 import content from '@/config/data/patient/patientGeneralData'
-
-type ContentPatientGeneralDataType = {
-    id: string
-    birthday?: string | null
-    gender?: string
-    birthplace?: string
-    place_of_residence?: string
-    occupation?: string
-}
 
 type FormData = {
     birthday?: string | null
@@ -36,14 +30,12 @@ type FormData = {
     occupation?: string
 }
 
-type UpdatePatientGeneralData = ContentPatientGeneralDataType[]
-
 const FormAdd = ({
     contentPatientGeneralData,
     onSuccess,
 }: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
-    onSuccess: (updatedData: UpdatePatientGeneralData) => void
+    contentPatientGeneralData: PatientWithRelationsType
+    onSuccess: () => void
 }) => {
     const form = useForm<FormData>({
         defaultValues: {
@@ -58,7 +50,7 @@ const FormAdd = ({
 
     const onSubmit = async (formData: FormData) => {
         try {
-            const data = await updateMedicalPatientGeneralData(
+            await updateMedicalPatientGeneralData(
                 contentPatientGeneralData.id,
                 normalizeDate(formData.birthday),
                 formData.gender,
@@ -66,8 +58,8 @@ const FormAdd = ({
                 formData.placeOfResidence,
                 formData.occupation
             )
-            toast.success('Patient general data updated successfully')
-            onSuccess(data as ContentPatientGeneralDataType[])
+            toast.success(content.textToastSuccess)
+            onSuccess()
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -75,7 +67,7 @@ const FormAdd = ({
                 type: 'server',
                 message,
             })
-            toast.error(`Failed to update patient history: ${message}`)
+            toast.error(`${content.textToastFail}: ${message}`)
             return
         }
     }
@@ -123,76 +115,48 @@ const FormAdd = ({
     )
 }
 
-const LoadData = ({
-    contentPatientGeneralData,
-}: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
-}) => {
-    const contentBirthday = contentPatientGeneralData.birthday
-        ? transformDate(contentPatientGeneralData.birthday)
-        : ''
-    const contentGender = contentPatientGeneralData.gender
-    const contentBirthplace = contentPatientGeneralData.birthplace
-    const contentPlaceOfResidence = contentPatientGeneralData.place_of_residence
-    const contentOccupation = contentPatientGeneralData.occupation
+const PatientGeneralData = () => {
+    const { patientData, refetchPatient } = usePatientContext()
 
-    return (
-        <ul>
-            <li className="my-2">
-                <span className="font-bold">{content.labelBirthday}</span>:{' '}
-                {contentBirthday}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelGender}</span>:{' '}
-                {contentGender}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelBirthplace}</span>:{' '}
-                {contentBirthplace}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">
-                    {content.labelPlaceOfResidence}
-                </span>
-                : {contentPlaceOfResidence}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelOccupation}</span>:{' '}
-                {contentOccupation}
-            </li>
-        </ul>
-    )
-}
+    const completenessCheck = (data: PatientWithRelationsType) =>
+        Boolean(
+            data.birthday ||
+                data.gender ||
+                data.birthplace ||
+                data.place_of_residence ||
+                data.occupation
+        )
 
-const PatientGeneralData = ({
-    contentPatientGeneralData,
-}: {
-    contentPatientGeneralData: ContentPatientGeneralDataType
-}) => {
-    const isDataComplete = Boolean(
-        contentPatientGeneralData.birthday ||
-            contentPatientGeneralData.gender ||
-            contentPatientGeneralData.birthplace ||
-            contentPatientGeneralData.place_of_residence ||
-            contentPatientGeneralData.occupation
+    const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
+        patientData,
+        completenessCheck,
+        refetchPatient
     )
 
-    const [toggle, setToggle] = useState(isDataComplete)
-    const [currentData, setCurrentData] = useState(contentPatientGeneralData)
-
-    const handleClick = useCallback(() => {
-        setToggle(!toggle)
-    }, [toggle])
-
-    const handleFormSuccess = useCallback(
-        (updatedData: UpdatePatientGeneralData) => {
-            if (updatedData && updatedData.length > 0) {
-                setCurrentData(updatedData[0])
-            }
-            setToggle(true)
+    const dataItems = [
+        {
+            label: content.labelBirthday,
+            value: patientData?.birthday
+                ? transformDate(patientData?.birthday)
+                : '',
         },
-        []
-    )
+        {
+            label: content.labelGender,
+            value: patientData?.gender,
+        },
+        {
+            label: content.labelBirthplace,
+            value: patientData?.birthplace,
+        },
+        {
+            label: content.labelPlaceOfResidence,
+            value: patientData?.place_of_residence,
+        },
+        {
+            label: content.labelOccupation,
+            value: patientData?.occupation,
+        },
+    ]
 
     return (
         <Card className="h-full">
@@ -200,28 +164,28 @@ const PatientGeneralData = ({
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                {contentPatientGeneralData && (
+                {patientData && (
                     <CardAction>
                         <Button
                             size="xs"
                             variant="outline"
-                            onClick={handleClick}
+                            onClick={handleToggle}
                         >
-                            {toggle ? <>{content.textButtonEdit}</> : <X />}
+                            {!isEditing ? <>{content.textButtonEdit}</> : <X />}
                         </Button>
                     </CardAction>
                 )}
             </CardHeader>
             <CardContent>
                 <>
-                    {toggle ? (
-                        <LoadData contentPatientGeneralData={currentData} />
-                    ) : (
+                    {!isEditing && patientData ? (
+                        <DataDisplayList items={dataItems} />
+                    ) : patientData ? (
                         <FormAdd
-                            contentPatientGeneralData={currentData}
+                            contentPatientGeneralData={patientData}
                             onSuccess={handleFormSuccess}
                         />
-                    )}
+                    ) : null}
                 </>
             </CardContent>
             <Toaster />
