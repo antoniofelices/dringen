@@ -57,7 +57,7 @@ const FormAdd = ({
                 formData.placeOfResidence,
                 formData.occupation
             )
-            toast.success('Patient general data updated successfully')
+            toast.success(content.textToastSuccess)
             onSuccess()
         } catch (error) {
             const postgrestError = error as PostgrestError
@@ -66,7 +66,7 @@ const FormAdd = ({
                 type: 'server',
                 message,
             })
-            toast.error(`Failed to update patient history: ${message}`)
+            toast.error(`${content.textToastFail}: ${message}`)
             return
         }
     }
