@@ -16,6 +16,7 @@ import {
     CardTitle,
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
+import DataDisplayList from '@components/ui/DataDisplayList'
 import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
 import content from '@/config/data/patient/patientHistory'
 
@@ -96,35 +97,6 @@ const FormAdd = ({
     )
 }
 
-const LoadData = ({
-    contentPatientHistory,
-}: {
-    contentPatientHistory: PatientHistoryType
-}) => {
-    const contentPastMedicalHistory = contentPatientHistory.past_medical_history
-    const contentFamilyHistory = contentPatientHistory.family_history
-    const contentSocialHistory = contentPatientHistory.social_history
-
-    return (
-        <ul>
-            <li className="my-2">
-                <span className="font-bold">
-                    {content.labelPastMedicalHistory}
-                </span>
-                : {contentPastMedicalHistory}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelFamilyHistory}</span>:{' '}
-                {contentFamilyHistory}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelSocialHistory}</span>:{' '}
-                {contentSocialHistory}
-            </li>
-        </ul>
-    )
-}
-
 const PatientHistory = () => {
     const { patientHistory, refetchPatient } = usePatientContext()
 
@@ -140,6 +112,21 @@ const PatientHistory = () => {
         completenessCheck,
         refetchPatient
     )
+
+    const dataItems = [
+        {
+            label: content.labelPastMedicalHistory,
+            value: patientHistory?.past_medical_history,
+        },
+        {
+            label: content.labelFamilyHistory,
+            value: patientHistory?.family_history,
+        },
+        {
+            label: content.labelSocialHistory,
+            value: patientHistory?.social_history,
+        },
+    ]
 
     return (
         <Card className="h-full">
@@ -162,7 +149,7 @@ const PatientHistory = () => {
             <CardContent>
                 <>
                     {!isEditing && patientHistory ? (
-                        <LoadData contentPatientHistory={patientHistory} />
+                        <DataDisplayList items={dataItems} />
                     ) : (
                         patientHistory && (
                             <FormAdd

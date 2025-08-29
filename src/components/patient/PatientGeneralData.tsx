@@ -17,6 +17,7 @@ import {
     CardTitle,
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
+import DataDisplayList from '@components/ui/DataDisplayList'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
 import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
 import content from '@/config/data/patient/patientGeneralData'
@@ -114,47 +115,6 @@ const FormAdd = ({
     )
 }
 
-const LoadData = ({
-    contentPatientGeneralData,
-}: {
-    contentPatientGeneralData: PatientWithRelationsType
-}) => {
-    const contentBirthday = contentPatientGeneralData.birthday
-        ? transformDate(contentPatientGeneralData.birthday)
-        : ''
-    const contentGender = contentPatientGeneralData.gender
-    const contentBirthplace = contentPatientGeneralData.birthplace
-    const contentPlaceOfResidence = contentPatientGeneralData.place_of_residence
-    const contentOccupation = contentPatientGeneralData.occupation
-
-    return (
-        <ul>
-            <li className="my-2">
-                <span className="font-bold">{content.labelBirthday}</span>:{' '}
-                {contentBirthday}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelGender}</span>:{' '}
-                {contentGender}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelBirthplace}</span>:{' '}
-                {contentBirthplace}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">
-                    {content.labelPlaceOfResidence}
-                </span>
-                : {contentPlaceOfResidence}
-            </li>
-            <li className="my-2">
-                <span className="font-bold">{content.labelOccupation}</span>:{' '}
-                {contentOccupation}
-            </li>
-        </ul>
-    )
-}
-
 const PatientGeneralData = () => {
     const { patientData, refetchPatient } = usePatientContext()
 
@@ -172,6 +132,31 @@ const PatientGeneralData = () => {
         completenessCheck,
         refetchPatient
     )
+
+    const dataItems = [
+        {
+            label: content.labelBirthday,
+            value: patientData?.birthday
+                ? transformDate(patientData?.birthday)
+                : '',
+        },
+        {
+            label: content.labelGender,
+            value: patientData?.gender,
+        },
+        {
+            label: content.labelBirthplace,
+            value: patientData?.birthplace,
+        },
+        {
+            label: content.labelPlaceOfResidence,
+            value: patientData?.place_of_residence,
+        },
+        {
+            label: content.labelOccupation,
+            value: patientData?.occupation,
+        },
+    ]
 
     return (
         <Card className="h-full">
@@ -194,7 +179,7 @@ const PatientGeneralData = () => {
             <CardContent>
                 <>
                     {!isEditing && patientData ? (
-                        <LoadData contentPatientGeneralData={patientData} />
+                        <DataDisplayList items={dataItems} />
                     ) : patientData ? (
                         <FormAdd
                             contentPatientGeneralData={patientData}
