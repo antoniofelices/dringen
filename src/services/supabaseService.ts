@@ -142,16 +142,6 @@ export const registerPatient = async (
     return data
 }
 
-export const getDiagnosis = async (id: string) => {
-    const { data, error } = await supabase
-        .from('medical_clinical_history')
-        .select(`id, medical_diagnosis("*")`)
-        .eq('id', id)
-        .single()
-    if (error) throw error
-    return data
-}
-
 export const updateMedicalPatientHistory = async (
     id: string,
     pastMedicalHistory: string,
@@ -193,6 +183,72 @@ export const updateMedicalPatientGeneralData = async (
             occupation: occupation,
         })
         .eq('id', id)
+        .select()
+    if (error) throw error
+    return data
+}
+
+// Clinical History
+export const registerClinicalHistory = async (
+    patientId?: string,
+    type_of?: string,
+    examination?: string,
+    mood?: string,
+    test?: string,
+    temperature?: number,
+    pas?: number,
+    pad?: number,
+    fc?: number,
+    fr?: number,
+    oximetry?: number,
+    eating?: string,
+    thirst?: string,
+    urine?: string,
+    feces?: string,
+    sleep?: string,
+    person_weight?: number,
+    person_height?: number,
+    imc?: number,
+    waist?: number,
+    bfp?: number,
+    mmp?: number,
+    gfp?: number,
+    additional_tests?: string,
+    treatment?: string
+) => {
+    if (!patientId) throw new Error('ID is required')
+
+    const { data, error } = await supabase
+        .from('medical_clinical_history')
+        .insert([
+            {
+                patient_id: patientId,
+                type_of: type_of,
+                examination: examination,
+                mood: mood,
+                test: test,
+                temperature: temperature,
+                pas: pas,
+                pad: pad,
+                fc: fc,
+                fr: fr,
+                oximetry: oximetry,
+                eating: eating,
+                thirst: thirst,
+                urine: urine,
+                feces: feces,
+                sleep: sleep,
+                person_weight: person_weight,
+                person_height: person_height,
+                imc: imc,
+                waist: waist,
+                bfp: bfp,
+                mmp: mmp,
+                gfp: gfp,
+                additional_tests: additional_tests,
+                treatment: treatment,
+            },
+        ])
         .select()
     if (error) throw error
     return data
