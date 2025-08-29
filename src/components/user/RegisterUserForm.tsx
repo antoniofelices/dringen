@@ -93,7 +93,6 @@ const RegisterUserForm = () => {
                 })
                 return
             }
-            console.log('Usuario creado exitosamente!')
         } catch (err) {
             console.error('Error en onSubmit:', err)
             form.setError('root', {

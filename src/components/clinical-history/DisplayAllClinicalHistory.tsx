@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { usePatientContext } from '@/hooks/usePatientContext'
 import { transformDate } from '@/lib/utils'
 import {
     Card,
@@ -16,19 +17,11 @@ import {
     DialogOverlay,
     DialogTrigger,
 } from '@/components/ui/base/dialog'
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from '@/components/ui/base/tabs'
+import DisplaySingleClinicalHistory from '@components/clinical-history/DisplaySingleClinicalHistory'
 
-import DisplayDiagnosis from '@components/clinical-history/DisplayDiagnosis'
-import DisplayExamination from '@components/clinical-history/DisplayExamination'
-import DisplayExaminationData from '@components/clinical-history/DisplayExaminationData'
-
-const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
+const DisplayAllClinicalHistory = () => {
     const [openModal, setOpenModal] = useState<string | null>(null)
+    const { clinicalHistory } = usePatientContext()
 
     return (
         <Card>
@@ -39,7 +32,7 @@ const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
             </CardHeader>
 
             <CardContent>
-                {content.medical_clinical_history.map((item: any) => {
+                {clinicalHistory?.map((item) => {
                     const isModalOpen = openModal === item.id
 
                     return (
@@ -52,70 +45,37 @@ const DisplayAllClinicalHistory = ({ content }: { content: any }) => {
                                 }
                             >
                                 <h3 className="my-3">
-                                    <DialogTrigger>
-                                        {transformDate(item.created_at)} -{' '}
-                                        {item.medical_diagnosis[0].diagnosis}
-                                    </DialogTrigger>
+                                    {item?.created_at && (
+                                        <DialogTrigger>
+                                            {transformDate(item.created_at)} -{' '}
+                                            {item.medical_diagnosis?.[0]
+                                                ?.diagnosis || 'No diagnosis'}
+                                        </DialogTrigger>
+                                    )}
                                 </h3>
                                 <DialogOverlay className="bg-black/60" />
                                 <DialogContent className="sm:max-w-6xl top-0 translate-y-0 dark:bg-black">
                                     <DialogHeader className="sr-only">
                                         <DialogTitle>
-                                            {transformDate(item.created_at)} -{' '}
-                                            {
-                                                item.medical_diagnosis[0]
-                                                    .diagnosis
-                                            }
+                                            {item?.created_at ? (
+                                                <>
+                                                    {transformDate(
+                                                        item.created_at
+                                                    )}
+                                                    -{' '}
+                                                    {item.medical_diagnosis?.[0]
+                                                        ?.diagnosis ||
+                                                        'No diagnosis'}
+                                                </>
+                                            ) : (
+                                                <>'No'</>
+                                            )}
                                         </DialogTitle>
                                         <DialogDescription>
-                                            A single review
+                                            A single clinical history
                                         </DialogDescription>
                                     </DialogHeader>
-                                    <Tabs
-                                        aria-label="Clinical history"
-                                        defaultValue="examination"
-                                    >
-                                        <TabsList>
-                                            <TabsTrigger value="examination">
-                                                Examination
-                                            </TabsTrigger>
-                                            <TabsTrigger value="examination-data">
-                                                Examination Data
-                                            </TabsTrigger>
-                                            <TabsTrigger value="diagnosis">
-                                                Diagnosis
-                                            </TabsTrigger>
-                                            <TabsTrigger value="aditional-tests">
-                                                Aditional Tests
-                                            </TabsTrigger>
-                                            <TabsTrigger value="treatment">
-                                                Treatment
-                                            </TabsTrigger>
-                                        </TabsList>
-                                        <div className="mt-4">
-                                            <TabsContent value="examination">
-                                                <DisplayExamination
-                                                    content={item}
-                                                />
-                                            </TabsContent>
-                                            <TabsContent value="examination-data">
-                                                <DisplayExaminationData
-                                                    content={item}
-                                                />
-                                            </TabsContent>
-                                            <TabsContent value="diagnosis">
-                                                <DisplayDiagnosis
-                                                    id={item.id}
-                                                />
-                                            </TabsContent>
-                                            <TabsContent value="aditional-tests">
-                                                <p>{item.additional_tests}</p>
-                                            </TabsContent>
-                                            <TabsContent value="treatment">
-                                                <p>{item.treatment}</p>
-                                            </TabsContent>
-                                        </div>
-                                    </Tabs>
+                                    <DisplaySingleClinicalHistory item={item} />
                                 </DialogContent>
                             </Dialog>
                         </div>

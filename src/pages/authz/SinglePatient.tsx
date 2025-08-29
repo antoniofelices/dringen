@@ -17,13 +17,13 @@ import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
-import PatientHistory from '@components/patient/PatientHistory'
+import PatientHistoryP from '@components/patient/PatientHistory'
 import content from '@/config/data/pages/singleUser'
 
 const SinglePatient = () => {
     const {
         patientData,
-        patientHistory,
+        clinicalHistory,
         patientLoading,
         patientError,
         patientErrorType,
@@ -51,13 +51,14 @@ const SinglePatient = () => {
                         <PatientGeneralData />
                     </div>
                     <div className="col-span-3">
-                        <PatientHistory
-                            contentPatientHistory={patientHistory}
-                        />
+                        <PatientHistoryP />
                     </div>
-                    <div className="col-span-6">
-                        <DisplayAllClinicalHistory content={patientData} />
-                    </div>
+                    {clinicalHistory?.[0] && (
+                        <div className="col-span-6">
+                            <DisplayAllClinicalHistory />
+                        </div>
+                    )}
+
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                         <DrawerHeader className="sr-only">
