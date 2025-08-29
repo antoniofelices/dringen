@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
-import type { PatientWithRelations } from '@/types/interfaces'
+import type { PatientWithRelationsType } from '@/types/interfaces'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
@@ -15,7 +15,7 @@ export const getListPatients = async () => {
 
 // export const getSinglePatient = async (
 //     id: string
-// ): Promise<PatientWithRelations> => {
+// ): Promise<PatientWithRelationsType> => {
 //     const { data, error } = await supabase
 //         .from('medical_patient')
 //         .select(
@@ -79,7 +79,7 @@ export const getListPatients = async () => {
 
 export const getSinglePatient = async (
     id: string
-): Promise<PatientWithRelations> => {
+): Promise<PatientWithRelationsType> => {
     if (!id) {
         throw new Error('Patient ID is required')
     }
@@ -103,7 +103,7 @@ export const getSinglePatient = async (
         throw new Error(`Failed to fetch patient: ${error.message}`)
     }
 
-    const transformedData: PatientWithRelations = {
+    const transformedData: PatientWithRelationsType = {
         ...data,
         medical_clinical_history: (data.medical_clinical_history || []).map(
             (history) => ({

@@ -1,12 +1,12 @@
-import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
+import { useEditableForm } from '@/hooks/useEditableForm'
 import { updateMedicalPatientHistory } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
-import type { PatientHistory } from '@/types/interfaces'
+import type { PatientHistoryType } from '@/types/interfaces'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -29,7 +29,7 @@ const FormAdd = ({
     contentPatientHistory,
     onSuccess,
 }: {
-    contentPatientHistory: PatientHistory
+    contentPatientHistory: PatientHistoryType
     onSuccess: () => void
 }) => {
     const form = useForm<FormData>({
@@ -99,7 +99,7 @@ const FormAdd = ({
 const LoadData = ({
     contentPatientHistory,
 }: {
-    contentPatientHistory: PatientHistory
+    contentPatientHistory: PatientHistoryType
 }) => {
     const contentPastMedicalHistory = contentPatientHistory.past_medical_history
     const contentFamilyHistory = contentPatientHistory.family_history
@@ -125,25 +125,21 @@ const LoadData = ({
     )
 }
 
-const PatientHistoryP = () => {
+const PatientHistory = () => {
     const { patientHistory, refetchPatient } = usePatientContext()
 
-    const isDataComplete = Boolean(
-        patientHistory?.past_medical_history ||
-            patientHistory?.family_history ||
-            patientHistory?.social_history
+    const completenessCheck = (data: PatientHistoryType) =>
+        Boolean(
+            data.past_medical_history ||
+                data.family_history ||
+                data.social_history
+        )
+
+    const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
+        patientHistory,
+        completenessCheck,
+        refetchPatient
     )
-
-    const [isEditing, setIsEditing] = useState(!isDataComplete)
-
-    const handleClick = useCallback(() => {
-        setIsEditing(!isEditing)
-    }, [isEditing])
-
-    const handleFormSuccess = useCallback(() => {
-        refetchPatient()
-        setIsEditing(false)
-    }, [refetchPatient])
 
     return (
         <Card className="h-full">
@@ -156,7 +152,7 @@ const PatientHistoryP = () => {
                         <Button
                             size="xs"
                             variant="outline"
-                            onClick={handleClick}
+                            onClick={handleToggle}
                         >
                             {!isEditing ? <>{content.textButtonEdit}</> : <X />}
                         </Button>
@@ -182,4 +178,4 @@ const PatientHistoryP = () => {
     )
 }
 
-export default PatientHistoryP
+export default PatientHistory

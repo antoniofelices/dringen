@@ -1,12 +1,12 @@
-import { useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
+import { useEditableForm } from '@/hooks/useEditableForm'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
-import type { PatientWithRelations } from '@/types/interfaces'
+import type { PatientWithRelationsType } from '@/types/interfaces'
 import { transformDate, normalizeDate } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
@@ -33,7 +33,7 @@ const FormAdd = ({
     contentPatientGeneralData,
     onSuccess,
 }: {
-    contentPatientGeneralData: PatientWithRelations
+    contentPatientGeneralData: PatientWithRelationsType
     onSuccess: () => void
 }) => {
     const form = useForm<FormData>({
@@ -117,7 +117,7 @@ const FormAdd = ({
 const LoadData = ({
     contentPatientGeneralData,
 }: {
-    contentPatientGeneralData: PatientWithRelations
+    contentPatientGeneralData: PatientWithRelationsType
 }) => {
     const contentBirthday = contentPatientGeneralData.birthday
         ? transformDate(contentPatientGeneralData.birthday)
@@ -158,24 +158,20 @@ const LoadData = ({
 const PatientGeneralData = () => {
     const { patientData, refetchPatient } = usePatientContext()
 
-    const isDataComplete = Boolean(
-        patientData?.birthday ||
-            patientData?.gender ||
-            patientData?.birthplace ||
-            patientData?.place_of_residence ||
-            patientData?.occupation
+    const completenessCheck = (data: PatientWithRelationsType) =>
+        Boolean(
+            data.birthday ||
+                data.gender ||
+                data.birthplace ||
+                data.place_of_residence ||
+                data.occupation
+        )
+
+    const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
+        patientData,
+        completenessCheck,
+        refetchPatient
     )
-
-    const [isEditing, setIsEditing] = useState(!isDataComplete)
-
-    const handleEditToggle = useCallback(() => {
-        setIsEditing(!isEditing)
-    }, [isEditing])
-
-    const handleFormSuccess = useCallback(() => {
-        refetchPatient()
-        setIsEditing(false)
-    }, [refetchPatient])
 
     return (
         <Card className="h-full">
@@ -188,7 +184,7 @@ const PatientGeneralData = () => {
                         <Button
                             size="xs"
                             variant="outline"
-                            onClick={handleEditToggle}
+                            onClick={handleToggle}
                         >
                             {!isEditing ? <>{content.textButtonEdit}</> : <X />}
                         </Button>

@@ -24,16 +24,16 @@ export type DataTableUser = {
     role?: string
 }
 
-export type Patient = Tables<'medical_patient'>
-export type ClinicalHistory = Tables<'medical_clinical_history'>
-export type PatientHistory = Tables<'medical_patient_history'>
-export type Diagnosis = Tables<'medical_diagnosis'>
+export type PatientType = Tables<'medical_patient'>
+export type ClinicalHistoryType = Tables<'medical_clinical_history'>
+export type PatientHistoryType = Tables<'medical_patient_history'>
+export type DiagnosisType = Tables<'medical_diagnosis'>
 
-export interface ClinicalHistoryWithDiagnosis extends ClinicalHistory {
-    medical_diagnosis: Diagnosis[]
+export interface ClinicalHistoryWithDiagnosisType extends ClinicalHistoryType {
+    medical_diagnosis: DiagnosisType[]
 }
 
-export interface PatientWithRelations extends Patient {
-    medical_clinical_history: ClinicalHistoryWithDiagnosis[]
-    medical_patient_history: PatientHistory | null
+export interface PatientWithRelationsType extends PatientType {
+    medical_clinical_history: ClinicalHistoryWithDiagnosisType[]
+    medical_patient_history: PatientHistoryType | null
 }

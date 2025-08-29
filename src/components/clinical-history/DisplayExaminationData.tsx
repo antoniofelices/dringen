@@ -1,9 +1,9 @@
-import type { ClinicalHistoryWithDiagnosis } from '@/types/interfaces'
+import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
 
 const DisplayExaminationData = ({
     item,
 }: {
-    item: ClinicalHistoryWithDiagnosis
+    item: ClinicalHistoryWithDiagnosisType
 }) => {
     return (
         <div>

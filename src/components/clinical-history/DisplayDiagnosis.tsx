@@ -1,7 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
-import type { ClinicalHistoryWithDiagnosis } from '@/types/interfaces'
+import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
 
-const DisplayDiagnosis = ({ item }: { item: ClinicalHistoryWithDiagnosis }) => {
+const DisplayDiagnosis = ({
+    item,
+}: {
+    item: ClinicalHistoryWithDiagnosisType
+}) => {
     return (
         <table className="w-full text-sm text-left rtl:text-right">
             <thead className="text-xs bg-gray-200 dark:bg-gray-700">

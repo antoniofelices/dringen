@@ -1,5 +1,4 @@
-// import { usePatientContext } from '@/hooks/usePatientContext'
-import type { ClinicalHistoryWithDiagnosis } from '@/types/interfaces'
+import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
 
 import {
     Tabs,
@@ -15,7 +14,7 @@ import DisplayExaminationData from '@components/clinical-history/DisplayExaminat
 const DisplayAllClinicalHistory = ({
     item,
 }: {
-    item: ClinicalHistoryWithDiagnosis
+    item: ClinicalHistoryWithDiagnosisType
 }) => {
     return (
         <Tabs aria-label="Clinical history" defaultValue="examination">

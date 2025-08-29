@@ -1,11 +1,14 @@
 import { createContext } from 'react'
-import type { PatientWithRelations, ClinicalHistoryWithDiagnosis } from '@/types/interfaces'
+import type {
+    PatientWithRelationsType,
+    ClinicalHistoryWithDiagnosisType,
+} from '@/types/interfaces'
 import type { Tables } from '@/types/database.types'
 
 interface PatientContextType {
-    patientData: PatientWithRelations | null
+    patientData: PatientWithRelationsType | null
     patientHistory: Tables<'medical_patient_history'> | null
-    clinicalHistory: ClinicalHistoryWithDiagnosis[] | null
+    clinicalHistory: ClinicalHistoryWithDiagnosisType[] | null
     patientLoading: boolean
     patientError: boolean
     patientErrorType: Error | null
