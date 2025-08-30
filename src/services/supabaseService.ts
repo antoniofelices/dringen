@@ -3,6 +3,7 @@ import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
 import type { PatientWithRelationsType } from '@/types/interfaces'
+import type { Enums } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
@@ -194,7 +195,7 @@ export const registerDiagnosis = async (
     clinical_history_id?: string,
     cie10?: string | null,
     diagnosis?: string | null,
-    certainty?: string
+    certainty?: Enums<'dn_diagnosis_certainty'>
 ) => {
     if (!clinical_history_id) throw new Error('ID is required')
 
