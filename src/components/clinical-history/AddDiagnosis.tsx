@@ -1,36 +1,37 @@
 import { useState } from 'react'
 import { CirclePlus } from 'lucide-react'
-import FormFieldInput from '@/components/ui/FormFieldInput'
+import type { Control } from 'react-hook-form'
+import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
+import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldSelectControl from '@/components/ui/FormFieldSelectControl'
+type Props = {
+    control: Control<ClinicalHistoryFormDataType>
+}
 
-const AddDiagnosis = ({ register, errors }) => {
+const AddDiagnosis = ({ control }: Props) => {
     const [addDiagnosis, setAddDiagnosis] = useState([1])
 
     const NewDiagnosis = () => {
         return (
             <div className="flex gap-4 justify-between items-center mt-4">
-                <FormFieldInput
-                    className="w-full"
-                    errors={errors}
+                <FormFieldInputControl
                     fieldName="cie10"
                     label="CIE10"
-                    register={register}
+                    control={control}
                     type="text"
                 />
-                <FormFieldInput
-                    className="w-full"
-                    errors={errors}
+                <FormFieldInputControl
                     fieldName="diagnosis"
                     label="Diagnosis"
-                    register={register}
+                    control={control}
                     type="text"
                 />
-                <FormFieldInput
-                    className="w-full"
-                    errors={errors}
+                <FormFieldSelectControl
+                    control={control}
                     fieldName="certainty"
                     label="Certainty"
-                    register={register}
-                    type="text"
+                    options={['confirmed', 'probable', 'suspected']}
+                    placeholder="User"
                 />
                 <button onClick={addDiagnosisHandler}>
                     <CirclePlus size={20} />

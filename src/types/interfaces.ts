@@ -40,7 +40,7 @@ export interface PatientWithRelationsType extends PatientType {
 }
 
 export type ClinicalHistoryFormDataType =
-    TablesInsert<'medical_clinical_history'>
+    TablesInsert<'medical_clinical_history'> & TablesInsert<'medical_diagnosis'>
 
 // export type ExaminationFormType = Pick<
 //     ClinicalHistoryFormDataType,

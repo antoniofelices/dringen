@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { Toaster, toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
-import { registerClinicalHistory } from '@/services/supabaseService'
+import {
+    registerClinicalHistory,
+    registerDiagnosis,
+} from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
@@ -17,6 +20,7 @@ import AddExamination from '@components/clinical-history/AddExamination'
 import AddExaminationData from '@components/clinical-history/AddExaminationData'
 import AddAdditionalTest from '@components/clinical-history/AddAdditionalTest'
 import AddTreatment from '@components/clinical-history/AddTreatment'
+import AddDiagnosis from '@components/clinical-history/AddDiagnosis'
 import content from '@/config/data/clinical-history/addClinicalHistory'
 
 const AddClinicalHistory = () => {
@@ -48,6 +52,9 @@ const AddClinicalHistory = () => {
         gfp: '' as any,
         additional_tests: '',
         treatment: '',
+        cie10: '' as any,
+        diagnosis: '',
+        certainty: 'suspected' as any,
     }
 
     const form = useForm<ClinicalHistoryFormDataType>({
@@ -56,7 +63,7 @@ const AddClinicalHistory = () => {
 
     const onSubmit = async (formData: ClinicalHistoryFormDataType) => {
         try {
-            await registerClinicalHistory(
+            const clinicHistoryData = await registerClinicalHistory(
                 patientData?.id ?? undefined,
                 '',
                 formData.examination ?? '',
@@ -87,7 +94,18 @@ const AddClinicalHistory = () => {
                 formData.additional_tests ?? '',
                 formData.treatment ?? ''
             )
+
+            console.log(clinicHistoryData)
+
+            const diagnosisData = await registerDiagnosis(
+                clinicHistoryData.id,
+                formData.cie10 ?? '',
+                formData.diagnosis ?? '',
+                formData.certainty ?? 'suspected'
+            )
+
             toast.success(content.textToastSuccess)
+            return { clinicHistoryData, diagnosisData }
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -139,7 +157,9 @@ const AddClinicalHistory = () => {
                             <TabsContent value="examination-data">
                                 <AddExaminationData control={form.control} />
                             </TabsContent>
-                            <TabsContent value="diagnosis"></TabsContent>
+                            <TabsContent value="diagnosis">
+                                <AddDiagnosis control={form.control} />
+                            </TabsContent>
                             <TabsContent value="additional-tests">
                                 <AddAdditionalTest control={form.control} />
                             </TabsContent>

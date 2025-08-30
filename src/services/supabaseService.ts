@@ -187,6 +187,7 @@ export const registerClinicalHistory = async (
             },
         ])
         .select()
+        .single()
     if (error) throw error
     return data
 }
