@@ -13,70 +13,6 @@ export const getListPatients = async () => {
     return data
 }
 
-// export const getSinglePatient = async (
-//     id: string
-// ): Promise<PatientWithRelationsType> => {
-//     const { data, error } = await supabase
-//         .from('medical_patient')
-//         .select(
-//             `
-//       *,
-//       medical_clinical_history(
-//         id,
-//         additional_tests,
-//         bfp,
-//         created_at,
-//         eating,
-//         examination,
-//         fc,
-//         feces,
-//         fr,
-//         gfp,
-//         imc,
-//         mmp,
-//         mood,
-//         oximetry,
-//         pad,
-//         pas,
-//         patient_id,
-//         person_height,
-//         person_weight,
-//         sleep,
-//         temperature,
-//         test,
-//         thirst,
-//         treatment,
-//         type_of,
-//         updated_at,
-//         urine,
-//         waist,
-//         medical_diagnosis(
-//           id,
-//           certainty,
-//           cie10,
-//           clinical_history_id,
-//           created_at,
-//           diagnosis,
-//           updated_at
-//         )
-//       ),
-//       medical_patient_history(
-//         id,
-//         created_at,
-//         family_history,
-//         past_medical_history,
-//         patient_id,
-//         social_history,
-//         updated_at
-//       )
-//     `
-//         )
-//         .eq('id', id)
-//         .single()
-//     if (error) throw error
-//     return data
-// }
-
 export const getSinglePatient = async (
     id: string
 ): Promise<PatientWithRelationsType> => {
@@ -247,6 +183,29 @@ export const registerClinicalHistory = async (
                 gfp: gfp,
                 additional_tests: additional_tests,
                 treatment: treatment,
+            },
+        ])
+        .select()
+    if (error) throw error
+    return data
+}
+
+export const registerDiagnosis = async (
+    clinical_history_id?: string,
+    cie10?: string | null,
+    diagnosis?: string | null,
+    certainty?: string
+) => {
+    if (!clinical_history_id) throw new Error('ID is required')
+
+    const { data, error } = await supabase
+        .from('medical_diagnosis')
+        .insert([
+            {
+                clinical_history_id: clinical_history_id,
+                cie10: cie10,
+                diagnosis: diagnosis,
+                certainty: certainty,
             },
         ])
         .select()

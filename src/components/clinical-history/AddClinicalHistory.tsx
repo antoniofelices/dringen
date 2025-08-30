@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Toaster, toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { registerClinicalHistory } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
@@ -16,6 +17,7 @@ import AddExamination from '@components/clinical-history/AddExamination'
 import AddExaminationData from '@components/clinical-history/AddExaminationData'
 import AddAdditionalTest from '@components/clinical-history/AddAdditionalTest'
 import AddTreatment from '@components/clinical-history/AddTreatment'
+import content from '@/config/data/clinical-history/addClinicalHistory'
 
 const AddClinicalHistory = () => {
     const { patientData } = usePatientContext()
@@ -71,8 +73,12 @@ const AddClinicalHistory = () => {
                 formData.urine ?? '',
                 formData.feces ?? '',
                 formData.sleep ?? '',
-                formData.person_weight ? Number(formData.person_weight) : undefined,
-                formData.person_height ? Number(formData.person_height) : undefined,
+                formData.person_weight
+                    ? Number(formData.person_weight)
+                    : undefined,
+                formData.person_height
+                    ? Number(formData.person_height)
+                    : undefined,
                 formData.imc ? Number(formData.imc) : undefined,
                 formData.waist ? Number(formData.waist) : undefined,
                 formData.bfp ? Number(formData.bfp) : undefined,
@@ -81,6 +87,7 @@ const AddClinicalHistory = () => {
                 formData.additional_tests ?? '',
                 formData.treatment ?? ''
             )
+            toast.success(content.textToastSuccess)
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
@@ -88,54 +95,63 @@ const AddClinicalHistory = () => {
                 type: 'server',
                 message,
             })
+            toast.error(`${content.textToastFail}: ${message}`)
             return
         }
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <Tabs aria-label="Previous revision" defaultValue="examination">
-                    <div className="flex justify-between items-center">
-                        <TabsList>
-                            <TabsTrigger value="examination">
-                                Examination
-                            </TabsTrigger>
-                            <TabsTrigger value="examination-data">
-                                Examination Data
-                            </TabsTrigger>
-                            <TabsTrigger value="diagnosis">
-                                Diagnosis
-                            </TabsTrigger>
-                            <TabsTrigger value="additional-tests">
-                                Additional Tests
-                            </TabsTrigger>
-                            <TabsTrigger value="treatment">
-                                Treatment
-                            </TabsTrigger>
-                        </TabsList>
-                        <Button type="submit" size="sm" className="mr-2">
-                            {form.formState.isSubmitting ? 'Saving' : 'Save'}
-                        </Button>
-                    </div>
-                    <div className="mt-4">
-                        <TabsContent value="examination">
-                            <AddExamination control={form.control} />
-                        </TabsContent>
-                        <TabsContent value="examination-data">
-                            <AddExaminationData control={form.control} />
-                        </TabsContent>
-                        <TabsContent value="diagnosis"></TabsContent>
-                        <TabsContent value="additional-tests">
-                            <AddAdditionalTest control={form.control} />
-                        </TabsContent>
-                        <TabsContent value="treatment">
-                            <AddTreatment control={form.control} />
-                        </TabsContent>
-                    </div>
-                </Tabs>
-            </form>
-        </Form>
+        <>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <Tabs
+                        aria-label="Previous revision"
+                        defaultValue="examination"
+                    >
+                        <div className="flex justify-between items-center">
+                            <TabsList>
+                                <TabsTrigger value="examination">
+                                    {content.textExamination}
+                                </TabsTrigger>
+                                <TabsTrigger value="examination-data">
+                                    {content.textExaminationData}
+                                </TabsTrigger>
+                                <TabsTrigger value="diagnosis">
+                                    {content.textDiagnosis}
+                                </TabsTrigger>
+                                <TabsTrigger value="additional-tests">
+                                    {content.textAdditionalTests}
+                                </TabsTrigger>
+                                <TabsTrigger value="treatment">
+                                    {content.textTreatment}
+                                </TabsTrigger>
+                            </TabsList>
+                            <Button type="submit" size="sm" className="mr-2">
+                                {form.formState.isSubmitting
+                                    ? 'Saving'
+                                    : 'Save'}
+                            </Button>
+                        </div>
+                        <div className="mt-4">
+                            <TabsContent value="examination">
+                                <AddExamination control={form.control} />
+                            </TabsContent>
+                            <TabsContent value="examination-data">
+                                <AddExaminationData control={form.control} />
+                            </TabsContent>
+                            <TabsContent value="diagnosis"></TabsContent>
+                            <TabsContent value="additional-tests">
+                                <AddAdditionalTest control={form.control} />
+                            </TabsContent>
+                            <TabsContent value="treatment">
+                                <AddTreatment control={form.control} />
+                            </TabsContent>
+                        </div>
+                    </Tabs>
+                </form>
+            </Form>
+            <Toaster />
+        </>
     )
 }
 
