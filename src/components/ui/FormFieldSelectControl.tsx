@@ -24,10 +24,10 @@ type FormFieldProps<T extends FieldValues> = {
     icon?: LucideIcon
     label: string
     placeholder?: string
-    options: string[]
+    options: string[] | readonly string[]
 }
 
-const FormFieldSelect = <T extends FieldValues>({
+const FormFieldSelectControl = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
@@ -76,4 +76,4 @@ const FormFieldSelect = <T extends FieldValues>({
     )
 }
 
-export default FormFieldSelect
+export default FormFieldSelectControl

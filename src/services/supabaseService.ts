@@ -3,6 +3,7 @@ import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
 import type { PatientWithRelationsType } from '@/types/interfaces'
+import type { Enums } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
@@ -12,70 +13,6 @@ export const getListPatients = async () => {
     if (error) throw error
     return data
 }
-
-// export const getSinglePatient = async (
-//     id: string
-// ): Promise<PatientWithRelationsType> => {
-//     const { data, error } = await supabase
-//         .from('medical_patient')
-//         .select(
-//             `
-//       *,
-//       medical_clinical_history(
-//         id,
-//         additional_tests,
-//         bfp,
-//         created_at,
-//         eating,
-//         examination,
-//         fc,
-//         feces,
-//         fr,
-//         gfp,
-//         imc,
-//         mmp,
-//         mood,
-//         oximetry,
-//         pad,
-//         pas,
-//         patient_id,
-//         person_height,
-//         person_weight,
-//         sleep,
-//         temperature,
-//         test,
-//         thirst,
-//         treatment,
-//         type_of,
-//         updated_at,
-//         urine,
-//         waist,
-//         medical_diagnosis(
-//           id,
-//           certainty,
-//           cie10,
-//           clinical_history_id,
-//           created_at,
-//           diagnosis,
-//           updated_at
-//         )
-//       ),
-//       medical_patient_history(
-//         id,
-//         created_at,
-//         family_history,
-//         past_medical_history,
-//         patient_id,
-//         social_history,
-//         updated_at
-//       )
-//     `
-//         )
-//         .eq('id', id)
-//         .single()
-//     if (error) throw error
-//     return data
-// }
 
 export const getSinglePatient = async (
     id: string
@@ -249,6 +186,33 @@ export const registerClinicalHistory = async (
                 treatment: treatment,
             },
         ])
+        .select()
+        .single()
+    if (error) throw error
+    return data
+}
+
+export const registerDiagnosis = async (
+    clinical_history_id: string,
+    diagnoses: {
+        cie10?: string | null
+        diagnosis?: string | null
+        certainty?: Enums<'dn_diagnosis_certainty'>
+    }[]
+) => {
+    if (!clinical_history_id) throw new Error('Clinical history ID is required')
+    if (!diagnoses || diagnoses.length === 0) throw new Error('At least one diagnosis is required')
+
+    const diagnosisRecords = diagnoses.map(diagnosis => ({
+        clinical_history_id,
+        cie10: diagnosis.cie10,
+        diagnosis: diagnosis.diagnosis,
+        certainty: diagnosis.certainty || 'suspected' as Enums<'dn_diagnosis_certainty'>
+    }))
+
+    const { data, error } = await supabase
+        .from('medical_diagnosis')
+        .insert(diagnosisRecords)
         .select()
     if (error) throw error
     return data

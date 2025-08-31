@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { Button } from '@components/ui/base/button'
 import {
@@ -17,16 +18,18 @@ import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
-import PatientHistoryP from '@components/patient/PatientHistory'
+import PatientHistory from '@components/patient/PatientHistory'
 import content from '@/config/data/pages/singleUser'
 
 const SinglePatient = () => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const {
         patientData,
         clinicalHistory,
         patientLoading,
         patientError,
         patientErrorType,
+        refetchPatient,
     } = usePatientContext()
 
     if (patientLoading) return <Loading />
@@ -34,8 +37,13 @@ const SinglePatient = () => {
     if (patientError && patientErrorType)
         return <ErrorApi message={patientErrorType.message} />
 
+    const handleFormSuccess = () => {
+        setIsDrawerOpen(false)
+        refetchPatient()
+    }
+
     return (
-        <Drawer>
+        <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
             <HeaderArticle
                 title={`${patientData?.user_name} ${patientData?.user_last_name}`}
             >
@@ -51,7 +59,7 @@ const SinglePatient = () => {
                         <PatientGeneralData />
                     </div>
                     <div className="col-span-3">
-                        <PatientHistoryP />
+                        <PatientHistory />
                     </div>
                     {clinicalHistory?.[0] && (
                         <div className="col-span-6">
@@ -69,7 +77,7 @@ const SinglePatient = () => {
                                 {content.textPesentIllnesForm}
                             </DrawerDescription>
                         </DrawerHeader>
-                        <AddClinicalHistory />
+                        <AddClinicalHistory onSuccess={handleFormSuccess} />
                     </DrawerContent>
                 </div>
             </ContentArticle>

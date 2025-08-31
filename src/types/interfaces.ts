@@ -39,45 +39,13 @@ export interface PatientWithRelationsType extends PatientType {
     medical_patient_history: PatientHistoryType | null
 }
 
+export type DiagnosisFormData = {
+    cie10?: string | null
+    diagnosis?: string | null
+    certainty?: 'confirmed' | 'probable' | 'suspected'
+}
+
 export type ClinicalHistoryFormDataType =
-    TablesInsert<'medical_clinical_history'>
-
-// export type ExaminationFormType = Pick<
-//     ClinicalHistoryFormDataType,
-//     'examination' | 'mood' | 'test'
-// >
-
-// export type ExaminationDataFormType = Pick<
-//     ClinicalHistoryFormDataType,
-//     | 'eating'
-//     | 'thirst'
-//     | 'urine'
-//     | 'feces'
-//     | 'sleep'
-//     | 'temperature'
-//     | 'pas'
-//     | 'pad'
-//     | 'fc'
-//     | 'fr'
-//     | 'oximetry'
-//     | 'person_weight'
-//     | 'person_height'
-//     | 'imc'
-//     | 'waist'
-//     | 'bfp'
-//     | 'mmp'
-//     | 'gfp'
-// >
-
-// export type AdditionalTestFormType = Pick<
-//     ClinicalHistoryFormDataType,
-//     'additional_tests'
-// >
-
-// export type TreatmentFormData = Pick<ClinicalHistoryFormDataType, 'treatment'>
-
-// export interface TabComponentProps {
-//     control: Control<ClinicalHistoryFormDataType>
-// }
-
-// export type { Control } from 'react-hook-form'
+    TablesInsert<'medical_clinical_history'> & {
+        diagnoses: DiagnosisFormData[]
+    }

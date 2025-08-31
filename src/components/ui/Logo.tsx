@@ -1,6 +1,6 @@
 const Logo = ({
     customClasses,
-    size = 'h-[32px] w-[32px]',
+    size = 'h-[24px] w-[24px]',
     variant,
 }: {
     customClasses?: string
