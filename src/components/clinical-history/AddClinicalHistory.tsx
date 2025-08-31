@@ -23,7 +23,11 @@ import AddTreatment from '@components/clinical-history/AddTreatment'
 import AddDiagnosis from '@components/clinical-history/AddDiagnosis'
 import content from '@/config/data/clinical-history/addClinicalHistory'
 
-const AddClinicalHistory = () => {
+type Props = {
+    onSuccess?: () => void
+}
+
+const AddClinicalHistory = ({ onSuccess }: Props) => {
     const { patientData } = usePatientContext()
 
     const defaultValues: ClinicalHistoryFormDataType = {
@@ -107,10 +111,12 @@ const AddClinicalHistory = () => {
 
                 toast.success(content.textToastSuccess)
                 form.reset()
+                onSuccess?.()
                 return { clinicHistoryData, diagnosisData }
             } else {
                 toast.success(content.textToastSuccess)
                 form.reset()
+                onSuccess?.()
                 return { clinicHistoryData, diagnosisData: null }
             }
         } catch (error) {
