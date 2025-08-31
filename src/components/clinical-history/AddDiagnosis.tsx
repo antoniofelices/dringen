@@ -5,7 +5,7 @@ import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelectControl from '@/components/ui/FormFieldSelectControl'
 import { Button } from '@components/ui/base/button'
-
+import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
 }
@@ -64,7 +64,7 @@ const AddDiagnosis = ({ control }: Props) => {
                         control={control}
                         fieldName={`diagnoses.${index}.certainty`}
                         label="Certainty"
-                        options={['confirmed', 'probable', 'suspected']}
+                        options={DIAGNOSISCERTAINTYVALUES}
                         placeholder="Select certainty"
                     />
                     <div className="flex items-center gap-2 mt-6">

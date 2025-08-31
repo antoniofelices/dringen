@@ -24,7 +24,7 @@ type FormFieldProps<T extends FieldValues> = {
     icon?: LucideIcon
     label: string
     placeholder?: string
-    options: string[]
+    options: string[] | readonly string[]
 }
 
 const FormFieldSelectControl = <T extends FieldValues>({
