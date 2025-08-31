@@ -19,7 +19,7 @@ import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
 import PatientHistory from '@components/patient/PatientHistory'
-import content from '@/config/data/pages/singleUser'
+import content from '@/config/data/pages/singlePatient'
 
 const SinglePatient = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)

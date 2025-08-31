@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import {
     IdCard,
     Lock,
@@ -11,6 +12,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createUser } from '@/services/supabaseAdmin'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
+import type { PostgrestError } from '@supabase/supabase-js'
+import { USERROLES } from '@/config/config.ts'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
@@ -22,19 +25,11 @@ const registerUserSchema = z
         userName: z
             .string()
             .min(3, content.errorUserNameTooShort)
-            .max(20, content.errorUserNameTooLong)
-            .regex(
-                /^[a-zA-Z0-9_]+$/,
-                content.errorUserNameDisallowedCharacters
-            ),
+            .max(20, content.errorUserNameTooLong),
         userLastName: z
             .string()
             .min(3, content.errorUserLastNameTooShort)
-            .max(20, content.errorUserLastNameTooLong)
-            .regex(
-                /^[a-zA-Z0-9_]+$/,
-                content.errorUserLastNameDisallowedCharacters
-            ),
+            .max(20, content.errorUserLastNameTooLong),
         dni: z
             .string()
             .min(9, content.errorUserDniTooShort)
@@ -44,7 +39,7 @@ const registerUserSchema = z
             .string()
             .email(content.errorEmailInvalid)
             .min(1, content.errorEmailRequired),
-        role: z.enum(['user', 'medical_office', 'physician', 'admin']),
+        role: z.enum(USERROLES),
         password: z
             .string()
             .min(8, content.errorPasswordTooShort)
@@ -62,21 +57,24 @@ const registerUserSchema = z
 type FormData = z.infer<typeof registerUserSchema>
 
 const RegisterUserForm = () => {
+    const defaultValues = {
+        email: '',
+        password: '',
+        confirmPassword: '',
+        userName: '',
+        userLastName: '',
+        dni: '',
+        role: 'user' as const,
+    }
+
     const form = useForm<FormData>({
         resolver: zodResolver(registerUserSchema),
-        defaultValues: {
-            email: '',
-            password: '',
-            userName: '',
-            userLastName: '',
-            dni: '',
-            role: 'user',
-        },
+        defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {
         try {
-            const { error } = await createUser({
+            const newUser = await createUser({
                 email: formData.email,
                 password: formData.password,
                 user_name: formData.userName,
@@ -84,21 +82,22 @@ const RegisterUserForm = () => {
                 dni: formData.dni,
                 role: formData.role,
             })
-            if (error) {
-                console.error('Error de Supabase:', error)
-                const { field, message } = mapSupabaseError(error.message)
-                form.setError(field, {
+            toast.success(content.textToastSuccess)
+            form.reset()
+            return newUser
+        } catch (error) {
+            const postgrestError = error as PostgrestError
+            const { field, message } = mapSupabaseError(postgrestError.message)
+
+            if (field && field in formData) {
+                form.setError('root', {
                     type: 'server',
                     message,
                 })
-                return
             }
-        } catch (err) {
-            console.error('Error en onSubmit:', err)
-            form.setError('root', {
-                type: 'server',
-                message: 'Error inesperado al crear el usuario',
-            })
+
+            toast.error(`${content.textToastFail}: ${message}`)
+            return
         }
     }
 
@@ -156,7 +155,7 @@ const RegisterUserForm = () => {
                     fieldName="role"
                     icon={UserRoundCog}
                     label={content.labelSelectRole}
-                    options={['user', 'medical_office', 'physician', 'admin']}
+                    options={USERROLES}
                     placeholder="User"
                 />
                 <Button type="submit" className="w-full">

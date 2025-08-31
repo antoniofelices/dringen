@@ -1,17 +1,8 @@
 const content = {
-    title: 'Account Settings',
-    textDetails: 'Details',
-    textName: 'Name',
-    textButtonSignOut: 'Sign Out',
-    textRole: 'Role',
-    textEmail: 'Email',
-    textCreatedAt: 'Created at',
-    textUpdatedAt: 'Updated at',
-    titleActions: 'Actions',
-    textDeactiveAccount: 'Deactive account',
-    textButtonDeactive: 'Deactive account',
-    textDeleteAccount: 'Delete account',
-    textButtonDelete: 'Delete account',
+    title: 'Single User',
+    textButtonAddClinicalHistory: 'Add History of Present Illness',
+    textPresentIllnes: 'History of Present Illness',
+    textPesentIllnesForm: 'A History of Present Illness form',
 }
 
 export default content

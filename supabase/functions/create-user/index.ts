@@ -56,25 +56,6 @@ serve(async (req) => {
             )
         }
 
-        // const { data: currentUser, error: profileError } = await supabaseClient
-        //     .from('medical_user')
-        //     .select('role')
-        //     .eq('id', user.id)
-        //     .single()
-
-        // if (profileError || currentUser?.role !== 'admin') {
-        //     return new Response(
-        //         JSON.stringify({ error: 'Forbidden - Admin role required' }),
-        //         {
-        //             status: 403,
-        //             headers: {
-        //                 ...corsHeaders,
-        //                 'Content-Type': 'application/json',
-        //             },
-        //         }
-        //     )
-        // }
-
         const body = await req.json()
         const {
             email,
@@ -169,25 +150,35 @@ serve(async (req) => {
             )
         }
 
-        const { data: userData, error: insertError } = await supabaseAdmin
+        console.log('Attempting to update user data:', {
+            id: authUser.user.id,
+            user_name,
+            user_last_name,
+            dni,
+            email,
+            role,
+        })
+
+        const { data: userData, error: updateError } = await supabaseAdmin
             .from('medical_user')
-            .insert({
-                id: authUser.user.id,
+            .update({
                 user_name,
                 user_last_name,
                 dni,
                 email,
                 role,
             })
+            .eq('id', authUser.user.id)
             .select()
             .single()
 
-        if (insertError) {
+        if (updateError) {
+            console.error('Update error details:', updateError)
             await supabaseAdmin.auth.admin.deleteUser(authUser.user.id)
 
             return new Response(
                 JSON.stringify({
-                    error: `Failed to create user profile: ${insertError.message}`,
+                    error: `Failed to update user profile: ${updateError?.message || JSON.stringify(updateError)}`,
                 }),
                 {
                     status: 500,
