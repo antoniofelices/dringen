@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { Toaster, toast } from 'sonner'
+import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import {
     registerClinicalHistory,
@@ -95,8 +95,6 @@ const AddClinicalHistory = () => {
                 formData.treatment ?? ''
             )
 
-            console.log(clinicHistoryData)
-
             const diagnosisData = await registerDiagnosis(
                 clinicHistoryData.id,
                 formData.cie10 ?? '',
@@ -119,59 +117,56 @@ const AddClinicalHistory = () => {
     }
 
     return (
-        <>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <Tabs
-                        aria-label="Previous revision"
-                        defaultValue="examination"
-                    >
-                        <div className="flex justify-between items-center">
-                            <TabsList>
-                                <TabsTrigger value="examination">
-                                    {content.textExamination}
-                                </TabsTrigger>
-                                <TabsTrigger value="examination-data">
-                                    {content.textExaminationData}
-                                </TabsTrigger>
-                                <TabsTrigger value="diagnosis">
-                                    {content.textDiagnosis}
-                                </TabsTrigger>
-                                <TabsTrigger value="additional-tests">
-                                    {content.textAdditionalTests}
-                                </TabsTrigger>
-                                <TabsTrigger value="treatment">
-                                    {content.textTreatment}
-                                </TabsTrigger>
-                            </TabsList>
-                            <Button type="submit" size="sm" className="mr-2">
-                                {form.formState.isSubmitting
-                                    ? 'Saving'
-                                    : 'Save'}
-                            </Button>
-                        </div>
-                        <div className="mt-4">
-                            <TabsContent value="examination">
-                                <AddExamination control={form.control} />
-                            </TabsContent>
-                            <TabsContent value="examination-data">
-                                <AddExaminationData control={form.control} />
-                            </TabsContent>
-                            <TabsContent value="diagnosis">
-                                <AddDiagnosis control={form.control} />
-                            </TabsContent>
-                            <TabsContent value="additional-tests">
-                                <AddAdditionalTest control={form.control} />
-                            </TabsContent>
-                            <TabsContent value="treatment">
-                                <AddTreatment control={form.control} />
-                            </TabsContent>
-                        </div>
-                    </Tabs>
-                </form>
-            </Form>
-            <Toaster />
-        </>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <Tabs
+                    aria-label="Previous revision"
+                    defaultValue="examination"
+                >
+                    <div className="flex justify-between items-center">
+                        <TabsList>
+                            <TabsTrigger value="examination">
+                                {content.textExamination}
+                            </TabsTrigger>
+                            <TabsTrigger value="examination-data">
+                                {content.textExaminationData}
+                            </TabsTrigger>
+                            <TabsTrigger value="diagnosis">
+                                {content.textDiagnosis}
+                            </TabsTrigger>
+                            <TabsTrigger value="additional-tests">
+                                {content.textAdditionalTests}
+                            </TabsTrigger>
+                            <TabsTrigger value="treatment">
+                                {content.textTreatment}
+                            </TabsTrigger>
+                        </TabsList>
+                        <Button type="submit" size="sm" className="mr-2">
+                            {form.formState.isSubmitting
+                                ? 'Saving'
+                                : 'Save'}
+                        </Button>
+                    </div>
+                    <div className="mt-4">
+                        <TabsContent value="examination">
+                            <AddExamination control={form.control} />
+                        </TabsContent>
+                        <TabsContent value="examination-data">
+                            <AddExaminationData control={form.control} />
+                        </TabsContent>
+                        <TabsContent value="diagnosis">
+                            <AddDiagnosis control={form.control} />
+                        </TabsContent>
+                        <TabsContent value="additional-tests">
+                            <AddAdditionalTest control={form.control} />
+                        </TabsContent>
+                        <TabsContent value="treatment">
+                            <AddTreatment control={form.control} />
+                        </TabsContent>
+                    </div>
+                </Tabs>
+            </form>
+        </Form>
     )
 }
 

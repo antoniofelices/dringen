@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
-import { Toaster, toast } from 'sonner'
+import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { updateMedicalPatientGeneralData } from '@services/supabaseService'
@@ -188,7 +188,6 @@ const PatientGeneralData = () => {
                     ) : null}
                 </>
             </CardContent>
-            <Toaster />
         </Card>
     )
 }
