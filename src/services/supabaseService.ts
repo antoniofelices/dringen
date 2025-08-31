@@ -193,23 +193,26 @@ export const registerClinicalHistory = async (
 }
 
 export const registerDiagnosis = async (
-    clinical_history_id?: string,
-    cie10?: string | null,
-    diagnosis?: string | null,
-    certainty?: Enums<'dn_diagnosis_certainty'>
+    clinical_history_id: string,
+    diagnoses: {
+        cie10?: string | null
+        diagnosis?: string | null
+        certainty?: Enums<'dn_diagnosis_certainty'>
+    }[]
 ) => {
-    if (!clinical_history_id) throw new Error('ID is required')
+    if (!clinical_history_id) throw new Error('Clinical history ID is required')
+    if (!diagnoses || diagnoses.length === 0) throw new Error('At least one diagnosis is required')
+
+    const diagnosisRecords = diagnoses.map(diagnosis => ({
+        clinical_history_id,
+        cie10: diagnosis.cie10,
+        diagnosis: diagnosis.diagnosis,
+        certainty: diagnosis.certainty || 'suspected' as Enums<'dn_diagnosis_certainty'>
+    }))
 
     const { data, error } = await supabase
         .from('medical_diagnosis')
-        .insert([
-            {
-                clinical_history_id: clinical_history_id,
-                cie10: cie10,
-                diagnosis: diagnosis,
-                certainty: certainty,
-            },
-        ])
+        .insert(diagnosisRecords)
         .select()
     if (error) throw error
     return data
