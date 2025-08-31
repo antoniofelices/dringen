@@ -2,10 +2,10 @@ import { useFieldArray } from 'react-hook-form'
 import { CirclePlus, Trash2 } from 'lucide-react'
 import type { Control } from 'react-hook-form'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
+import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelectControl from '@/components/ui/FormFieldSelectControl'
 import { Button } from '@components/ui/base/button'
-import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
 }

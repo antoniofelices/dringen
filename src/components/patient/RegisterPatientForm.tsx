@@ -14,16 +14,11 @@ const registerPatientSchema = z.object({
     userName: z
         .string()
         .min(3, content.errorUserNameTooShort)
-        .max(20, content.errorUserNameTooLong)
-        .regex(/^[a-zA-Z0-9_]+$/, content.errorUserNameDisallowedCharacters),
+        .max(20, content.errorUserNameTooLong),
     userLastName: z
         .string()
         .min(3, content.errorUserLastNameTooShort)
-        .max(20, content.errorUserLastNameTooLong)
-        .regex(
-            /^[a-zA-Z0-9_]+$/,
-            content.errorUserLastNameDisallowedCharacters
-        ),
+        .max(20, content.errorUserLastNameTooLong),
     dni: z
         .string()
         .min(9, content.errorUserDniTooShort)
