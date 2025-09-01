@@ -29,7 +29,7 @@ import patientMenu from '@/config/data/menus/patient'
 import users from '@/config/data/menus/users'
 
 const Aside = () => {
-    const { userData } = useCurrentUser()
+    const { user } = useCurrentUser()
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -74,7 +74,7 @@ const Aside = () => {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
                                     <Circle />
-                                    {userData?.user_name}
+                                    {user?.user_name}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>

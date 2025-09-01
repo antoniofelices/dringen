@@ -3,23 +3,25 @@ import { useAuth } from '@hooks/useAuth'
 import { getSingleUser } from '@/services/supabaseService'
 
 export const useCurrentUser = () => {
-    const { user, loading: authLoading } = useAuth()
+    const { user: authUser, loading: authLoading } = useAuth()
 
     const {
-        data,
-        isLoading: userDataLoading,
-        error,
+        data: userData,
+        isPending: userLoading,
+        isError: userError,
+        error: userErrorType,
     } = useQuery({
-        queryKey: ['singleUser', user?.id],
-        queryFn: () => getSingleUser(user!.id),
-        enabled: !!user,
+        queryKey: ['currentUser', authUser?.id],
+        queryFn: () => getSingleUser(authUser!.id),
+        enabled: !!authUser && !authLoading,
     })
 
     return {
-        user,
-        userData: data,
-        loading: authLoading || userDataLoading,
-        error,
-        isAuthenticated: !!user,
+        user: userData,
+        authUser,
+        isPending: authLoading || userLoading,
+        isError: userError,
+        error: userErrorType,
+        isAuthenticated: !!authUser,
     }
 }
