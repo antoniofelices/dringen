@@ -11,36 +11,46 @@ type CreateUserData = {
 
 export const createUser = async (userData: CreateUserData) => {
     try {
-        const {
-            data: { session },
-            error: sessionError,
-        } = await supabase.auth.getSession()
+        const { data, error } = await supabase.functions.invoke('create-user', {
+            body: userData,
+        })
 
-        if (sessionError || !session) {
+        if (error) {
             return {
                 error: {
-                    message:
-                        "You don't have an active session. Please sign in.",
+                    message: error.message || 'Error connecting to the server',
                 },
             }
         }
 
-        const response = await fetch(
-            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-user`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${session.access_token}`,
-                },
-                body: JSON.stringify(userData),
-            }
-        )
-
-        const responseData = await response.json()
-        return { data: responseData }
+        return { data }
     } catch (error) {
         console.error('Error in createUser:', error)
+        return {
+            error: {
+                message: 'Error connecting to the server',
+            },
+        }
+    }
+}
+
+export const resetPassword = async (userEmail: string) => {
+    try {
+        const { data, error } = await supabase.functions.invoke('reset-password', {
+            body: { userEmail },
+        })
+
+        if (error) {
+            return {
+                error: {
+                    message: error.message || 'Error connecting to the server',
+                },
+            }
+        }
+
+        return { data }
+    } catch (error) {
+        console.error('Error in resetPassword:', error)
         return {
             error: {
                 message: 'Error connecting to the server',
