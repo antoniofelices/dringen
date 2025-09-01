@@ -150,15 +150,6 @@ serve(async (req) => {
             )
         }
 
-        console.log('Attempting to update user data:', {
-            id: authUser.user.id,
-            user_name,
-            user_last_name,
-            dni,
-            email,
-            role,
-        })
-
         const { data: userData, error: updateError } = await supabaseAdmin
             .from('medical_user')
             .update({
