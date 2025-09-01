@@ -1,6 +1,6 @@
 import { supabase } from '@/services/supabaseService'
 
-interface CreateUserData {
+type CreateUserData = {
     email: string
     password: string
     user_name: string
@@ -11,7 +11,6 @@ interface CreateUserData {
 
 export const createUser = async (userData: CreateUserData) => {
     try {
-        // 1. Obtener el token del usuario actual
         const {
             data: { session },
             error: sessionError,
@@ -21,12 +20,11 @@ export const createUser = async (userData: CreateUserData) => {
             return {
                 error: {
                     message:
-                        'No tienes una sesión activa. Por favor, inicia sesión.',
+                        "You don't have an active session. Please sign in.",
                 },
             }
         }
 
-        // 2. Llamar a la Edge Function con el token de autorización
         const response = await fetch(
             `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-user`,
             {
@@ -40,22 +38,12 @@ export const createUser = async (userData: CreateUserData) => {
         )
 
         const responseData = await response.json()
-
-        if (!response.ok) {
-            console.error('Error response:', responseData)
-            return {
-                error: {
-                    message: responseData.error || 'Error al crear el usuario',
-                },
-            }
-        }
-
         return { data: responseData }
     } catch (error) {
         console.error('Error in createUser:', error)
         return {
             error: {
-                message: 'Error de conexión al servidor',
+                message: 'Error connecting to the server',
             },
         }
     }

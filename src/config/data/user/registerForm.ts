@@ -2,13 +2,10 @@ const content = {
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
-    errorUserNameDisallowedCharacters: 'Only letters, numbers, and underscores',
     errorUserLastNameTooShort:
         'The username must be at least 3 characters long',
     errorUserLastNameTooLong:
         'The username cannot be longer than 20 characters',
-    errorUserLastNameDisallowedCharacters:
-        'Only letters, numbers, and underscores',
     errorEmailInvalid: 'Please use a valid email address',
     errorEmailRequired: 'The email address is required',
     errorPasswordTooShort:
@@ -28,6 +25,8 @@ const content = {
     labelSelectRole: 'Select Role',
     textButtonSend: 'Register new user',
     textButtonSending: 'Sending',
+    textToastSuccess: 'User register successfully',
+    textToastFail: 'Failed to register user',
 }
 
 export default content

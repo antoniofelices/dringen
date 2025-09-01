@@ -7,15 +7,15 @@ export const useAuth = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const getUser = async () => {
+        const getInitialSession = async () => {
             const {
-                data: { user },
-            } = await supabase.auth.getUser()
-            setUser(user)
+                data: { session },
+            } = await supabase.auth.getSession()
+            setUser(session?.user ?? null)
             setLoading(false)
         }
 
-        getUser()
+        getInitialSession()
 
         const {
             data: { subscription },
