@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
-import type { AuthResponse } from '@supabase/supabase-js'
+import type { AuthResponse, UserResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
 import type { PatientWithRelationsType } from '@/types/interfaces'
 import type { Enums } from '@/types/database.types'
@@ -201,13 +201,16 @@ export const registerDiagnosis = async (
     }[]
 ) => {
     if (!clinical_history_id) throw new Error('Clinical history ID is required')
-    if (!diagnoses || diagnoses.length === 0) throw new Error('At least one diagnosis is required')
+    if (!diagnoses || diagnoses.length === 0)
+        throw new Error('At least one diagnosis is required')
 
-    const diagnosisRecords = diagnoses.map(diagnosis => ({
+    const diagnosisRecords = diagnoses.map((diagnosis) => ({
         clinical_history_id,
         cie10: diagnosis.cie10,
         diagnosis: diagnosis.diagnosis,
-        certainty: diagnosis.certainty || 'suspected' as Enums<'dn_diagnosis_certainty'>
+        certainty:
+            diagnosis.certainty ||
+            ('suspected' as Enums<'dn_diagnosis_certainty'>),
     }))
 
     const { data, error } = await supabase
@@ -247,6 +250,15 @@ export const registerUserOriginal = async (
         },
     })
 }
+
+export const resetPasswordUser = async (
+    password: string
+): Promise<UserResponse> => {
+    return await supabase.auth.updateUser({
+        password: password,
+    })
+}
+
 export const signInWithPassword = async (
     email: string,
     password: string
@@ -256,3 +268,9 @@ export const signInWithPassword = async (
         password: password,
     })
 }
+
+// export const resetPasswordForEmail = async (email: string) => {
+//     await supabase.auth.resetPasswordForEmail(email, {
+//         redirectTo: 'https://localhost:5173/reset-password',
+//     })
+// }

@@ -14,6 +14,7 @@ export const useCurrentUser = () => {
         queryKey: ['currentUser', authUser?.id],
         queryFn: () => getSingleUser(authUser!.id),
         enabled: !!authUser && !authLoading,
+        staleTime: 300000,
     })
 
     return {
