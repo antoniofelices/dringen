@@ -5,31 +5,32 @@ import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
-import DisplayDetails from '@/components/user/DisplayDetails'
+import UserDetails from '@/components/user/UserDetails'
 import AddActions from '@/components/user/AddActions'
 import content from '@/config/data/pages/singleUser'
 
 const SingleUser = ({ id }: { id: string }) => {
     const {
-        data: personData,
-        isPending: personLoading,
-        isError: personError,
-        error: personErrorType,
+        data: userData,
+        isPending: userLoading,
+        isError: userError,
+        error: userErrorType,
+        refetch: refetchPatient,
     } = useQuery({
         queryKey: ['singleUser', id],
         queryFn: () => getSingleUser(id),
     })
 
-    if (personLoading) return <Loading />
+    if (userLoading) return <Loading />
 
-    if (personError && personErrorType)
-        return <ErrorApi message={personErrorType.message} />
+    if (userError && userErrorType)
+        return <ErrorApi message={userErrorType.message} />
 
     return (
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
-                <DisplayDetails personData={personData} />
+                <UserDetails userData={userData} refetch={refetchPatient} />
                 <AddActions />
             </ContentArticle>
             <ButtonBack />
