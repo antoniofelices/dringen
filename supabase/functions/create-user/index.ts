@@ -48,6 +48,18 @@ serve(async (req) => {
             return createResponse({ error: 'Invalid or expired token' }, 401)
         }
 
+        const { data: currentUserProfile } = await supabaseAdmin
+            .from('medical_user')
+            .select('role')
+            .eq('id', user.id)
+            .single()
+
+        if (!currentUserProfile || currentUserProfile.role !== 'admin') {
+            return createResponse({ 
+                error: 'Insufficient permissions. Only admin users can create new users.' 
+            }, 403)
+        }
+
         const body = await req.json()
         const {
             email,
