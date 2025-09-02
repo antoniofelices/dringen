@@ -5,7 +5,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
-// import { Switch } from '@/components/ui/base/switch'
 import content from '@/config/data/user/addActions'
 
 const AddActions = () => {
@@ -19,10 +18,6 @@ const AddActions = () => {
                 </CardHeader>
                 <CardContent>
                     <ul>
-                        {/* <li className="lg:flex justify-between my-4">
-                            {content.textDeactiveAccount}
-                            <Switch />
-                        </li> */}
                         <li className="lg:flex justify-between my-4">
                             {content.textResetPassword}
                             <Button size="xs">

@@ -23,6 +23,7 @@ import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
+import FormFieldSwitchControl from '@components/ui/FormFieldSwitchControl'
 import content from '@/config/data/user/userDetails'
 
 const updateUserSchema = z.object({
@@ -39,6 +40,7 @@ const updateUserSchema = z.object({
         .email(content.errorEmailInvalid)
         .min(1, content.errorEmailRequired),
     role: z.enum(USERROLES),
+    isActive: z.boolean(),
 })
 
 type FormData = {
@@ -46,6 +48,7 @@ type FormData = {
     userLastName: string
     email: string
     role: (typeof USERROLES)[number]
+    isActive: boolean
 }
 
 type UserDetailsProps = {
@@ -66,6 +69,7 @@ const FormAdd = ({
         userLastName: contentUser.user_last_name || '',
         email: contentUser.email || '',
         role: (contentUser.role || 'user') as (typeof USERROLES)[number],
+        isActive: contentUser.is_active || false,
     }
 
     const form = useForm<FormData>({
@@ -81,6 +85,7 @@ const FormAdd = ({
                 user_last_name: formData.userLastName,
                 email: formData.email,
                 role: formData.role,
+                is_active: formData.isActive,
             }
 
             await updateUser(contentUser.id, updateData)
@@ -126,6 +131,12 @@ const FormAdd = ({
                     fieldName="role"
                     label={content.labelRole}
                     options={USERROLES}
+                />
+                <FormFieldSwitchControl
+                    className="mt-6"
+                    control={form.control}
+                    fieldName="isActive"
+                    label={content.labelState}
                 />
                 <Button
                     type="submit"
