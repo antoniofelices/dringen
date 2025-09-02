@@ -31,7 +31,7 @@ const SingleUser = ({ id }: { id: string }) => {
             <HeaderArticle title={content.title} />
             <ContentArticle>
                 <UserDetails userData={userData} refetch={refetchPatient} />
-                <AddActions />
+                <AddActions userId={userData.id} userEmail={userData.email} />
             </ContentArticle>
             <ButtonBack />
         </>
