@@ -9,6 +9,7 @@ import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { transformDate } from '@/lib/utils'
 import type { PostgrestError } from '@supabase/supabase-js'
+import type { UserType } from '@/types/interfaces'
 import { USERROLES } from '@/config/config.ts'
 import { Button } from '@components/ui/base/button'
 import {
@@ -39,6 +40,7 @@ const updateUserSchema = z.object({
         .min(1, content.errorEmailRequired),
     role: z.enum(USERROLES),
 })
+
 type FormData = {
     userName: string
     userLastName: string
@@ -46,19 +48,8 @@ type FormData = {
     role: (typeof USERROLES)[number]
 }
 
-type UserData = {
-    id: string
-    user_name: string | null
-    user_last_name: string | null
-    email: string | null
-    role: string | null
-    is_active: boolean
-    created_at: string
-    updated_at: string
-}
-
 type UserDetailsProps = {
-    userData: UserData
+    userData: UserType
     refetch: () => void
 }
 
@@ -66,7 +57,7 @@ const FormAdd = ({
     contentUser,
     onSuccess,
 }: {
-    contentUser: UserData
+    contentUser: UserType
     onSuccess: () => void
 }) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -152,7 +143,7 @@ const FormAdd = ({
 }
 
 const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
-    const completenessCheck = (data: UserData) =>
+    const completenessCheck = (data: UserType) =>
         Boolean(
             data.user_name || data.user_last_name || data.email || data.role
         )
@@ -186,11 +177,15 @@ const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
         },
         {
             label: content.labelCreatedAt,
-            value: transformDate(userData?.created_at),
+            value: userData?.created_at
+                ? transformDate(userData?.created_at)
+                : '',
         },
         {
             label: content.labelUpdatedAt,
-            value: transformDate(userData?.updated_at),
+            value: userData?.updated_at
+                ? transformDate(userData?.updated_at)
+                : '',
         },
     ]
 
