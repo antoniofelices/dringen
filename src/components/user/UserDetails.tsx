@@ -1,8 +1,14 @@
+import { useState } from 'react'
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { X } from 'lucide-react'
-// import { z } from 'zod'
+import { z } from 'zod'
+import { updateUser } from '@/services/supabaseAdmin'
+import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { transformDate } from '@/lib/utils'
+import type { PostgrestError } from '@supabase/supabase-js'
 import { USERROLES } from '@/config/config.ts'
 import { Button } from '@components/ui/base/button'
 import {
@@ -18,47 +24,92 @@ import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
 import content from '@/config/data/user/userDetails'
 
-// const updateUserSchema = z.object({
-//     userName: z
-//         .string()
-//         .min(3, content.errorUserNameTooShort)
-//         .max(20, content.errorUserNameTooLong),
-//     userLastName: z
-//         .string()
-//         .min(3, content.errorUserLastNameTooShort)
-//         .max(20, content.errorUserLastNameTooLong),
-//     email: z
-//         .string()
-//         .email(content.errorEmailInvalid)
-//         .min(1, content.errorEmailRequired),
-//     role: z.enum(USERROLES),
-// })
+const updateUserSchema = z.object({
+    userName: z
+        .string()
+        .min(3, content.errorUserNameTooShort)
+        .max(20, content.errorUserNameTooLong),
+    userLastName: z
+        .string()
+        .min(3, content.errorUserLastNameTooShort)
+        .max(20, content.errorUserLastNameTooLong),
+    email: z
+        .string()
+        .email(content.errorEmailInvalid)
+        .min(1, content.errorEmailRequired),
+    role: z.enum(USERROLES),
+})
 type FormData = {
-    userName?: string | null
-    userLastName?: string | null
-    email?: string | null
-    role?: 'user'
+    userName: string
+    userLastName: string
+    email: string
+    role: (typeof USERROLES)[number]
+}
+
+type UserData = {
+    id: string
+    user_name: string | null
+    user_last_name: string | null
+    email: string | null
+    role: string | null
+    is_active: boolean
+    created_at: string
+    updated_at: string
+}
+
+type UserDetailsProps = {
+    userData: UserData
+    refetch: () => void
 }
 
 const FormAdd = ({
     contentUser,
     onSuccess,
 }: {
-    contentUser: FormData
+    contentUser: UserData
     onSuccess: () => void
 }) => {
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const defaultValues = {
-        userName: contentUser.userName || '',
-        userLastName: contentUser.userLastName || '',
+        userName: contentUser.user_name || '',
+        userLastName: contentUser.user_last_name || '',
         email: contentUser.email || '',
-        role: 'user' as const,
+        role: (contentUser.role || 'user') as (typeof USERROLES)[number],
     }
 
     const form = useForm<FormData>({
+        resolver: zodResolver(updateUserSchema),
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {}
+    const onSubmit = async (formData: FormData) => {
+        setIsSubmitting(true)
+        try {
+            const updateData = {
+                user_name: formData.userName,
+                user_last_name: formData.userLastName,
+                email: formData.email,
+                role: formData.role,
+            }
+
+            await updateUser(contentUser.id, updateData)
+            toast.success(content.textToastSuccess)
+            onSuccess()
+        } catch (error) {
+            const postgrestError = error as PostgrestError
+            const { field, message } = mapSupabaseError(postgrestError.message)
+
+            if (field && field in formData) {
+                form.setError('root', {
+                    type: 'server',
+                    message,
+                })
+            }
+            toast.error(`${content.textToastFail}: ${message}`)
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     return (
         <Form {...form}>
@@ -89,9 +140,9 @@ const FormAdd = ({
                     type="submit"
                     className="mt-4"
                     size="sm"
-                    disabled={form.formState.isSubmitting}
+                    disabled={isSubmitting || form.formState.isSubmitting}
                 >
-                    {form.formState.isSubmitting
+                    {isSubmitting || form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
                 </Button>
@@ -100,10 +151,8 @@ const FormAdd = ({
     )
 }
 
-const UserDetails = ({ userData, refetch }) => {
-    console.log(userData)
-
-    const completenessCheck = (data) =>
+const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
+    const completenessCheck = (data: UserData) =>
         Boolean(
             data.user_name || data.user_last_name || data.email || data.role
         )
