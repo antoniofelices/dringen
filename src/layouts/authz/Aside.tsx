@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
 import { useCurrentUser } from '@hooks/useCurrentUser'
+import { usePermissions } from '@hooks/usePermissions'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -27,9 +28,12 @@ import Logo from '@/components/ui/Logo'
 import MenuItems from '@/components/ui/Menutems'
 import patientMenu from '@/config/data/menus/patient'
 import users from '@/config/data/menus/users'
+import RoleGuard from '@components/RoleGuard'
 
 const Aside = () => {
     const { user } = useCurrentUser()
+    const { hasActionPermission, userRole } = usePermissions()
+
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -56,14 +60,18 @@ const Aside = () => {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarSeparator />
-                <SidebarGroup>
-                    <SidebarGroupLabel>Users</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <MenuItems content={users} />
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                {/* {userRole === 'admin' && ( */}
+                <RoleGuard allowedRoles={['admin']}>
+                    <SidebarGroup>
+                        <SidebarGroupLabel>Users</SidebarGroupLabel>
+                        <SidebarGroupContent>
+                            <SidebarMenu>
+                                <MenuItems content={users} />
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                </RoleGuard>
+                {/* )} */}
             </SidebarContent>
             <SidebarSeparator />
 

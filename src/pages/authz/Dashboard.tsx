@@ -16,8 +16,6 @@ const Dashboard = () => {
     if (isPending) return <Loading />
     if (isError && error) return <ErrorApi message={error.message} />
 
-    console.log(user)
-
     return (
         <ContentArticle>
             <div className="grid grid-cols-2 gap-6">
