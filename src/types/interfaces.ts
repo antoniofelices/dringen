@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import type { Tables, TablesInsert } from '@/types/database.types'
+import type { Database, Tables, TablesInsert } from '@/types/database.types'
 // import type { Control } from 'react-hook-form'
 
 export type RoutesProps = {
@@ -50,3 +50,8 @@ export type ClinicalHistoryFormDataType =
     TablesInsert<'medical_clinical_history'> & {
         diagnoses: DiagnosisFormData[]
     }
+
+export type UserRoleType = Database['public']['Enums']['dn_user_role']
+
+export type MedicalUserDataType =
+    Database['public']['Tables']['medical_user']['Row']
