@@ -5,8 +5,10 @@ import {
     TabsList,
     TabsTrigger,
 } from '@components/ui/base/tabs'
+import ButtonSignOut from '@/components/ui/ButtonSignOut'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
+
 import Account from '@/components/settings/Account'
 import Appearance from '@/components/settings/Appearance'
 import TermsOfUse from '@/components/settings/TermsOfUse'
@@ -19,7 +21,9 @@ const Settings = () => {
 
     return (
         <>
-            <HeaderArticle title={content.title} />
+            <HeaderArticle title={content.title}>
+                <ButtonSignOut size="sm" />
+            </HeaderArticle>
             <ContentArticle>
                 <Tabs aria-label="Settings" defaultValue={account}>
                     <div className="flex justify-between items-center">

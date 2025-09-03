@@ -14,7 +14,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
-import ButtonSignOut from '@/components/ui/ButtonSignOut'
 import ErrorApi from '@components/ui/ErrorApi'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
@@ -96,7 +95,6 @@ const Account = () => {
                                 {user?.email}
                             </li>
                         </ul>
-                        <ButtonSignOut />
                     </CardContent>
                 </Card>
                 <Card>
