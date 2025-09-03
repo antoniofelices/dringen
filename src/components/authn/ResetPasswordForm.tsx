@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-// import { resetPassword } from '@/services/supabaseAdmin'
+import { resetPasswordUser } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
@@ -44,18 +44,21 @@ const ResetPasswordForm = () => {
 
     const onSubmit = async (formData: FormData) => {
         try {
+            await resetPasswordUser(formData.password)
             toast.success(content.textToastSuccess)
             navigate({ to: '/dashboard' })
             form.reset()
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)
+
             if (field && field in formData) {
                 form.setError('root', {
                     type: 'server',
                     message,
                 })
             }
+
             toast.error(`${content.textToastFail}: ${message}`)
             return
         }
