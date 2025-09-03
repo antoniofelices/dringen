@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
-import content from '@/config/data/authn/checkEmail'
+import content from '@/config/data/pages/checkEmail'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/base/button'
 
