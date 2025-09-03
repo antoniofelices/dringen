@@ -29,6 +29,7 @@ export type PatientType = Tables<'medical_patient'>
 export type ClinicalHistoryType = Tables<'medical_clinical_history'>
 export type PatientHistoryType = Tables<'medical_patient_history'>
 export type DiagnosisType = Tables<'medical_diagnosis'>
+export type UserType = Tables<'medical_user'>
 
 export interface ClinicalHistoryWithDiagnosisType extends ClinicalHistoryType {
     medical_diagnosis: DiagnosisType[]

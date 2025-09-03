@@ -37,15 +37,16 @@ const FormAdd = ({
     contentPatientGeneralData: PatientWithRelationsType
     onSuccess: () => void
 }) => {
+    const defaultValues = {
+        birthday: contentPatientGeneralData.birthday || '',
+        gender: contentPatientGeneralData.gender || '',
+        birthplace: contentPatientGeneralData.birthplace || '',
+        placeOfResidence: contentPatientGeneralData.place_of_residence || '',
+        occupation: contentPatientGeneralData.occupation || '',
+    }
+
     const form = useForm<FormData>({
-        defaultValues: {
-            birthday: contentPatientGeneralData.birthday || '',
-            gender: contentPatientGeneralData.gender || '',
-            birthplace: contentPatientGeneralData.birthplace || '',
-            placeOfResidence:
-                contentPatientGeneralData.place_of_residence || '',
-            occupation: contentPatientGeneralData.occupation || '',
-        },
+        defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {
