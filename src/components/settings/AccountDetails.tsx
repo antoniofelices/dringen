@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { X } from 'lucide-react'
-import { updateUser } from '@/services/supabaseAdmin'
+import { updateAccountUser } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { transformDate } from '@/lib/utils'
 import type { PostgrestError } from '@supabase/supabase-js'
 import type { UserType } from '@/types/interfaces'
-import { USERROLES } from '@/config/config.ts'
+import { useCurrentUser } from '@hooks/useCurrentUser'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -22,38 +22,32 @@ import {
 import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
-import FormFieldSwitchControl from '@components/ui/FormFieldSwitchControl'
-import content from '@/config/data/user/userDetails'
+import ErrorApi from '@components/ui/ErrorApi'
+import Loading from '@components/ui/Loading'
+import content from '@data/settings/accountDetails'
 
-const updateUserSchema = z.object({
+const updateAccountSchema = z.object({
     userName: z
         .string()
         .min(3, content.errorUserNameTooShort)
-        .max(20, content.errorUserNameTooLong),
+        .max(20, content.errorUserNameTooLong)
+        .optional(),
     userLastName: z
         .string()
         .min(3, content.errorUserLastNameTooShort)
-        .max(20, content.errorUserLastNameTooLong),
+        .max(20, content.errorUserLastNameTooLong)
+        .optional(),
     email: z
         .string()
         .email(content.errorEmailInvalid)
-        .min(1, content.errorEmailRequired),
-    role: z.enum(USERROLES),
-    isActive: z.boolean(),
+        .min(1, content.errorEmailRequired)
+        .optional(),
 })
 
 type FormData = {
-    userName: string
-    userLastName: string
-    email: string
-    role: (typeof USERROLES)[number]
-    isActive: boolean
-}
-
-type UserDetailsProps = {
-    userData: UserType
-    refetch: () => void
+    userName?: string
+    userLastName?: string
+    email?: string
 }
 
 const FormUpdate = ({
@@ -68,27 +62,22 @@ const FormUpdate = ({
         userName: contentUser.user_name || '',
         userLastName: contentUser.user_last_name || '',
         email: contentUser.email || '',
-        role: (contentUser.role || 'user') as (typeof USERROLES)[number],
-        isActive: contentUser.is_active || false,
     }
 
     const form = useForm<FormData>({
-        resolver: zodResolver(updateUserSchema),
+        resolver: zodResolver(updateAccountSchema),
         defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {
         setIsSubmitting(true)
         try {
-            const updateData = {
-                user_name: formData.userName,
-                user_last_name: formData.userLastName,
-                email: formData.email,
-                role: formData.role,
-                is_active: formData.isActive,
-            }
-
-            await updateUser(contentUser.id, updateData)
+            await updateAccountUser(
+                contentUser.id,
+                formData.userName,
+                formData.userLastName,
+                formData.email
+            )
             toast.success(content.textToastSuccess)
             onSuccess()
         } catch (error) {
@@ -126,18 +115,6 @@ const FormUpdate = ({
                     label={content.labelEmail}
                     type="email"
                 />
-                <FormFieldSelectControl
-                    control={form.control}
-                    fieldName="role"
-                    label={content.labelRole}
-                    options={USERROLES}
-                />
-                <FormFieldSwitchControl
-                    className="mt-6"
-                    control={form.control}
-                    fieldName="isActive"
-                    label={content.labelState}
-                />
                 <Button
                     type="submit"
                     className="mt-4"
@@ -153,50 +130,43 @@ const FormUpdate = ({
     )
 }
 
-const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
+const AccountDetails = () => {
+    const { user, isPending, isError, error, refetch } = useCurrentUser()
+
     const completenessCheck = (data: UserType) =>
-        Boolean(
-            data.user_name || data.user_last_name || data.email || data.role
-        )
+        Boolean(data.user_name || data.user_last_name || data.email)
 
     const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
-        userData,
+        user ||
+            ({
+                user_name: ' ',
+                user_last_name: ' ',
+                email: ' ',
+            } as UserType),
         completenessCheck,
         refetch
     )
 
-    const accountState = userData.is_active
-        ? content.labelIsActiveTrue
-        : content.labelIsActiveFalse
+    if (isPending) return <Loading />
+
+    if (isError && error) return <ErrorApi message={error.message} />
 
     const dataItems = [
         {
             label: content.labelUserName,
-            value: `${userData?.user_name} ${userData.user_last_name}`,
+            value: `${user?.user_name} ${user?.user_last_name}`,
         },
         {
             label: content.labelEmail,
-            value: userData?.email,
-        },
-        {
-            label: content.labelRole,
-            value: userData?.role,
-        },
-        {
-            label: content.labelState,
-            value: accountState,
+            value: user?.email,
         },
         {
             label: content.labelCreatedAt,
-            value: userData?.created_at
-                ? transformDate(userData?.created_at)
-                : '',
+            value: user?.created_at ? transformDate(user?.created_at) : '',
         },
         {
             label: content.labelUpdatedAt,
-            value: userData?.updated_at
-                ? transformDate(userData?.updated_at)
-                : '',
+            value: user?.updated_at ? transformDate(user?.updated_at) : '',
         },
     ]
 
@@ -204,7 +174,7 @@ const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="mb-8">{content.title}</h2>
+                    <h2>{content.title}</h2>
                 </CardTitle>
                 <CardAction>
                     <Button size="xs" variant="outline" onClick={handleToggle}>
@@ -213,11 +183,11 @@ const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
                 </CardAction>
             </CardHeader>
             <CardContent>
-                {!isEditing && userData ? (
+                {!isEditing && user ? (
                     <DataDisplayList items={dataItems} />
-                ) : userData ? (
+                ) : user ? (
                     <FormUpdate
-                        contentUser={userData}
+                        contentUser={user}
                         onSuccess={handleFormSuccess}
                     />
                 ) : null}
@@ -226,4 +196,4 @@ const UserDetails = ({ userData, refetch }: UserDetailsProps) => {
     )
 }
 
-export default UserDetails
+export default AccountDetails

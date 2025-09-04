@@ -1,8 +1,5 @@
 const content = {
-    title: 'Settings',
-    textAccount: 'Account',
-    textSecurity: 'Security',
-    textNotifications: 'Notifications',
+    title: 'Security',
     errorPasswordTooShort:
         'The password must contain at least eight characters',
     errorPasswordMustContain:

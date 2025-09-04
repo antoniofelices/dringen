@@ -79,7 +79,7 @@ export const registerPatient = async (
     return data
 }
 
-export const updateMedicalPatientHistory = async (
+export const updateHistoryPatient = async (
     id: string,
     pastMedicalHistory: string,
     familyHistory: string,
@@ -100,7 +100,7 @@ export const updateMedicalPatientHistory = async (
     return data
 }
 
-export const updateMedicalPatientGeneralData = async (
+export const updateGeneralDataPatient = async (
     id: string,
     birthday?: string | null,
     gender?: string,
@@ -237,18 +237,24 @@ export const getSingleUser = async (id: string) => {
     if (error) throw error
     return data
 }
-export const registerUserOriginal = async (
-    email: string,
-    password: string,
-    username: string
-): Promise<AuthResponse> => {
-    return await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-            data: { username },
-        },
-    })
+
+export const updateAccountUser = async (
+    id: string,
+    userName?: string,
+    userLastName?: string,
+    email?: string
+) => {
+    const { data, error } = await supabase
+        .from('medical_user')
+        .update({
+            user_name: userName,
+            user_last_name: userLastName,
+            email: email,
+        })
+        .eq('id', id)
+        .select()
+    if (error) throw error
+    return data
 }
 
 export const resetPasswordUser = async (
@@ -266,5 +272,20 @@ export const signInWithPassword = async (
     return await supabase.auth.signInWithPassword({
         email: email,
         password: password,
+    })
+}
+
+// TODO: delete
+export const registerUserOriginal = async (
+    email: string,
+    password: string,
+    username: string
+): Promise<AuthResponse> => {
+    return await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+            data: { username },
+        },
     })
 }

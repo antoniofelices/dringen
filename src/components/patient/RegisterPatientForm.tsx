@@ -37,16 +37,18 @@ type FormData = z.infer<typeof registerPatientSchema>
 const RegisterPatientForm = () => {
     const navigate = useNavigate()
 
+    const defaultValues = {
+        userName: '',
+        userLastName: '',
+        dni: '',
+        email: '',
+        phone: '',
+        placeOfResidence: '',
+    }
+
     const form = useForm<FormData>({
         resolver: zodResolver(registerPatientSchema),
-        defaultValues: {
-            userName: '',
-            userLastName: '',
-            dni: '',
-            email: '',
-            phone: '',
-            placeOfResidence: '',
-        },
+        defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {

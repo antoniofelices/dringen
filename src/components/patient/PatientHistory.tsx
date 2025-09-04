@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { useEditableForm } from '@/hooks/useEditableForm'
-import { updateMedicalPatientHistory } from '@services/supabaseService'
+import { updateHistoryPatient } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import type { PatientHistoryType } from '@/types/interfaces'
@@ -33,18 +33,19 @@ const FormAdd = ({
     contentPatientHistory: PatientHistoryType
     onSuccess: () => void
 }) => {
+    const defaultValues = {
+        pastMedicalHistory: contentPatientHistory.past_medical_history || '',
+        familyHistory: contentPatientHistory.family_history || '',
+        socialHistory: contentPatientHistory.social_history || '',
+    }
+
     const form = useForm<FormData>({
-        defaultValues: {
-            pastMedicalHistory:
-                contentPatientHistory.past_medical_history || '',
-            familyHistory: contentPatientHistory.family_history || '',
-            socialHistory: contentPatientHistory.social_history || '',
-        },
+        defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {
         try {
-            await updateMedicalPatientHistory(
+            await updateHistoryPatient(
                 contentPatientHistory.id,
                 formData.pastMedicalHistory,
                 formData.familyHistory,
