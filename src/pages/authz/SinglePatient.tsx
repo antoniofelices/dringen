@@ -28,6 +28,7 @@ const SinglePatient = () => {
     const {
         patientData,
         clinicalHistory,
+        clinicalHistoryNutritional,
         patientLoading,
         patientError,
         patientErrorType,
@@ -71,7 +72,7 @@ const SinglePatient = () => {
                                 <DisplayAllClinicalHistory />
                             </div>
                         )}
-                        {clinicalHistory?.[0] && (
+                        {clinicalHistoryNutritional?.[1] && (
                             <div className="col-span-3">
                                 <PatientWeightChart />
                             </div>

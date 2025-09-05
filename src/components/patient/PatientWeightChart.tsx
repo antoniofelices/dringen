@@ -1,7 +1,6 @@
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 import { chartConfig } from '@/config/charts'
 import { usePatientContext } from '@/hooks/usePatientContext'
-
 import {
     Card,
     CardContent,
@@ -13,28 +12,27 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from '@components/ui/base/chart'
-
-const chartData = [
-    { date: '11-09-25', weight: 186 },
-    { date: '10-10-25', weight: 305 },
-    { date: '12-19-25', weight: 237 },
-    { date: '4-1-26', weight: 73 },
-    { date: '9-3-26', weight: 209 },
-    { date: '12-16-26', weight: 214 },
-]
+import content from '@data/patient/patientCharts'
 
 const PatientWeightChart = () => {
-    const { clinicalHistory } = usePatientContext()
-    const weightValues = clinicalHistory?.filter(
-        (item) => item.person_weight != null
-    )
-    console.log(weightValues)
+    const { clinicalHistoryNutritional } = usePatientContext()
+
+    const dataWeightChart = clinicalHistoryNutritional?.map((item) => ({
+        date: item.date
+            ? new Date(item.date).toLocaleDateString('es-ES', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+              })
+            : '',
+        weight: item.weight,
+    }))
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">Weight</h2>
+                    <h2 className="font-extrabold">{content.titleWeight}</h2>
                 </CardTitle>
             </CardHeader>
             <CardContent>
@@ -44,7 +42,7 @@ const PatientWeightChart = () => {
                 >
                     <LineChart
                         accessibilityLayer
-                        data={chartData}
+                        data={dataWeightChart}
                         margin={{
                             left: 12,
                             right: 12,
@@ -56,29 +54,9 @@ const PatientWeightChart = () => {
                             tickLine={false}
                             tickMargin={8}
                             axisLine={false}
-                            tickFormatter={(value) => {
-                                const date = new Date(value)
-                                return date.toLocaleDateString('es-ES', {
-                                    day: 'numeric',
-                                    month: 'short',
-                                })
-                            }}
+                            tickFormatter={(value) => value.slice(0, -5)}
                         />
-                        <ChartTooltip
-                            content={
-                                <ChartTooltipContent
-                                    labelFormatter={(value) => {
-                                        return new Date(
-                                            value
-                                        ).toLocaleDateString('es-ES', {
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric',
-                                        })
-                                    }}
-                                />
-                            }
-                        />
+                        <ChartTooltip content={<ChartTooltipContent />} />
                         <Line
                             dataKey="weight"
                             type="linear"
