@@ -22,6 +22,11 @@ import DisplaySingleClinicalHistory from '@components/clinical-history/DisplaySi
 const DisplayAllClinicalHistory = () => {
     const [openModal, setOpenModal] = useState<string | null>(null)
     const { clinicalHistory } = usePatientContext()
+    const orderClinicalHistory = clinicalHistory?.toSorted((a, b) => {
+        const dateA = new Date(a.created_at ?? '').getTime()
+        const dateB = new Date(b.created_at ?? '').getTime()
+        return dateB - dateA
+    })
 
     return (
         <Card>
@@ -32,7 +37,7 @@ const DisplayAllClinicalHistory = () => {
             </CardHeader>
 
             <CardContent>
-                {clinicalHistory?.map((item) => {
+                {orderClinicalHistory?.map((item) => {
                     const isModalOpen = openModal === item.id
 
                     return (

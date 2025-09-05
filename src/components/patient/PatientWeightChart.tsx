@@ -42,7 +42,7 @@ const PatientWeightChart = () => {
                 >
                     <LineChart
                         accessibilityLayer
-                        data={dataWeightChart}
+                        data={dataWeightChart.toSorted().reverse()}
                         margin={{
                             left: 12,
                             right: 12,

@@ -49,7 +49,6 @@ const SinglePatient = () => {
         refetchPatient()
     }
 
-    console.log(patientData)
     return (
         <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
             <HeaderArticle
