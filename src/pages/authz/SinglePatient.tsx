@@ -20,6 +20,7 @@ import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
 import PatientHistory from '@components/patient/PatientHistory'
+import PatientWeightChart from '@components/patient/patientWeightChart'
 import content from '@/config/data/pages/singlePatient'
 
 const SinglePatient = () => {
@@ -68,6 +69,11 @@ const SinglePatient = () => {
                         {clinicalHistory?.[0] && (
                             <div className="col-span-6">
                                 <DisplayAllClinicalHistory />
+                            </div>
+                        )}
+                        {clinicalHistory?.[0] && (
+                            <div className="col-span-3">
+                                <PatientWeightChart />
                             </div>
                         )}
                     </RoleGuard>
