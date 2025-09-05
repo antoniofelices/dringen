@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import SinglePatient from '@/pages/authz/SinglePatient'
 import PatientProvider from '@/context/PatientProvider'
+import ProtectedRoute from '@/components/ProtectedRoute'
 
 export const Route = createFileRoute('/_authz/patient/$id')({
     component: RouteComponent,
@@ -15,8 +16,10 @@ function RouteComponent() {
     const { id } = Route.useParams()
 
     return (
-        <PatientProvider patientId={id}>
-            <SinglePatient />
-        </PatientProvider>
+        <ProtectedRoute allowedRoles={['admin', 'physician', 'medical_office']}>
+            <PatientProvider patientId={id}>
+                <SinglePatient />
+            </PatientProvider>
+        </ProtectedRoute>
     )
 }

@@ -35,7 +35,7 @@ const content: SignUpForm = {
     errorPasswordTooShort:
         'The password must contain at least eight characters',
     errorPasswordMustContain:
-        'It must contain at least one uppercase letter, one lowercase letter, and one number',
+        'The password must contain at least one uppercase letter, one lowercase letter, one number and one special character.',
     errorPasswordNoMatch: 'Passwords do not match',
     labelUserName: 'Username',
     labelEmail: 'Email',

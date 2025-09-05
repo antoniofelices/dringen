@@ -1,5 +1,6 @@
 import type { RoutesProps } from '@/types/interfaces'
 import {
+    CalendarDays,
     ClipboardPlus,
     ChartColumnIncreasing,
     PlusCircleIcon,
@@ -22,10 +23,17 @@ const patientMenu: RoutesProps[] = [
     },
     {
         id: 3,
+        icon: CalendarDays,
+        url: 'patient/calendar',
+        text: 'Calendar',
+        orderMenu: 3,
+    },
+    {
+        id: 4,
         icon: ChartColumnIncreasing,
         url: 'patient/stadistics',
         text: 'Stadistics',
-        orderMenu: 3,
+        orderMenu: 4,
     },
 ]
 

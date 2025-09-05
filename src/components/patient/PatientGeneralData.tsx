@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { useEditableForm } from '@/hooks/useEditableForm'
-import { updateMedicalPatientGeneralData } from '@services/supabaseService'
+import { updateGeneralDataPatient } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import type { PatientWithRelationsType } from '@/types/interfaces'
@@ -51,7 +51,7 @@ const FormAdd = ({
 
     const onSubmit = async (formData: FormData) => {
         try {
-            await updateMedicalPatientGeneralData(
+            await updateGeneralDataPatient(
                 contentPatientGeneralData.id,
                 normalizeDate(formData.birthday),
                 formData.gender,

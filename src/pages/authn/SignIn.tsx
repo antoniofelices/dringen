@@ -6,7 +6,7 @@ import {
     CardTitle,
 } from '@/components/ui/base/card'
 import SignInForm from '@/components/authn/SignInForm'
-import content from '@/config/data/authn/signIn'
+import content from '@/config/data/pages/signIn'
 
 const SignIn = () => {
     return (

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import SingleUser from '@/pages/authz/SingleUser'
+import ProtectedRoute from '@/components/ProtectedRoute'
 
 export const Route = createFileRoute('/_authz/user/$id')({
     component: RouteComponent,
@@ -12,5 +13,9 @@ export const Route = createFileRoute('/_authz/user/$id')({
 
 function RouteComponent() {
     const { id } = Route.useParams()
-    return <SingleUser id={id} />
+    return (
+        <ProtectedRoute allowedRoles={['admin']}>
+            <SingleUser id={id} />
+        </ProtectedRoute>
+    )
 }

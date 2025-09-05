@@ -1,5 +1,6 @@
 const content = {
-    title: 'Hello Dashboard!',
+    title: 'Hello, ',
+    textWelcome: 'Welcome, get familiar with the dashboard.',
 }
 
 export default content

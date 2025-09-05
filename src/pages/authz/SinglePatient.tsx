@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { usePatientContext } from '@/hooks/usePatientContext'
+import RoleGuard from '@components/RoleGuard'
 import { Button } from '@components/ui/base/button'
 import {
     Drawer,
@@ -47,26 +48,29 @@ const SinglePatient = () => {
             <HeaderArticle
                 title={`${patientData?.user_name} ${patientData?.user_last_name}`}
             >
-                <Button asChild size="sm">
-                    <DrawerTrigger>
-                        {content.textButtonAddClinicalHistory}
-                    </DrawerTrigger>
-                </Button>
+                <RoleGuard allowedRoles={['admin', 'physician']}>
+                    <Button asChild size="sm">
+                        <DrawerTrigger>
+                            {content.textButtonAddClinicalHistory}
+                        </DrawerTrigger>
+                    </Button>
+                </RoleGuard>
             </HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
                         <PatientGeneralData />
                     </div>
-                    <div className="col-span-3">
-                        <PatientHistory />
-                    </div>
-                    {clinicalHistory?.[0] && (
-                        <div className="col-span-6">
-                            <DisplayAllClinicalHistory />
+                    <RoleGuard allowedRoles={['admin', 'physician']}>
+                        <div className="col-span-3">
+                            <PatientHistory />
                         </div>
-                    )}
-
+                        {clinicalHistory?.[0] && (
+                            <div className="col-span-6">
+                                <DisplayAllClinicalHistory />
+                            </div>
+                        )}
+                    </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                         <DrawerHeader className="sr-only">

@@ -10,6 +10,7 @@ export const useCurrentUser = () => {
         isPending: userLoading,
         isError: userError,
         error: userErrorType,
+        refetch: userRefetch,
     } = useQuery({
         queryKey: ['currentUser', authUser?.id],
         queryFn: () => getSingleUser(authUser!.id),
@@ -23,6 +24,7 @@ export const useCurrentUser = () => {
         isPending: authLoading || userLoading,
         isError: userError,
         error: userErrorType,
+        refetch: userRefetch,
         isAuthenticated: !!authUser,
     }
 }

@@ -41,5 +41,9 @@
             "@services/*": ["src/services/*"]
         }
     },
-    "include": ["src", "src/__test__/setupTests.ts"]
+    "include": [
+        "src",
+        "src/__test__/setupTests.ts",
+        "src/routes/_authz/.lazy.tsx"
+    ]
 }

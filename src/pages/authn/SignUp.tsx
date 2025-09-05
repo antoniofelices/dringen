@@ -9,7 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/base/card'
-import content from '@/config/data/authn/signUp'
+import content from '@/config/data/pages/signUp'
 
 const SignUp = () => {
     return (
