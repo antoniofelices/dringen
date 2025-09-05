@@ -9,7 +9,6 @@ type PatientContextType = {
     patientData: PatientWithRelationsType | null
     patientHistory: Tables<'medical_patient_history'> | null
     clinicalHistory: ClinicalHistoryWithDiagnosisType[] | null
-    clinicalHistoryNutritional: { date: string; weight: number }[] | null
     patientLoading: boolean
     patientError: boolean
     patientErrorType: Error | null

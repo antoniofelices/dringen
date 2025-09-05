@@ -1,6 +1,6 @@
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 import { chartConfig } from '@/config/charts'
-import { useDataWeight } from '@/hooks/usePatientMetrics'
+import { useDataBMI } from '@/hooks/usePatientMetrics'
 import {
     Card,
     CardContent,
@@ -14,10 +14,10 @@ import {
 } from '@components/ui/base/chart'
 import content from '@data/patient/patientCharts'
 
-const PatientWeightChart = () => {
-    const patientDataWeight = useDataWeight()
+const PatientBMIChart = () => {
+    const patientDataBMI = useDataBMI()
 
-    const dataWeightChart = patientDataWeight?.map((item) => ({
+    const dataWeightChart = patientDataBMI?.map((item) => ({
         date: item.date
             ? new Date(item.date).toLocaleDateString('es-ES', {
                   day: 'numeric',
@@ -25,7 +25,7 @@ const PatientWeightChart = () => {
                   year: 'numeric',
               })
             : '',
-        weight: item.weight,
+        bmi: item.bmi,
     }))
 
     return (
@@ -58,7 +58,7 @@ const PatientWeightChart = () => {
                         />
                         <ChartTooltip content={<ChartTooltipContent />} />
                         <Line
-                            dataKey="weight"
+                            dataKey="bmi"
                             type="linear"
                             stroke="var(--color-desktop)"
                             strokeWidth={2}
@@ -71,4 +71,4 @@ const PatientWeightChart = () => {
     )
 }
 
-export default PatientWeightChart
+export default PatientBMIChart

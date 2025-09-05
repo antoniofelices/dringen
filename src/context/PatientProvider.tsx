@@ -24,22 +24,10 @@ const PatientProvider = ({
         enabled: !!patientId,
     })
 
-    const clinicalHistoryNutritional =
-        patientData?.medical_clinical_history
-            .filter(
-                (item) =>
-                    item.person_weight != null && item.type_of === 'nutricional'
-            )
-            .map((item) => ({
-                date: item.created_at || '',
-                weight: item.person_weight || 0,
-            })) || null
-
     const value = {
         patientData: patientData || null,
         patientHistory: patientData?.medical_patient_history || null,
         clinicalHistory: patientData?.medical_clinical_history || null,
-        clinicalHistoryNutritional: clinicalHistoryNutritional || null,
         patientLoading,
         patientError,
         patientErrorType: patientErrorType || null,
