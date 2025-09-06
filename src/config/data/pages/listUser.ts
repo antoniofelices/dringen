@@ -1,5 +1,5 @@
 const content = {
-    title: 'List of Users',
+    title: 'List of users',
     textCaptionTable: 'A list of users',
     textButtonAddNew: 'Add User',
 }

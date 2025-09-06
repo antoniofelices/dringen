@@ -1,6 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
 import type { Database, Tables, TablesInsert } from '@/types/database.types'
-// import type { Control } from 'react-hook-form'
 
 export type RoutesProps = {
     id: number
@@ -8,21 +7,6 @@ export type RoutesProps = {
     url: string
     text: string
     orderMenu?: number
-}
-
-export type DataTablePatient = {
-    id: string
-    user_name: string
-    user_last_name: string
-    dni?: string
-}
-
-export type DataTableUser = {
-    id: string
-    user_name: string
-    user_last_name: string
-    dni?: string
-    role?: string
 }
 
 export type PatientType = Tables<'medical_patient'>
