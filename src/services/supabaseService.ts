@@ -141,6 +141,14 @@ export const updateGeneralDataPatient = async (
 }
 
 // Clinical History
+export const getListAllClinicalHistory = async () => {
+    const { data, error } = await supabase
+        .from('medical_clinical_history')
+        .select('*')
+    if (error) throw error
+    return data
+}
+
 export const registerClinicalHistory = async (
     patientId?: string,
     type_of?: string,
