@@ -38,53 +38,54 @@
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
-
-    --color-chart-1: oklch(0.707 0.165 254.624);
-    --color-chart-2: oklch(0.623 0.214 259.815);
-    --color-chart-3: oklch(0.546 0.245 262.881);
-    --color-chart-4: oklch(0.488 0.243 264.376);
-    --color-chart-5: oklch(0.424 0.199 265.638);
-    --color-chart-6: oklch(0.379 0.146 265.522);
-    --color-chart-7: oklch(0.248 0.078 268.2);
-
-    --color-sidebar: var(--color-gray-50);
-    --color-sidebar-foreground: var(--color-gray-950);
-    --color-sidebar-primary: var(--color-gray-100);
-    --color-sidebar-primary-foreground: oklch(0.97 0 0);
-    --color-sidebar-accent: oklch(0.97 0 0);
-    --color-sidebar-accent-foreground: var(--color-gray-950);
-    --color-sidebar-border: var(--color-gray-300);
-    --color-sidebar-ring: var(--color-gray-300);
-
-    --color-border: var(--color-gray-300);
-    --color-foreground: var(--color-gray-950);
-    --color-background: var(--color-gray-100);
-}
-
-@theme dark {
-    --color-chart-1: oklch(0.707 0.165 254.624);
-    --color-chart-2: oklch(0.623 0.214 259.815);
-    --color-chart-3: oklch(0.546 0.245 262.881);
-    --color-chart-4: oklch(0.488 0.243 264.376);
-    --color-chart-5: oklch(0.424 0.199 265.638);
-    --color-chart-6: oklch(0.379 0.146 265.522);
-    --color-chart-7: oklch(0.248 0.078 268.2);
-
-    --color-sidebar: var(--color-gray-950);
-    --color-sidebar-foreground: var(--color-gray-200);
-    --color-sidebar-primary: var(--color-gray-950);
-    --color-sidebar-primary-foreground: oklch(0.97 0 0);
-    --color-sidebar-accent: var(--color-gray-950);
-    --color-sidebar-accent-foreground: var(--color-gray-50);
-    --color-sidebar-border: var(--color-gray-800);
-    --color-sidebar-ring: var(--color-gray-800);
-
-    --color-border: var(--color-gray-800);
-    --color-foreground: var(--color-gray-200);
-    --color-background: var(--color-gray-900);
 }
 
 @layer base {
+    :root {
+        --color-chart-1: oklch(0.707 0.165 254.624);
+        --color-chart-2: oklch(0.623 0.214 259.815);
+        --color-chart-3: oklch(0.546 0.245 262.881);
+        --color-chart-4: oklch(0.488 0.243 264.376);
+        --color-chart-5: oklch(0.424 0.199 265.638);
+        --color-chart-6: oklch(0.379 0.146 265.522);
+        --color-chart-7: oklch(0.248 0.078 268.2);
+
+        --color-sidebar: var(--color-gray-50);
+        --color-sidebar-foreground: var(--color-gray-950);
+        --color-sidebar-primary: var(--color-gray-100);
+        --color-sidebar-primary-foreground: oklch(0.97 0 0);
+        --color-sidebar-accent: oklch(0.97 0 0);
+        --color-sidebar-accent-foreground: var(--color-gray-950);
+        --color-sidebar-border: var(--color-gray-300);
+        --color-sidebar-ring: var(--color-gray-300);
+
+        --color-border: var(--color-gray-300);
+        --color-foreground: var(--color-gray-950);
+        --color-background: var(--color-gray-100);
+    }
+
+    .dark {
+        --color-chart-1: oklch(0.707 0.165 254.624);
+        --color-chart-2: oklch(0.623 0.214 259.815);
+        --color-chart-3: oklch(0.546 0.245 262.881);
+        --color-chart-4: oklch(0.488 0.243 264.376);
+        --color-chart-5: oklch(0.424 0.199 265.638);
+        --color-chart-6: oklch(0.379 0.146 265.522);
+        --color-chart-7: oklch(0.248 0.078 268.2);
+
+        --color-sidebar: var(--color-gray-950);
+        --color-sidebar-foreground: var(--color-gray-200);
+        --color-sidebar-primary: var(--color-gray-950);
+        --color-sidebar-primary-foreground: oklch(0.97 0 0);
+        --color-sidebar-accent: var(--color-gray-950);
+        --color-sidebar-accent-foreground: var(--color-gray-50);
+        --color-sidebar-border: var(--color-gray-800);
+        --color-sidebar-ring: var(--color-gray-800);
+
+        --color-border: var(--color-gray-800);
+        --color-foreground: var(--color-gray-200);
+        --color-background: var(--color-gray-900);
+    }
     *,
     ::after,
     ::before,
@@ -92,12 +93,10 @@
     ::file-selector-button {
         border-color: var(--color-border);
     }
-
     body {
         background-color: var(--color-background);
         color: var(--color-foreground);
     }
-
     body:has(button.navigation-open) {
         overflow: hidden;
     }
