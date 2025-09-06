@@ -24,7 +24,13 @@ export const useDataWeight = (): WeightData[] => {
                 .map((item) => ({
                     date: item.created_at || '',
                     weight: item.person_weight || 0,
-                })) ?? []
+                }))
+                .sort((a, b) => {
+                    const dateA = new Date(a.date)
+                    const dateB = new Date(b.date)
+
+                    return dateA.getTime() - dateB.getTime()
+                }) ?? []
         )
     }, [clinicalHistory])
 
@@ -43,7 +49,13 @@ export const useDataBMI = (): BMIData[] => {
                 .map((item) => ({
                     date: item.created_at || '',
                     bmi: item.imc || 0,
-                })) ?? []
+                }))
+                .sort((a, b) => {
+                    const dateA = new Date(a.date)
+                    const dateB = new Date(b.date)
+
+                    return dateA.getTime() - dateB.getTime()
+                }) ?? []
         )
     }, [clinicalHistory])
 

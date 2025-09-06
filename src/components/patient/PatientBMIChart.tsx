@@ -32,7 +32,7 @@ const PatientBMIChart = () => {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">{content.titleWeight}</h2>
+                    <h2 className="font-extrabold">{content.titleBMI}</h2>
                 </CardTitle>
             </CardHeader>
             <CardContent>
@@ -42,7 +42,7 @@ const PatientBMIChart = () => {
                 >
                     <LineChart
                         accessibilityLayer
-                        data={dataWeightChart.toSorted().reverse()}
+                        data={dataWeightChart}
                         margin={{
                             left: 12,
                             right: 12,
