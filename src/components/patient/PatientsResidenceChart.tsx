@@ -1,5 +1,5 @@
 import { Label, Pie, PieChart } from 'recharts'
-import { chartConfig } from '@/config/charts'
+import { chartPieConfig } from '@/config/charts'
 import {
     useDataTotalPatients,
     useDataResidence,
@@ -23,12 +23,10 @@ const PatientsResidenceChart = () => {
     const patientsResidences = useDataResidence()
 
     const dataResidencesChart = patientsResidences.map((item, index) => {
-        const color = 100 + index * 100
-        const obj = { ...item, fill: `var(--color-blue-${color})` }
-        return obj
+        const chartKey =
+            `var(--color-area${(index % 7) + 1})` as keyof typeof chartPieConfig
+        return { ...item, fill: chartKey }
     })
-
-    console.log(dataResidencesChart)
 
     return (
         <Card>
@@ -39,7 +37,7 @@ const PatientsResidenceChart = () => {
             </CardHeader>
             <CardContent>
                 <ChartContainer
-                    config={chartConfig}
+                    config={chartPieConfig}
                     className="mx-auto aspect-square max-h-[250px]"
                 >
                     <PieChart>

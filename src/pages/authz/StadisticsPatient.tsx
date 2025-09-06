@@ -8,7 +8,6 @@ import content from '@/config/data/pages/stadisticsPatient'
 
 const StadisticsPatient = () => {
     // const residenceData = useDataTotalPatients()
-
     return (
         <>
             <HeaderArticle title={content.title} />

@@ -1,5 +1,5 @@
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
-import { chartConfig } from '@/config/charts'
+import { chartLineConfig } from '@/config/charts'
 import { useDataWeight } from '@/hooks/usePatientMetrics'
 import {
     Card,
@@ -37,7 +37,7 @@ const PatientWeightChart = () => {
             </CardHeader>
             <CardContent>
                 <ChartContainer
-                    config={chartConfig}
+                    config={chartLineConfig}
                     className="min-h-[200px] w-full"
                 >
                     <LineChart
@@ -60,7 +60,7 @@ const PatientWeightChart = () => {
                         <Line
                             dataKey="weight"
                             type="linear"
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-line)"
                             strokeWidth={2}
                             dot={true}
                         />

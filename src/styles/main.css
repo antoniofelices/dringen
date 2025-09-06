@@ -9,6 +9,7 @@
         'Proxima Nova', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+
     --color-gray-50: oklch(0.985 0.002 210);
     --color-gray-100: oklch(0.967 0.003 210);
     --color-gray-200: oklch(0.922 0.005 210);
@@ -20,96 +21,84 @@
     --color-gray-800: oklch(0.275 0.014 210);
     --color-gray-900: oklch(0.185 0.012 210);
     --color-gray-950: oklch(0.125 0.008 210);
+
+    --color-blue-50: oklch(0.97 0.014 254.604);
+    --color-blue-100: oklch(0.932 0.032 255.585);
+    --color-blue-200: oklch(0.882 0.059 254.128);
+    --color-blue-300: oklch(0.809 0.105 251.813);
+    --color-blue-400: oklch(0.707 0.165 254.624);
+    --color-blue-500: oklch(0.623 0.214 259.815);
+    --color-blue-600: oklch(0.546 0.245 262.881);
+    --color-blue-700: oklch(0.488 0.243 264.376);
+    --color-blue-800: oklch(0.424 0.199 265.638);
+    --color-blue-900: oklch(0.379 0.146 265.522);
+    --color-blue-950: oklch(0.282 0.091 267.935);
+
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+
+    --color-chart-1: oklch(0.707 0.165 254.624);
+    --color-chart-2: oklch(0.623 0.214 259.815);
+    --color-chart-3: oklch(0.546 0.245 262.881);
+    --color-chart-4: oklch(0.488 0.243 264.376);
+    --color-chart-5: oklch(0.424 0.199 265.638);
+    --color-chart-6: oklch(0.379 0.146 265.522);
+    --color-chart-7: oklch(0.248 0.078 268.2);
+
+    --color-sidebar: var(--color-gray-50);
+    --color-sidebar-foreground: var(--color-gray-950);
+    --color-sidebar-primary: var(--color-gray-100);
+    --color-sidebar-primary-foreground: oklch(0.97 0 0);
+    --color-sidebar-accent: oklch(0.97 0 0);
+    --color-sidebar-accent-foreground: var(--color-gray-950);
+    --color-sidebar-border: var(--color-gray-300);
+    --color-sidebar-ring: var(--color-gray-300);
+
+    --color-border: var(--color-gray-300);
+    --color-foreground: var(--color-gray-950);
+    --color-background: var(--color-gray-100);
+}
+
+@theme dark {
+    --color-chart-1: oklch(0.707 0.165 254.624);
+    --color-chart-2: oklch(0.623 0.214 259.815);
+    --color-chart-3: oklch(0.546 0.245 262.881);
+    --color-chart-4: oklch(0.488 0.243 264.376);
+    --color-chart-5: oklch(0.424 0.199 265.638);
+    --color-chart-6: oklch(0.379 0.146 265.522);
+    --color-chart-7: oklch(0.248 0.078 268.2);
+
+    --color-sidebar: var(--color-gray-950);
+    --color-sidebar-foreground: var(--color-gray-200);
+    --color-sidebar-primary: var(--color-gray-950);
+    --color-sidebar-primary-foreground: oklch(0.97 0 0);
+    --color-sidebar-accent: var(--color-gray-950);
+    --color-sidebar-accent-foreground: var(--color-gray-50);
+    --color-sidebar-border: var(--color-gray-800);
+    --color-sidebar-ring: var(--color-gray-800);
+
+    --color-border: var(--color-gray-800);
+    --color-foreground: var(--color-gray-200);
+    --color-background: var(--color-gray-900);
 }
 
 @layer base {
-    :root {
-        --default-border-color: var(--color-gray-300, currentColor);
-        --default-text-color: var(--color-gray-950);
-        --default-bg-color: var(--color-gray-100);
-
-        --sidebar: var(--color-gray-50);
-        --sidebar-foreground: var(--color-gray-950);
-        --sidebar-primary: var(--color-gray-100);
-        --sidebar-primary-foreground: oklch(0.97 0 0);
-        --sidebar-accent: oklch(0.97 0 0);
-        --sidebar-accent-foreground: var(--color-gray-950);
-        --sidebar-border: var(--default-border-color);
-        --sidebar-ring: var(--default-border-color);
-
-        --chart-1: oklch(0.646 0.222 41.116);
-        --chart-2: oklch(0.6 0.118 184.704);
-        --chart-3: oklch(0.398 0.07 227.392);
-        --chart-4: oklch(0.828 0.189 84.429);
-        --chart-5: oklch(0.769 0.188 70.08);
-
-        --color-blue-50: oklch(0.97 0.014 254.604);
-        --color-blue-100: oklch(0.932 0.032 255.585);
-        --color-blue-200: oklch(0.882 0.059 254.128);
-        --color-blue-300: oklch(0.809 0.105 251.813);
-        --color-blue-400: oklch(0.707 0.165 254.624);
-        --color-blue-500: oklch(0.623 0.214 259.815);
-        --color-blue-600: oklch(0.546 0.245 262.881);
-        --color-blue-700: oklch(0.488 0.243 264.376);
-        --color-blue-800: oklch(0.424 0.199 265.638);
-        --color-blue-900: oklch(0.379 0.146 265.522);
-        --color-blue-950: oklch(0.282 0.091 267.935);
-        --color-blue-1000: oklch(0.248 0.078 268.2);
-        --color-blue-1050: oklch(0.215 0.065 268.5);
-        --color-blue-1100: oklch(0.182 0.052 268.8);
-        --color-blue-1150: oklch(0.149 0.039 269.1);
-        --color-blue-1200: oklch(0.116 0.026 269.4);
-    }
-
-    .dark {
-        --default-border-color: var(--color-gray-800, currentColor);
-        --default-text-color: var(--color-gray-200);
-        --default-bg-color: var(--color-gray-900);
-
-        --sidebar: var(--color-gray-950);
-        --sidebar-foreground: var(--color-gray-200);
-        --sidebar-primary: var(--color-gray-950);
-        --sidebar-primary-foreground: oklch(0.97 0 0);
-        --sidebar-accent: var(--color-gray-950);
-        --sidebar-accent-foreground: var(--color-gray-50);
-        --sidebar-border: var(--default-border-color);
-        --sidebar-ring: var(--default-border-color);
-        /* --sidebar-border: transparent;
-        --sidebar-ring: transparent; */
-
-        --chart-1: oklch(0.488 0.243 264.376);
-        --chart-2: oklch(0.696 0.17 162.48);
-        --chart-3: oklch(0.769 0.188 70.08);
-        --chart-4: oklch(0.627 0.265 303.9);
-        --chart-5: oklch(0.645 0.246 16.439);
-    }
     *,
     ::after,
     ::before,
     ::backdrop,
     ::file-selector-button {
-        border-color: var(--default-border-color);
+        border-color: var(--color-border);
     }
+
     body {
-        background-color: var(--default-bg-color);
-        color: var(--default-text-color);
+        background-color: var(--color-background);
+        color: var(--color-foreground);
     }
+
     body:has(button.navigation-open) {
         overflow: hidden;
     }
-}
-
-@theme inline {
-    --radius-sm: calc(var(--radius) - 4px);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) + 4px);
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
 }

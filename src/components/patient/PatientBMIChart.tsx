@@ -1,5 +1,5 @@
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
-import { chartConfig } from '@/config/charts'
+import { chartLineConfig } from '@/config/charts'
 import { useDataBMI } from '@/hooks/usePatientMetrics'
 import {
     Card,
@@ -37,7 +37,7 @@ const PatientBMIChart = () => {
             </CardHeader>
             <CardContent>
                 <ChartContainer
-                    config={chartConfig}
+                    config={chartLineConfig}
                     className="min-h-[200px] w-full"
                 >
                     <LineChart
@@ -60,7 +60,7 @@ const PatientBMIChart = () => {
                         <Line
                             dataKey="bmi"
                             type="linear"
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-line)"
                             strokeWidth={2}
                             dot={true}
                         />
