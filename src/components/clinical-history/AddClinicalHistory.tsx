@@ -100,13 +100,19 @@ const AddClinicalHistory = ({ onSuccess }: Props) => {
             )
 
             const validDiagnoses = formData.diagnoses.filter(
-                (diagnosis) => diagnosis.cie10 || diagnosis.diagnosis
+                (diagnosis) =>
+                    diagnosis.cie10 ||
+                    diagnosis.diagnosis ||
+                    diagnosis.certainty
             )
 
             if (validDiagnoses.length > 0) {
                 const diagnosisData = await registerDiagnosis(
                     clinicHistoryData.id,
-                    validDiagnoses
+                    validDiagnoses.map(diagnosis => ({
+                        ...diagnosis,
+                        certainty: diagnosis.certainty || 'suspected'
+                    }))
                 )
 
                 toast.success(content.textToastSuccess)

@@ -24,11 +24,10 @@ export interface PatientWithRelationsType extends PatientType {
     medical_patient_history: PatientHistoryType | null
 }
 
-export type DiagnosisFormData = {
-    cie10?: string | null
-    diagnosis?: string | null
-    certainty?: 'confirmed' | 'probable' | 'suspected'
-}
+export type DiagnosisFormData = Pick<
+    TablesInsert<'medical_diagnosis'>,
+    'cie10' | 'diagnosis' | 'certainty'
+>
 
 export type ClinicalHistoryFormDataType =
     TablesInsert<'medical_clinical_history'> & {
@@ -36,6 +35,3 @@ export type ClinicalHistoryFormDataType =
     }
 
 export type UserRoleType = Database['public']['Enums']['dn_user_role']
-
-export type MedicalUserDataType =
-    Database['public']['Tables']['medical_user']['Row']
