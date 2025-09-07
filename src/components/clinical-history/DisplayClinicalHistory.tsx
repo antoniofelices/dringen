@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Maximize } from 'lucide-react'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { transformDate } from '@/lib/utils'
 import {
@@ -18,21 +19,27 @@ import {
     DialogTrigger,
 } from '@/components/ui/base/dialog'
 import DisplaySingleClinicalHistory from '@components/clinical-history/DisplaySingleClinicalHistory'
+import content from '@data/clinical-history/displayClinicalHistory'
 
-const DisplayAllClinicalHistory = () => {
+const DisplayClinicalHistory = () => {
     const [openModal, setOpenModal] = useState<string | null>(null)
     const { clinicalHistory } = usePatientContext()
+    const orderClinicalHistory = clinicalHistory?.toSorted((a, b) => {
+        const dateA = new Date(a.created_at ?? '').getTime()
+        const dateB = new Date(b.created_at ?? '').getTime()
+        return dateB - dateA
+    })
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h2 className="font-extrabold">Clinical History</h2>
+                    <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
             </CardHeader>
 
             <CardContent>
-                {clinicalHistory?.map((item) => {
+                {orderClinicalHistory?.map((item) => {
                     const isModalOpen = openModal === item.id
 
                     return (
@@ -44,12 +51,17 @@ const DisplayAllClinicalHistory = () => {
                                     setOpenModal(open ? item.id : null)
                                 }
                             >
-                                <h3 className="my-3">
+                                <h3 className="my-4 border-b-2 pb-4">
                                     {item?.created_at && (
-                                        <DialogTrigger>
-                                            {transformDate(item.created_at)} -{' '}
-                                            {item.medical_diagnosis?.[0]
-                                                ?.diagnosis || 'No diagnosis'}
+                                        <DialogTrigger className="flex justify-between w-full">
+                                            <div>
+                                                {transformDate(item.created_at)}{' '}
+                                                -{' '}
+                                                {item.medical_diagnosis?.[0]
+                                                    ?.diagnosis ||
+                                                    content.textNoDiagnosis}
+                                            </div>
+                                            <Maximize size={12} />
                                         </DialogTrigger>
                                     )}
                                 </h3>
@@ -65,14 +77,14 @@ const DisplayAllClinicalHistory = () => {
                                                     -{' '}
                                                     {item.medical_diagnosis?.[0]
                                                         ?.diagnosis ||
-                                                        'No diagnosis'}
+                                                        content.textNoDiagnosis}
                                                 </>
                                             ) : (
                                                 <>'No'</>
                                             )}
                                         </DialogTitle>
                                         <DialogDescription>
-                                            A single clinical history
+                                            {content.textDescription}
                                         </DialogDescription>
                                     </DialogHeader>
                                     <DisplaySingleClinicalHistory item={item} />
@@ -86,4 +98,4 @@ const DisplayAllClinicalHistory = () => {
     )
 }
 
-export default DisplayAllClinicalHistory
+export default DisplayClinicalHistory

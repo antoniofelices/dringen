@@ -77,36 +77,42 @@ const AddClinicalHistory = ({ onSuccess }: Props) => {
                 formData.examination ?? '',
                 formData.mood ?? '',
                 formData.test ?? '',
-                formData.temperature,
-                formData.pas,
-                formData.pad,
-                formData.fc,
-                formData.fr,
-                formData.oximetry,
+                formData.temperature ?? undefined,
+                formData.pas ?? undefined,
+                formData.pad ?? undefined,
+                formData.fc ?? undefined,
+                formData.fr ?? undefined,
+                formData.oximetry ?? undefined,
                 formData.eating ?? '',
                 formData.thirst ?? '',
                 formData.urine ?? '',
                 formData.feces ?? '',
                 formData.sleep ?? '',
-                formData.person_weight,
-                formData.person_height,
-                formData.imc,
-                formData.waist,
-                formData.bfp,
-                formData.mmp,
-                formData.gfp,
+                formData.person_weight ?? undefined,
+                formData.person_height ?? undefined,
+                formData.imc ?? undefined,
+                formData.waist ?? undefined,
+                formData.bfp ?? undefined,
+                formData.mmp ?? undefined,
+                formData.gfp ?? undefined,
                 formData.additional_tests ?? '',
                 formData.treatment ?? ''
             )
 
             const validDiagnoses = formData.diagnoses.filter(
-                (diagnosis) => diagnosis.cie10 || diagnosis.diagnosis
+                (diagnosis) =>
+                    diagnosis.cie10 ||
+                    diagnosis.diagnosis ||
+                    diagnosis.certainty
             )
 
             if (validDiagnoses.length > 0) {
                 const diagnosisData = await registerDiagnosis(
                     clinicHistoryData.id,
-                    validDiagnoses
+                    validDiagnoses.map((diagnosis) => ({
+                        ...diagnosis,
+                        certainty: diagnosis.certainty || 'suspected',
+                    }))
                 )
 
                 toast.success(content.textToastSuccess)

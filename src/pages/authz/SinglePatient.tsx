@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { usePatientContext } from '@/hooks/usePatientContext'
+import { usePatientContext } from '@hooks/usePatientContext'
+import { useDataWeight, useDataBMI } from '@hooks/usePatientMetrics'
 import RoleGuard from '@components/RoleGuard'
 import { Button } from '@components/ui/base/button'
 import {
@@ -18,8 +19,10 @@ import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
-import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
+import DisplayClinicalHistory from '@/components/clinical-history/DisplayClinicalHistory'
 import PatientHistory from '@components/patient/PatientHistory'
+import PatientWeightChart from '@components/patient/PatientWeightChart'
+import PatientBMIChart from '@components/patient/PatientBMIChart'
 import content from '@/config/data/pages/singlePatient'
 
 const SinglePatient = () => {
@@ -32,6 +35,9 @@ const SinglePatient = () => {
         patientErrorType,
         refetchPatient,
     } = usePatientContext()
+
+    const patientDataWeight = useDataWeight()
+    const patientDataBMI = useDataBMI()
 
     if (patientLoading) return <Loading />
 
@@ -67,7 +73,17 @@ const SinglePatient = () => {
                         </div>
                         {clinicalHistory?.[0] && (
                             <div className="col-span-6">
-                                <DisplayAllClinicalHistory />
+                                <DisplayClinicalHistory />
+                            </div>
+                        )}
+                        {patientDataWeight?.[1] && (
+                            <div className="col-span-3">
+                                <PatientWeightChart />
+                            </div>
+                        )}
+                        {patientDataBMI?.[1] && (
+                            <div className="col-span-3">
+                                <PatientBMIChart />
                             </div>
                         )}
                     </RoleGuard>

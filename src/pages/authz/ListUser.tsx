@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
-import type { DataTableUser } from '@/types/interfaces'
+import type { UserType } from '@/types/interfaces'
 import { getListUsers } from '@services/supabaseService'
 import { createUserColumns } from '@/config/tables'
-import { Button } from '@/components/ui/base/button'
+import { Button } from '@components/ui/base/button'
 import ContentArticle from '@components/ui/ContentArticle'
 import HeaderArticle from '@components/ui/HeaderArticle'
 import DataTable from '@components/ui/DataTable'
@@ -31,13 +31,13 @@ const ListUser = () => {
 
     return (
         <>
-            <HeaderArticle title="List of health consumers">
+            <HeaderArticle title={content.title}>
                 <Button asChild size="sm">
                     <Link to="/user/add">{content.textButtonAddNew}</Link>
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <DataTable<DataTableUser>
+                <DataTable<UserType>
                     columns={createUserColumns(navigate)}
                     data={listData || []}
                     caption={content.textCaptionTable}

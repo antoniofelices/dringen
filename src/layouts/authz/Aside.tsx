@@ -23,10 +23,11 @@ import {
     SidebarRail,
 } from '@components/ui/base/sidebar'
 import ButtonSignOut from '@components/ui/ButtonSignOut'
-import Logo from '@/components/ui/Logo'
+import Logo from '@components/ui/Logo'
 import MenuItems from '@components/ui/Menutems'
 import patientMenu from '@/config/data/menus/patient'
 import users from '@/config/data/menus/users'
+import content from '@data/layouts/asideAuthz'
 
 const Aside = () => {
     const { user } = useCurrentUser()
@@ -40,7 +41,7 @@ const Aside = () => {
                         <SidebarMenuButton asChild>
                             <Link to={'/dashboard'}>
                                 <Home />
-                                Home
+                                {content.textHome}
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -51,7 +52,9 @@ const Aside = () => {
                     allowedRoles={['admin', 'physician', 'medical_office']}
                 >
                     <SidebarGroup>
-                        <SidebarGroupLabel>Health Consumers</SidebarGroupLabel>
+                        <SidebarGroupLabel>
+                            {content.titlePatients}
+                        </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 <MenuItems content={patientMenu} />
@@ -62,7 +65,9 @@ const Aside = () => {
                 </RoleGuard>
                 <RoleGuard allowedRoles={['admin']}>
                     <SidebarGroup>
-                        <SidebarGroupLabel>Users</SidebarGroupLabel>
+                        <SidebarGroupLabel>
+                            {content.titleUsers}
+                        </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 <MenuItems content={users} />
@@ -93,7 +98,9 @@ const Aside = () => {
                                     ]}
                                 >
                                     <DropdownMenuItem>
-                                        <Link to={'/settings'}>Settings</Link>
+                                        <Link to={'/settings'}>
+                                            {content.titleSettings}
+                                        </Link>
                                     </DropdownMenuItem>
                                 </RoleGuard>
                                 <DropdownMenuItem>

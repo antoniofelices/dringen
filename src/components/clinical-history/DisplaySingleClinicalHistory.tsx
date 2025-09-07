@@ -1,15 +1,14 @@
 import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
-
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
 } from '@/components/ui/base/tabs'
-
 import DisplayDiagnosis from '@components/clinical-history/DisplayDiagnosis'
 import DisplayExamination from '@components/clinical-history/DisplayExamination'
 import DisplayExaminationData from '@components/clinical-history/DisplayExaminationData'
+import content from '@data/clinical-history/displaySingleClinicalHistory'
 
 const DisplayAllClinicalHistory = ({
     item,
@@ -19,15 +18,21 @@ const DisplayAllClinicalHistory = ({
     return (
         <Tabs aria-label="Clinical history" defaultValue="examination">
             <TabsList>
-                <TabsTrigger value="examination">Examination</TabsTrigger>
+                <TabsTrigger value="examination">
+                    {content.textExamination}
+                </TabsTrigger>
                 <TabsTrigger value="examination-data">
-                    Examination Data
+                    {content.textExaminationData}
                 </TabsTrigger>
-                <TabsTrigger value="diagnosis">Diagnosis</TabsTrigger>
+                <TabsTrigger value="diagnosis">
+                    {content.textDiagnosis}
+                </TabsTrigger>
                 <TabsTrigger value="aditional-tests">
-                    Aditional Tests
+                    {content.textAditionalTests}
                 </TabsTrigger>
-                <TabsTrigger value="treatment">Treatment</TabsTrigger>
+                <TabsTrigger value="treatment">
+                    {content.textTreatment}
+                </TabsTrigger>
             </TabsList>
             <div className="mt-4">
                 <TabsContent value="examination">
