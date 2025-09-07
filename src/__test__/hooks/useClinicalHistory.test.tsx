@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useClinicalHistory } from '@/hooks/useClinicalHistory'
 import type { ReactNode } from 'react'
+import { createMockClinicalHistory } from '../testTypes'
 
 vi.mock('@services/supabaseService')
 
@@ -22,24 +23,20 @@ const createWrapper = () => {
 
 describe('useClinicalHistory', () => {
     const mockClinicalHistoryData = [
-        {
+        createMockClinicalHistory({
             id: '1',
             patient_id: '123',
             type_of: 'nutricional',
             person_weight: 70,
             imc: 22.5,
-            created_at: '2024-01-01',
-            medical_diagnoses: [],
-        },
-        {
+        }),
+        createMockClinicalHistory({
             id: '2',
             patient_id: '456',
             type_of: 'general',
             person_weight: null,
             imc: null,
-            created_at: '2024-01-02',
-            medical_diagnoses: [],
-        },
+        }),
     ]
 
     beforeEach(() => {

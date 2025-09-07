@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { usePatients } from '@/hooks/usePatients'
 import type { ReactNode } from 'react'
+import { createMockPatient } from '../testTypes'
 
 vi.mock('@services/supabaseService')
 
@@ -22,28 +23,24 @@ const createWrapper = () => {
 
 describe('usePatients', () => {
     const mockPatientsData = [
-        {
+        createMockPatient({
             id: '1',
-            patient_name: 'Lorem',
-            patient_last_name: 'Ipsum',
-            patient_dni: '12345678A',
-            patient_phone: '123456789',
-            patient_email: 'loremipsum@example.com',
+            user_name: 'Lorem',
+            user_last_name: 'Ipsum',
+            dni: '12345678A',
+            phone: '123456789',
+            email: 'lorem@example.com',
             place_of_residence: 'Madrid',
-            user_id: 'user1',
-            created_at: '2024-01-01',
-        },
-        {
+        }),
+        createMockPatient({
             id: '2',
-            patient_name: 'Calar',
-            patient_last_name: 'Dolor',
-            patient_dni: '87654321B',
-            patient_phone: '987654321',
-            patient_email: 'calardolor@example.com',
+            user_name: 'Calar',
+            user_last_name: 'Dolor',
+            dni: '87654321B',
+            phone: '987654321',
+            email: 'calar@example.com',
             place_of_residence: 'Barcelona',
-            user_id: 'user2',
-            created_at: '2024-01-02',
-        },
+        }),
     ]
 
     beforeEach(() => {

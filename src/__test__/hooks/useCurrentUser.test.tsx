@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import type { ReactNode } from 'react'
+import { createMockAuthUser, createMockUser, createMockUseAuthReturn } from '../testTypes'
 
 vi.mock('@hooks/useAuth')
 vi.mock('@/services/supabaseService')
@@ -22,19 +23,8 @@ const createWrapper = () => {
 }
 
 describe('useCurrentUser', () => {
-    const mockAuthUser = {
-        id: '123',
-        email: 'test@example.com',
-    }
-
-    const mockUserData = {
-        id: '123',
-        email: 'test@example.com',
-        user_name: 'Lorem',
-        user_last_name: 'Ipsum',
-        role: 'admin',
-        is_active: true,
-    }
+    const mockAuthUser = createMockAuthUser()
+    const mockUserData = createMockUser()
 
     beforeEach(() => {
         vi.clearAllMocks()
@@ -42,10 +32,10 @@ describe('useCurrentUser', () => {
 
     it('should return pending state when auth is loading', async () => {
         const { useAuth } = await import('@hooks/useAuth')
-        vi.mocked(useAuth).mockReturnValue({
+        vi.mocked(useAuth).mockReturnValue(createMockUseAuthReturn({
             user: null,
             loading: true,
-        })
+        }))
 
         const { result } = renderHook(() => useCurrentUser(), {
             wrapper: createWrapper(),
@@ -59,10 +49,10 @@ describe('useCurrentUser', () => {
         const { useAuth } = await import('@hooks/useAuth')
         const { getSingleUser } = await import('@/services/supabaseService')
 
-        vi.mocked(useAuth).mockReturnValue({
+        vi.mocked(useAuth).mockReturnValue(createMockUseAuthReturn({
             user: mockAuthUser,
             loading: false,
-        })
+        }))
         vi.mocked(getSingleUser).mockResolvedValue(mockUserData)
 
         const { result } = renderHook(() => useCurrentUser(), {
@@ -83,10 +73,10 @@ describe('useCurrentUser', () => {
         const { useAuth } = await import('@hooks/useAuth')
         const { getSingleUser } = await import('@/services/supabaseService')
 
-        vi.mocked(useAuth).mockReturnValue({
+        vi.mocked(useAuth).mockReturnValue(createMockUseAuthReturn({
             user: null,
             loading: false,
-        })
+        }))
 
         renderHook(() => useCurrentUser(), {
             wrapper: createWrapper(),
@@ -99,10 +89,10 @@ describe('useCurrentUser', () => {
         const { useAuth } = await import('@hooks/useAuth')
         const { getSingleUser } = await import('@/services/supabaseService')
 
-        vi.mocked(useAuth).mockReturnValue({
+        vi.mocked(useAuth).mockReturnValue(createMockUseAuthReturn({
             user: mockAuthUser,
             loading: false,
-        })
+        }))
         const error = new Error('Fetch failed')
         vi.mocked(getSingleUser).mockRejectedValue(error)
 
