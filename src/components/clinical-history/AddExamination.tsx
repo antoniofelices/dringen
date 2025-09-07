@@ -3,6 +3,8 @@ import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
 import FormFieldSelectControl from '../ui/FormFieldSelectControl'
+import content from '@data/clinical-history/addExamination'
+
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
 }
@@ -12,23 +14,23 @@ const AddExamination = ({ control }: Props) => {
         <>
             <FormFieldSelectControl
                 fieldName="type_of"
-                label="Type of"
+                label={content.labelType}
                 control={control}
                 options={['general', 'nutricional']}
             />
             <FormFieldTextareaControl
                 fieldName="examination"
-                label="Explain"
+                label={content.labelExplain}
                 control={control}
             />
             <FormFieldInputControl
                 fieldName="mood"
-                label="Mood"
+                label={content.labelMood}
                 control={control}
             />
             <FormFieldInputControl
                 fieldName="test"
-                label="Test"
+                label={content.labelTest}
                 control={control}
             />
         </>

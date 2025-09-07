@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import type { ClinicalHistoryWithDiagnosisType } from '@/types/interfaces'
+import content from '@data/clinical-history/displayDiagnosis'
 
 const DisplayDiagnosis = ({
     item,
@@ -10,9 +11,9 @@ const DisplayDiagnosis = ({
         <table className="w-full text-sm text-left rtl:text-right">
             <thead className="text-xs bg-gray-200 dark:bg-gray-700">
                 <tr>
-                    <th className="px-6 py-3">CIE10</th>
-                    <th className="px-6 py-3">Diagnosis</th>
-                    <th className="px-6 py-3">Certainty</th>
+                    <th className="px-6 py-3">{content.textCIE}</th>
+                    <th className="px-6 py-3">{content.textDiagnosis}</th>
+                    <th className="px-6 py-3">{content.textCertainty}</th>
                 </tr>
             </thead>
             <tbody>

@@ -19,7 +19,7 @@ import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
-import DisplayAllClinicalHistory from '@/components/clinical-history/DisplayAllClinicalHistory'
+import DisplayClinicalHistory from '@/components/clinical-history/DisplayClinicalHistory'
 import PatientHistory from '@components/patient/PatientHistory'
 import PatientWeightChart from '@components/patient/PatientWeightChart'
 import PatientBMIChart from '@components/patient/PatientBMIChart'
@@ -73,7 +73,7 @@ const SinglePatient = () => {
                         </div>
                         {clinicalHistory?.[0] && (
                             <div className="col-span-6">
-                                <DisplayAllClinicalHistory />
+                                <DisplayClinicalHistory />
                             </div>
                         )}
                         {patientDataWeight?.[1] && (

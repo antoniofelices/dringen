@@ -6,6 +6,8 @@ import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
 import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
 import FormFieldSelectControl from '@/components/ui/FormFieldSelectControl'
 import { Button } from '@components/ui/base/button'
+import content from '@data/clinical-history/addDiagnosis'
+
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
 }
@@ -48,14 +50,14 @@ const AddDiagnosis = ({ control }: Props) => {
                     <FormFieldInputControl
                         className="w-full"
                         fieldName={`diagnoses.${index}.cie10`}
-                        label="CIE10"
+                        label={content.labelCIE}
                         control={control}
                         type="text"
                     />
                     <FormFieldInputControl
                         className="w-full"
                         fieldName={`diagnoses.${index}.diagnosis`}
-                        label="Diagnosis"
+                        label={content.labelDiagnosis}
                         control={control}
                         type="text"
                     />
@@ -63,9 +65,9 @@ const AddDiagnosis = ({ control }: Props) => {
                         className="w-full"
                         control={control}
                         fieldName={`diagnoses.${index}.certainty`}
-                        label="Certainty"
+                        label={content.labelCertainty}
                         options={DIAGNOSISCERTAINTYVALUES}
-                        placeholder="Select certainty"
+                        placeholder={content.placeholderCertainty}
                     />
                     <div className="flex items-center gap-2 mt-6">
                         <Button
