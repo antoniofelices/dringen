@@ -14,21 +14,6 @@ export const getListPatients = async () => {
     return data
 }
 
-export const getListAllDataPatients = async () => {
-    const { data, error } = await supabase.from('medical_patient').select(
-        `
-      *,
-      medical_clinical_history(
-        *,
-        medical_diagnosis(*)
-      ),
-      medical_patient_history(*)
-    `
-    )
-    if (error) throw error
-    return data
-}
-
 export const getSinglePatient = async (
     id: string
 ): Promise<PatientWithRelationsType> => {

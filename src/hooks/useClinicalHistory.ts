@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getListAllClinicalHistory } from '@services/supabaseService'
 
-export const useClinicalHistoryAllData = () => {
+export const useClinicalHistory = () => {
     const {
         data: clinicalHistoryData,
         isPending: clinicalHistoryLoading,

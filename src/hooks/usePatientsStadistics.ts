@@ -1,15 +1,16 @@
 import { useMemo } from 'react'
-import { usePatientsAllData } from '@/hooks/usePatientsAllData'
-import { useClinicalHistoryAllData } from '@hooks/useClinicalHistoryAllData'
+import { usePatients } from '@/hooks/usePatients'
+import { useClinicalHistory } from '@/hooks/useClinicalHistory'
+
 export const useDataTotalPatients = () => {
-    const { patients } = usePatientsAllData()
+    const { patients } = usePatients()
     const totalPatients = patients?.length
 
     return totalPatients
 }
 
 export const useDataResidence = () => {
-    const { patients } = usePatientsAllData()
+    const { patients } = usePatients()
 
     const residenceData = useMemo(() => {
         return (
@@ -35,7 +36,7 @@ export const useDataResidence = () => {
 }
 
 export const useDataTypeOf = () => {
-    const { clinicalHistory } = useClinicalHistoryAllData()
+    const { clinicalHistory } = useClinicalHistory()
 
     const typeOfData = useMemo(() => {
         return (
