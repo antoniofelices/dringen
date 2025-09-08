@@ -34,6 +34,5 @@ supabase/.env.keys
 supabase/.env.local
 supabase/.env.*.local
 
-# Flowbite
-.flowbite-react/class-list.json
-.flowbite-react/pid
+# TanStack
+.tanstack/
