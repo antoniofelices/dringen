@@ -2,7 +2,7 @@
 
 ## Description
 
-Sprint 8 - 9
+This is an app designed for managing clinical histories. It is built using Supabase. Currently, you can create health consumers and users with roles, as well as create clinical histories and view statistics.
 
 <img src="src/assets/images/preview-01.webp" alt="Preview" width="400"/>
 
@@ -10,7 +10,7 @@ Sprint 8 - 9
 
 ### API keys from
 
-In order to use the Supabase Auth functionality, you will require an API key [Supabase](https://supabase.com/)
+In order to use Supabase, you will require an API key [Supabase](https://supabase.com/)
 
 ## Technologies
 
@@ -20,7 +20,10 @@ In order to use the Supabase Auth functionality, you will require an API key [Su
 - Vitest.
 - TanStack Query.
 - TanStack Router.
+- TanStack Table.
 - Taildwind.
+- Shadcn/ui.
+- React hook form.
 - Supabase.
 
 ## Documentation
@@ -46,6 +49,9 @@ $ npm run dev
 ```
 
 ## Future Improvements
+
+- The database structure should be refactored.
+- Implement some standard, such as HL7 FHIR, to ensure data is shared securely and efficiently.
 
 ## Contributing
 
