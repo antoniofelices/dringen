@@ -1,7 +1,7 @@
 import type { Control } from 'react-hook-form'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
 import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
-import content from '@/config/data/clinical-history/displayClinicalHistory'
+import content from '@data/clinical-history/addTreatment'
 
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
