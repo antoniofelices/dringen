@@ -3,9 +3,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Error404 from '@pages/Error'
 import { Toaster } from 'sonner'
 
-// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
 const queryClient = new QueryClient()
 
 export const Route = createRootRoute({
@@ -18,8 +15,6 @@ function RootComponent() {
         <div className="antialiased min-h-dvh">
             <QueryClientProvider client={queryClient}>
                 <Outlet />
-                {/* <TanStackRouterDevtools /> */}
-                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             </QueryClientProvider>
             <Toaster />
         </div>
