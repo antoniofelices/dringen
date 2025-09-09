@@ -20,7 +20,7 @@ vi.mock('@tanstack/react-router', async () => {
     const actual = await vi.importActual('@tanstack/react-router')
     return {
         ...actual,
-        redirect: (options) => mockRedirect(options),
+        redirect: (options: Record<string, unknown>) => mockRedirect(options),
     }
 })
 
