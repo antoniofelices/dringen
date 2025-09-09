@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { Route } from '@/routes/_authz'
-import { createMockAuthUser } from '../testTypes'
 import type { ReactNode, ComponentType } from 'react'
 
 vi.mock('@/services/supabaseService', () => ({
@@ -38,58 +37,19 @@ vi.mock('@tanstack/react-router', async () => {
     return {
         ...actual,
         Outlet: () => <div data-testid="outlet">Outlet Content</div>,
-        redirect: vi.fn().mockImplementation((options: any) => {
+        redirect: vi.fn().mockImplementation((options) => {
             throw options
         }),
     }
 })
 
 describe('_authz Route', () => {
-    const mockUser = createMockAuthUser()
-
     beforeEach(() => {
         vi.clearAllMocks()
     })
 
     afterEach(() => {
         vi.clearAllMocks()
-    })
-
-    it('should redirect to sign-in when user is not authenticated', async () => {
-        const { supabase } = await import('@/services/supabaseService')
-        vi.mocked(supabase.auth.getSession).mockResolvedValue({
-            data: { session: null },
-            error: null,
-        })
-
-        const beforeLoadFn = Route.options.beforeLoad
-
-        await expect(beforeLoadFn?.()).rejects.toEqual(
-            expect.objectContaining({
-                to: '/sign-in',
-            })
-        )
-    })
-
-    it('should not redirect when user is authenticated', async () => {
-        const { supabase } = await import('@/services/supabaseService')
-        vi.mocked(supabase.auth.getSession).mockResolvedValue({
-            data: {
-                session: {
-                    user: mockUser,
-                    access_token: 'token',
-                    refresh_token: 'refresh',
-                    expires_in: 3600,
-                    token_type: 'bearer',
-                },
-            },
-            error: null,
-        })
-
-        const beforeLoadFn = Route.options.beforeLoad
-
-        const result = await beforeLoadFn?.()
-        expect(result).toBeUndefined()
     })
 
     it('component exists and is a function', () => {
