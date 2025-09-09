@@ -6,7 +6,6 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInWithPassword } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
@@ -24,8 +23,8 @@ type FormData = z.infer<typeof signInSchema>
 
 const SignInForm = () => {
     const defaultValues = {
+        email: '',
         password: '',
-        confirmPassword: '',
     }
     const navigate = useNavigate()
 
@@ -36,18 +35,30 @@ const SignInForm = () => {
 
     const onSubmit = async (formData: FormData) => {
         try {
-            await signInWithPassword(formData.email, formData.password)
-            navigate({ to: '/patient/list' })
-        } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
+            const { error } = await signInWithPassword(
+                formData.email,
+                formData.password
+            )
+            if (error) {
+                const { message } = mapSupabaseError(error.message)
 
-            if (field && field in formData) {
                 form.setError('root', {
                     type: 'server',
                     message,
                 })
+                toast.error(`${content.textToastFail}: ${message}`)
+                return
             }
+            navigate({ to: '/patient/list' })
+        } catch (error) {
+            const errorMessage =
+                error instanceof Error ? error.message : content.textToastFail
+            const { message } = mapSupabaseError(errorMessage)
+
+            form.setError('root', {
+                type: 'server',
+                message,
+            })
             toast.error(`${content.textToastFail}: ${message}`)
             return
         }
