@@ -1,8 +1,9 @@
 import ButtonBack from '@components/ui/ButtonBack'
-import ContentArticle from '@/components/ui/ContentArticle'
-import HeaderArticle from '@/components/ui/HeaderArticle'
-import PatientsResidenceChart from '@/components/patient/PatientsResidenceChart'
-import PatientsTypeOfChart from '@/components/patient/PatientsTypeOfChart'
+import ContentArticle from '@components/ui/ContentArticle'
+import HeaderArticle from '@components/ui/HeaderArticle'
+import PatientsResidenceChart from '@components/patient/PatientsResidenceChart'
+import PatientsTypeOfChart from '@components/patient/PatientsTypeOfChart'
+import PatientsTypeOfByDayChart from '@components/patient/PatientsTypeOfByDayChart'
 import content from '@/config/data/pages/stadisticsPatient'
 
 const StadisticsPatient = () => {
@@ -16,6 +17,9 @@ const StadisticsPatient = () => {
                     </div>
                     <div className="col-span-3">
                         <PatientsTypeOfChart />
+                    </div>
+                    <div className="col-span-6">
+                        <PatientsTypeOfByDayChart />
                     </div>
                 </div>
             </ContentArticle>
