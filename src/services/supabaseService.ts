@@ -282,18 +282,3 @@ export const signInWithPassword = async (
         password: password,
     })
 }
-
-// TODO: delete
-export const registerUserOriginal = async (
-    email: string,
-    password: string,
-    username: string
-): Promise<AuthResponse> => {
-    return await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-            data: { username },
-        },
-    })
-}

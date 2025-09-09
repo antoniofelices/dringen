@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import {
     Card,
     CardContent,
@@ -16,10 +15,6 @@ const SignIn = () => {
             </CardHeader>
             <CardContent>
                 <SignInForm />
-                <p className="text-xs mt-4 text-center">
-                    {content.textToSignUp}{' '}
-                    <Link to="/sign-up">{content.textButtonSignUp}</Link>
-                </p>
             </CardContent>
         </Card>
     )
