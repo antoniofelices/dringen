@@ -1,8 +1,9 @@
 import type { Tables } from '@/types/database.types'
 import { vi } from 'vitest'
 
-// Mock user type based on actual database schema
-export const createMockUser = (overrides: Partial<Tables<'medical_user'>> = {}): Tables<'medical_user'> => ({
+export const createMockUser = (
+    overrides: Partial<Tables<'medical_user'>> = {}
+): Tables<'medical_user'> => ({
     id: '123',
     email: 'test@example.com',
     user_name: 'Lorem',
@@ -16,8 +17,9 @@ export const createMockUser = (overrides: Partial<Tables<'medical_user'>> = {}):
     ...overrides,
 })
 
-// Mock patient type based on actual database schema
-export const createMockPatient = (overrides: Partial<Tables<'medical_patient'>> = {}): Tables<'medical_patient'> => ({
+export const createMockPatient = (
+    overrides: Partial<Tables<'medical_patient'>> = {}
+): Tables<'medical_patient'> => ({
     id: '1',
     user_name: 'Lorem',
     user_last_name: 'Ipsum',
@@ -34,8 +36,9 @@ export const createMockPatient = (overrides: Partial<Tables<'medical_patient'>> 
     ...overrides,
 })
 
-// Mock clinical history type based on actual database schema
-export const createMockClinicalHistory = (overrides: Partial<Tables<'medical_clinical_history'>> = {}): Tables<'medical_clinical_history'> => ({
+export const createMockClinicalHistory = (
+    overrides: Partial<Tables<'medical_clinical_history'>> = {}
+): Tables<'medical_clinical_history'> => ({
     id: '1',
     patient_id: '123',
     type_of: 'nutricional',
@@ -67,7 +70,6 @@ export const createMockClinicalHistory = (overrides: Partial<Tables<'medical_cli
     ...overrides,
 })
 
-// Mock Supabase Auth User type
 export const createMockAuthUser = (overrides: any = {}) => ({
     id: '123',
     email: 'test@example.com',
@@ -84,14 +86,12 @@ export const createMockAuthUser = (overrides: any = {}) => ({
     ...overrides,
 })
 
-// Mock Supabase Subscription type
 export const createMockSubscription = () => ({
     id: 'sub-123',
     callback: vi.fn(),
     unsubscribe: vi.fn(),
 })
 
-// Mock hook return types
 export const createMockUseAuthReturn = (overrides: any = {}) => ({
     user: null,
     loading: false,
