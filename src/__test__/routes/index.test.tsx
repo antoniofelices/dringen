@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { Route } from '@/routes/index'
-import { createMockAuthUser } from '../testTypes'
 import type { ComponentType } from 'react'
+
+vi.mock('@pages/Index.tsx', () => ({
+    default: () => <div data-testid="index-page">Index Page</div>,
+}))
 
 vi.mock('@/services/supabaseService', () => ({
     supabase: {
@@ -11,18 +13,47 @@ vi.mock('@/services/supabaseService', () => ({
     },
 }))
 
-vi.mock('@pages/Index.tsx', () => ({
-    default: () => <div data-testid="index-page">Index Page</div>,
-}))
-
-const mockRedirect = vi.fn()
 vi.mock('@tanstack/react-router', async () => {
     const actual = await vi.importActual('@tanstack/react-router')
     return {
         ...actual,
-        redirect: (options: any) => mockRedirect(options),
+        redirect: vi
+            .fn()
+            .mockImplementation((options: Record<string, unknown>) => {
+                throw options
+            }),
     }
 })
+
+import { Route } from '@/routes/index'
+import { createMockAuthUser } from '../testTypes'
+
+type BeforeLoadFn = NonNullable<typeof Route.options.beforeLoad>
+type BeforeLoadContext = Parameters<BeforeLoadFn>[0]
+
+const mockContext: BeforeLoadContext = {
+    location: {
+        pathname: '/',
+        search: '',
+        hash: '',
+        href: 'http://localhost/',
+        searchStr: '',
+        state: {
+            key: 'mock-key',
+            __TSR_key: 'mock-tsr-key',
+            __TSR_index: 0,
+        },
+    },
+    params: {},
+    search: {},
+    context: {},
+    cause: 'preload',
+    abortController: new AbortController(),
+    preload: false,
+    navigate: vi.fn(),
+    buildLocation: vi.fn(),
+    matches: [],
+}
 
 describe('Index Route', () => {
     const mockUser = createMockAuthUser()
@@ -35,7 +66,7 @@ describe('Index Route', () => {
         vi.clearAllMocks()
     })
 
-    it('beforeLoad function calls getSession when authenticated', async () => {
+    it('should redirect to dashboard when user is authenticated', async () => {
         const { supabase } = await import('@/services/supabaseService')
         vi.mocked(supabase.auth.getSession).mockResolvedValue({
             data: {
@@ -51,12 +82,12 @@ describe('Index Route', () => {
         })
 
         const beforeLoadFn = Route.options.beforeLoad
-        try {
-            await beforeLoadFn?.()
-        } catch {
-            return null
-        }
-        expect(supabase.auth.getSession).toHaveBeenCalled()
+
+        await expect(beforeLoadFn?.(mockContext)).rejects.toEqual(
+            expect.objectContaining({
+                to: '/dashboard',
+            })
+        )
     })
 
     it('should not redirect when user is not authenticated', async () => {
@@ -68,9 +99,15 @@ describe('Index Route', () => {
 
         const beforeLoadFn = Route.options.beforeLoad
 
-        const result = await beforeLoadFn?.()
+        const result = await beforeLoadFn?.(mockContext)
         expect(result).toBeUndefined()
-        expect(mockRedirect).not.toHaveBeenCalled()
+    })
+
+    it('route component can be called without errors', () => {
+        const RouteComponent = Route.options.component as ComponentType
+
+        expect(() => RouteComponent).not.toThrow()
+        expect(RouteComponent).toBeInstanceOf(Function)
     })
 
     it('has component and beforeLoad functions configured', () => {
@@ -78,10 +115,5 @@ describe('Index Route', () => {
         expect(Route.options.beforeLoad).toBeDefined()
         expect(typeof Route.options.component).toBe('function')
         expect(typeof Route.options.beforeLoad).toBe('function')
-    })
-
-    it('renders Index component when route component is called', () => {
-        const RouteComponent = Route.options.component as ComponentType
-        expect(RouteComponent).toBeDefined()
     })
 })

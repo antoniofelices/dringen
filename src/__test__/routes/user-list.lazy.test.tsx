@@ -66,11 +66,11 @@ describe('user/list.lazy Route', () => {
 
         const { container } = render(<RouteComponent />)
 
-        // Check the nesting structure
         const protectedRoute = screen.getByTestId('protected-route')
         const listUserPage = screen.getByTestId('list-user-page')
 
         expect(protectedRoute).toContainElement(listUserPage)
+        return container
     })
 
     it('restricts access to admin users only', () => {
