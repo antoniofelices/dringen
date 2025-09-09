@@ -53,7 +53,7 @@ const DisplayClinicalHistory = () => {
                             >
                                 <h3 className="my-4 border-b-2 pb-4">
                                     {item?.created_at && (
-                                        <DialogTrigger className="flex justify-between w-full">
+                                        <DialogTrigger className="flex justify-between w-full cursor-pointer hover:scale-101 transform-gpu">
                                             <div>
                                                 {transformDate(item.created_at)}{' '}
                                                 -{' '}

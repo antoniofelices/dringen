@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { PatientType, UserType } from '@/types/interfaces'
 import type { NavigateFn } from '@tanstack/react-router'
-import { ArrowUpDown, Ellipsis } from 'lucide-react'
+import { ArrowUpDown, ArrowRight } from 'lucide-react'
 
 const createPatientColumns = (
     navigate: NavigateFn
@@ -64,7 +64,7 @@ const createPatientColumns = (
             const id = row.original.id
             return (
                 <button onClick={() => navigate({ to: `/patient/${id}` })}>
-                    <Ellipsis size="16" />
+                    <ArrowRight size="16" />
                 </button>
             )
         },
@@ -147,7 +147,7 @@ const createUserColumns = (navigate: NavigateFn): ColumnDef<UserType>[] => [
             const id = row.original.id
             return (
                 <button onClick={() => navigate({ to: `/user/${id}` })}>
-                    <Ellipsis size="16" />
+                    <ArrowRight size="16" />
                 </button>
             )
         },
