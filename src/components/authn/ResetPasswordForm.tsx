@@ -66,7 +66,7 @@ const ResetPasswordForm = () => {
 
     return (
         <Form {...form}>
-            <form className="" onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormFieldInputControl
                     control={form.control}
                     fieldName="password"

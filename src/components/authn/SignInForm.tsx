@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { toast } from 'sonner'
 import { Mail, Lock } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from '@tanstack/react-router'
@@ -7,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signInWithPassword } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
-import { Input } from '@/components/ui/base/input'
-import { Label } from '@/components/ui/base/label'
+import { Form } from '@components/ui/base/form'
+import FormFieldInputControl from '@components/ui/FormFieldInputControl'
 import content from '@/config/data/authn/signInForm'
 
 const signInSchema = z.object({
@@ -22,89 +22,77 @@ const signInSchema = z.object({
 type FormData = z.infer<typeof signInSchema>
 
 const SignInForm = () => {
-    const emailId = useId()
-    const passwordId = useId()
+    const defaultValues = {
+        email: '',
+        password: '',
+    }
     const navigate = useNavigate()
 
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isSubmitting },
-    } = useForm<FormData>({
+    const form = useForm<FormData>({
         resolver: zodResolver(signInSchema),
+        defaultValues: defaultValues,
     })
 
-    const onSubmit = async (data: FormData) => {
-        const { error } = await signInWithPassword(data.email, data.password)
+    const onSubmit = async (formData: FormData) => {
+        try {
+            const { error } = await signInWithPassword(
+                formData.email,
+                formData.password
+            )
+            if (error) {
+                const { message } = mapSupabaseError(error.message)
 
-        if (error) {
-            const { field, message } = mapSupabaseError(error.message)
-            setError(field, {
+                form.setError('root', {
+                    type: 'server',
+                    message,
+                })
+                toast.error(`${content.textToastFail}: ${message}`)
+                return
+            }
+            navigate({ to: '/patient/list' })
+        } catch (error) {
+            const errorMessage =
+                error instanceof Error ? error.message : content.textToastFail
+            const { message } = mapSupabaseError(errorMessage)
+
+            form.setError('root', {
                 type: 'server',
                 message,
             })
+            toast.error(`${content.textToastFail}: ${message}`)
             return
         }
-
-        navigate({ to: '/patient/list' })
     }
 
     return (
-        <>
-            <form className="" onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-5">
-                    <Label
-                        htmlFor={emailId}
-                        className="text-sm font-bold flex items-center gap-2 mb-1"
-                    >
-                        <Mail className="w-4 h-4" />
-                        {content.labelEmail}
-                    </Label>
-                    <Input
-                        id={emailId}
-                        type="email"
-                        {...register('email')}
-                        placeholder={content.labelEmail}
-                    />
-                    {errors.email && (
-                        <span className="text-red text-sm mt-1">
-                            {errors.email?.message}
-                        </span>
-                    )}
-                </div>
-                <div className="my-5">
-                    <Label
-                        htmlFor={passwordId}
-                        className="text-sm font-bold flex items-center gap-2 mb-1"
-                    >
-                        <Lock className="w-4 h-4" />
-                        {content.labelPassword}
-                    </Label>
-                    <Input
-                        id={passwordId}
-                        type="password"
-                        {...register('password')}
-                        placeholder={content.labelPassword}
-                    />
-                    {errors.password && (
-                        <span className="text-red text-sm mt-1">
-                            {errors.password?.message}
-                        </span>
-                    )}
-                </div>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormFieldInputControl
+                    control={form.control}
+                    fieldName="email"
+                    icon={Mail}
+                    label={content.labelEmail}
+                    type="email"
+                />
+                <FormFieldInputControl
+                    control={form.control}
+                    fieldName="password"
+                    icon={Lock}
+                    label={content.labelPassword}
+                    type="password"
+                />
                 <Button type="submit" className="w-full">
-                    {isSubmitting
+                    {form.formState.isSubmitting
                         ? content.textButtonSending
                         : content.textButtonSend}
                 </Button>
             </form>
-            {errors.root && (
+            {form.formState.errors.root && (
                 <div className="text-red text-sm mt-2 text-center">
-                    {errors.root.message}
+                    {form.formState.errors.root.message}
                 </div>
             )}
-        </>
+        </Form>
     )
 }
 

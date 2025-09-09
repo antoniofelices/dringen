@@ -36,11 +36,11 @@ const Aside = () => {
         <Sidebar collapsible="icon">
             <SidebarHeader>
                 <Logo customClasses="ml-2" />
-                <SidebarMenu>
+                <SidebarMenu className="mt-8">
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to={'/dashboard'}>
-                                <Home />
+                                <Home className="stroke-blue-600" />
                                 {content.textHome}
                             </Link>
                         </SidebarMenuButton>
@@ -84,7 +84,7 @@ const Aside = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
-                                    <Circle />
+                                    <Circle className="stroke-blue-600" />
                                     {user?.user_name}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>

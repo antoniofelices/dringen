@@ -27,7 +27,9 @@ const MenuItems = ({
                 >
                     <SidebarMenuButton asChild>
                         <Link to={`/${item.url}` as any}>
-                            {item.icon && <item.icon />}
+                            {item.icon && (
+                                <item.icon className="stroke-blue-600" />
+                            )}
                             {item.text}
                         </Link>
                     </SidebarMenuButton>
