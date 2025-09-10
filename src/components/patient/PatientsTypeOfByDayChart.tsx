@@ -32,6 +32,8 @@ import {
 
 import content from '@data/patient/patientsCharts'
 
+import { useDataTypeOfByDay } from '@hooks/usePatientsStadistics'
+
 const chartData = [
     { date: '2024-04-01', nutritional: 222, general: 150 },
     { date: '2024-04-02', nutritional: 97, general: 180 },
@@ -127,6 +129,10 @@ const chartData = [
 ]
 
 const PatientsTypeOfByDayChart = () => {
+    const lorem = useDataTypeOfByDay()
+
+    console.log(lorem)
+
     const [timeRange, setTimeRange] = useState('90d')
 
     const filteredData = chartData.filter((item) => {
