@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { chartAreaConfig } from '@/config/charts'
-import { useDataTypeOfByDay } from '@/hooks/usePatientsStadistics'
+import { useDataTypeOfAssistanceByDay } from '@/hooks/usePatientsStadistics'
 import {
     Card,
     CardAction,
@@ -29,36 +29,13 @@ import {
 
 import content from '@data/patient/patientsCharts'
 
-const chartData = [
-    { date: '2025-06-13', nutritional: 81, general: 130 },
-    { date: '2025-06-14', nutritional: 426, general: 380 },
-    { date: '2025-06-15', nutritional: 307, general: 350 },
-    { date: '2025-06-16', nutritional: 371, general: 310 },
-    { date: '2025-06-17', nutritional: 475, general: 520 },
-    { date: '2025-06-18', nutritional: 107, general: 170 },
-    { date: '2025-08-19', nutritional: 341, general: 290 },
-    { date: '2025-08-20', nutritional: 408, general: 450 },
-    { date: '2025-08-21', nutritional: 169, general: 210 },
-    { date: '2025-08-22', nutritional: 317, general: 270 },
-    { date: '2025-08-23', nutritional: 480, general: 530 },
-    { date: '2025-08-24', nutritional: 132, general: 180 },
-    { date: '2025-08-25', nutritional: 141, general: 190 },
-    { date: '2025-08-26', nutritional: 434, general: 380 },
-    { date: '2025-09-02', nutritional: 448, general: 490 },
-    { date: '2025-09-03', nutritional: 149, general: 200 },
-    { date: '2025-09-05', nutritional: 103, general: 160 },
-    { date: '2025-09-09', nutritional: 446, general: 400 },
-]
-
-const PatientsTypeOfByDayChart = () => {
-    const lorem = useDataTypeOfByDay()
-    console.log(lorem)
-
+const PatientsTypeOfByAssistanceDayChart = () => {
+    const chartData = useDataTypeOfAssistanceByDay()
     const [timeRange, setTimeRange] = useState('90d')
 
     const filteredData = chartData.filter((item) => {
         const date = new Date(item.date)
-        const referenceDate = new Date().toJSON().slice(0, 10)
+        const referenceDate = new Date().toISOString().slice(0, 10)
         let daysToSubtract = 90
         if (timeRange === '30d') {
             daysToSubtract = 30
@@ -204,4 +181,4 @@ const PatientsTypeOfByDayChart = () => {
     )
 }
 
-export default PatientsTypeOfByDayChart
+export default PatientsTypeOfByAssistanceDayChart

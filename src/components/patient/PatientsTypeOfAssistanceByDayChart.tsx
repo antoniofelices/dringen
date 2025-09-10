@@ -1,6 +1,6 @@
 import { Pie, PieChart } from 'recharts'
 import { chartPieConfig } from '@/config/charts'
-import { useDataTypeOf } from '@/hooks/usePatientsStadistics'
+import { useDataTypeOfAssistance } from '@/hooks/usePatientsStadistics'
 import {
     Card,
     CardContent,
@@ -15,8 +15,8 @@ import {
 } from '@components/ui/base/chart'
 import content from '@data/patient/patientsCharts'
 
-const PatientsTypeOfChart = () => {
-    const patientsResidences = useDataTypeOf()
+const PatientsTypeOfAssistanceChart = () => {
+    const patientsResidences = useDataTypeOfAssistance()
 
     const dataTypeOfChart = patientsResidences.map((item, index) => {
         const chartKey =
@@ -58,4 +58,4 @@ const PatientsTypeOfChart = () => {
     )
 }
 
-export default PatientsTypeOfChart
+export default PatientsTypeOfAssistanceChart

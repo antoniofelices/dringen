@@ -35,7 +35,7 @@ export const useDataResidence = () => {
     return result
 }
 
-export const useDataTypeOf = () => {
+export const useDataTypeOfAssistance = () => {
     const { clinicalHistory } = useClinicalHistory()
 
     const typeOfData = useMemo(() => {
@@ -60,11 +60,11 @@ export const useDataTypeOf = () => {
     return result
 }
 
-export const useDataTypeOfByDay = () => {
+export const useDataTypeOfAssistanceByDay = () => {
     const { clinicalHistory } = useClinicalHistory()
 
     const typeOfData = useMemo(() => {
-        return (
+        const rawData =
             clinicalHistory
                 ?.filter((item) => item.type_of != null)
                 .map((item) => ({
@@ -74,30 +74,37 @@ export const useDataTypeOfByDay = () => {
                 .sort((a, b) => {
                     const dateA = new Date(a.date)
                     const dateB = new Date(b.date)
-
                     return dateA.getTime() - dateB.getTime()
                 })
                 .map((item) => ({
                     type: item.type,
-                    date: new Date(item.date).toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'numeric',
-                        day: 'numeric',
-                    }),
+                    date: new Date(item.date).toISOString().slice(0, 10),
                 })) ?? []
+
+        const groupedData = rawData.reduce(
+            (total, currentValue) => {
+                const { date, type } = currentValue
+
+                if (!total[date]) {
+                    total[date] = { date, nutritional: 0, general: 0 }
+                }
+
+                if (type === 'nutricional') {
+                    total[date].nutritional += 1
+                } else if (type === 'general') {
+                    total[date].general += 1
+                }
+
+                return total
+            },
+            {} as Record<
+                string,
+                { date: string; nutritional: number; general: number }
+            >
         )
+
+        return Object.values(groupedData)
     }, [clinicalHistory])
-
-    // const uniqueTypeOf = {
-    //     ...typeOfData,
-    //     ...new Set(typeOfData.map((item) => item.date).filter(Boolean)),
-    // }
-
-    // const result = uniqueTypeOf.map((item) => ({
-    //     type: item?.type_of,
-    //     date: item.date,
-    //     quantity: typeOfData.filter((q) => q.type === item.type_of).length,
-    // }))
 
     return typeOfData
 }
