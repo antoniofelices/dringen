@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { chartAreaConfig } from '@/config/charts'
-import { useDataTypeOfAssistanceByDay } from '@/hooks/usePatientsStadistics'
+import { useDataAssistanceTypeDate } from '@/hooks/usePatientsStadistics'
 import {
     Card,
     CardAction,
@@ -10,7 +10,6 @@ import {
     CardFooter,
     CardTitle,
 } from '@components/ui/base/card'
-
 import {
     ChartContainer,
     ChartLegend,
@@ -18,7 +17,6 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from '@/components/ui/base/chart'
-
 import {
     Select,
     SelectContent,
@@ -26,11 +24,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/base/select'
-
 import content from '@data/patient/patientsCharts'
 
-const PatientsTypeOfByAssistanceDayChart = () => {
-    const chartData = useDataTypeOfAssistanceByDay()
+const PatientsAssistanceTypeDateChart = () => {
+    const chartData = useDataAssistanceTypeDate()
     const [timeRange, setTimeRange] = useState('90d')
 
     const filteredData = chartData.filter((item) => {
@@ -181,4 +178,4 @@ const PatientsTypeOfByAssistanceDayChart = () => {
     )
 }
 
-export default PatientsTypeOfByAssistanceDayChart
+export default PatientsAssistanceTypeDateChart

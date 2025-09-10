@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import {
     useDataTotalPatients,
     useDataResidence,
-    useDataTypeOfAssistance,
+    useDataAssistanceType,
 } from '@/hooks/usePatientsStadistics'
 import {
     createMockPatient,
@@ -135,7 +135,7 @@ describe('usePatientsStadistics', () => {
                 })
             )
 
-            const { result } = renderHook(() => useDataTypeOfAssistance())
+            const { result } = renderHook(() => useDataAssistanceType())
 
             expect(result.current).toEqual([
                 {
@@ -159,7 +159,7 @@ describe('usePatientsStadistics', () => {
                 })
             )
 
-            const { result } = renderHook(() => useDataTypeOfAssistance())
+            const { result } = renderHook(() => useDataAssistanceType())
 
             expect(result.current).toEqual([])
         })

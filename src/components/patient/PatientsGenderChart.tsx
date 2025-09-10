@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 import { chartMultipleLinesConfig } from '@/config/charts'
-// import { useDataTypeOf } from '@/hooks/usePatientsStadistics'
+import { useDataGenderDate } from '@/hooks/usePatientsStadistics'
 import {
     Card,
+    CardAction,
     CardContent,
     CardHeader,
     CardFooter,
@@ -13,24 +15,66 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from '@components/ui/base/chart'
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/base/select'
 import content from '@data/patient/patientsCharts'
 
-const chartData = [
-    { month: 'January', female: 186, male: 80, noBinary: 73 },
-    { month: 'February', female: 305, male: 200, noBinary: 3 },
-    { month: 'March', female: 237, male: 120, noBinary: 11 },
-    { month: 'April', female: 73, male: 190, noBinary: 91 },
-    { month: 'May', female: 209, male: 130, noBinary: 16 },
-    { month: 'June', female: 214, male: 140, noBinary: 48 },
-]
-
 const PatientsGenderChart = () => {
+    const chartData = useDataGenderDate()
+
+    const [timeRange, setTimeRange] = useState('90d')
+
+    const filteredData = chartData.filter((item) => {
+        const date = new Date(item.date)
+        const referenceDate = new Date().toISOString().slice(0, 10)
+        let daysToSubtract = 90
+        if (timeRange === '30d') {
+            daysToSubtract = 30
+        } else if (timeRange === '7d') {
+            daysToSubtract = 7
+        }
+        const startDate = new Date(referenceDate)
+        startDate.setDate(startDate.getDate() - daysToSubtract)
+        return date >= startDate
+    })
+
     return (
         <Card>
             <CardHeader>
                 <CardTitle>
                     <h2 className="font-extrabold">{content.titleGender}</h2>
                 </CardTitle>
+                <CardAction>
+                    <Select value={timeRange} onValueChange={setTimeRange}>
+                        <SelectTrigger
+                            className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex"
+                            aria-label="Select a value"
+                        >
+                            <SelectValue
+                                placeholder={
+                                    content.labelOption3ChartTypeOfByDay
+                                }
+                            />
+                        </SelectTrigger>
+                        <SelectContent className="rounded-xl">
+                            <SelectItem value="90d" className="rounded-lg">
+                                {content.labelOption1ChartTypeOfByDay}
+                            </SelectItem>
+                            <SelectItem value="30d" className="rounded-lg">
+                                {content.labelOption2ChartTypeOfByDay}
+                            </SelectItem>
+                            <SelectItem value="7d" className="rounded-lg">
+                                {content.labelOption3ChartTypeOfByDay}
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+                </CardAction>
             </CardHeader>
             <CardContent>
                 <ChartContainer
@@ -39,7 +83,7 @@ const PatientsGenderChart = () => {
                 >
                     <LineChart
                         accessibilityLayer
-                        data={chartData}
+                        data={filteredData}
                         margin={{
                             left: 12,
                             right: 12,
@@ -47,15 +91,33 @@ const PatientsGenderChart = () => {
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
-                            dataKey="month"
+                            dataKey="date"
                             tickLine={false}
                             axisLine={false}
                             tickMargin={8}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            minTickGap={32}
+                            tickFormatter={(value) => {
+                                const date = new Date(value)
+                                return date.toLocaleDateString('es-ES', {
+                                    month: 'short',
+                                    day: 'numeric',
+                                })
+                            }}
                         />
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent />}
+                            content={
+                                <ChartTooltipContent
+                                    labelFormatter={(value) => {
+                                        return new Date(
+                                            value
+                                        ).toLocaleDateString('es-ES', {
+                                            month: 'short',
+                                            day: 'numeric',
+                                        })
+                                    }}
+                                />
+                            }
                         />
                         <Line
                             dataKey="female"
