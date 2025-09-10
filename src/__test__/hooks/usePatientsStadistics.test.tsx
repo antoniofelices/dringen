@@ -3,9 +3,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import {
     useDataTotalPatients,
     useDataResidence,
-    useDataTypeOf,
+    useDataAssistanceType,
 } from '@/hooks/usePatientsStadistics'
-import { createMockPatient, createMockClinicalHistory, createMockUsePatientsReturn, createMockUseClinicalHistoryReturn } from '../testTypes'
+import {
+    createMockPatient,
+    createMockClinicalHistory,
+    createMockUsePatientsReturn,
+    createMockUseClinicalHistoryReturn,
+} from '../testTypes'
 
 vi.mock('@/hooks/usePatients')
 vi.mock('@/hooks/useClinicalHistory')
@@ -57,9 +62,11 @@ describe('usePatientsStadistics', () => {
     describe('useDataTotalPatients', () => {
         it('should return correct total number of patients', async () => {
             const { usePatients } = await import('@/hooks/usePatients')
-            vi.mocked(usePatients).mockReturnValue(createMockUsePatientsReturn({
-                patients: mockPatientsData,
-            }))
+            vi.mocked(usePatients).mockReturnValue(
+                createMockUsePatientsReturn({
+                    patients: mockPatientsData,
+                })
+            )
 
             const { result } = renderHook(() => useDataTotalPatients())
 
@@ -68,9 +75,11 @@ describe('usePatientsStadistics', () => {
 
         it('should return undefined when no patients data', async () => {
             const { usePatients } = await import('@/hooks/usePatients')
-            vi.mocked(usePatients).mockReturnValue(createMockUsePatientsReturn({
-                patients: undefined,
-            }))
+            vi.mocked(usePatients).mockReturnValue(
+                createMockUsePatientsReturn({
+                    patients: undefined,
+                })
+            )
 
             const { result } = renderHook(() => useDataTotalPatients())
 
@@ -81,9 +90,11 @@ describe('usePatientsStadistics', () => {
     describe('useDataResidence', () => {
         it('should return residence statistics correctly', async () => {
             const { usePatients } = await import('@/hooks/usePatients')
-            vi.mocked(usePatients).mockReturnValue(createMockUsePatientsReturn({
-                patients: mockPatientsData,
-            }))
+            vi.mocked(usePatients).mockReturnValue(
+                createMockUsePatientsReturn({
+                    patients: mockPatientsData,
+                })
+            )
 
             const { result } = renderHook(() => useDataResidence())
 
@@ -101,9 +112,11 @@ describe('usePatientsStadistics', () => {
 
         it('should handle empty patients array', async () => {
             const { usePatients } = await import('@/hooks/usePatients')
-            vi.mocked(usePatients).mockReturnValue(createMockUsePatientsReturn({
-                patients: [],
-            }))
+            vi.mocked(usePatients).mockReturnValue(
+                createMockUsePatientsReturn({
+                    patients: [],
+                })
+            )
 
             const { result } = renderHook(() => useDataResidence())
 
@@ -111,14 +124,18 @@ describe('usePatientsStadistics', () => {
         })
     })
 
-    describe('useDataTypeOf', () => {
+    describe('useDataTypeOfAssistance', () => {
         it('should return consultation type statistics correctly', async () => {
-            const { useClinicalHistory } = await import('@/hooks/useClinicalHistory')
-            vi.mocked(useClinicalHistory).mockReturnValue(createMockUseClinicalHistoryReturn({
-                clinicalHistory: mockClinicalHistoryData,
-            }))
+            const { useClinicalHistory } = await import(
+                '@/hooks/useClinicalHistory'
+            )
+            vi.mocked(useClinicalHistory).mockReturnValue(
+                createMockUseClinicalHistoryReturn({
+                    clinicalHistory: mockClinicalHistoryData,
+                })
+            )
 
-            const { result } = renderHook(() => useDataTypeOf())
+            const { result } = renderHook(() => useDataAssistanceType())
 
             expect(result.current).toEqual([
                 {
@@ -133,12 +150,16 @@ describe('usePatientsStadistics', () => {
         })
 
         it('should handle empty clinical history array', async () => {
-            const { useClinicalHistory } = await import('@/hooks/useClinicalHistory')
-            vi.mocked(useClinicalHistory).mockReturnValue(createMockUseClinicalHistoryReturn({
-                clinicalHistory: [],
-            }))
+            const { useClinicalHistory } = await import(
+                '@/hooks/useClinicalHistory'
+            )
+            vi.mocked(useClinicalHistory).mockReturnValue(
+                createMockUseClinicalHistoryReturn({
+                    clinicalHistory: [],
+                })
+            )
 
-            const { result } = renderHook(() => useDataTypeOf())
+            const { result } = renderHook(() => useDataAssistanceType())
 
             expect(result.current).toEqual([])
         })

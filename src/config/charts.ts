@@ -37,3 +37,29 @@ export const chartLineConfig = {
         color: 'var(--color-chart-1)',
     },
 } satisfies ChartConfig
+
+export const chartAreaConfig = {
+    area1: {
+        label: 'Area 1',
+        color: 'var(--color-chart-1)',
+    },
+    area2: {
+        label: 'Area 2',
+        color: 'var(--color-chart-2)',
+    },
+} satisfies ChartConfig
+
+export const chartMultipleLinesConfig = {
+    line1: {
+        label: 'Line1',
+        color: 'var(--color-chart-1)',
+    },
+    line2: {
+        label: 'Line2',
+        color: 'var(--color-chart-3)',
+    },
+    line3: {
+        label: 'Line3',
+        color: 'var(--color-chart-5)',
+    },
+} satisfies ChartConfig
