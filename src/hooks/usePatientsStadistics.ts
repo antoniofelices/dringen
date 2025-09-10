@@ -88,10 +88,10 @@ export const useDataTypeOfByDay = () => {
         )
     }, [clinicalHistory])
 
-    const uniqueTypeOf = {
-        ...typeOfData,
-        ...new Set(typeOfData.map((item) => item.date).filter(Boolean)),
-    }
+    // const uniqueTypeOf = {
+    //     ...typeOfData,
+    //     ...new Set(typeOfData.map((item) => item.date).filter(Boolean)),
+    // }
 
     // const result = uniqueTypeOf.map((item) => ({
     //     type: item?.type_of,
@@ -99,5 +99,5 @@ export const useDataTypeOfByDay = () => {
     //     quantity: typeOfData.filter((q) => q.type === item.type_of).length,
     // }))
 
-    return uniqueTypeOf
+    return typeOfData
 }

@@ -11,6 +11,9 @@ const content = {
     labelOption3ChartTypeOfByDay: 'Last 7 days',
     textDescriptionChartTypeOfByDay:
         'This shows the number of patients. It separates them by type of consultation.',
+    titleGender: 'Gender by months',
+    textDescriptionGender:
+        'This shows the number of patients. It separates them by gender and months.',
 }
 
 export default content

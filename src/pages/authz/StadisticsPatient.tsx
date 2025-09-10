@@ -4,6 +4,7 @@ import HeaderArticle from '@components/ui/HeaderArticle'
 import PatientsResidenceChart from '@components/patient/PatientsResidenceChart'
 import PatientsTypeOfChart from '@components/patient/PatientsTypeOfChart'
 import PatientsTypeOfByDayChart from '@components/patient/PatientsTypeOfByDayChart'
+import PatientsGenderChart from '@components/patient/PatientsGenderChart'
 import content from '@/config/data/pages/stadisticsPatient'
 
 const StadisticsPatient = () => {
@@ -20,6 +21,9 @@ const StadisticsPatient = () => {
                     </div>
                     <div className="col-span-6">
                         <PatientsTypeOfByDayChart />
+                    </div>
+                    <div className="col-span-6">
+                        <PatientsGenderChart />
                     </div>
                 </div>
             </ContentArticle>
