@@ -373,14 +373,12 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
-      upload_medical_file: {
+      validate_medical_file_upload: {
         Args: {
-          file_content_type?: string
-          file_data: string
           file_name: string
           patient_dni_param: string
         }
-        Returns: string
+        Returns: Json
       }
     }
     Enums: {

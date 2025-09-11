@@ -282,3 +282,63 @@ export const signInWithPassword = async (
         password: password,
     })
 }
+
+// Upload files
+export const uploadFiles = async (
+    patientDni: string,
+    fileName: string,
+    file: File
+) => {
+    const { data: validationResult, error: validationError } =
+        await supabase.rpc('validate_medical_file_upload', {
+            patient_dni_param: patientDni,
+            file_name: fileName,
+        })
+
+    if (validationError) throw validationError
+    if (!validationResult?.success) {
+        throw new Error('Upload validation failed')
+    }
+
+    const storagePath = validationResult.path
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('medical-files')
+        .upload(storagePath, file, {
+            cacheControl: '3600',
+            upsert: false,
+            contentType: file.type,
+        })
+
+    if (uploadError) {
+        if (uploadError.message.includes('already exists')) {
+            throw new Error(
+                'Ya existe un archivo con ese nombre para este paciente'
+            )
+        }
+        throw uploadError
+    }
+
+    return {
+        id: uploadData.id,
+        path: uploadData.path,
+        fullPath: uploadData.fullPath,
+        message: 'File uploaded successfully',
+    }
+}
+
+export const getPatientFiles = async (patientDni: string) => {
+    const { data, error } = await supabase.rpc('get_patient_files', {
+        patient_dni_param: patientDni,
+    })
+    if (error) throw error
+    return data
+}
+
+export const canUploadFiles = async (patientDni: string) => {
+    const { data, error } = await supabase.rpc('can_upload_medical_file', {
+        patient_dni_param: patientDni,
+    })
+    if (error) throw error
+    return data
+}

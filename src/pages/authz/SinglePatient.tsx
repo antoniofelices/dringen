@@ -20,6 +20,7 @@ import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayClinicalHistory from '@/components/clinical-history/DisplayClinicalHistory'
+import PatientFiles from '@/components/patient/PatientFiles'
 import PatientHistory from '@components/patient/PatientHistory'
 import PatientWeightChart from '@components/patient/PatientWeightChart'
 import PatientBMIChart from '@components/patient/PatientBMIChart'
@@ -70,6 +71,9 @@ const SinglePatient = () => {
                     <RoleGuard allowedRoles={['admin', 'physician']}>
                         <div className="col-span-3">
                             <PatientHistory />
+                        </div>
+                        <div className="col-spn-6">
+                            <PatientFiles />
                         </div>
                         {clinicalHistory?.[0] && (
                             <div className="col-span-6">

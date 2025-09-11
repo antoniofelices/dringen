@@ -19,6 +19,7 @@ type FormFieldProps<T extends FieldValues> = {
     label: string
     placeholder?: string
     type?: string
+    rules?: object
 }
 
 const FormFieldInputControl = <T extends FieldValues>({
@@ -30,12 +31,14 @@ const FormFieldInputControl = <T extends FieldValues>({
     label,
     placeholder,
     type = 'text',
+    rules,
 }: FormFieldProps<T>) => {
     return (
         <div className={className}>
             <FormField
                 control={control}
                 name={fieldName}
+                rules={rules}
                 render={({ field }) => (
                     <FormItem>
                         <FormLabel>
