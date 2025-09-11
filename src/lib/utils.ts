@@ -5,10 +5,6 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-export function filterArrayOfObjects<T>(array: T[], property: keyof T): T[] {
-    return array.filter((item) => item[property])
-}
-
 export function transformDate(value: string): string {
     const date = new Date(value)
     if (isNaN(date.getTime())) return ''
@@ -33,4 +29,16 @@ export function transformToId(value: string): string {
         .replace(/\s+/g, '-')
         .replace(/[^\w-]+/g, '')
         .replace(/--+/g, '-')
+}
+
+export function fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            const base64 = (reader.result as string).split(',')[1]
+            resolve(base64)
+        }
+        reader.onerror = (error) => reject(error)
+    })
 }
