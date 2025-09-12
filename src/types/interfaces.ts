@@ -40,3 +40,11 @@ export type FileUploadValidationResult = {
     success: boolean
     path?: string
 }
+
+export type PatientFileType = {
+    file_id: string
+    file_name: string
+    file_created_at: string
+    file_updated_at: string
+    file_metadata: Database['public']['Functions']['get_patient_files']['Returns'][0]['file_metadata']
+}

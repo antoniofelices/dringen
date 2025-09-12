@@ -2,9 +2,15 @@ import { useState, useEffect, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
-import { uploadFiles, canUploadFiles } from '@services/supabaseService'
+import {
+    uploadFiles,
+    canUploadFiles,
+    getPatientFiles,
+} from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
+import type { PatientFileType } from '@/types/interfaces'
+import { normalizeFileName } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -48,12 +54,8 @@ const FormUpload = ({
         }
 
         try {
-            const actualFileName = formData.file.name
-            const customFileName = formData.fileName
-                ? `${formData.fileName}-${actualFileName}`
-                : actualFileName
-
-            await uploadFiles(patientDni, customFileName, formData.file)
+            const actualFileName = `${normalizeFileName(formData.fileName)}.pdf`
+            await uploadFiles(patientDni, actualFileName, formData.file)
             toast.success(content.textToastSuccess)
             onSuccess()
         } catch (error) {
@@ -105,6 +107,7 @@ const FormUpload = ({
 
 const PatientFiles = () => {
     const [canUpload, setCanUpload] = useState(false)
+    const [hasFiles, setHasFiles] = useState<PatientFileType[]>([])
 
     const { patientData, refetchPatient } = usePatientContext()
     const patientDni = patientData?.dni ?? ''
@@ -119,14 +122,41 @@ const PatientFiles = () => {
         }
     }, [patientDni])
 
+    const loadFiles = useCallback(async () => {
+        try {
+            const files = await getPatientFiles(patientDni)
+            setHasFiles(files)
+            console.log(files)
+        } catch (error) {
+            console.error(content.textConsoleErrorPermission, error)
+            setHasFiles([])
+        }
+    }, [patientDni])
+
     useEffect(() => {
         if (!patientDni) return
         checkPermissions()
-    }, [patientDni, checkPermissions])
+        loadFiles()
+    }, [patientDni, checkPermissions, loadFiles])
 
     const handleFileUploaded = useCallback(() => {
         refetchPatient()
     }, [refetchPatient])
+
+    const filesData =
+        hasFiles
+            .sort((a, b) => {
+                const dateA = new Date(a.file_created_at)
+                const dateB = new Date(b.file_created_at)
+                return dateA.getTime() - dateB.getTime()
+            })
+            .map((item) => {
+                const date = new Date(item.file_created_at)
+                    .toLocaleDateString('es-ES')
+                    .slice(0, 10)
+                const title = item.file_name.split('/').pop()
+                return { date, title }
+            }) ?? []
 
     return (
         <Card className="h-full">
@@ -138,11 +168,26 @@ const PatientFiles = () => {
             <CardContent>
                 {canUpload && (
                     <>
-                        <h3 className="mb-4">{content.titleForm}</h3>
+                        <h3 className="mb-4">{content.titleUpload}</h3>
                         <FormUpload
                             patientDni={patientDni}
                             onSuccess={handleFileUploaded}
                         />
+                    </>
+                )}
+                {hasFiles.length > 0 && (
+                    <>
+                        <h3 className="mb-4">{content.titleListFiles}</h3>
+                        <ul>
+                            {filesData.map((item, index) => {
+                                return (
+                                    <li key={index}>
+                                        <strong>{item.date}</strong> |{' '}
+                                        {item.title}
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     </>
                 )}
             </CardContent>

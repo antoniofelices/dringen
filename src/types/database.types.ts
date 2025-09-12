@@ -354,11 +354,11 @@ export type Database = {
       get_patient_files: {
         Args: { patient_dni_param: string }
         Returns: {
-          created_at: string
-          id: string
-          metadata: Json
-          name: string
-          updated_at: string
+          file_created_at: string
+          file_id: string
+          file_metadata: Json
+          file_name: string
+          file_updated_at: string
         }[]
       }
       is_admin: {
@@ -374,10 +374,7 @@ export type Database = {
         Returns: boolean
       }
       validate_medical_file_upload: {
-        Args: {
-          file_name: string
-          patient_dni_param: string
-        }
+        Args: { file_name: string; patient_dni_param: string }
         Returns: Json
       }
     }

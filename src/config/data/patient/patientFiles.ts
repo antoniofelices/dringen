@@ -1,7 +1,8 @@
 const content = {
     title: 'Patient Files',
     textNoFiles: 'No files',
-    titleForm: 'Upload files',
+    titleUpload: 'Upload files',
+    titleListFiles: 'Files updated',
     labelFileName: 'File name',
     labelFile: 'File',
     textButtonSend: 'Save',
