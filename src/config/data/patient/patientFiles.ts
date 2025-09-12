@@ -10,6 +10,8 @@ const content = {
     textRequired: 'File name is required',
     textMessageRequired: 'File name cannot be empty',
     textConsoleErrorPermission: 'Error checking upload permissions:',
+    textConsoleErrorLoadFiles: 'Error loading upload files:',
+    textConsoleErrorDownloadingFiles: 'Error downloading upload files:',
     textToastSelectFile: 'Please select a file',
     textToastSuccess: 'File updated successfully',
     textToastFail: 'Failed to update the file',

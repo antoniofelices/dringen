@@ -127,9 +127,8 @@ const PatientFiles = () => {
         try {
             const files = await getPatientFiles(patientDni)
             setHasFiles(files)
-            console.log(files)
         } catch (error) {
-            console.error(content.textConsoleErrorPermission, error)
+            console.error(content.textConsoleErrorLoadFiles, error)
             setHasFiles([])
         }
     }, [patientDni])
@@ -150,8 +149,8 @@ const PatientFiles = () => {
             const downloadUrl = await getFileDownloadUrl(filePath)
             window.open(downloadUrl, '_blank')
         } catch (error) {
-            console.error('Error downloading file:', error)
-            toast.error('Error al descargar el archivo')
+            console.error(content.textConsoleErrorDownloadingFiles, error)
+            toast.error(content.textConsoleErrorDownloadingFiles)
         }
     }
 
