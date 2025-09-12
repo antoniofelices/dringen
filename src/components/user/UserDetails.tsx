@@ -21,9 +21,9 @@ import {
 } from '@/components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
-import FormFieldSwitchControl from '@components/ui/FormFieldSwitchControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldSelect from '@/components/ui/FormFieldSelect'
+import FormFieldSwitch from '@/components/ui/FormFieldSwitch'
 import content from '@/config/data/user/userDetails'
 
 const updateUserSchema = z.object({
@@ -110,29 +110,29 @@ const FormUpdate = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userName"
                     label={content.labelUserName}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="email"
                     label={content.labelEmail}
                     type="email"
                 />
-                <FormFieldSelectControl
+                <FormFieldSelect
                     control={form.control}
                     fieldName="role"
                     label={content.labelRole}
                     options={USERROLES}
                 />
-                <FormFieldSwitchControl
+                <FormFieldSwitch
                     className="mt-6"
                     control={form.control}
                     fieldName="isActive"

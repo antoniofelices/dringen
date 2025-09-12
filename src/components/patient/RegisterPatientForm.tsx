@@ -7,7 +7,7 @@ import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import content from '@/config/data/patient/registerForm'
 
 const registerPatientSchema = z.object({
@@ -76,38 +76,38 @@ const RegisterPatientForm = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userName"
                     label={content.labelUserName}
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="email"
                     label={content.labelEmail}
                     type="email"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="dni"
                     label={content.labelDNI}
                     placeholder="12121212P"
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="phone"
                     label={content.labelPhone}
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="placeOfResidence"
                     label={content.labelPlaceOfResidence}

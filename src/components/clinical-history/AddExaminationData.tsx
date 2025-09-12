@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import type { Control } from 'react-hook-form'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 
 type Props = {
     control: Control<ClinicalHistoryFormDataType>
@@ -34,7 +34,7 @@ const AddExaminationData = ({ control }: Props) => {
                 {fcInputs.map((item) => {
                     return (
                         <Fragment key={item}>
-                            <FormFieldInputControl
+                            <FormFieldInput
                                 fieldName={item}
                                 label={item}
                                 control={control}
@@ -49,7 +49,7 @@ const AddExaminationData = ({ control }: Props) => {
                 {fbInputs.map((item) => {
                     return (
                         <Fragment key={item}>
-                            <FormFieldInputControl
+                            <FormFieldInput
                                 fieldName={item}
                                 label={item}
                                 control={control}
@@ -63,7 +63,7 @@ const AddExaminationData = ({ control }: Props) => {
                 {nutritionIndicatorsInputs.map((item) => {
                     return (
                         <Fragment key={item}>
-                            <FormFieldInputControl
+                            <FormFieldInput
                                 fieldName={item}
                                 label={item}
                                 control={control}

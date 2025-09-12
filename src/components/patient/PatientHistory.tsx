@@ -17,7 +17,7 @@ import {
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
+import FormFieldTextarea from '@/components/ui/FormFieldTextarea'
 import content from '@/config/data/patient/patientHistory'
 
 type FormData = {
@@ -68,17 +68,17 @@ const FormAdd = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldTextareaControl
+                <FormFieldTextarea
                     control={form.control}
                     fieldName="pastMedicalHistory"
                     label={content.labelPastMedicalHistory}
                 />
-                <FormFieldTextareaControl
+                <FormFieldTextarea
                     control={form.control}
                     fieldName="familyHistory"
                     label={content.labelFamilyHistory}
                 />
-                <FormFieldTextareaControl
+                <FormFieldTextarea
                     control={form.control}
                     fieldName="socialHistory"
                     label={content.labelSocialHistory}

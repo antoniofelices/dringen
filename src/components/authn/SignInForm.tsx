@@ -8,7 +8,7 @@ import { signInWithPassword } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import content from '@/config/data/authn/signInForm'
 
 const signInSchema = z.object({
@@ -67,14 +67,14 @@ const SignInForm = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="email"
                     icon={Mail}
                     label={content.labelEmail}
                     type="email"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="password"
                     icon={Lock}

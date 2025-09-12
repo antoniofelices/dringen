@@ -9,7 +9,7 @@ import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import content from '@/config/data/authn/resetPasswordForm'
 
 const resetPasswordSchema = z
@@ -67,14 +67,14 @@ const ResetPasswordForm = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="password"
                     icon={Lock}
                     label={content.labelPassword}
                     type="password"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="confirmPassword"
                     icon={LockKeyhole}

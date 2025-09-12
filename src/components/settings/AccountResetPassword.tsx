@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/base/card'
 import ErrorApi from '@components/ui/ErrorApi'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import Loading from '@components/ui/Loading'
 import content from '@/config/data/settings/accountResetPassword'
 
@@ -85,14 +85,14 @@ const AccountResetPassword = () => {
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <FormFieldInputControl
+                        <FormFieldInput
                             control={form.control}
                             fieldName="password"
                             icon={Lock}
                             label={content.labelPassword}
                             type="password"
                         />
-                        <FormFieldInputControl
+                        <FormFieldInput
                             control={form.control}
                             fieldName="confirmPassword"
                             icon={LockKeyhole}

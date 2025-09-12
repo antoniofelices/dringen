@@ -3,8 +3,8 @@ import { CirclePlus, Trash2 } from 'lucide-react'
 import type { Control } from 'react-hook-form'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
 import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldSelectControl from '@/components/ui/FormFieldSelectControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldSelect from '@/components/ui/FormFieldSelect'
 import { Button } from '@components/ui/base/button'
 import content from '@data/clinical-history/addDiagnosis'
 
@@ -47,21 +47,21 @@ const AddDiagnosis = ({ control }: Props) => {
                     key={field.id}
                     className="flex gap-4 justify-between items-center mt-4"
                 >
-                    <FormFieldInputControl
+                    <FormFieldInput
                         className="w-full"
                         fieldName={`diagnoses.${index}.cie10`}
                         label={content.labelCIE}
                         control={control}
                         type="text"
                     />
-                    <FormFieldInputControl
+                    <FormFieldInput
                         className="w-full"
                         fieldName={`diagnoses.${index}.diagnosis`}
                         label={content.labelDiagnosis}
                         control={control}
                         type="text"
                     />
-                    <FormFieldSelectControl
+                    <FormFieldSelect
                         className="w-full"
                         control={control}
                         fieldName={`diagnoses.${index}.certainty`}

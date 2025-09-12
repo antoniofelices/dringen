@@ -35,3 +35,8 @@ export type ClinicalHistoryFormDataType =
     }
 
 export type UserRoleType = Database['public']['Enums']['dn_user_role']
+
+export type FileUploadValidationResult = {
+    success: boolean
+    path?: string
+}

@@ -16,7 +16,7 @@ type FormFieldProps<T extends FieldValues> = {
     label: string
 }
 
-const FormFieldSwitchControl = <T extends FieldValues>({
+const FormFieldSwitch = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
@@ -48,4 +48,4 @@ const FormFieldSwitchControl = <T extends FieldValues>({
     )
 }
 
-export default FormFieldSwitchControl
+export default FormFieldSwitch

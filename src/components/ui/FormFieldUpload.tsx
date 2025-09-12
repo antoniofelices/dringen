@@ -8,6 +8,7 @@ import {
     FormMessage,
 } from '@/components/ui/base/form'
 import { Input } from '@/components/ui/base/input'
+import content from '@data/ui/formFieldUpload'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string
@@ -20,7 +21,7 @@ type FormFieldProps<T extends FieldValues> = {
     maxSize?: number
 }
 
-const FormFieldUploadControl = <T extends FieldValues>({
+const FormFieldUpload = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
@@ -36,10 +37,10 @@ const FormFieldUploadControl = <T extends FieldValues>({
                 name={fieldName}
                 rules={{
                     validate: (file: File | null) => {
-                        if (!file) return 'Please select a file'
+                        if (!file) return `${content.textSelectFile}`
 
                         if (file.size > maxSize) {
-                            return `File size must be less than ${(maxSize / (1024 * 1024)).toFixed(1)}MB`
+                            return `${content.textFileSize} ${(maxSize / (1024 * 1024)).toFixed(1)}MB`
                         }
 
                         if (accept) {
@@ -59,7 +60,7 @@ const FormFieldUploadControl = <T extends FieldValues>({
                             )
 
                             if (!isValidType) {
-                                return `File type not allowed. Accepted types: ${accept}`
+                                return `${content.textAcceptedType} ${accept}`
                             }
                         }
 
@@ -88,7 +89,7 @@ const FormFieldUploadControl = <T extends FieldValues>({
                         )}
                         {maxSize && (
                             <FormDescription>
-                                Maximum file size:{' '}
+                                {content.textMaxFileSize}:{' '}
                                 {(maxSize / (1024 * 1024)).toFixed(1)}MB
                             </FormDescription>
                         )}
@@ -100,4 +101,4 @@ const FormFieldUploadControl = <T extends FieldValues>({
     )
 }
 
-export default FormFieldUploadControl
+export default FormFieldUpload

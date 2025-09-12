@@ -2,7 +2,10 @@ import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse, UserResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
-import type { PatientWithRelationsType } from '@/types/interfaces'
+import type {
+    PatientWithRelationsType,
+    FileUploadValidationResult,
+} from '@/types/interfaces'
 import type { Enums } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
@@ -296,11 +299,12 @@ export const uploadFiles = async (
         })
 
     if (validationError) throw validationError
-    if (!validationResult?.success) {
+    if (!(validationResult as unknown as FileUploadValidationResult)?.success) {
         throw new Error('Upload validation failed')
     }
 
-    const storagePath = validationResult.path
+    const storagePath =
+        (validationResult as unknown as FileUploadValidationResult)?.path ?? ''
 
     const { data: uploadData, error: uploadError } = await supabase.storage
         .from('medical-files')
@@ -313,7 +317,7 @@ export const uploadFiles = async (
     if (uploadError) {
         if (uploadError.message.includes('already exists')) {
             throw new Error(
-                'Ya existe un archivo con ese nombre para este paciente'
+                'There is already a file with that name for this patient'
             )
         }
         throw uploadError

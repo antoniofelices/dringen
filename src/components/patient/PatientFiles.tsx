@@ -13,8 +13,8 @@ import {
     CardTitle,
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@components/ui/FormFieldInputControl'
-import FormFieldUploadControl from '@components/ui/FormFieldUploadControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldUpload from '@/components/ui/FormFieldUpload'
 import content from '@/config/data/patient/patientFiles'
 
 type FormData = {
@@ -71,7 +71,7 @@ const FormUpload = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="fileName"
                     label={content.labelFileName}
@@ -83,7 +83,7 @@ const FormUpload = ({
                         },
                     }}
                 />
-                <FormFieldUploadControl
+                <FormFieldUpload
                     control={form.control}
                     fieldName="file"
                     label={content.labelFile}
@@ -138,7 +138,7 @@ const PatientFiles = () => {
             <CardContent>
                 {canUpload && (
                     <>
-                        <h3>{content.titleForm}</h3>
+                        <h3 className="mb-4">{content.titleForm}</h3>
                         <FormUpload
                             patientDni={patientDni}
                             onSuccess={handleFileUploaded}
