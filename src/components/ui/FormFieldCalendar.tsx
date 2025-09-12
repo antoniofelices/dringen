@@ -25,7 +25,7 @@ type FormFieldProps<T extends FieldValues> = {
     label: string
 }
 
-const FormFieldCalendarControl = <T extends FieldValues>({
+const FormFieldCalendar = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
@@ -83,4 +83,4 @@ const FormFieldCalendarControl = <T extends FieldValues>({
     )
 }
 
-export default FormFieldCalendarControl
+export default FormFieldCalendar

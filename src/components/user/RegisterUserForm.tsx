@@ -16,8 +16,8 @@ import type { PostgrestError } from '@supabase/supabase-js'
 import { USERROLES } from '@/config/config.ts'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldSelectControl from '@components/ui/FormFieldSelectControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldSelect from '@/components/ui/FormFieldSelect'
 import content from '@/config/data/user/registerForm'
 
 const registerUserSchema = z
@@ -104,7 +104,7 @@ const RegisterUserForm = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userName"
                     icon={User}
@@ -112,7 +112,7 @@ const RegisterUserForm = () => {
                     placeholder="Manolo"
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userLastName"
                     icon={User}
@@ -120,7 +120,7 @@ const RegisterUserForm = () => {
                     placeholder="Kabezabolo"
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="email"
                     icon={Mail}
@@ -128,7 +128,7 @@ const RegisterUserForm = () => {
                     placeholder="nf@manolo.es"
                     type="email"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="dni"
                     icon={IdCard}
@@ -136,21 +136,21 @@ const RegisterUserForm = () => {
                     placeholder="12121212P"
                     type="text"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="password"
                     icon={Lock}
                     label={content.labelPassword}
                     type="password"
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="confirmPassword"
                     icon={LockKeyhole}
                     label={content.labelConfirmPassword}
                     type="password"
                 />
-                <FormFieldSelectControl
+                <FormFieldSelect
                     control={form.control}
                     fieldName="role"
                     icon={UserRoundCog}

@@ -18,8 +18,8 @@ import {
 } from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldInputControl from '@components/ui/FormFieldInputControl'
-import FormFieldCalendarControl from '@components/ui/FormFieldCalendarControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
 import content from '@/config/data/patient/patientGeneralData'
 
 type FormData = {
@@ -76,27 +76,27 @@ const FormAdd = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldCalendarControl
+                <FormFieldCalendar
                     control={form.control}
                     fieldName="birthday"
                     label={content.labelBirthday}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="gender"
                     label={content.labelGender}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="birthplace"
                     label={content.labelBirthplace}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="placeOfResidence"
                     label={content.labelPlaceOfResidence}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="occupation"
                     label={content.labelOccupation}

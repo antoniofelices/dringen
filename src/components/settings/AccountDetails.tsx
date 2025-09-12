@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
 import content from '@data/settings/accountDetails'
@@ -99,17 +99,17 @@ const FormUpdate = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userName"
                     label={content.labelUserName}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="userLastName"
                     label={content.labelUserLastName}
                 />
-                <FormFieldInputControl
+                <FormFieldInput
                     control={form.control}
                     fieldName="email"
                     label={content.labelEmail}

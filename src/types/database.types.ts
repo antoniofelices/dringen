@@ -347,6 +347,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_upload_medical_file: {
+        Args: { patient_dni_param: string }
+        Returns: boolean
+      }
+      get_patient_files: {
+        Args: { patient_dni_param: string }
+        Returns: {
+          file_created_at: string
+          file_id: string
+          file_metadata: Json
+          file_name: string
+          file_updated_at: string
+        }[]
+      }
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
@@ -358,6 +372,10 @@ export type Database = {
       is_physician: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      validate_medical_file_upload: {
+        Args: { file_name: string; patient_dni_param: string }
+        Returns: Json
       }
     }
     Enums: {

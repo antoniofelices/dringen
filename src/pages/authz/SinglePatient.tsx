@@ -20,6 +20,7 @@ import Loading from '@components/ui/Loading'
 import AddClinicalHistory from '@components/clinical-history/AddClinicalHistory'
 import PatientGeneralData from '@components/patient/PatientGeneralData'
 import DisplayClinicalHistory from '@/components/clinical-history/DisplayClinicalHistory'
+import PatientFiles from '@/components/patient/PatientFiles'
 import PatientHistory from '@components/patient/PatientHistory'
 import PatientWeightChart from '@components/patient/PatientWeightChart'
 import PatientBMIChart from '@components/patient/PatientBMIChart'
@@ -86,6 +87,9 @@ const SinglePatient = () => {
                                 <PatientBMIChart />
                             </div>
                         )}
+                        <div className="col-span-6">
+                            <PatientFiles />
+                        </div>
                     </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">

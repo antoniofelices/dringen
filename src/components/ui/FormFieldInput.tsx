@@ -1,63 +1,65 @@
-import { useId } from 'react'
-import type {
-    UseFormRegister,
-    FieldErrors,
-    FieldValues,
-    Path,
-} from 'react-hook-form'
+import type { Control, FieldValues, Path } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
+import {
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/base/form'
 import { Input } from '@/components/ui/base/input'
-import { Label } from '@/components/ui/base/label'
-
-// type FormValues = {
-//     [key: string]: string
-// }
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string
-    errors: FieldErrors<T>
+    control: Control<T>
+    description?: string
     fieldName: Path<T>
     icon?: LucideIcon
     label: string
     placeholder?: string
-    register: UseFormRegister<T>
     type?: string
+    rules?: object
 }
 
 const FormFieldInput = <T extends FieldValues>({
     className = 'mb-5',
-    errors,
+    control,
+    description,
     fieldName,
     icon: Icon,
     label,
     placeholder,
-    register,
     type = 'text',
+    rules,
 }: FormFieldProps<T>) => {
-    const inputId = useId()
-    const error = errors?.[fieldName]
-
     return (
         <div className={className}>
-            <Label
-                htmlFor={inputId}
-                className="text-sm font-bold flex items-center gap-2 mb-1"
-            >
-                {Icon && <Icon className="w-4 h-4" />}
-                {label}
-            </Label>
-            <Input
-                id={inputId}
-                type={type}
-                {...register(fieldName)}
-                placeholder={placeholder}
-                className="border-gray-300 dark:border-gray-600"
+            <FormField
+                control={control}
+                name={fieldName}
+                rules={rules}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>
+                            {Icon && <Icon className="w-4 h-4" />}
+                            {label}
+                        </FormLabel>
+                        <FormControl>
+                            <Input
+                                type={type}
+                                {...field}
+                                placeholder={placeholder}
+                                className="border-gray-300 dark:border-gray-600"
+                            />
+                        </FormControl>
+                        {description && (
+                            <FormDescription>{description}</FormDescription>
+                        )}
+                        <FormMessage />
+                    </FormItem>
+                )}
             />
-            {error && (
-                <span className="text-sm text-red-500 mt-1">
-                    {String(error.message)}
-                </span>
-            )}
         </div>
     )
 }

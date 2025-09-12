@@ -5,10 +5,6 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-export function filterArrayOfObjects<T>(array: T[], property: keyof T): T[] {
-    return array.filter((item) => item[property])
-}
-
 export function transformDate(value: string): string {
     const date = new Date(value)
     if (isNaN(date.getTime())) return ''
@@ -33,4 +29,20 @@ export function transformToId(value: string): string {
         .replace(/\s+/g, '-')
         .replace(/[^\w-]+/g, '')
         .replace(/--+/g, '-')
+}
+
+export function normalizeFileName(fileName: string): string {
+    return (
+        fileName
+            .trim()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/ñ/g, 'n')
+            .replace(/Ñ/g, 'N')
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            // eslint-disable-next-line no-useless-escape
+            .replace(/[\s\.]+/g, '-')
+            .replace(/-+/g, '-')
+    )
 }

@@ -1,8 +1,8 @@
 import type { Control } from 'react-hook-form'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
-import FormFieldInputControl from '@/components/ui/FormFieldInputControl'
-import FormFieldTextareaControl from '@components/ui/FormFieldTextareaControl'
-import FormFieldSelectControl from '../ui/FormFieldSelectControl'
+import FormFieldInput from '@/components/ui/FormFieldInput'
+import FormFieldTextarea from '@/components/ui/FormFieldTextarea'
+import FormFieldSelect from '../ui/FormFieldSelect'
 import content from '@data/clinical-history/addExamination'
 
 type Props = {
@@ -12,23 +12,23 @@ type Props = {
 const AddExamination = ({ control }: Props) => {
     return (
         <>
-            <FormFieldSelectControl
+            <FormFieldSelect
                 fieldName="type_of"
                 label={content.labelType}
                 control={control}
                 options={['general', 'nutricional']}
             />
-            <FormFieldTextareaControl
+            <FormFieldTextarea
                 fieldName="examination"
                 label={content.labelExplain}
                 control={control}
             />
-            <FormFieldInputControl
+            <FormFieldInput
                 fieldName="mood"
                 label={content.labelMood}
                 control={control}
             />
-            <FormFieldInputControl
+            <FormFieldInput
                 fieldName="test"
                 label={content.labelTest}
                 control={control}

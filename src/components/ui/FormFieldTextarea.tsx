@@ -1,55 +1,60 @@
-import { useId } from 'react'
-import type { UseFormRegister, FieldErrors } from 'react-hook-form'
+import type { Control, FieldValues, Path } from 'react-hook-form'
+// import type { UseFormRegister, FieldErrors } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
+import {
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/base/form'
 import { Textarea } from '@components/ui/base/textarea'
-import { Label } from '@components/ui/base/label'
 
-type FormValues = {
-    [key: string]: string
-}
-
-type FormFieldProps = {
+type FormFieldProps<T extends FieldValues> = {
     className?: string
-    errors: FieldErrors<FormValues>
-    fieldName: string
+    control: Control<T>
+    description?: string
+    fieldName: Path<T>
     icon?: LucideIcon
     label: string
     placeholder?: string
-    register: UseFormRegister<FormValues>
 }
 
-const FormFieldTextarea = ({
+const FormFieldTextarea = <T extends FieldValues>({
     className = 'mb-5',
-    errors,
+    control,
+    description,
     fieldName,
     icon: Icon,
     label,
     placeholder,
-    register,
-}: FormFieldProps) => {
-    const inputId = useId()
-    const error = errors?.[fieldName]
-
+}: FormFieldProps<T>) => {
     return (
         <div className={className}>
-            <Label
-                htmlFor={inputId}
-                className="text-sm font-bold flex items-center gap-2 mb-1"
-            >
-                {Icon && <Icon className="w-4 h-4" />}
-                {label}
-            </Label>
-            <Textarea
-                id={inputId}
-                {...register(fieldName)}
-                placeholder={placeholder}
-                className="border-gray-300 dark:border-gray-600"
+            <FormField
+                control={control}
+                name={fieldName}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>
+                            {Icon && <Icon className="w-4 h-4" />}
+                            {label}
+                        </FormLabel>
+                        <FormControl>
+                            <Textarea
+                                {...field}
+                                placeholder={placeholder}
+                                className="border-gray-300 dark:border-gray-600"
+                            />
+                        </FormControl>
+                        {description && (
+                            <FormDescription>{description}</FormDescription>
+                        )}
+                        <FormMessage />
+                    </FormItem>
+                )}
             />
-            {error && (
-                <span className="text-sm text-red-500 mt-1">
-                    {String(error.message)}
-                </span>
-            )}
         </div>
     )
 }

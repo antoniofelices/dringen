@@ -2,7 +2,10 @@ import { createClient } from '@supabase/supabase-js'
 import { SUPABASEURL, SUPABASEANONKEY } from '@/config/config'
 import type { AuthResponse, UserResponse } from '@supabase/supabase-js'
 import type { Database } from '@/types/database.types'
-import type { PatientWithRelationsType } from '@/types/interfaces'
+import type {
+    PatientWithRelationsType,
+    FileUploadValidationResult,
+} from '@/types/interfaces'
 import type { Enums } from '@/types/database.types'
 
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
@@ -281,4 +284,74 @@ export const signInWithPassword = async (
         email: email,
         password: password,
     })
+}
+
+// Upload files
+export const uploadFiles = async (
+    patientDni: string,
+    fileName: string,
+    file: File
+) => {
+    const { data: validationResult, error: validationError } =
+        await supabase.rpc('validate_medical_file_upload', {
+            patient_dni_param: patientDni,
+            file_name: fileName,
+        })
+
+    if (validationError) throw validationError
+    if (!(validationResult as unknown as FileUploadValidationResult)?.success) {
+        throw new Error('Upload validation failed')
+    }
+
+    const storagePath =
+        (validationResult as unknown as FileUploadValidationResult)?.path ?? ''
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('medical-files')
+        .upload(storagePath, file, {
+            cacheControl: '3600',
+            upsert: false,
+            contentType: file.type,
+        })
+
+    if (uploadError) {
+        if (uploadError.message.includes('already exists')) {
+            throw new Error(
+                'There is already a file with that name for this patient'
+            )
+        }
+        throw uploadError
+    }
+
+    return {
+        id: uploadData.id,
+        path: uploadData.path,
+        fullPath: uploadData.fullPath,
+        message: 'File uploaded successfully',
+    }
+}
+
+export const getPatientFiles = async (patientDni: string) => {
+    const { data, error } = await supabase.rpc('get_patient_files', {
+        patient_dni_param: patientDni,
+    })
+    if (error) throw error
+    return data
+}
+
+export const canUploadFiles = async (patientDni: string) => {
+    const { data, error } = await supabase.rpc('can_upload_medical_file', {
+        patient_dni_param: patientDni,
+    })
+    if (error) throw error
+    return data
+}
+
+export const getFileDownloadUrl = async (filePath: string) => {
+    const { data, error } = await supabase.storage
+        .from('medical-files')
+        .createSignedUrl(filePath, 3600)
+
+    if (error) throw error
+    return data.signedUrl
 }
