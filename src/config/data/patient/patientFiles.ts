@@ -1,7 +1,7 @@
 const content = {
-    title: 'Patient Files',
+    title: 'Analysis',
     textNoFiles: 'No files',
-    titleUpload: 'Upload files',
+    titleUpload: 'Upload a file',
     titleListFiles: 'Files updated',
     labelFileName: 'File name',
     labelFile: 'File',

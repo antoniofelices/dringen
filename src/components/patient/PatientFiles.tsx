@@ -6,6 +6,7 @@ import {
     uploadFiles,
     canUploadFiles,
     getPatientFiles,
+    getFileDownloadUrl,
 } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
@@ -93,7 +94,7 @@ const FormUpload = ({
                 <Button
                     type="submit"
                     className="mt-4"
-                    size="sm"
+                    size="xs"
                     disabled={form.formState.isSubmitting}
                 >
                     {form.formState.isSubmitting
@@ -141,7 +142,18 @@ const PatientFiles = () => {
 
     const handleFileUploaded = useCallback(() => {
         refetchPatient()
-    }, [refetchPatient])
+        loadFiles()
+    }, [refetchPatient, loadFiles])
+
+    const handleDownloadFile = async (filePath: string) => {
+        try {
+            const downloadUrl = await getFileDownloadUrl(filePath)
+            window.open(downloadUrl, '_blank')
+        } catch (error) {
+            console.error('Error downloading file:', error)
+            toast.error('Error al descargar el archivo')
+        }
+    }
 
     const filesData =
         hasFiles
@@ -155,7 +167,12 @@ const PatientFiles = () => {
                     .toLocaleDateString('es-ES')
                     .slice(0, 10)
                 const title = item.file_name.split('/').pop()
-                return { date, title }
+                return {
+                    date,
+                    title,
+                    fullPath: item.file_name,
+                    fileId: item.file_id,
+                }
             }) ?? []
 
     return (
@@ -166,30 +183,45 @@ const PatientFiles = () => {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                {canUpload && (
-                    <>
-                        <h3 className="mb-4">{content.titleUpload}</h3>
-                        <FormUpload
-                            patientDni={patientDni}
-                            onSuccess={handleFileUploaded}
-                        />
-                    </>
-                )}
-                {hasFiles.length > 0 && (
-                    <>
-                        <h3 className="mb-4">{content.titleListFiles}</h3>
-                        <ul>
-                            {filesData.map((item, index) => {
-                                return (
-                                    <li key={index}>
-                                        <strong>{item.date}</strong> |{' '}
-                                        {item.title}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </>
-                )}
+                <div className="grid lg:grid-cols-6 gap-6">
+                    {hasFiles.length > 0 && (
+                        <div className="col-span-3">
+                            <h3 className="mb-4 pb-2 border-b-2 dark:border-gray-700 border-gray-200 text-xs">
+                                {content.titleListFiles}
+                            </h3>
+                            <ul>
+                                {filesData.map((item) => {
+                                    return (
+                                        <li key={item.fileId}>
+                                            <strong>{item.date}</strong> |{' '}
+                                            <button
+                                                onClick={() =>
+                                                    handleDownloadFile(
+                                                        item.fullPath
+                                                    )
+                                                }
+                                                className="text-blue-600 hover:text-blue-800 underline cursor-pointer"
+                                            >
+                                                {item.title}
+                                            </button>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    )}
+                    {canUpload && (
+                        <div className="col-span-3">
+                            <h3 className="mb-6 pb-2 border-b-2 dark:border-gray-700 border-gray-200 text-xs">
+                                {content.titleUpload}
+                            </h3>
+                            <FormUpload
+                                patientDni={patientDni}
+                                onSuccess={handleFileUploaded}
+                            />
+                        </div>
+                    )}
+                </div>
             </CardContent>
         </Card>
     )

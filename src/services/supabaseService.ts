@@ -346,3 +346,12 @@ export const canUploadFiles = async (patientDni: string) => {
     if (error) throw error
     return data
 }
+
+export const getFileDownloadUrl = async (filePath: string) => {
+    const { data, error } = await supabase.storage
+        .from('medical-files')
+        .createSignedUrl(filePath, 3600)
+
+    if (error) throw error
+    return data.signedUrl
+}
