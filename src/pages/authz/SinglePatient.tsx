@@ -72,9 +72,6 @@ const SinglePatient = () => {
                         <div className="col-span-3">
                             <PatientHistory />
                         </div>
-                        <div className="col-spn-6">
-                            <PatientFiles />
-                        </div>
                         {clinicalHistory?.[0] && (
                             <div className="col-span-6">
                                 <DisplayClinicalHistory />
@@ -90,6 +87,9 @@ const SinglePatient = () => {
                                 <PatientBMIChart />
                             </div>
                         )}
+                        <div className="col-span-6">
+                            <PatientFiles />
+                        </div>
                     </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">

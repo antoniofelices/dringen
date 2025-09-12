@@ -6,6 +6,12 @@ import { uploadFiles, canUploadFiles } from '@services/supabaseService'
 import mapSupabaseError from '@services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@components/ui/base/button'
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@components/ui/base/card'
 import { Form } from '@components/ui/base/form'
 import FormFieldInputControl from '@components/ui/FormFieldInputControl'
 import FormFieldUploadControl from '@components/ui/FormFieldUploadControl'
@@ -123,18 +129,24 @@ const PatientFiles = () => {
     }, [refetchPatient])
 
     return (
-        <div>
-            <h3>{content.title}</h3>
-            {canUpload && (
-                <>
-                    <h3>{content.titleForm}</h3>
-                    <FormUpload
-                        patientDni={patientDni}
-                        onSuccess={handleFileUploaded}
-                    />
-                </>
-            )}
-        </div>
+        <Card className="h-full">
+            <CardHeader>
+                <CardTitle>
+                    <h2 className="font-extrabold">{content.title}</h2>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                {canUpload && (
+                    <>
+                        <h3>{content.titleForm}</h3>
+                        <FormUpload
+                            patientDni={patientDni}
+                            onSuccess={handleFileUploaded}
+                        />
+                    </>
+                )}
+            </CardContent>
+        </Card>
     )
 }
 
