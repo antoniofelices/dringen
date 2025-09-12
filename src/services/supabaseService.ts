@@ -65,18 +65,18 @@ export const registerPatient = async (
     phone?: string,
     placeOfResidence?: string
 ) => {
+    const insertData = {
+        user_name: userName,
+        user_last_name: userLastName,
+        dni: dni,
+        email: email,
+        ...(phone && { phone }),
+        ...(placeOfResidence && { place_of_residence: placeOfResidence }),
+    }
+
     const { data, error } = await supabase
         .from('medical_patient')
-        .insert([
-            {
-                user_name: userName,
-                user_last_name: userLastName,
-                dni: dni,
-                email: email,
-                phone: phone,
-                place_of_residence: placeOfResidence,
-            },
-        ])
+        .insert([insertData])
         .select()
     if (error) throw error
     return data

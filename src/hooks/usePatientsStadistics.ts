@@ -112,7 +112,6 @@ export const useDataAssistanceTypeDate = () => {
 export const useDataGenderDate = () => {
     const { patients } = usePatients()
 
-    console.log(patients)
     const genderData = useMemo(() => {
         const rawData =
             patients

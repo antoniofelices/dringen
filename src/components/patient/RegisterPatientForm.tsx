@@ -5,10 +5,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { registerPatient } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
-import { Button } from '@/components/ui/base/button'
+import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import content from '@/config/data/patient/registerForm'
+import FormFieldInput from '@components/ui/FormFieldInput'
+import content from '@data/patient/registerForm'
 
 const registerPatientSchema = z.object({
     userName: z
