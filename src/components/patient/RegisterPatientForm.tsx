@@ -8,7 +8,7 @@ import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInput from '@components/ui/FormFieldInput'
-import content from '@data/patient/registerForm'
+import content from '@/config/data/patient/registerPatientForm'
 
 const registerPatientSchema = z.object({
     userName: z
