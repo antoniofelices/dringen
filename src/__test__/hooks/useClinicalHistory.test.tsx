@@ -44,12 +44,8 @@ describe('useClinicalHistory', () => {
     })
 
     it('should fetch clinical history successfully', async () => {
-        const { getListAllClinicalHistory } = await import(
-            '@services/supabaseService'
-        )
-        vi.mocked(getListAllClinicalHistory).mockResolvedValue(
-            mockClinicalHistoryData
-        )
+        const { getClinicalHistory } = await import('@services/supabaseService')
+        vi.mocked(getClinicalHistory).mockResolvedValue(mockClinicalHistoryData)
 
         const { result } = renderHook(() => useClinicalHistory(), {
             wrapper: createWrapper(),
@@ -63,15 +59,13 @@ describe('useClinicalHistory', () => {
 
         expect(result.current.clinicalHistory).toEqual(mockClinicalHistoryData)
         expect(result.current.isError).toBe(false)
-        expect(getListAllClinicalHistory).toHaveBeenCalledTimes(1)
+        expect(getClinicalHistory).toHaveBeenCalledTimes(1)
     })
 
     it('should handle fetch errors', async () => {
-        const { getListAllClinicalHistory } = await import(
-            '@services/supabaseService'
-        )
+        const { getClinicalHistory } = await import('@services/supabaseService')
         const error = new Error('Failed to fetch clinical history')
-        vi.mocked(getListAllClinicalHistory).mockRejectedValue(error)
+        vi.mocked(getClinicalHistory).mockRejectedValue(error)
 
         const { result } = renderHook(() => useClinicalHistory(), {
             wrapper: createWrapper(),
@@ -89,10 +83,8 @@ describe('useClinicalHistory', () => {
     })
 
     it('should handle empty clinical history', async () => {
-        const { getListAllClinicalHistory } = await import(
-            '@services/supabaseService'
-        )
-        vi.mocked(getListAllClinicalHistory).mockResolvedValue([])
+        const { getClinicalHistory } = await import('@services/supabaseService')
+        vi.mocked(getClinicalHistory).mockResolvedValue([])
 
         const { result } = renderHook(() => useClinicalHistory(), {
             wrapper: createWrapper(),

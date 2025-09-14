@@ -11,7 +11,7 @@ import type { Enums } from '@/types/database.types'
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
 // Patients
-export const getListPatients = async () => {
+export const getPatients = async () => {
     const { data, error } = await supabase.from('medical_patient').select('*')
     if (error) throw error
     return data
@@ -129,7 +129,7 @@ export const updateGeneralDataPatient = async (
 }
 
 // Clinical History
-export const getListAllClinicalHistory = async () => {
+export const getClinicalHistory = async () => {
     const { data, error } = await supabase
         .from('medical_clinical_history')
         .select('*')
@@ -233,7 +233,7 @@ export const registerDiagnosis = async (
 }
 
 // Users
-export const getListUsers = async () => {
+export const getUsers = async () => {
     const { data, error } = await supabase.from('medical_user').select('*')
     if (error) throw error
     return data
@@ -354,4 +354,17 @@ export const getFileDownloadUrl = async (filePath: string) => {
 
     if (error) throw error
     return data.signedUrl
+}
+
+// Appointment
+export const getAppointments = async () => {
+    const { data, error } = await supabase.from('medical_appointment').select(
+        `
+          *,
+          medical_patient(user_name, user_last_name),
+          medical_user(user_name, user_last_name)
+        `
+    )
+    if (error) throw error
+    return data
 }

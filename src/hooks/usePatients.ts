@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getListPatients } from '@services/supabaseService'
+import { getPatients } from '@services/supabaseService'
 
 export const usePatients = () => {
     const {
@@ -10,7 +10,7 @@ export const usePatients = () => {
         refetch: userRefetch,
     } = useQuery({
         queryKey: ['listPatients'],
-        queryFn: () => getListPatients(),
+        queryFn: () => getPatients(),
     })
 
     return {

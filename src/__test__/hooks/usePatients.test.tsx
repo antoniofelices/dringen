@@ -48,8 +48,8 @@ describe('usePatients', () => {
     })
 
     it('should fetch patients successfully', async () => {
-        const { getListPatients } = await import('@services/supabaseService')
-        vi.mocked(getListPatients).mockResolvedValue(mockPatientsData)
+        const { getPatients } = await import('@services/supabaseService')
+        vi.mocked(getPatients).mockResolvedValue(mockPatientsData)
 
         const { result } = renderHook(() => usePatients(), {
             wrapper: createWrapper(),
@@ -63,13 +63,13 @@ describe('usePatients', () => {
 
         expect(result.current.patients).toEqual(mockPatientsData)
         expect(result.current.isError).toBe(false)
-        expect(getListPatients).toHaveBeenCalledTimes(1)
+        expect(getPatients).toHaveBeenCalledTimes(1)
     })
 
     it('should handle fetch errors', async () => {
-        const { getListPatients } = await import('@services/supabaseService')
+        const { getPatients } = await import('@services/supabaseService')
         const error = new Error('Failed to fetch patients')
-        vi.mocked(getListPatients).mockRejectedValue(error)
+        vi.mocked(getPatients).mockRejectedValue(error)
 
         const { result } = renderHook(() => usePatients(), {
             wrapper: createWrapper(),
@@ -87,8 +87,8 @@ describe('usePatients', () => {
     })
 
     it('should handle empty patients list', async () => {
-        const { getListPatients } = await import('@services/supabaseService')
-        vi.mocked(getListPatients).mockResolvedValue([])
+        const { getPatients } = await import('@services/supabaseService')
+        vi.mocked(getPatients).mockResolvedValue([])
 
         const { result } = renderHook(() => usePatients(), {
             wrapper: createWrapper(),
