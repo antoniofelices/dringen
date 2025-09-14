@@ -11,6 +11,7 @@ import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
+import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm'
 import content from '@/config/data/pages/calendarPatient'
 
 const locales = {
@@ -54,6 +55,8 @@ const CalendarPatient = () => {
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
+                <RegisterAppointmentForm />
+                <div className="h-[10rem]"></div>
                 <div className="h-[80vh] w-[70vw]">
                     <Calendar
                         localizer={localizer}

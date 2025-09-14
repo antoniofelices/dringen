@@ -368,3 +368,23 @@ export const getAppointments = async () => {
     if (error) throw error
     return data
 }
+
+export const registerAppointments = async (
+    patientId: string,
+    physicianId: string,
+    appointmentDate: string,
+    notes?: string
+) => {
+    const insertData = {
+        patient_id: patientId,
+        physician_id: physicianId,
+        appointment_date: appointmentDate,
+        notes: notes,
+    }
+    const { data, error } = await supabase
+        .from('medical_appointment')
+        .insert([insertData])
+        .select()
+    if (error) throw error
+    return data
+}
