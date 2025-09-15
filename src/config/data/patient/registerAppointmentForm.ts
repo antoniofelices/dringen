@@ -14,7 +14,7 @@ const content = {
     textNoCommandPhysicianFound: 'No physician found',
     textToastSuccess: 'Appointment add successfully',
     textToastFail: 'Failed to add appointment',
-    textButtonSend: 'Register appointment',
+    textButtonSend: 'Add appointment',
     textButtonSending: 'Sending',
 }
 

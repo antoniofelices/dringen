@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// import { useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -6,6 +7,14 @@ import { getAppointments } from '@services/supabaseService'
 import type { View } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { es } from 'date-fns/locale/es'
+import { Button } from '@/components/ui/base/button'
+import {
+    Dialog,
+    DialogContent,
+    DialogOverlay,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/base/dialog'
 import ButtonBack from '@components/ui/ButtonBack'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
@@ -28,6 +37,12 @@ const localizer = dateFnsLocalizer({
 const CalendarPatient = () => {
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
+
+    // const handleSelectSlot = useCallback(
+    //     (slotInfo) => console.log(slotInfo),
+    //     []
+    // )
+    // const handleSelectEvent = useCallback((event) => console.log(event), [])
 
     const {
         data: listData,
@@ -52,11 +67,20 @@ const CalendarPatient = () => {
     }))
 
     return (
-        <>
-            <HeaderArticle title={content.title} />
+        <Dialog>
+            <HeaderArticle title={content.title}>
+                <DialogTrigger asChild>
+                    <Button size="sm">{content.textButtonAdd}</Button>
+                </DialogTrigger>
+            </HeaderArticle>
             <ContentArticle>
-                <RegisterAppointmentForm />
-                <div className="h-[10rem]"></div>
+                <DialogOverlay className="bg-black/60" />
+                <DialogContent className="sm:max-w-sm dark:bg-black">
+                    <DialogTitle className="sr-only">
+                        {content.textButtonAdd}
+                    </DialogTitle>
+                    <RegisterAppointmentForm />
+                </DialogContent>
                 <div className="h-[80vh] w-[70vw]">
                     <Calendar
                         localizer={localizer}
@@ -68,11 +92,14 @@ const CalendarPatient = () => {
                         onView={setCurrentView}
                         date={currentDate}
                         onNavigate={setCurrentDate}
+                        // onSelectEvent={handleSelectEvent}
+                        // onSelectSlot={handleSelectSlot}
+                        selectable
                     />
                 </div>
             </ContentArticle>
             <ButtonBack />
-        </>
+        </Dialog>
     )
 }
 
