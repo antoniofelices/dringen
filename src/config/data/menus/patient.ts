@@ -18,7 +18,7 @@ const patientMenu: RoutesProps[] = [
         id: 2,
         icon: PlusCircleIcon,
         url: 'patient/add',
-        text: 'Add Health Consumer',
+        text: 'Add Patient',
         orderMenu: 2,
     },
     {

@@ -63,7 +63,11 @@ const FormFieldCombobox = <T extends FieldValues>({
                                 <FormControl>
                                     <Button
                                         variant="outline"
-                                        className="w-full justify-between font-normal border-gray-300 dark:border-gray-600"
+                                        className={cn(
+                                            'w-full justify-between font-normal border-gray-300 dark:border-gray-600',
+                                            !field.value &&
+                                                'text-muted-foreground'
+                                        )}
                                     >
                                         {field.value
                                             ? options.find(
@@ -76,7 +80,7 @@ const FormFieldCombobox = <T extends FieldValues>({
                                     </Button>
                                 </FormControl>
                             </PopoverTrigger>
-                            <PopoverContent className="w-[200px] p-0">
+                            <PopoverContent className="w-full p-0">
                                 <Command>
                                     <CommandInput
                                         placeholder={`${placeholder}`}

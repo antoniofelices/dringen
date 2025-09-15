@@ -1,4 +1,8 @@
 import { useForm } from 'react-hook-form'
+import { format } from 'date-fns'
+import { toast } from 'sonner'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { registerAppointments } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
@@ -7,54 +11,51 @@ import { usePhysicians } from '@hooks/useUsers'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
-import FormFieldInput from '@components/ui/FormFieldInput'
-// import FormFieldSelectArray from '@/components/ui/FormFieldSelectArray'
 import FormFieldCombobox from '@components/ui/FormFieldCombobox'
+import FormFieldInput from '@components/ui/FormFieldInput'
 import content from '@data/patient/registerAppointmentForm'
 
-type FormData = {
-    patient: string
-    physician: string
-    appointmentDate: Date
-    notes?: string
-}
+const registetAppointmentSchema = z.object({
+    patient: z.string().min(1, content.errorPatientRequired),
+    physician: z.string().min(1, content.errorPhysicianRequired),
+    appointmentDate: z.date(),
+    appointmentTime: z
+        .string()
+        .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, content.errorInvalidTime),
+    notes: z.string().optional(),
+})
+
+type FormData = z.infer<typeof registetAppointmentSchema>
 
 const RegisterAppointmentForm = () => {
+    const patients = usePatientsNames()
+    const physicians = usePhysicians()
+
     const defaultValues = {
         patient: '',
         physician: '',
         appointmentDate: new Date(),
+        appointmentTime: '10:00',
         notes: '',
     }
 
     const form = useForm<FormData>({
+        resolver: zodResolver(registetAppointmentSchema),
         defaultValues: defaultValues,
     })
 
     const onSubmit = async (formData: FormData) => {
-        if (!formData.patient) {
-            form.setError('patient', {
-                type: 'required',
-                message: 'Please select a patient',
-            })
-            return
-        }
-
-        if (!formData.physician) {
-            form.setError('physician', {
-                type: 'required',
-                message: 'Please select a physician',
-            })
-            return
-        }
+        const dateOnly = format(formData.appointmentDate, 'yyyy-MM-dd')
+        const dateComplete = `${dateOnly}T${formData.appointmentTime}:00`
 
         try {
             await registerAppointments(
                 formData.patient,
                 formData.physician,
-                formData.appointmentDate.toISOString(),
+                dateComplete,
                 formData.notes
             )
+            toast.success(content.textToastSuccess)
             form.reset()
         } catch (error) {
             const postgrestError = error as PostgrestError
@@ -63,12 +64,10 @@ const RegisterAppointmentForm = () => {
                 type: 'server',
                 message,
             })
+            toast.error(`${content.textToastFail} ${message}`)
             return
         }
     }
-
-    const patients = usePatientsNames()
-    const physicians = usePhysicians()
 
     return (
         <Form {...form}>
@@ -99,6 +98,12 @@ const RegisterAppointmentForm = () => {
                     control={form.control}
                     fieldName="appointmentDate"
                     label={content.labelDate}
+                />
+                <FormFieldInput
+                    control={form.control}
+                    fieldName="appointmentTime"
+                    label={content.labelTime}
+                    type="time"
                 />
                 <FormFieldInput
                     control={form.control}

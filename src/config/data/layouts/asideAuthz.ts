@@ -1,7 +1,7 @@
 const content = {
     title: 'Sidebar',
     textHome: 'Home',
-    titlePatients: 'Health Consumers',
+    titlePatients: 'Patients',
     titleUsers: 'Users',
     titleSettings: 'Settings',
 }
