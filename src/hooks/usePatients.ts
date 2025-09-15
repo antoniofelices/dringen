@@ -8,7 +8,7 @@ export const usePatients = () => {
         isPending: patientsLoading,
         isError: patientsError,
         error: patientsErrorType,
-        refetch: userRefetch,
+        refetch: patientsRefetch,
     } = useQuery({
         queryKey: ['listPatients'],
         queryFn: () => getPatients(),
@@ -19,7 +19,7 @@ export const usePatients = () => {
         isPending: patientsLoading,
         isError: patientsError,
         error: patientsErrorType,
-        refetch: userRefetch,
+        refetch: patientsRefetch,
     }
 }
 

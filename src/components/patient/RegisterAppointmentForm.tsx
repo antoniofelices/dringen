@@ -27,7 +27,11 @@ const registetAppointmentSchema = z.object({
 
 type FormData = z.infer<typeof registetAppointmentSchema>
 
-const RegisterAppointmentForm = () => {
+interface RegisterAppointmentFormProps {
+    onSuccess?: () => void
+}
+
+const RegisterAppointmentForm = ({ onSuccess }: RegisterAppointmentFormProps) => {
     const patients = usePatientsNames()
     const physicians = usePhysicians()
 
@@ -57,6 +61,7 @@ const RegisterAppointmentForm = () => {
             )
             toast.success(content.textToastSuccess)
             form.reset()
+            onSuccess?.()
         } catch (error) {
             const postgrestError = error as PostgrestError
             const { field, message } = mapSupabaseError(postgrestError.message)

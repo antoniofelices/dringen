@@ -37,6 +37,7 @@ const localizer = dateFnsLocalizer({
 const CalendarPatient = () => {
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     // const handleSelectSlot = useCallback(
     //     (slotInfo) => console.log(slotInfo),
@@ -49,6 +50,7 @@ const CalendarPatient = () => {
         isPending: listLoading,
         isError: listError,
         error: listErrorType,
+        refetch: appointmentsRefetch,
     } = useQuery({
         queryKey: ['listAppointments'],
         queryFn: () => getAppointments(),
@@ -59,6 +61,11 @@ const CalendarPatient = () => {
     if (listError && listErrorType)
         return <ErrorApi message={listErrorType.message} />
 
+    const handleFormSuccess = () => {
+        setIsDialogOpen(false)
+        appointmentsRefetch()
+    }
+
     const events = listData.map((appt) => ({
         title: `${appt.medical_patient.user_name} ${appt.medical_patient.user_last_name} - Dra. ${appt.medical_user.user_last_name}`,
         start: new Date(appt.appointment_date),
@@ -67,7 +74,7 @@ const CalendarPatient = () => {
     }))
 
     return (
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <HeaderArticle title={content.title}>
                 <DialogTrigger asChild>
                     <Button size="sm">{content.textButtonAdd}</Button>
@@ -79,7 +86,7 @@ const CalendarPatient = () => {
                     <DialogTitle className="sr-only">
                         {content.textButtonAdd}
                     </DialogTitle>
-                    <RegisterAppointmentForm />
+                    <RegisterAppointmentForm onSuccess={handleFormSuccess} />
                 </DialogContent>
                 <div className="h-[80vh] w-[70vw]">
                     <Calendar
