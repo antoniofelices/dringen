@@ -8,20 +8,21 @@ import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
 import FormFieldInput from '@components/ui/FormFieldInput'
-import FormFieldSelectArray from '@/components/ui/FormFieldSelectArray'
+// import FormFieldSelectArray from '@/components/ui/FormFieldSelectArray'
+import FormFieldCombobox from '@components/ui/FormFieldCombobox'
 import content from '@data/patient/registerAppointmentForm'
 
 type FormData = {
-    patient: { label: string; value: string } | null
-    physician: { label: string; value: string } | null
+    patient: string
+    physician: string
     appointmentDate: Date
     notes?: string
 }
 
 const RegisterAppointmentForm = () => {
     const defaultValues = {
-        patient: null,
-        physician: null,
+        patient: '',
+        physician: '',
         appointmentDate: new Date(),
         notes: '',
     }
@@ -31,7 +32,7 @@ const RegisterAppointmentForm = () => {
     })
 
     const onSubmit = async (formData: FormData) => {
-        if (!formData.patient?.value) {
+        if (!formData.patient) {
             form.setError('patient', {
                 type: 'required',
                 message: 'Please select a patient',
@@ -39,7 +40,7 @@ const RegisterAppointmentForm = () => {
             return
         }
 
-        if (!formData.physician?.value) {
+        if (!formData.physician) {
             form.setError('physician', {
                 type: 'required',
                 message: 'Please select a physician',
@@ -49,8 +50,8 @@ const RegisterAppointmentForm = () => {
 
         try {
             await registerAppointments(
-                formData.patient.value,
-                formData.physician.value,
+                formData.patient,
+                formData.physician,
                 formData.appointmentDate.toISOString(),
                 formData.notes
             )
@@ -72,19 +73,23 @@ const RegisterAppointmentForm = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldSelectArray
+                <FormFieldCombobox
                     control={form.control}
+                    textCommandEmpty={content.textNoCommandPatientFound}
                     fieldName="patient"
                     label={content.labelPatient}
+                    placeholder={content.placeholderPatient}
                     options={patients.map((p) => ({
-                        label: `${p.name} (${p.dni})`,
+                        label: `${p.name} - ${p.dni}`,
                         value: p.id,
                     }))}
                 />
-                <FormFieldSelectArray
+                <FormFieldCombobox
                     control={form.control}
+                    textCommandEmpty={content.textNoCommandPhysicianFound}
                     fieldName="physician"
                     label={content.labelPhysician}
+                    placeholder={content.placeholderPhysician}
                     options={physicians.map((p) => ({
                         label: `${p.name}`,
                         value: p.id,
