@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -27,18 +28,22 @@ const registetAppointmentSchema = z.object({
 
 type FormData = z.infer<typeof registetAppointmentSchema>
 
-interface RegisterAppointmentFormProps {
+type RegisterAppointmentFormProps = {
     onSuccess?: () => void
+    initialDate?: Date | null
 }
 
-const RegisterAppointmentForm = ({ onSuccess }: RegisterAppointmentFormProps) => {
+const RegisterAppointmentForm = ({
+    onSuccess,
+    initialDate,
+}: RegisterAppointmentFormProps) => {
     const patients = usePatientsNames()
     const physicians = usePhysicians()
 
     const defaultValues = {
         patient: '',
         physician: '',
-        appointmentDate: new Date(),
+        appointmentDate: initialDate || new Date(),
         appointmentTime: '10:00',
         notes: '',
     }
@@ -47,6 +52,12 @@ const RegisterAppointmentForm = ({ onSuccess }: RegisterAppointmentFormProps) =>
         resolver: zodResolver(registetAppointmentSchema),
         defaultValues: defaultValues,
     })
+
+    useEffect(() => {
+        if (initialDate) {
+            form.setValue('appointmentDate', initialDate)
+        }
+    }, [initialDate, form])
 
     const onSubmit = async (formData: FormData) => {
         const dateOnly = format(formData.appointmentDate, 'yyyy-MM-dd')

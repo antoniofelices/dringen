@@ -1,10 +1,9 @@
-import { useState } from 'react'
-// import { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { getAppointments } from '@services/supabaseService'
-import type { View } from 'react-big-calendar'
+import type { View, SlotInfo } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { es } from 'date-fns/locale/es'
 import { Button } from '@/components/ui/base/button'
@@ -38,11 +37,13 @@ const CalendarPatient = () => {
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
-    // const handleSelectSlot = useCallback(
-    //     (slotInfo) => console.log(slotInfo),
-    //     []
-    // )
+    const handleSelectSlot = useCallback((slotInfo: SlotInfo) => {
+        setSelectedDate(slotInfo.start)
+        setIsDialogOpen(true)
+    }, [])
+
     // const handleSelectEvent = useCallback((event) => console.log(event), [])
 
     const {
@@ -63,6 +64,7 @@ const CalendarPatient = () => {
 
     const handleFormSuccess = () => {
         setIsDialogOpen(false)
+        setSelectedDate(null)
         appointmentsRefetch()
     }
 
@@ -86,7 +88,10 @@ const CalendarPatient = () => {
                     <DialogTitle className="sr-only">
                         {content.textButtonAdd}
                     </DialogTitle>
-                    <RegisterAppointmentForm onSuccess={handleFormSuccess} />
+                    <RegisterAppointmentForm
+                        onSuccess={handleFormSuccess}
+                        initialDate={selectedDate}
+                    />
                 </DialogContent>
                 <div className="h-[80vh] w-[70vw]">
                     <Calendar
@@ -100,7 +105,7 @@ const CalendarPatient = () => {
                         date={currentDate}
                         onNavigate={setCurrentDate}
                         // onSelectEvent={handleSelectEvent}
-                        // onSelectSlot={handleSelectSlot}
+                        onSelectSlot={handleSelectSlot}
                         selectable
                     />
                 </div>
