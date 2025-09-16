@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { getAppointments } from '@services/supabaseService'
-import type { View, SlotInfo } from 'react-big-calendar'
+import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { es } from 'date-fns/locale/es'
 import { Button } from '@/components/ui/base/button'
@@ -12,13 +12,13 @@ import {
     DialogContent,
     DialogOverlay,
     DialogTitle,
-    DialogTrigger,
 } from '@/components/ui/base/dialog'
 import ButtonBack from '@components/ui/ButtonBack'
 import ContentArticle from '@/components/ui/ContentArticle'
 import HeaderArticle from '@/components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
+import DataDisplayList from '@components/ui/DataDisplayList'
 import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm'
 import content from '@/config/data/pages/calendarPatient'
 
@@ -36,15 +36,20 @@ const localizer = dateFnsLocalizer({
 const CalendarPatient = () => {
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [isDialogAddFormOpen, setIsDialogAddFormOpen] = useState(false)
+    const [isDialogEventOpen, setIsDialogEventOpen] = useState(false)
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
 
     const handleSelectSlot = useCallback((slotInfo: SlotInfo) => {
         setSelectedDate(slotInfo.start)
-        setIsDialogOpen(true)
+        setIsDialogAddFormOpen(true)
     }, [])
 
-    // const handleSelectEvent = useCallback((event) => console.log(event), [])
+    const handleSelectEvent = useCallback((event: Event) => {
+        setSelectedEvent(event)
+        setIsDialogEventOpen(true)
+    }, [])
 
     const {
         data: listData,
@@ -63,7 +68,7 @@ const CalendarPatient = () => {
         return <ErrorApi message={listErrorType.message} />
 
     const handleFormSuccess = () => {
-        setIsDialogOpen(false)
+        setIsDialogAddFormOpen(false)
         setSelectedDate(null)
         appointmentsRefetch()
     }
@@ -75,24 +80,37 @@ const CalendarPatient = () => {
         resource: appt,
     }))
 
+    const dataItems = [
+        {
+            label: content.labelPatient,
+            value: selectedEvent
+                ? `${selectedEvent.resource?.medical_patient?.user_name}
+                   ${selectedEvent.resource?.medical_patient?.user_last_name}`
+                : '',
+        },
+        {
+            label: content.labelPhysician,
+            value: selectedEvent
+                ? `${selectedEvent.resource?.medical_user?.user_name} ${selectedEvent.resource?.medical_user?.user_last_name}`
+                : '',
+        },
+        {
+            label: content.labelSchedule,
+            value: selectedEvent
+                ? format(selectedEvent.start!, 'dd/MM/yyyy - HH:mm', {
+                      locale: es,
+                  })
+                : '',
+        },
+    ]
     return (
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <>
             <HeaderArticle title={content.title}>
-                <DialogTrigger asChild>
-                    <Button size="sm">{content.textButtonAdd}</Button>
-                </DialogTrigger>
+                <Button size="sm" onClick={() => setIsDialogAddFormOpen(true)}>
+                    {content.textButtonAdd}
+                </Button>
             </HeaderArticle>
             <ContentArticle>
-                <DialogOverlay className="bg-black/60" />
-                <DialogContent className="sm:max-w-sm dark:bg-black">
-                    <DialogTitle className="sr-only">
-                        {content.textButtonAdd}
-                    </DialogTitle>
-                    <RegisterAppointmentForm
-                        onSuccess={handleFormSuccess}
-                        initialDate={selectedDate}
-                    />
-                </DialogContent>
                 <div className="h-[80vh] w-[70vw]">
                     <Calendar
                         localizer={localizer}
@@ -104,14 +122,46 @@ const CalendarPatient = () => {
                         onView={setCurrentView}
                         date={currentDate}
                         onNavigate={setCurrentDate}
-                        // onSelectEvent={handleSelectEvent}
+                        onSelectEvent={handleSelectEvent}
                         onSelectSlot={handleSelectSlot}
                         selectable
                     />
                 </div>
             </ContentArticle>
             <ButtonBack />
-        </Dialog>
+            <Dialog
+                open={isDialogAddFormOpen}
+                onOpenChange={setIsDialogAddFormOpen}
+            >
+                <DialogOverlay className="bg-black/60" />
+                <DialogContent className="sm:max-w-sm dark:bg-black">
+                    <DialogTitle className="mb-2">
+                        {content.titleDialogAppointment}
+                    </DialogTitle>
+                    <RegisterAppointmentForm
+                        onSuccess={handleFormSuccess}
+                        initialDate={selectedDate}
+                    />
+                </DialogContent>
+            </Dialog>
+            <Dialog
+                open={isDialogEventOpen}
+                onOpenChange={setIsDialogEventOpen}
+            >
+                <DialogOverlay className="bg-black/60" />
+                <DialogContent className="sm:max-w-sm dark:bg-black">
+                    <DialogTitle>{content.titleDialogEvent}</DialogTitle>
+                    {selectedEvent && (
+                        <>
+                            <DataDisplayList items={dataItems} />
+                            <Button size="sm" variant="destructive">
+                                Deleted
+                            </Button>
+                        </>
+                    )}
+                </DialogContent>
+            </Dialog>
+        </>
     )
 }
 
