@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { getAppointments } from '@services/supabaseService'
+import { getAppointments, deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { es } from 'date-fns/locale/es'
@@ -67,18 +67,24 @@ const CalendarPatient = () => {
     if (listError && listErrorType)
         return <ErrorApi message={listErrorType.message} />
 
-    const handleFormSuccess = () => {
-        setIsDialogAddFormOpen(false)
-        setSelectedDate(null)
-        appointmentsRefetch()
-    }
-
     const events = listData.map((appt) => ({
         title: `${appt.medical_patient.user_name} ${appt.medical_patient.user_last_name} - Dra. ${appt.medical_user.user_last_name}`,
         start: new Date(appt.appointment_date),
         end: new Date(new Date(appt.appointment_date).getTime() + 30 * 60000),
         resource: appt,
     }))
+
+    const handleFormSuccess = () => {
+        setIsDialogAddFormOpen(false)
+        setSelectedDate(null)
+        appointmentsRefetch()
+    }
+
+    const handleDeletedEvent = async (event: Event) => {
+        await deleteAppointment(event.resource.id)
+        setIsDialogEventOpen(false)
+        appointmentsRefetch()
+    }
 
     const dataItems = [
         {
@@ -103,6 +109,7 @@ const CalendarPatient = () => {
                 : '',
         },
     ]
+
     return (
         <>
             <HeaderArticle title={content.title}>
@@ -154,8 +161,14 @@ const CalendarPatient = () => {
                     {selectedEvent && (
                         <>
                             <DataDisplayList items={dataItems} />
-                            <Button size="sm" variant="destructive">
-                                Deleted
+                            <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() =>
+                                    handleDeletedEvent(selectedEvent)
+                                }
+                            >
+                                {content.textButtonDeleteEvent}
                             </Button>
                         </>
                     )}

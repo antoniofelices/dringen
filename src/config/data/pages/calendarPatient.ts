@@ -6,6 +6,7 @@ const content = {
     labelPatient: 'Patient',
     labelPhysician: 'Physician',
     labelSchedule: 'Schedule',
+    textButtonDeleteEvent: 'Delete',
 }
 
 export default content

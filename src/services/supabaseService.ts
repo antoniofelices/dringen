@@ -369,7 +369,7 @@ export const getAppointments = async () => {
     return data
 }
 
-export const registerAppointments = async (
+export const registerAppointment = async (
     patientId: string,
     physicianId: string,
     appointmentDate: string,
@@ -387,4 +387,15 @@ export const registerAppointments = async (
         .select()
     if (error) throw error
     return data
+}
+
+export const deleteAppointment = async (appointmentId: string) => {
+    if (!appointmentId) throw new Error('ID is required')
+
+    const { error } = await supabase
+        .from('medical_appointment')
+        .delete()
+        .eq('id', appointmentId)
+
+    if (error) throw error
 }

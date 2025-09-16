@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { registerAppointments } from '@/services/supabaseService'
+import { registerAppointment } from '@/services/supabaseService'
 import mapSupabaseError from '@/services/mapSupabaseErrors'
 import type { PostgrestError } from '@supabase/supabase-js'
 import { usePatientsNames } from '@/hooks/usePatients'
@@ -64,7 +64,7 @@ const RegisterAppointmentForm = ({
         const dateComplete = `${dateOnly}T${formData.appointmentTime}:00`
 
         try {
-            await registerAppointments(
+            await registerAppointment(
                 formData.patient,
                 formData.physician,
                 dateComplete,
