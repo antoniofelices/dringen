@@ -106,7 +106,9 @@
         --calendar-today-text: var(--color-white);
         --calendar-event-bg: var(--color-blue-600);
         --calendar-event-text: var(--color-background-up);
-        --calendar-hover-bg: var(--color-black);
+        --calendar-button-bg: var(--color-background-up);
+        --calendar-button-text: var(--color-foreground);
+        --calendar-hover-bg: var(--color-background-up);
     }
 
     .dark {
@@ -131,8 +133,10 @@
         --calendar-header-text: var(--color-foreground);
         --calendar-today-bg: var(--color-indigo-700);
         --calendar-today-text: var(--color-white);
-        --calendar-event-bg: var(--color-blue-600);
-        --calendar-event-text: var(--color-background-up);
+        --calendar-event-bg: var(--color-indigo-300);
+        --calendar-event-text: var(--color-black);
+        --calendar-button-bg: var(--color-background-up);
+        --calendar-button-text: var(--color-white);
         --calendar-hover-bg: var(--color-black);
     }
     *,
