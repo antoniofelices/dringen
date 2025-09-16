@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import '@/styles/calendar.css'
 import { getAppointments, deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
@@ -120,7 +121,7 @@ const CalendarPatient = () => {
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <div className="h-[80vh] w-[70vw]">
+                <div className="h-[80vh] w-full">
                     <Calendar
                         localizer={localizer}
                         startAccessor="start"

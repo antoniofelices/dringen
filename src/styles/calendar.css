@@ -1,0 +1,37 @@
+.rbc-calendar {
+    background-color: var(--calendar-bg);
+}
+
+.rbc-toolbar {
+    background-color: var(--calendar-header-bg);
+}
+
+.rbc-btn-group button {
+    background-color: var(--calendar-bg-off);
+    color: var(--calendar-event-text);
+}
+
+.rbc-today {
+    background-color: var(--calendar-today-bg);
+    color: var(--calendar-today-text);
+}
+
+.rbc-current .rbc-button-link {
+    color: var(--calendar-today-text);
+}
+
+.rbc-event {
+    background-color: var(--calendar-event-bg);
+    color: var(--calendar-event-text);
+}
+
+.rbc-off-range-bg {
+    background-color: var(--calendar-bg-off);
+}
+
+.rbc-month-view,
+.rbc-header,
+.rbc-day-bg + .rbc-day-bg,
+.rbc-month-row + .rbc-month-row {
+    border-color: var(--calendar-border);
+}
