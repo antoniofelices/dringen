@@ -5,6 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { getAppointments, deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
+import { toast } from 'sonner'
 import { es } from 'date-fns/locale/es'
 import { Button } from '@/components/ui/base/button'
 import {
@@ -83,6 +84,7 @@ const CalendarPatient = () => {
     const handleDeletedEvent = async (event: Event) => {
         await deleteAppointment(event.resource.id)
         setIsDialogEventOpen(false)
+        toast.success(content.textToastSuccessDelete)
         appointmentsRefetch()
     }
 
