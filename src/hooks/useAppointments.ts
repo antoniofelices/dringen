@@ -1,23 +1,27 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAppointments } from '@services/supabaseService'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { getAppointments, deleteAppointment } from '@services/supabaseService'
 
 export const useAppointments = () => {
-    const {
-        data: appointmentData,
-        isPending: appointmentLoading,
-        isError: appointmentError,
-        error: appointmentErrorType,
-        refetch: appointmentRefetch,
-    } = useQuery({
+    const queryClient = useQueryClient()
+
+    const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['listAppointments'],
         queryFn: () => getAppointments(),
     })
 
+    const deleteAppointmentMutation = useMutation({
+        mutationFn: deleteAppointment,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['listAppointments'] })
+        },
+    })
+
     return {
-        appointments: appointmentData,
-        isPending: appointmentLoading,
-        isError: appointmentError,
-        error: appointmentErrorType,
-        refetch: appointmentRefetch,
+        appointments: data,
+        isPending: isPending,
+        isError: isError,
+        error: error,
+        refetch: refetch,
+        deleteAppointment: deleteAppointmentMutation,
     }
 }

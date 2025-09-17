@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute('/_authz/patient/stadistics')({
 
 function RouteComponent() {
     return (
-        <ProtectedRoute allowedRoles={['admin', 'physician', 'medical_office']}>
+        <ProtectedRoute allowedRoles={['admin', 'physician']}>
             <StadisticsPatient />
         </ProtectedRoute>
     )

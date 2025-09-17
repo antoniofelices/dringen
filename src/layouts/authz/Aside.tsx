@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
 import { useCurrentUser } from '@hooks/useCurrentUser'
+import { usePermissions } from '@/hooks/usePermissions'
 import RoleGuard from '@components/RoleGuard'
 import {
     DropdownMenu,
@@ -25,12 +26,20 @@ import {
 import ButtonSignOut from '@components/ui/ButtonSignOut'
 import Logo from '@components/ui/Logo'
 import MenuItems from '@components/ui/Menutems'
-import patientMenu from '@/config/data/menus/patient'
-import users from '@/config/data/menus/users'
+import patientsMenu from '@/config/data/menus/patients'
+import usersMenu from '@/config/data/menus/users'
 import content from '@data/layouts/asideAuthz'
 
 const Aside = () => {
     const { user } = useCurrentUser()
+    const { canAccess } = usePermissions()
+
+    const patientsMenuFiltered = patientsMenu.filter((item) => {
+        if (item.id === 4) {
+            return canAccess(['admin', 'physician'])
+        }
+        return true
+    })
 
     return (
         <Sidebar collapsible="icon">
@@ -57,7 +66,7 @@ const Aside = () => {
                         </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
-                                <MenuItems content={patientMenu} />
+                                <MenuItems content={patientsMenuFiltered} />
                             </SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>
@@ -70,7 +79,7 @@ const Aside = () => {
                         </SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
-                                <MenuItems content={users} />
+                                <MenuItems content={usersMenu} />
                             </SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>

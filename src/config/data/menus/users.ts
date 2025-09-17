@@ -1,7 +1,7 @@
 import type { RoutesProps } from '@/types/interfaces'
 import { Users, UserRoundPlus } from 'lucide-react'
 
-const user: RoutesProps[] = [
+const usersMenu: RoutesProps[] = [
     {
         id: 1,
         icon: Users,
@@ -18,4 +18,4 @@ const user: RoutesProps[] = [
     },
 ]
 
-export default user
+export default usersMenu

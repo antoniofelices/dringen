@@ -8,7 +8,6 @@ import {
     formEventData,
 } from '@/lib/calendarUtils'
 import { useAppointments } from '@hooks/useAppointments'
-import { deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/base/button'
@@ -28,8 +27,14 @@ import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm
 import content from '@/config/data/pages/calendarPatient'
 
 const CalendarPatient = () => {
-    const { appointments, isPending, isError, error, refetch } =
-        useAppointments()
+    const {
+        appointments,
+        isPending,
+        isError,
+        error,
+        refetch,
+        deleteAppointment,
+    } = useAppointments()
 
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
@@ -48,16 +53,15 @@ const CalendarPatient = () => {
         setIsDialogEventOpen(true)
     }, [])
 
+    const handleDeletedEvent = async (event: Event) => {
+        deleteAppointment.mutate(event.resource.id)
+        setIsDialogEventOpen(false)
+        toast.success(content.textToastSuccessDelete)
+    }
+
     const handleFormSuccess = () => {
         setIsDialogAddFormOpen(false)
         setSelectedDate(null)
-        refetch()
-    }
-
-    const handleDeletedEvent = async (event: Event) => {
-        await deleteAppointment(event.resource.id)
-        setIsDialogEventOpen(false)
-        toast.success(content.textToastSuccessDelete)
         refetch()
     }
 
