@@ -53,7 +53,7 @@ const CalendarPatient = () => {
         setIsDialogEventOpen(true)
     }, [])
 
-    const handleDeletedEvent = async (event: Event) => {
+    const handleDeletedEvent = (event: Event) => {
         deleteAppointment.mutate(event.resource.id)
         setIsDialogEventOpen(false)
         toast.success(content.textToastSuccessDelete)
