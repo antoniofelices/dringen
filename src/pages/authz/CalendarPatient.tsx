@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { Calendar } from 'react-big-calendar'
 import { format } from 'date-fns'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
 import { localizer } from '@/config/calendar'
 import { es } from 'date-fns/locale/es'
-import { getAppointments, deleteAppointment } from '@services/supabaseService'
+import { useAppointments } from '@hooks/useAppointments'
+import { deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/base/button'
@@ -26,6 +26,9 @@ import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm
 import content from '@/config/data/pages/calendarPatient'
 
 const CalendarPatient = () => {
+    const { appointments, isPending, isError, error, refetch } =
+        useAppointments()
+
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
     const [isDialogAddFormOpen, setIsDialogAddFormOpen] = useState(false)
@@ -43,41 +46,29 @@ const CalendarPatient = () => {
         setIsDialogEventOpen(true)
     }, [])
 
-    const {
-        data: listData,
-        isPending: listLoading,
-        isError: listError,
-        error: listErrorType,
-        refetch: appointmentsRefetch,
-    } = useQuery({
-        queryKey: ['listAppointments'],
-        queryFn: () => getAppointments(),
-    })
-
-    if (listLoading) return <Loading />
-
-    if (listError && listErrorType)
-        return <ErrorApi message={listErrorType.message} />
-
-    const events = listData.map((appt) => ({
-        title: `${appt.medical_patient.user_name} ${appt.medical_patient.user_last_name} - Dra. ${appt.medical_user.user_last_name}`,
-        start: new Date(appt.appointment_date),
-        end: new Date(new Date(appt.appointment_date).getTime() + 30 * 60000),
-        resource: appt,
-    }))
-
     const handleFormSuccess = () => {
         setIsDialogAddFormOpen(false)
         setSelectedDate(null)
-        appointmentsRefetch()
+        refetch()
     }
 
     const handleDeletedEvent = async (event: Event) => {
         await deleteAppointment(event.resource.id)
         setIsDialogEventOpen(false)
         toast.success(content.textToastSuccessDelete)
-        appointmentsRefetch()
+        refetch()
     }
+
+    if (isPending) return <Loading />
+
+    if (isError && error) return <ErrorApi message={error.message} />
+
+    const events = appointments?.map((appt) => ({
+        title: `${appt.medical_patient.user_name} ${appt.medical_patient.user_last_name} - Dra. ${appt.medical_user.user_last_name}`,
+        start: new Date(appt.appointment_date),
+        end: new Date(new Date(appt.appointment_date).getTime() + 30 * 60000),
+        resource: appt,
+    }))
 
     const dataItems = [
         {
