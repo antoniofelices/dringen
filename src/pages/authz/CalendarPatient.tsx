@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
+import { Calendar } from 'react-big-calendar'
+import { format } from 'date-fns'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
+import { localizer } from '@/config/calendar'
+import { es } from 'date-fns/locale/es'
 import { getAppointments, deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
-import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { toast } from 'sonner'
-import { es } from 'date-fns/locale/es'
 import { Button } from '@/components/ui/base/button'
 import {
     Dialog,
@@ -23,17 +24,6 @@ import Loading from '@components/ui/Loading'
 import DataDisplayList from '@components/ui/DataDisplayList'
 import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm'
 import content from '@/config/data/pages/calendarPatient'
-
-const locales = {
-    'es-ES': es,
-}
-const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales,
-})
 
 const CalendarPatient = () => {
     const [currentView, setCurrentView] = useState<View>('month')
