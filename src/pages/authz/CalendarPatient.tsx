@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react'
 import { Calendar } from 'react-big-calendar'
-import { format } from 'date-fns'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
-import { localizer } from '@/config/calendar'
-import { es } from 'date-fns/locale/es'
+import {
+    calendarLocalizer,
+    transformAppointmentsToEvents,
+    formEventData,
+} from '@/lib/calendarUtils'
 import { useAppointments } from '@hooks/useAppointments'
 import { deleteAppointment } from '@services/supabaseService'
 import type { View, SlotInfo, Event } from 'react-big-calendar'
@@ -63,12 +65,7 @@ const CalendarPatient = () => {
 
     if (isError && error) return <ErrorApi message={error.message} />
 
-    const events = appointments?.map((appt) => ({
-        title: `${appt.medical_patient.user_name} ${appt.medical_patient.user_last_name} - Dra. ${appt.medical_user.user_last_name}`,
-        start: new Date(appt.appointment_date),
-        end: new Date(new Date(appt.appointment_date).getTime() + 30 * 60000),
-        resource: appt,
-    }))
+    const allEvents = transformAppointmentsToEvents(appointments || [])
 
     const dataItems = [
         {
@@ -86,11 +83,7 @@ const CalendarPatient = () => {
         },
         {
             label: content.labelSchedule,
-            value: selectedEvent
-                ? format(selectedEvent.start!, 'dd/MM/yyyy - HH:mm', {
-                      locale: es,
-                  })
-                : '',
+            value: selectedEvent ? formEventData(selectedEvent) : '',
         },
     ]
 
@@ -104,11 +97,11 @@ const CalendarPatient = () => {
             <ContentArticle>
                 <div className="h-[80vh] w-full">
                     <Calendar
-                        localizer={localizer}
+                        localizer={calendarLocalizer}
                         startAccessor="start"
                         endAccessor="end"
                         views={['month', 'week', 'day']}
-                        events={events}
+                        events={allEvents}
                         view={currentView}
                         onView={setCurrentView}
                         date={currentDate}
