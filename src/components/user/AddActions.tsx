@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
+import { useDialog } from '@hooks/useDialog'
 import { deleteUser, resetPassword } from '@/services/supabaseAdmin'
 import { Button } from '@/components/ui/base/button'
 import {
@@ -28,7 +28,7 @@ const AddActions = ({
     userEmail: string
 }) => {
     const navigate = useNavigate()
-    const [isDialogDeleteUserOpen, setIsDialogDeleteUserOpen] = useState(false)
+    const deleteUserDialog = useDialog()
 
     const handleResetPassword = async () => {
         try {
@@ -90,7 +90,7 @@ const AddActions = ({
                             <Button
                                 size="xs"
                                 variant="destructive"
-                                onClick={() => setIsDialogDeleteUserOpen(true)}
+                                onClick={() => deleteUserDialog.openDialog()}
                             >
                                 {content.textButtonDeleteAccount}
                             </Button>
@@ -99,8 +99,8 @@ const AddActions = ({
                 </CardContent>
             </Card>
             <Dialog
-                open={isDialogDeleteUserOpen}
-                onOpenChange={setIsDialogDeleteUserOpen}
+                open={deleteUserDialog.isOpen}
+                onOpenChange={deleteUserDialog.setIsOpen}
             >
                 <DialogContent>
                     <DialogHeader>
