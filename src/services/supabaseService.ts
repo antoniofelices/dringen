@@ -11,7 +11,7 @@ import type { Enums } from '@/types/database.types'
 export const supabase = createClient<Database>(SUPABASEURL!, SUPABASEANONKEY!)
 
 // Patients
-export const getListPatients = async () => {
+export const getPatients = async () => {
     const { data, error } = await supabase.from('medical_patient').select('*')
     if (error) throw error
     return data
@@ -65,18 +65,18 @@ export const registerPatient = async (
     phone?: string,
     placeOfResidence?: string
 ) => {
+    const insertData = {
+        user_name: userName,
+        user_last_name: userLastName,
+        dni: dni,
+        email: email,
+        ...(phone && { phone }),
+        ...(placeOfResidence && { place_of_residence: placeOfResidence }),
+    }
+
     const { data, error } = await supabase
         .from('medical_patient')
-        .insert([
-            {
-                user_name: userName,
-                user_last_name: userLastName,
-                dni: dni,
-                email: email,
-                phone: phone,
-                place_of_residence: placeOfResidence,
-            },
-        ])
+        .insert([insertData])
         .select()
     if (error) throw error
     return data
@@ -129,7 +129,7 @@ export const updateGeneralDataPatient = async (
 }
 
 // Clinical History
-export const getListAllClinicalHistory = async () => {
+export const getClinicalHistory = async () => {
     const { data, error } = await supabase
         .from('medical_clinical_history')
         .select('*')
@@ -233,7 +233,7 @@ export const registerDiagnosis = async (
 }
 
 // Users
-export const getListUsers = async () => {
+export const getUsers = async () => {
     const { data, error } = await supabase.from('medical_user').select('*')
     if (error) throw error
     return data
@@ -354,4 +354,48 @@ export const getFileDownloadUrl = async (filePath: string) => {
 
     if (error) throw error
     return data.signedUrl
+}
+
+// Appointment
+export const getAppointments = async () => {
+    const { data, error } = await supabase.from('medical_appointment').select(
+        `
+          *,
+          medical_patient(user_name, user_last_name),
+          medical_user(user_name, user_last_name)
+        `
+    )
+    if (error) throw error
+    return data
+}
+
+export const registerAppointment = async (
+    patientId: string,
+    physicianId: string,
+    appointmentDate: string,
+    notes?: string
+) => {
+    const insertData = {
+        patient_id: patientId,
+        physician_id: physicianId,
+        appointment_date: appointmentDate,
+        notes: notes,
+    }
+    const { data, error } = await supabase
+        .from('medical_appointment')
+        .insert([insertData])
+        .select()
+    if (error) throw error
+    return data
+}
+
+export const deleteAppointment = async (appointmentId: string) => {
+    if (!appointmentId) throw new Error('ID is required')
+
+    const { error } = await supabase
+        .from('medical_appointment')
+        .delete()
+        .eq('id', appointmentId)
+
+    if (error) throw error
 }

@@ -1,7 +1,9 @@
+'use client'
+
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
-import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { PanelLeftIcon } from 'lucide-react'
 
 import { useIsMobile } from '@/hooks/useMobile'
@@ -378,7 +380,7 @@ function SidebarSeparator({
         <Separator
             data-slot="sidebar-separator"
             data-sidebar="separator"
-            className={cn('bg-sidebar-border border-1 mx-2 w-auto', className)}
+            className={cn('bg-sidebar-border mx-2 w-auto', className)}
             {...props}
         />
     )

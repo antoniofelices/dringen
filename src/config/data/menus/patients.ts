@@ -6,35 +6,35 @@ import {
     PlusCircleIcon,
 } from 'lucide-react'
 
-const patientMenu: RoutesProps[] = [
+const patientsMenu: RoutesProps[] = [
     {
         id: 1,
         icon: ClipboardPlus,
         url: 'patient/list',
-        text: 'List',
+        text: 'Patients List',
         orderMenu: 1,
     },
     {
         id: 2,
         icon: PlusCircleIcon,
         url: 'patient/add',
-        text: 'Add Health Consumer',
+        text: 'Add Patient',
         orderMenu: 2,
     },
     {
         id: 3,
         icon: CalendarDays,
         url: 'patient/calendar',
-        text: 'Calendar',
+        text: 'Appointments',
         orderMenu: 3,
     },
     {
         id: 4,
         icon: ChartColumnIncreasing,
-        url: 'patient/stadistics',
-        text: 'Stadistics',
+        url: 'patient/statistics',
+        text: 'Statistics',
         orderMenu: 4,
     },
 ]
 
-export default patientMenu
+export default patientsMenu

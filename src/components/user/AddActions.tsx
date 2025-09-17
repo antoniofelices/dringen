@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { deleteUser, resetPassword } from '@/services/supabaseAdmin'
@@ -16,7 +17,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/components/ui/base/dialog'
 import content from '@/config/data/user/addActions'
 
@@ -28,6 +28,7 @@ const AddActions = ({
     userEmail: string
 }) => {
     const navigate = useNavigate()
+    const [isDialogDeleteUserOpen, setIsDialogDeleteUserOpen] = useState(false)
 
     const handleResetPassword = async () => {
         try {
@@ -70,32 +71,37 @@ const AddActions = ({
 
     return (
         <>
-            <Dialog>
-                <Card className="mt-4">
-                    <CardHeader>
-                        <CardTitle>
-                            <h2 className="mb-8">{content.title}</h2>
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <ul>
-                            <li className="lg:flex justify-between my-4">
-                                {content.textResetPassword}
-                                <Button size="xs" onClick={handleResetPassword}>
-                                    {content.textButtonResetPassword}
-                                </Button>
-                            </li>
-                            <li className="lg:flex justify-between my-4">
-                                {content.textDeleteAccount}
-                                <DialogTrigger asChild>
-                                    <Button size="xs" variant="destructive">
-                                        {content.textButtonDeleteAccount}
-                                    </Button>
-                                </DialogTrigger>
-                            </li>
-                        </ul>
-                    </CardContent>
-                </Card>
+            <Card className="mt-4">
+                <CardHeader>
+                    <CardTitle>
+                        <h2 className="mb-8">{content.title}</h2>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <ul>
+                        <li className="lg:flex justify-between my-4">
+                            {content.textResetPassword}
+                            <Button size="xs" onClick={handleResetPassword}>
+                                {content.textButtonResetPassword}
+                            </Button>
+                        </li>
+                        <li className="lg:flex justify-between my-4">
+                            {content.textDeleteAccount}
+                            <Button
+                                size="xs"
+                                variant="destructive"
+                                onClick={() => setIsDialogDeleteUserOpen(true)}
+                            >
+                                {content.textButtonDeleteAccount}
+                            </Button>
+                        </li>
+                    </ul>
+                </CardContent>
+            </Card>
+            <Dialog
+                open={isDialogDeleteUserOpen}
+                onOpenChange={setIsDialogDeleteUserOpen}
+            >
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>{content.titleDialog}</DialogTitle>

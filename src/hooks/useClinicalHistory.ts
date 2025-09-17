@@ -1,23 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
-import { getListAllClinicalHistory } from '@services/supabaseService'
+import { getClinicalHistory } from '@services/supabaseService'
 
 export const useClinicalHistory = () => {
-    const {
-        data: clinicalHistoryData,
-        isPending: clinicalHistoryLoading,
-        isError: clinicalHistoryError,
-        error: clinicalHistoryErrorType,
-        refetch: userRefetch,
-    } = useQuery({
+    const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['listClinicalHistory'],
-        queryFn: () => getListAllClinicalHistory(),
+        queryFn: () => getClinicalHistory(),
     })
 
     return {
-        clinicalHistory: clinicalHistoryData,
-        isPending: clinicalHistoryLoading,
-        isError: clinicalHistoryError,
-        error: clinicalHistoryErrorType,
-        refetch: userRefetch,
+        clinicalHistory: data,
+        isPending: isPending,
+        isError: isError,
+        error: error,
+        refetch: refetch,
     }
 }

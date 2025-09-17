@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
 import type { UserType } from '@/types/interfaces'
-import { getListUsers } from '@services/supabaseService'
-import { createUserColumns } from '@/config/tables'
+import { getUsers } from '@services/supabaseService'
+import { createUserColumns } from '@/lib/tableUtils'
 import { Button } from '@components/ui/base/button'
 import ContentArticle from '@components/ui/ContentArticle'
 import HeaderArticle from '@components/ui/HeaderArticle'
@@ -19,7 +19,7 @@ const ListUser = () => {
         error: listErrorType,
     } = useQuery({
         queryKey: ['listUsers'],
-        queryFn: () => getListUsers(),
+        queryFn: () => getUsers(),
     })
 
     const navigate = useNavigate()

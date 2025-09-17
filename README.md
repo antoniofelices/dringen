@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an app designed for managing clinical histories. It is built using Supabase. Currently, you can create health consumers and users with roles, as well as create clinical histories and view statistics.
+This is an app designed for managing clinical histories. It is built using Supabase. Currently, you can create patients and users with roles, as well as create clinical histories and view statistics.
 
 <img src="src/assets/images/preview-01.webp" alt="Preview" width="400"/>
 

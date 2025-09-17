@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import { Maximize } from 'lucide-react'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { transformDate } from '@/lib/utils'
@@ -39,11 +38,11 @@ const DisplayClinicalHistory = () => {
             </CardHeader>
 
             <CardContent>
-                {orderClinicalHistory?.map((item) => {
+                {orderClinicalHistory?.map((item, index) => {
                     const isModalOpen = openModal === item.id
 
                     return (
-                        <div key={uuidv4()}>
+                        <div key={index}>
                             <Dialog
                                 key={item.id}
                                 open={isModalOpen}

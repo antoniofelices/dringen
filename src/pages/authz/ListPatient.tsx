@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
 import type { PatientType } from '@/types/interfaces'
-import { getListPatients } from '@services/supabaseService'
-import { createPatientColumns } from '@/config/tables'
+import { getPatients } from '@services/supabaseService'
+import { createPatientColumns } from '@/lib/tableUtils'
 import { Button } from '@components/ui/base/button'
 import ContentArticle from '@components/ui/ContentArticle'
 import HeaderArticle from '@components/ui/HeaderArticle'
@@ -19,7 +19,7 @@ const ListPatient = () => {
         error: listErrorType,
     } = useQuery({
         queryKey: ['listHealthConsumers'],
-        queryFn: () => getListPatients(),
+        queryFn: () => getPatients(),
     })
 
     const navigate = useNavigate()

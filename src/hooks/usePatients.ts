@@ -1,5 +1,6 @@
+import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getListPatients } from '@services/supabaseService'
+import { getPatients } from '@services/supabaseService'
 
 export const usePatients = () => {
     const {
@@ -7,10 +8,10 @@ export const usePatients = () => {
         isPending: patientsLoading,
         isError: patientsError,
         error: patientsErrorType,
-        refetch: userRefetch,
+        refetch: patientsRefetch,
     } = useQuery({
         queryKey: ['listPatients'],
-        queryFn: () => getListPatients(),
+        queryFn: () => getPatients(),
     })
 
     return {
@@ -18,6 +19,24 @@ export const usePatients = () => {
         isPending: patientsLoading,
         isError: patientsError,
         error: patientsErrorType,
-        refetch: userRefetch,
+        refetch: patientsRefetch,
     }
+}
+
+export const usePatientsNames = () => {
+    const { patients } = usePatients()
+
+    const patientsData = useMemo(() => {
+        return (
+            patients
+                ?.map((item) => ({
+                    name: `${item.user_last_name} ${item.user_name}`,
+                    id: item.id,
+                    dni: item.dni,
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name)) || []
+        )
+    }, [patients])
+
+    return patientsData
 }
