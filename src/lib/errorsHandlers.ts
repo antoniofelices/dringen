@@ -8,7 +8,7 @@ class ConnectionError extends Error {
 class ValidationError extends Error {
     constructor(message: string) {
         super(message)
-        this.name = 'ValidatioError'
+        this.name = 'ValidationError'
     }
 }
 
