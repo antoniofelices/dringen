@@ -5,13 +5,7 @@ import { getSingleUser } from '@/services/supabaseService'
 export const useCurrentUser = () => {
     const { user: authUser, loading: authLoading } = useAuth()
 
-    const {
-        data: userData,
-        isPending: userLoading,
-        isError: userError,
-        error: userErrorType,
-        refetch: userRefetch,
-    } = useQuery({
+    const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['currentUser', authUser?.id],
         queryFn: () => getSingleUser(authUser!.id),
         enabled: !!authUser && !authLoading,
@@ -19,12 +13,12 @@ export const useCurrentUser = () => {
     })
 
     return {
-        user: userData,
+        user: data,
         authUser,
-        isPending: authLoading || userLoading,
-        isError: userError,
-        error: userErrorType,
-        refetch: userRefetch,
+        isPending: authLoading || isPending,
+        isError: isError,
+        error: error,
+        refetch: refetch,
         isAuthenticated: !!authUser,
     }
 }

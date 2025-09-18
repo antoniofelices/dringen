@@ -3,23 +3,17 @@ import { useQuery } from '@tanstack/react-query'
 import { getPatients } from '@services/supabaseService'
 
 export const usePatients = () => {
-    const {
-        data: patientsData,
-        isPending: patientsLoading,
-        isError: patientsError,
-        error: patientsErrorType,
-        refetch: patientsRefetch,
-    } = useQuery({
+    const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['listPatients'],
         queryFn: () => getPatients(),
     })
 
     return {
-        patients: patientsData,
-        isPending: patientsLoading,
-        isError: patientsError,
-        error: patientsErrorType,
-        refetch: patientsRefetch,
+        patients: data,
+        isPending: isPending,
+        isError: isError,
+        error: error,
+        refetch: refetch,
     }
 }
 

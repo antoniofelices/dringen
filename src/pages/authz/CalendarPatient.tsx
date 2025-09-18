@@ -2,24 +2,25 @@ import { useState, useCallback } from 'react'
 import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
+import { toast } from 'sonner'
+import { useAppointments } from '@hooks/useAppointments'
+import { useDialog } from '@hooks/useDialog'
+import type { View, SlotInfo, Event } from 'react-big-calendar'
 import {
     calendarLocalizer,
     transformAppointmentsToEvents,
     formEventData,
 } from '@/lib/calendarUtils'
-import { useAppointments } from '@hooks/useAppointments'
-import type { View, SlotInfo, Event } from 'react-big-calendar'
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/base/button'
+import { Button } from '@components/ui/base/button'
 import {
     Dialog,
     DialogContent,
     DialogOverlay,
     DialogTitle,
-} from '@/components/ui/base/dialog'
+} from '@components/ui/base/dialog'
 import ButtonBack from '@components/ui/ButtonBack'
-import ContentArticle from '@/components/ui/ContentArticle'
-import HeaderArticle from '@/components/ui/HeaderArticle'
+import ContentArticle from '@components/ui/ContentArticle'
+import HeaderArticle from '@components/ui/HeaderArticle'
 import ErrorApi from '@components/ui/ErrorApi'
 import Loading from '@components/ui/Loading'
 import DataDisplayList from '@components/ui/DataDisplayList'
@@ -38,29 +39,36 @@ const CalendarPatient = () => {
 
     const [currentView, setCurrentView] = useState<View>('month')
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [isDialogAddFormOpen, setIsDialogAddFormOpen] = useState(false)
-    const [isDialogEventOpen, setIsDialogEventOpen] = useState(false)
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
 
-    const handleSelectSlot = useCallback((slotInfo: SlotInfo) => {
-        setSelectedDate(slotInfo.start)
-        setIsDialogAddFormOpen(true)
-    }, [])
+    const addAppointmentDialog = useDialog()
+    const eventDialog = useDialog()
 
-    const handleSelectEvent = useCallback((event: Event) => {
-        setSelectedEvent(event)
-        setIsDialogEventOpen(true)
-    }, [])
+    const handleSelectSlot = useCallback(
+        (slotInfo: SlotInfo) => {
+            setSelectedDate(slotInfo.start)
+            addAppointmentDialog.openDialog()
+        },
+        [addAppointmentDialog]
+    )
+
+    const handleSelectEvent = useCallback(
+        (event: Event) => {
+            setSelectedEvent(event)
+            eventDialog.openDialog()
+        },
+        [eventDialog]
+    )
 
     const handleDeletedEvent = (event: Event) => {
         deleteAppointment.mutate(event.resource.id)
-        setIsDialogEventOpen(false)
+        eventDialog.closeDialog()
         toast.success(content.textToastSuccessDelete)
     }
 
     const handleFormSuccess = () => {
-        setIsDialogAddFormOpen(false)
+        addAppointmentDialog.closeDialog()
         setSelectedDate(null)
         refetch()
     }
@@ -94,7 +102,10 @@ const CalendarPatient = () => {
     return (
         <>
             <HeaderArticle title={content.title}>
-                <Button size="sm" onClick={() => setIsDialogAddFormOpen(true)}>
+                <Button
+                    size="sm"
+                    onClick={() => addAppointmentDialog.openDialog()}
+                >
                     {content.textButtonAdd}
                 </Button>
             </HeaderArticle>
@@ -118,8 +129,8 @@ const CalendarPatient = () => {
             </ContentArticle>
             <ButtonBack />
             <Dialog
-                open={isDialogAddFormOpen}
-                onOpenChange={setIsDialogAddFormOpen}
+                open={addAppointmentDialog.isOpen}
+                onOpenChange={addAppointmentDialog.setIsOpen}
             >
                 <DialogOverlay className="bg-black/60" />
                 <DialogContent className="sm:max-w-sm dark:bg-black">
@@ -133,8 +144,8 @@ const CalendarPatient = () => {
                 </DialogContent>
             </Dialog>
             <Dialog
-                open={isDialogEventOpen}
-                onOpenChange={setIsDialogEventOpen}
+                open={eventDialog.isOpen}
+                onOpenChange={eventDialog.setIsOpen}
             >
                 <DialogOverlay className="bg-black/60" />
                 <DialogContent className="sm:max-w-sm dark:bg-black">
