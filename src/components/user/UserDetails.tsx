@@ -9,6 +9,7 @@ import { useEditableForm } from '@/hooks/useEditableForm'
 import { transformDate } from '@/lib/utils'
 import type { UserType } from '@/types/interfaces'
 import { USERROLES } from '@/config/config.ts'
+import { useLogger } from '@/hooks/useLogger'
 import { Button } from '@components/ui/base/button'
 import {
     Card,
@@ -55,6 +56,7 @@ const FormUpdate = ({
     contentUser: UserType
     onSuccess: () => void
 }) => {
+    const { logError, logSuccess } = useLogger('RegisterUserForm')
     const [isSubmitting, setIsSubmitting] = useState(false)
     const defaultValues = {
         userName: contentUser.user_name || '',
@@ -82,9 +84,11 @@ const FormUpdate = ({
 
             await updateUser(contentUser.id, updateData)
             toast.success(content.textToastSuccess)
+            logSuccess(content.textToastSuccess, content.title)
             onSuccess()
-        } catch {
+        } catch (error) {
             toast.error(`${content.textToastFail}`)
+            logError(content.textToastFail, error, content.title)
         } finally {
             setIsSubmitting(false)
         }

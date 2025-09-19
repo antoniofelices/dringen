@@ -1,4 +1,5 @@
 const content = {
+    title: 'Register patient',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
     errorUserNameDisallowedCharacters: 'Only letters, numbers, and underscores',
@@ -26,6 +27,7 @@ const content = {
     labelOccupation: 'Occupation',
     textButtonSend: 'Register new',
     textButtonSending: 'Sending',
+    textToastSuccess: 'Register patient successfully',
     textToastFail: 'Failed to register patient',
 }
 

@@ -1,4 +1,5 @@
 const content = {
+    title: 'Register user',
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
