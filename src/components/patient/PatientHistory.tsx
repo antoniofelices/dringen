@@ -4,8 +4,6 @@ import { toast } from 'sonner'
 import { usePatientContext } from '@/hooks/usePatientContext'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { updateHistoryPatient } from '@services/supabaseService'
-import mapSupabaseError from '@services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import type { PatientHistoryType } from '@/types/interfaces'
 import { Button } from '@components/ui/base/button'
 import {
@@ -53,14 +51,8 @@ const FormAdd = ({
             )
             toast.success(content.textToastSuccess)
             onSuccess()
-        } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-            form.setError(field as keyof FormData, {
-                type: 'server',
-                message,
-            })
-            toast.error(`${content.textToastFail} ${message}`)
+        } catch {
+            toast.error(`${content.textToastFail}`)
             return
         }
     }

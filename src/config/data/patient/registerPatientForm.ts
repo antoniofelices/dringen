@@ -26,6 +26,7 @@ const content = {
     labelOccupation: 'Occupation',
     textButtonSend: 'Register new',
     textButtonSending: 'Sending',
+    textToastFail: 'Failed to register patient',
 }
 
 export default content

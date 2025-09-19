@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerPatient } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInput from '@components/ui/FormFieldInput'
@@ -62,13 +61,8 @@ const RegisterPatientForm = () => {
                 formData.placeOfResidence
             )
             navigate({ to: `/patient/${data[0].id}` })
-        } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-            form.setError(field, {
-                type: 'server',
-                message,
-            })
+        } catch {
+            toast.error(content.textToastFail)
             return
         }
     }

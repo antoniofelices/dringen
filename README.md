@@ -52,6 +52,8 @@ $ npm run dev
 
 - The database structure should be refactored.
 - Implement some standard, such as HL7 FHIR, to ensure data is shared securely and efficiently.
+- Improve mapSupabaseError to map specific errors to specific fields. Use the generic ServiceError with the correct FormData type. Reimplement granular error handling per field.
+- Improve dashboard screen.
 
 ## Contributing
 

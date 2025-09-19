@@ -5,8 +5,6 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerAppointment } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import { usePatientsNames } from '@/hooks/usePatients'
 import { usePhysicians } from '@hooks/useUsers'
 import { Button } from '@components/ui/base/button'
@@ -73,14 +71,8 @@ const RegisterAppointmentForm = ({
             toast.success(content.textToastSuccess)
             form.reset()
             onSuccess?.()
-        } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-            form.setError(field as keyof FormData, {
-                type: 'server',
-                message,
-            })
-            toast.error(`${content.textToastFail} ${message}`)
+        } catch {
+            toast.error(`${content.textToastFail}`)
             return
         }
     }
