@@ -31,8 +31,8 @@ const AuthzUserAddLazyRouteImport = createFileRoute('/_authz/user/add')()
 const AuthzUserAccountInactiveLazyRouteImport = createFileRoute(
   '/_authz/user/account-inactive',
 )()
-const AuthzPatientStadisticsLazyRouteImport = createFileRoute(
-  '/_authz/patient/stadistics',
+const AuthzPatientStatisticsLazyRouteImport = createFileRoute(
+  '/_authz/patient/statistics',
 )()
 const AuthzPatientListLazyRouteImport = createFileRoute(
   '/_authz/patient/list',
@@ -112,13 +112,13 @@ const AuthzUserAccountInactiveLazyRoute =
   } as any).lazy(() =>
     import('./routes/_authz/user/account-inactive.lazy').then((d) => d.Route),
   )
-const AuthzPatientStadisticsLazyRoute =
-  AuthzPatientStadisticsLazyRouteImport.update({
-    id: '/patient/stadistics',
-    path: '/patient/stadistics',
+const AuthzPatientStatisticsLazyRoute =
+  AuthzPatientStatisticsLazyRouteImport.update({
+    id: '/patient/statistics',
+    path: '/patient/statistics',
     getParentRoute: () => AuthzRoute,
   } as any).lazy(() =>
-    import('./routes/_authz/patient/stadistics.lazy').then((d) => d.Route),
+    import('./routes/_authz/patient/statistics.lazy').then((d) => d.Route),
   )
 const AuthzPatientListLazyRoute = AuthzPatientListLazyRouteImport.update({
   id: '/patient/list',
@@ -165,7 +165,7 @@ export interface FileRoutesByFullPath {
   '/patient/add': typeof AuthzPatientAddLazyRoute
   '/patient/calendar': typeof AuthzPatientCalendarLazyRoute
   '/patient/list': typeof AuthzPatientListLazyRoute
-  '/patient/stadistics': typeof AuthzPatientStadisticsLazyRoute
+  '/patient/statistics': typeof AuthzPatientStatisticsLazyRoute
   '/user/account-inactive': typeof AuthzUserAccountInactiveLazyRoute
   '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
@@ -182,7 +182,7 @@ export interface FileRoutesByTo {
   '/patient/add': typeof AuthzPatientAddLazyRoute
   '/patient/calendar': typeof AuthzPatientCalendarLazyRoute
   '/patient/list': typeof AuthzPatientListLazyRoute
-  '/patient/stadistics': typeof AuthzPatientStadisticsLazyRoute
+  '/patient/statistics': typeof AuthzPatientStatisticsLazyRoute
   '/user/account-inactive': typeof AuthzUserAccountInactiveLazyRoute
   '/user/add': typeof AuthzUserAddLazyRoute
   '/user/list': typeof AuthzUserListLazyRoute
@@ -202,7 +202,7 @@ export interface FileRoutesById {
   '/_authz/patient/add': typeof AuthzPatientAddLazyRoute
   '/_authz/patient/calendar': typeof AuthzPatientCalendarLazyRoute
   '/_authz/patient/list': typeof AuthzPatientListLazyRoute
-  '/_authz/patient/stadistics': typeof AuthzPatientStadisticsLazyRoute
+  '/_authz/patient/statistics': typeof AuthzPatientStatisticsLazyRoute
   '/_authz/user/account-inactive': typeof AuthzUserAccountInactiveLazyRoute
   '/_authz/user/add': typeof AuthzUserAddLazyRoute
   '/_authz/user/list': typeof AuthzUserListLazyRoute
@@ -221,7 +221,7 @@ export interface FileRouteTypes {
     | '/patient/add'
     | '/patient/calendar'
     | '/patient/list'
-    | '/patient/stadistics'
+    | '/patient/statistics'
     | '/user/account-inactive'
     | '/user/add'
     | '/user/list'
@@ -238,7 +238,7 @@ export interface FileRouteTypes {
     | '/patient/add'
     | '/patient/calendar'
     | '/patient/list'
-    | '/patient/stadistics'
+    | '/patient/statistics'
     | '/user/account-inactive'
     | '/user/add'
     | '/user/list'
@@ -257,7 +257,7 @@ export interface FileRouteTypes {
     | '/_authz/patient/add'
     | '/_authz/patient/calendar'
     | '/_authz/patient/list'
-    | '/_authz/patient/stadistics'
+    | '/_authz/patient/statistics'
     | '/_authz/user/account-inactive'
     | '/_authz/user/add'
     | '/_authz/user/list'
@@ -348,11 +348,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthzUserAccountInactiveLazyRouteImport
       parentRoute: typeof AuthzRoute
     }
-    '/_authz/patient/stadistics': {
-      id: '/_authz/patient/stadistics'
-      path: '/patient/stadistics'
-      fullPath: '/patient/stadistics'
-      preLoaderRoute: typeof AuthzPatientStadisticsLazyRouteImport
+    '/_authz/patient/statistics': {
+      id: '/_authz/patient/statistics'
+      path: '/patient/statistics'
+      fullPath: '/patient/statistics'
+      preLoaderRoute: typeof AuthzPatientStatisticsLazyRouteImport
       parentRoute: typeof AuthzRoute
     }
     '/_authz/patient/list': {
@@ -414,7 +414,7 @@ interface AuthzRouteChildren {
   AuthzPatientAddLazyRoute: typeof AuthzPatientAddLazyRoute
   AuthzPatientCalendarLazyRoute: typeof AuthzPatientCalendarLazyRoute
   AuthzPatientListLazyRoute: typeof AuthzPatientListLazyRoute
-  AuthzPatientStadisticsLazyRoute: typeof AuthzPatientStadisticsLazyRoute
+  AuthzPatientStatisticsLazyRoute: typeof AuthzPatientStatisticsLazyRoute
   AuthzUserAccountInactiveLazyRoute: typeof AuthzUserAccountInactiveLazyRoute
   AuthzUserAddLazyRoute: typeof AuthzUserAddLazyRoute
   AuthzUserListLazyRoute: typeof AuthzUserListLazyRoute
@@ -429,7 +429,7 @@ const AuthzRouteChildren: AuthzRouteChildren = {
   AuthzPatientAddLazyRoute: AuthzPatientAddLazyRoute,
   AuthzPatientCalendarLazyRoute: AuthzPatientCalendarLazyRoute,
   AuthzPatientListLazyRoute: AuthzPatientListLazyRoute,
-  AuthzPatientStadisticsLazyRoute: AuthzPatientStadisticsLazyRoute,
+  AuthzPatientStatisticsLazyRoute: AuthzPatientStatisticsLazyRoute,
   AuthzUserAccountInactiveLazyRoute: AuthzUserAccountInactiveLazyRoute,
   AuthzUserAddLazyRoute: AuthzUserAddLazyRoute,
   AuthzUserListLazyRoute: AuthzUserListLazyRoute,

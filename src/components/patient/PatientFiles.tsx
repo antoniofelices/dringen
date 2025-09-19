@@ -8,8 +8,6 @@ import {
     getPatientFiles,
     getFileDownloadUrl,
 } from '@services/supabaseService'
-import mapSupabaseError from '@services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import type { PatientFileType } from '@/types/interfaces'
 import { normalizeFileName } from '@/lib/utils'
 import { Button } from '@components/ui/base/button'
@@ -60,13 +58,8 @@ const FormUpload = ({
             toast.success(content.textToastSuccess)
             onSuccess()
         } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-            form.setError(field as keyof FormData, {
-                type: 'server',
-                message,
-            })
-            toast.error(`${content.textToastFail}: ${message}`)
+            console.error(content.textConsoleErrorPermission, error)
+            toast.error(`${content.textToastFail}`)
             return
         }
     }

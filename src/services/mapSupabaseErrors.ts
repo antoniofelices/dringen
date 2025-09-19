@@ -1,30 +1,13 @@
-const mapSupabaseError = (errorMessage: string) => {
-    const lowerMessage = errorMessage.toLowerCase()
+type SupabaseError = {
+    field: 'root' | 'email'
+    message: string
+}
 
-    if (lowerMessage.includes('invalid login credentials')) {
-        return {
-            field: 'root' as const,
-            message: 'Email o contraseña incorrectos',
-        }
-    }
-
-    if (lowerMessage.includes('email not confirmed')) {
-        return {
-            field: 'email' as const,
-            message: 'Por favor confirma tu email antes de iniciar sesión',
-        }
-    }
-
-    if (lowerMessage.includes('too many requests')) {
-        return {
-            field: 'root' as const,
-            message: 'Demasiados intentos. Intenta de nuevo más tarde',
-        }
-    }
-
+const mapSupabaseError = (errorMessage: string): SupabaseError => {
+    const message = errorMessage.toLowerCase()
     return {
-        field: 'root' as const,
-        message: errorMessage,
+        field: 'root',
+        message: message,
     }
 }
 

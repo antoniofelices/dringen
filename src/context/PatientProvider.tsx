@@ -12,26 +12,20 @@ const PatientProvider = ({
     children,
     ...props
 }: PatientProviderProps) => {
-    const {
-        data: patientData,
-        isPending: patientLoading,
-        isError: patientError,
-        error: patientErrorType,
-        refetch: refetchPatient,
-    } = useQuery({
+    const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['singleHealthConsumerQuery', patientId],
         queryFn: () => getSinglePatient(patientId),
         enabled: !!patientId,
     })
 
     const value = {
-        patientData: patientData || null,
-        patientHistory: patientData?.medical_patient_history || null,
-        clinicalHistory: patientData?.medical_clinical_history || null,
-        patientLoading,
-        patientError,
-        patientErrorType: patientErrorType || null,
-        refetchPatient,
+        patientData: data || null,
+        patientHistory: data?.medical_patient_history || null,
+        clinicalHistory: data?.medical_clinical_history || null,
+        patientLoading: isPending,
+        patientError: isError,
+        patientErrorType: error || null,
+        refetchPatient: refetch,
     }
 
     return (

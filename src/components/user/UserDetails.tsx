@@ -5,10 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { X } from 'lucide-react'
 import { updateUser } from '@/services/supabaseAdmin'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
 import { useEditableForm } from '@/hooks/useEditableForm'
 import { transformDate } from '@/lib/utils'
-import type { PostgrestError } from '@supabase/supabase-js'
 import type { UserType } from '@/types/interfaces'
 import { USERROLES } from '@/config/config.ts'
 import { Button } from '@components/ui/base/button'
@@ -43,13 +41,7 @@ const updateUserSchema = z.object({
     isActive: z.boolean(),
 })
 
-type FormData = {
-    userName: string
-    userLastName: string
-    email: string
-    role: (typeof USERROLES)[number]
-    isActive: boolean
-}
+type FormData = z.infer<typeof updateUserSchema>
 
 type UserDetailsProps = {
     userData: UserType
@@ -91,17 +83,8 @@ const FormUpdate = ({
             await updateUser(contentUser.id, updateData)
             toast.success(content.textToastSuccess)
             onSuccess()
-        } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-
-            if (field && field in formData) {
-                form.setError('root', {
-                    type: 'server',
-                    message,
-                })
-            }
-            toast.error(`${content.textToastFail}: ${message}`)
+        } catch {
+            toast.error(`${content.textToastFail}`)
         } finally {
             setIsSubmitting(false)
         }
