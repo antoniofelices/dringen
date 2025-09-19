@@ -176,6 +176,17 @@ const PatientFiles = () => {
             </CardHeader>
             <CardContent>
                 <div className="grid lg:grid-cols-6 gap-6">
+                    {canUpload && (
+                        <div className="col-span-3">
+                            <h3 className="mb-6 pb-2 border-b-2 dark:border-gray-700 border-gray-200 text-xs">
+                                {content.titleUpload}
+                            </h3>
+                            <FormUpload
+                                patientDni={patientDni}
+                                onSuccess={handleFileUploaded}
+                            />
+                        </div>
+                    )}
                     {hasFiles.length > 0 && (
                         <div className="col-span-3">
                             <h3 className="mb-4 pb-2 border-b-2 dark:border-gray-700 border-gray-200 text-xs">
@@ -200,17 +211,6 @@ const PatientFiles = () => {
                                     )
                                 })}
                             </ul>
-                        </div>
-                    )}
-                    {canUpload && (
-                        <div className="col-span-3">
-                            <h3 className="mb-6 pb-2 border-b-2 dark:border-gray-700 border-gray-200 text-xs">
-                                {content.titleUpload}
-                            </h3>
-                            <FormUpload
-                                patientDni={patientDni}
-                                onSuccess={handleFileUploaded}
-                            />
                         </div>
                     )}
                 </div>
