@@ -4,6 +4,7 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerPatient } from '@/services/supabaseService'
+import { useLogger } from '@/hooks/useLogger'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInput from '@components/ui/FormFieldInput'
@@ -34,6 +35,8 @@ const registerPatientSchema = z.object({
 type FormData = z.infer<typeof registerPatientSchema>
 
 const RegisterPatientForm = () => {
+    const { logError, logSuccess } = useLogger('RegisterPatientForm')
+
     const navigate = useNavigate()
 
     const defaultValues = {
@@ -61,7 +64,9 @@ const RegisterPatientForm = () => {
                 formData.placeOfResidence
             )
             navigate({ to: `/patient/${data[0].id}` })
-        } catch {
+            logSuccess(content.textToastSuccess, content.title)
+        } catch (error) {
+            logError(content.textToastFail, error, content.title)
             toast.error(content.textToastFail)
             return
         }

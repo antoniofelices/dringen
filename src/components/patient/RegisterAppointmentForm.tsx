@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { registerAppointment } from '@/services/supabaseService'
 import { usePatientsNames } from '@/hooks/usePatients'
 import { usePhysicians } from '@hooks/useUsers'
+import { useLogger } from '@/hooks/useLogger'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
@@ -35,6 +36,7 @@ const RegisterAppointmentForm = ({
     onSuccess,
     initialDate,
 }: RegisterAppointmentFormProps) => {
+    const { logError, logSuccess } = useLogger('RegisterAppointmentFormProps')
     const patients = usePatientsNames()
     const physicians = usePhysicians()
 
@@ -69,10 +71,12 @@ const RegisterAppointmentForm = ({
                 formData.notes
             )
             toast.success(content.textToastSuccess)
+            logSuccess(content.textToastSuccess, content.title)
             form.reset()
             onSuccess?.()
-        } catch {
+        } catch (error) {
             toast.error(`${content.textToastFail}`)
+            logError(content.textToastFail, error, content.title)
             return
         }
     }

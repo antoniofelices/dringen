@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createUser } from '@/services/supabaseAdmin'
 import { USERROLES } from '@/config/config.ts'
+import { useLogger } from '@/hooks/useLogger'
 import { Button } from '@/components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import FormFieldInput from '@/components/ui/FormFieldInput'
@@ -55,6 +56,8 @@ const registerUserSchema = z
 type FormData = z.infer<typeof registerUserSchema>
 
 const RegisterUserForm = () => {
+    const { logError, logSuccess } = useLogger('RegisterUserForm')
+
     const defaultValues = {
         email: '',
         password: '',
@@ -81,9 +84,11 @@ const RegisterUserForm = () => {
                 role: formData.role,
             })
             toast.success(content.textToastSuccess)
+            logSuccess(content.textToastSuccess, content.title)
             form.reset()
             return newUser
-        } catch {
+        } catch (error) {
+            logError(content.textToastFail, error, content.title)
             toast.error(content.textToastFail)
             return
         }

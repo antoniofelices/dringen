@@ -5,9 +5,8 @@ import {
     registerClinicalHistory,
     registerDiagnosis,
 } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
-import type { PostgrestError } from '@supabase/supabase-js'
 import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
+import { useLogger } from '@/hooks/useLogger'
 import { Button } from '@components/ui/base/button'
 import { Form } from '@components/ui/base/form'
 import {
@@ -28,6 +27,8 @@ type Props = {
 }
 
 const AddClinicalHistory = ({ onSuccess }: Props) => {
+    const { logError, logSuccess } = useLogger('RegisterPatientForm')
+
     const { patientData } = usePatientContext()
 
     const defaultValues: ClinicalHistoryFormDataType = {
@@ -116,27 +117,20 @@ const AddClinicalHistory = ({ onSuccess }: Props) => {
                 )
 
                 toast.success(content.textToastSuccess)
+                logSuccess(content.textToastSuccess, content.title)
                 form.reset()
                 onSuccess?.()
                 return { clinicHistoryData, diagnosisData }
             } else {
                 toast.success(content.textToastSuccess)
+                logSuccess(content.textToastSuccess, content.title)
                 form.reset()
                 onSuccess?.()
                 return { clinicHistoryData, diagnosisData: null }
             }
         } catch (error) {
-            const postgrestError = error as PostgrestError
-            const { field, message } = mapSupabaseError(postgrestError.message)
-
-            if (field && field in formData) {
-                form.setError(field as keyof ClinicalHistoryFormDataType, {
-                    type: 'server',
-                    message,
-                })
-            }
-
-            toast.error(`${content.textToastFail}: ${message}`)
+            logError(content.textToastFail, error, content.title)
+            toast.error(content.textToastFail)
             return
         }
     }
