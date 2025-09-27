@@ -23,7 +23,7 @@ const ProtectedRoute = ({
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/sign-in" />
+        return <Navigate to="/" />
     }
 
     if (!canAccess(allowedRoles)) {
