@@ -14,7 +14,7 @@ const Error404 = () => {
             <p className="font-light lg:mb-8 ">{content.textIntro}</p>
             {!isLoggedIn && (
                 <Button className="mr-4">
-                    <Link to="/sign-in">{content.textButtonSignIn}</Link>
+                    <Link to="/">{content.textButtonSignIn}</Link>
                 </Button>
             )}
         </Main>
