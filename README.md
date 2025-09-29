@@ -1,16 +1,23 @@
-# Dringen
+<div align="center">
+    <h1>Dringen</h1>
+    <br/>
+    <p>This app is designed for managing patients and their clinical histories.</p>
+    <br/>
+</div>
 
-## Description
+<div align="center">
+    <img src="src/assets/images/preview-01.webp" alt="Preview" />
+</div>
 
-This is an app designed for managing clinical histories. It is built using Supabase. Currently, you can create patients and users with roles, as well as create clinical histories and view statistics.
+---
 
-<img src="src/assets/images/preview-01.webp" alt="Preview" width="400"/>
+## Features
 
-### Some decisions
-
-### API keys from
-
-In order to use Supabase, you will require an API key [Supabase](https://supabase.com/)
+- Create and manage users. The following roles are currently available: 'user', 'medical office', 'physician' and 'admin'. Each role has its own capabilities. Patients are not included as users.
+- Create and manage patients. Each patient has their own clinical history, statistics and related attachment files.
+- Create and manage appointments.
+- Use charts to display statistics about patients, such as their place of residence, gender, and diagnosis.
+- The backend is built using Supabase and PostgreSQL.
 
 ## Technologies
 
@@ -24,7 +31,8 @@ In order to use Supabase, you will require an API key [Supabase](https://supabas
 - Taildwind.
 - Shadcn/ui.
 - React hook form.
-- Supabase.
+- React Big Calendar.
+- Supabase. In order to use Supabase, you will require an API key [Supabase](https://supabase.com/)
 
 ## Documentation
 
@@ -57,6 +65,14 @@ $ npm run dev
 
 ## Contributing
 
+Please feel free to send pull requests and raise issues.
+Any contributions you make will be under the MIT license.
+Therefore, when you submit code changes, they are understood to be covered by the same licence.
+
 ### Code of Conduct
 
 Studio Moare has adopted the Contributor Covenant Code of Conduct that we expect project participants to adhere to. [Please read the full text](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) so that you can understand what actions will and will not be tolerated.
+
+## License
+
+© 2025+, Antonio Felices. Released under the [MIT licence](./LICENSE).
