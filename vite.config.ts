@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
@@ -32,7 +32,7 @@ export default defineConfig({
             '@hooks': path.resolve(__dirname, './src/hooks'),
             '@layouts': path.resolve(__dirname, './src/layouts'),
             '@pages': path.resolve(__dirname, './src/pages'),
-            '@tests': path.resolve(__dirname, './src/__tests__'),
+            '@tests': path.resolve(__dirname, './src/__test__'),
             '@types': path.resolve(__dirname, './src/types'),
             '@services': path.resolve(__dirname, './src/services'),
         },

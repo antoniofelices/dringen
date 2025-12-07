@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import type { ComponentType } from 'react'
 
 vi.mock('@pages/Index.tsx', () => ({
@@ -37,12 +37,14 @@ const mockContext: BeforeLoadContext = {
         search: '',
         hash: '',
         href: 'http://localhost/',
+        publicHref: 'http://localhost/',
         searchStr: '',
         state: {
             key: 'mock-key',
             __TSR_key: 'mock-tsr-key',
             __TSR_index: 0,
         },
+        url: 'http://localhost/',
     },
     params: {},
     search: {},
@@ -59,10 +61,6 @@ describe('Index Route', () => {
     const mockUser = createMockAuthUser()
 
     beforeEach(() => {
-        vi.clearAllMocks()
-    })
-
-    afterEach(() => {
         vi.clearAllMocks()
     })
 
