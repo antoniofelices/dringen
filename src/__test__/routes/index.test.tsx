@@ -44,7 +44,7 @@ const mockContext: BeforeLoadContext = {
             __TSR_key: 'mock-tsr-key',
             __TSR_index: 0,
         },
-        url: 'http://localhost/',
+        url: new URL('http://localhost/'),
     },
     params: {},
     search: {},
