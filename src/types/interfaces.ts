@@ -1,5 +1,4 @@
 import type { LucideIcon } from 'lucide-react'
-import type { Database, Tables, TablesInsert } from '@/types/database.types'
 
 export type RoutesProps = {
     id: number
@@ -9,32 +8,21 @@ export type RoutesProps = {
     orderMenu?: number
 }
 
-export type PatientType = Tables<'medical_patient'>
-export type ClinicalHistoryType = Tables<'medical_clinical_history'>
-export type PatientHistoryType = Tables<'medical_patient_history'>
-export type DiagnosisType = Tables<'medical_diagnosis'>
-export type UserType = Tables<'medical_user'>
+export type PatientType = null
+export type ClinicalHistoryType = null
+export type PatientHistoryType = null
+export type DiagnosisType = null
+export type UserType = null
 
-export interface ClinicalHistoryWithDiagnosisType extends ClinicalHistoryType {
-    medical_diagnosis: DiagnosisType[]
-}
+export type ClinicalHistoryWithDiagnosisType = null
 
-export interface PatientWithRelationsType extends PatientType {
-    medical_clinical_history: ClinicalHistoryWithDiagnosisType[]
-    medical_patient_history: PatientHistoryType | null
-}
+export type PatientWithRelationsType = null
 
-export type DiagnosisFormData = Pick<
-    TablesInsert<'medical_diagnosis'>,
-    'cie10' | 'diagnosis' | 'certainty'
->
+export type DiagnosisFormData = null
 
-export type ClinicalHistoryFormDataType =
-    TablesInsert<'medical_clinical_history'> & {
-        diagnoses: DiagnosisFormData[]
-    }
+export type ClinicalHistoryFormDataType = null
 
-export type UserRoleType = Database['public']['Enums']['dn_user_role']
+export type UserRoleType = null
 
 export type FileUploadValidationResult = {
     success: boolean
@@ -46,5 +34,5 @@ export type PatientFileType = {
     file_name: string
     file_created_at: string
     file_updated_at: string
-    file_metadata: Database['public']['Functions']['get_patient_files']['Returns'][0]['file_metadata']
+    file_metadata: null
 }
