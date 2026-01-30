@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import AccountInactive from '@pages/authz/AccountInactive'
+import AccountInactive from '@pages/practitioner/AccountInactive'
 
-export const Route = createLazyFileRoute('/_authz/user/account-inactive')({
+export const Route = createLazyFileRoute('/_authz/account-inactive')({
     component: RouteComponent,
 })
 

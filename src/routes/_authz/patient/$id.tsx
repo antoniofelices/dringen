@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import SinglePatient from '@/pages/authz/SinglePatient'
+import SinglePatient from '@/pages/patient/SinglePatient'
 import PatientProvider from '@/context/PatientProvider'
 import ProtectedRoute from '@/components/ProtectedRoute'
 

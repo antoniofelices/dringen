@@ -1,15 +1,15 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import CalendarPatient from '@/pages/authz/CalendarPatient'
+import Settings from '@pages/practitioner/Settings'
 import ProtectedRoute from '@/components/ProtectedRoute'
 
-export const Route = createLazyFileRoute('/_authz/patient/calendar')({
+export const Route = createLazyFileRoute('/_authz/settings')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
     return (
         <ProtectedRoute allowedRoles={['admin', 'physician', 'medical_office']}>
-            <CalendarPatient />
+            <Settings />
         </ProtectedRoute>
     )
 }

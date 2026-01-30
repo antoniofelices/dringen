@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import AddPatient from '@pages/authz/AddPatient'
+import AddPatient from '@pages/patient/AddPatient'
 import ProtectedRoute from '@/components/ProtectedRoute'
 
 export const Route = createLazyFileRoute('/_authz/patient/add')({
