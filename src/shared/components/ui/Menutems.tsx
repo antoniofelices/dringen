@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import type { RoutesProps } from '@/types/interfaces'
+import type { RoutesProps } from '@shared/types/routes.model'
 import {
     SidebarMenuButton,
     SidebarMenuItem,

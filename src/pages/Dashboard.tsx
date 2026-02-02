@@ -1,20 +1,20 @@
-import { useCurrentUser } from '@hooks/useCurrentUser'
+// import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentPractitioner'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import ContentArticle from '@components/ui/ContentArticle'
-import Loading from '@components/ui/Loading'
-import ErrorApi from '@components/ui/ErrorApi'
-import content from '@/config/data/pages/dashboard'
+} from '@shared/components/ui/base/card'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+// import Loading from '@shared/components/ui/Loading'
+// import ErrorApi from '@shared/components/ui/ErrorApi'
+import content from './Dashboard.content'
 
 const Dashboard = () => {
-    const { user, isPending, isError, error } = useCurrentUser()
+    // const { user, isPending, isError, error } = useCurrentPractitioner()
 
-    if (isPending) return <Loading />
-    if (isError && error) return <ErrorApi message={error.message} />
+    // if (isPending) return <Loading />
+    // if (isError && error) return <ErrorApi message={error.message} />
 
     return (
         <ContentArticle>
@@ -23,8 +23,7 @@ const Dashboard = () => {
                     <CardHeader>
                         <CardTitle>
                             <h1>
-                                {content.title} {user?.user_name}{' '}
-                                {user?.user_last_name}
+                                {content.title} {null} {null}
                             </h1>
                         </CardTitle>
                     </CardHeader>
