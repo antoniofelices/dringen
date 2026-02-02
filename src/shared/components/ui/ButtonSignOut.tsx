@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { type VariantProps } from 'class-variance-authority'
-import { supabase } from '@/services/supabaseService'
-import { Button, buttonVariants } from '@/components/ui/base/button'
-import ErrorApi from '@components/ui/ErrorApi'
-import content from '@data/ui/buttonSignOut'
+import { Button, buttonVariants } from '@shared/components/ui/base/button'
+import ErrorApi from '@shared/components/ui/ErrorApi'
+import content from './ButtonSignOut.content'
 
 type ButtonSignOutProps = VariantProps<typeof buttonVariants> & {
     asbutton?: boolean
@@ -25,16 +24,16 @@ const ButtonSignOut = ({
     const [isLoading, setIsLoading] = useState(false)
 
     const handleLogout = async () => {
-        setIsLoading(true)
-        setError(null)
+        // setIsLoading(true)
+        // setError(null)
 
-        const { error } = await supabase.auth.signOut()
+        // const { error } = null
 
-        if (error) {
-            setError(error.message)
-            setIsLoading(false)
-            return
-        }
+        // if (error) {
+        //     setError(error.message)
+        //     setIsLoading(false)
+        //     return
+        // }
 
         navigate({ to: '/' })
     }
@@ -53,7 +52,7 @@ const ButtonSignOut = ({
                     {...props}
                 >
                     {isLoading
-                        ? 'Cerrando sesión...'
+                        ? content.textClosing
                         : children || content.textButton}
                 </Button>
             ) : (
@@ -64,7 +63,7 @@ const ButtonSignOut = ({
                     {...props}
                 >
                     {isLoading
-                        ? 'Cerrando sesión...'
+                        ? content.textClosing
                         : children || content.textButton}
                 </button>
             )}

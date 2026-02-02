@@ -19,22 +19,16 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
-        setupFiles: './src/__test__/setupTests.ts',
     },
 
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
-            '@context': path.resolve(__dirname, './src/context'),
-            '@components': path.resolve(__dirname, './src/components'),
-            '@data': path.resolve(__dirname, './src/config/data'),
-            '@helpers': path.resolve(__dirname, './src/helpers'),
-            '@hooks': path.resolve(__dirname, './src/hooks'),
+            '@config': path.resolve(__dirname, './src/config'),
             '@layouts': path.resolve(__dirname, './src/layouts'),
             '@pages': path.resolve(__dirname, './src/pages'),
-            '@tests': path.resolve(__dirname, './src/__test__'),
-            '@types': path.resolve(__dirname, './src/types'),
-            '@services': path.resolve(__dirname, './src/services'),
+            '@resources': path.resolve(__dirname, './src/resources'),
+            '@shared': path.resolve(__dirname, './src/shared'),
         },
     },
 })

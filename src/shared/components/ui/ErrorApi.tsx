@@ -1,4 +1,4 @@
-import content from '@data/ui/errorApi'
+import content from './ErrorApi.content'
 
 const ErrorApi = ({ message }: { message: string }) => {
     return (

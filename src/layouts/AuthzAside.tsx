@@ -1,14 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
-import { useCurrentUser } from '@hooks/useCurrentUser'
-import { usePermissions } from '@/hooks/usePermissions'
-import RoleGuard from '@components/RoleGuard'
+// import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentUser'
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from '@components/ui/base/dropdown-menu'
+} from '@shared/components/ui/base/dropdown-menu'
 import {
     Sidebar,
     SidebarContent,
@@ -22,25 +20,15 @@ import {
     SidebarMenuItem,
     SidebarSeparator,
     SidebarRail,
-} from '@components/ui/base/sidebar'
-import ButtonSignOut from '@components/ui/ButtonSignOut'
-import Logo from '@components/ui/Logo'
-import MenuItems from '@components/ui/Menutems'
-import patientsMenu from '@/config/data/menus/patients'
-import usersMenu from '@/config/data/menus/users'
-import content from '@data/layouts/asideAuthz'
+} from '@shared/components/ui/base/sidebar'
+import ButtonSignOut from '@shared/components/ui/ButtonSignOut'
+import Logo from '@shared/components/ui/Logo'
+import MenuItems from '@shared/components/ui/Menutems'
+import patientMenu from '@resources/patient/content/patientMenu.content'
+import practitionerMenu from '@resources/practitioner/content/practitionerMenu.content'
+import content from './AuthzAside.content'
 
 const Aside = () => {
-    const { user } = useCurrentUser()
-    const { canAccess } = usePermissions()
-
-    const patientsMenuFiltered = patientsMenu.filter((item) => {
-        if (item.id === 4) {
-            return canAccess(['admin', 'physician'])
-        }
-        return true
-    })
-
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -57,33 +45,26 @@ const Aside = () => {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                <RoleGuard
-                    allowedRoles={['admin', 'physician', 'medical_office']}
-                >
-                    <SidebarGroup>
-                        <SidebarGroupLabel>
-                            {content.titlePatients}
-                        </SidebarGroupLabel>
-                        <SidebarGroupContent>
-                            <SidebarMenu>
-                                <MenuItems content={patientsMenuFiltered} />
-                            </SidebarMenu>
-                        </SidebarGroupContent>
-                    </SidebarGroup>
-                    <SidebarSeparator />
-                </RoleGuard>
-                <RoleGuard allowedRoles={['admin']}>
-                    <SidebarGroup>
-                        <SidebarGroupLabel>
-                            {content.titleUsers}
-                        </SidebarGroupLabel>
-                        <SidebarGroupContent>
-                            <SidebarMenu>
-                                <MenuItems content={usersMenu} />
-                            </SidebarMenu>
-                        </SidebarGroupContent>
-                    </SidebarGroup>
-                </RoleGuard>
+                <SidebarGroup>
+                    <SidebarGroupLabel>
+                        {content.titlePatients}
+                    </SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <MenuItems content={patientMenu} />
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarSeparator />
+
+                <SidebarGroup>
+                    <SidebarGroupLabel>{content.titleUsers}</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <MenuItems content={practitionerMenu} />
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
             </SidebarContent>
             <SidebarSeparator />
 
@@ -94,24 +75,15 @@ const Aside = () => {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
                                     <Circle className="stroke-blue-600" />
-                                    {user?.user_name}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent side="top" className="w-56">
-                                <RoleGuard
-                                    allowedRoles={[
-                                        'admin',
-                                        'physician',
-                                        'medical_office',
-                                    ]}
-                                >
-                                    <DropdownMenuItem>
-                                        <Link to={'/settings'}>
-                                            {content.titleSettings}
-                                        </Link>
-                                    </DropdownMenuItem>
-                                </RoleGuard>
+                                <DropdownMenuItem>
+                                    <Link to={'/practitioner/settings'}>
+                                        {content.titleSettings}
+                                    </Link>
+                                </DropdownMenuItem>
                                 <DropdownMenuItem>
                                     <ButtonSignOut asbutton={false} />
                                 </DropdownMenuItem>

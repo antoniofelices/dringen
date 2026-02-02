@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import MainAuthn from '@layouts/authn/Main'
+import AuthnMain from '@layouts/AuthnMain'
 
 export const Route = createFileRoute('/_authn')({
     // beforeLoad: async () => {
@@ -13,8 +13,8 @@ export const Route = createFileRoute('/_authn')({
 
 function RouteComponent() {
     return (
-        <MainAuthn>
+        <AuthnMain>
             <Outlet />
-        </MainAuthn>
+        </AuthnMain>
     )
 }

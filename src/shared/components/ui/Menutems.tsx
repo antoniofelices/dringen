@@ -3,7 +3,7 @@ import type { RoutesProps } from '@/types/interfaces'
 import {
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/components/ui/base/sidebar'
+} from '@shared/components/ui/base/sidebar'
 
 const MenuItems = ({
     content,

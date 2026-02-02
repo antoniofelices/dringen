@@ -3,9 +3,9 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import ResetPasswordForm from '@/components/authn/ResetPasswordForm'
-import content from '@/config/data/pages/resetPassword'
+} from '@shared/components/ui/base/card'
+import ResetPasswordForm from '@resources/practitioner/components/ResetPasswordForm'
+import content from './ResetPassword.content'
 
 const ResetPassword = () => {
     return (
