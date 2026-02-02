@@ -1,33 +1,33 @@
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
-import type { PatientType } from '@/types/interfaces'
-import { getPatients } from '@services/supabaseService'
-import { createPatientColumns } from '@/lib/tableUtils'
-import { Button } from '@components/ui/base/button'
-import ContentArticle from '@components/ui/ContentArticle'
-import HeaderArticle from '@components/ui/HeaderArticle'
-import DataTable from '@components/ui/DataTable'
-import ErrorApi from '@components/ui/ErrorApi'
-import Loading from '@components/ui/Loading'
-import content from '@data/pages/listPatient'
+// import type { PatientType } from '../types/patient.model.ts'
+// import { getPatients } from '@resources/patient/hooks/usePatients'
+// import { patientTableColumns } from '../presentation/patientTable.columns'
+import { Button } from '@shared/components/ui/base/button'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import HeaderArticle from '@shared/components/ui/HeaderArticle'
+// import DataTable from '@shared/components/ui/DataTable'
+// import ErrorApi from '@shared/components/ui/ErrorApi'
+// import Loading from '@shared/components/ui/Loading'
+import content from './List.content'
 
 const ListPatient = () => {
-    const {
-        data: listData,
-        isPending: listLoading,
-        isError: listError,
-        error: listErrorType,
-    } = useQuery({
-        queryKey: ['listHealthConsumers'],
-        queryFn: () => getPatients(),
-    })
+    // const {
+    //     data: listData,
+    //     isPending: listLoading,
+    //     isError: listError,
+    //     error: listErrorType,
+    // } = useQuery({
+    //     queryKey: ['listPatients'],
+    //     queryFn: () => getPatients(),
+    // })
 
     const navigate = useNavigate()
 
-    if (listLoading) return <Loading />
+    // if (listLoading) return <Loading />
 
-    if (listError && listErrorType)
-        return <ErrorApi message={listErrorType.message} />
+    // if (listError && listErrorType)
+    //     return <ErrorApi message={listErrorType.message} />
 
     return (
         <>
@@ -37,11 +37,11 @@ const ListPatient = () => {
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <DataTable<PatientType>
+                {/* <DataTable<PatientType>
                     columns={createPatientColumns(navigate)}
                     data={listData || []}
                     caption={content.textCaptionTable}
-                />
+                /> */}
             </ContentArticle>
         </>
     )

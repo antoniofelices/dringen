@@ -1,47 +1,48 @@
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
 import { useNavigate, Link } from '@tanstack/react-router'
-import type { UserType } from '@/types/interfaces'
-import { getUsers } from '@services/supabaseService'
-import { createUserColumns } from '@/lib/tableUtils'
-import { Button } from '@components/ui/base/button'
-import ContentArticle from '@components/ui/ContentArticle'
-import HeaderArticle from '@components/ui/HeaderArticle'
-import DataTable from '@components/ui/DataTable'
-import ErrorApi from '@components/ui/ErrorApi'
-import Loading from '@components/ui/Loading'
-import content from '@data/pages/listUser'
+// import type { PractitionerType } from '../types/practitioner.model'
+// import { practitionerTableColumns } from '../presentation/practitionerTable.columns'
+import { Button } from '@shared/components/ui/base/button'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import HeaderArticle from '@shared/components/ui/HeaderArticle'
+// import DataTable from '@shared/components/ui/DataTable'
+// import ErrorApi from '@shared/components/ui/ErrorApi'
+// import Loading from '@shared/components/ui/Loading'
+import content from './List.content'
 
 const ListUser = () => {
-    const {
-        data: listData,
-        isPending: listLoading,
-        isError: listError,
-        error: listErrorType,
-    } = useQuery({
-        queryKey: ['listUsers'],
-        queryFn: () => getUsers(),
-    })
+    // const {
+    //     data: listData,
+    //     isPending: listLoading,
+    //     isError: listError,
+    //     error: listErrorType,
+    // } = useQuery({
+    //     queryKey: ['listUsers'],
+    //     queryFn: () => getUsers(),
+    // })
 
     const navigate = useNavigate()
 
-    if (listLoading) return <Loading />
+    // if (listLoading) return <Loading />
 
-    if (listError && listErrorType)
-        return <ErrorApi message={listErrorType.message} />
+    // if (listError && listErrorType)
+    //     return <ErrorApi message={listErrorType.message} />
 
     return (
         <>
             <HeaderArticle title={content.title}>
                 <Button asChild size="sm">
-                    <Link to="/user/add">{content.textButtonAddNew}</Link>
+                    <Link to="/practitioner/add">
+                        {content.textButtonAddNew}
+                    </Link>
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <DataTable<UserType>
+                {/* <DataTable<UserType>
                     columns={createUserColumns(navigate)}
                     data={listData || []}
                     caption={content.textCaptionTable}
-                />
+                /> */}
             </ContentArticle>
         </>
     )

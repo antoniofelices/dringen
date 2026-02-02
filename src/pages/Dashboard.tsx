@@ -23,7 +23,7 @@ const Dashboard = () => {
                     <CardHeader>
                         <CardTitle>
                             <h1>
-                                {content.title} {null} {null}
+                                {content.title} A Name {null}
                             </h1>
                         </CardTitle>
                     </CardHeader>

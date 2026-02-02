@@ -20,11 +20,11 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from '@/components/ui/base/table'
+} from '@shared/components/ui/base/table'
 
-import { Label } from '@components/ui/base/label'
-import { Input } from '@/components/ui/base/input'
-import content from '@data/ui/dataTable'
+import { Label } from '@shared/components/ui/base/label'
+import { Input } from '@shared/components/ui/base/input'
+import content from './DataTable.content'
 
 type DataTableProps<TData> = {
     columns: ColumnDef<TData>[]

@@ -3,9 +3,9 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import ContentArticle from '@components/ui/ContentArticle'
-import content from '@/config/data/pages/unauthorized'
+} from '@shared/components/ui/base/card'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import content from './Unauthorized.content'
 
 const Unauthorized = () => {
     return (
