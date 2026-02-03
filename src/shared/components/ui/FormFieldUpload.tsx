@@ -6,9 +6,9 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
-import { Input } from '@/components/ui/base/input'
-import content from '@data/ui/formFieldUpload'
+} from '@shared/components/ui/base/form'
+import { Input } from '@shared/components/ui/base/input'
+import content from './FormFieldUpload.content'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

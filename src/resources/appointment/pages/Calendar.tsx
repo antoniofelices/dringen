@@ -1,117 +1,117 @@
-import { useState, useCallback } from 'react'
-import { Calendar } from 'react-big-calendar'
+// import { useState, useCallback } from 'react'
+// import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
-import { toast } from 'sonner'
-import { useAppointments } from '@hooks/useAppointments'
-import { useDialog } from '@hooks/useDialog'
-import type { View, SlotInfo, Event } from 'react-big-calendar'
-import {
-    calendarLocalizer,
-    transformAppointmentsToEvents,
-    formEventData,
-} from '@/lib/calendarUtils'
-import { Button } from '@components/ui/base/button'
+// import { toast } from 'sonner'
+// import { useAppointments } from '@resources/appointment/hooks/useAppointment'
+// import { useDialog } from '@shared/hooks/useDialog'
+// import type { View, SlotInfo, Event } from 'react-big-calendar'
+// import {
+//     calendarLocalizer,
+//     transformAppointmentsToEvents,
+//     formEventData,
+// } from '@resources/appointment/utils/calendarUtils'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Dialog,
     DialogContent,
     DialogOverlay,
     DialogTitle,
-} from '@components/ui/base/dialog'
-import ButtonBack from '@components/ui/ButtonBack'
-import ContentArticle from '@components/ui/ContentArticle'
-import HeaderArticle from '@components/ui/HeaderArticle'
-import ErrorApi from '@components/ui/ErrorApi'
-import Loading from '@components/ui/Loading'
-import DataDisplayList from '@components/ui/DataDisplayList'
-import RegisterAppointmentForm from '@components/patient/RegisterAppointmentForm'
-import content from '@/config/data/pages/calendarPatient'
+} from '@shared/components/ui/base/dialog'
+import ButtonBack from '@shared/components/ui/ButtonBack'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import HeaderArticle from '@shared/components/ui/HeaderArticle'
+// import ErrorApi from '@shared/components/ui/ErrorApi'
+// import Loading from '@shared/components/ui/Loading'
+// import DataDisplayList from '@shared/components/ui/DataDisplayList'
+import AddNewAppointmentForm from '@/resources/appointment/components/AddNewAppointmentForm'
+import content from './Calendar.content'
 
 const CalendarPatient = () => {
-    const {
-        appointments,
-        isPending,
-        isError,
-        error,
-        refetch,
-        deleteAppointment,
-    } = useAppointments()
+    // const {
+    //     appointments,
+    //     isPending,
+    //     isError,
+    //     error,
+    //     refetch,
+    //     deleteAppointment,
+    // } = useAppointments()
 
-    const [currentView, setCurrentView] = useState<View>('month')
-    const [currentDate, setCurrentDate] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
+    // const [currentView, setCurrentView] = useState<View>('month')
+    // const [currentDate, setCurrentDate] = useState(new Date())
+    // const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    // const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
 
-    const addAppointmentDialog = useDialog()
-    const eventDialog = useDialog()
+    // const addAppointmentDialog = useDialog()
+    // const eventDialog = useDialog()
 
-    const handleSelectSlot = useCallback(
-        (slotInfo: SlotInfo) => {
-            setSelectedDate(slotInfo.start)
-            addAppointmentDialog.openDialog()
-        },
-        [addAppointmentDialog]
-    )
+    // const handleSelectSlot = useCallback(
+    //     (slotInfo: SlotInfo) => {
+    //         setSelectedDate(slotInfo.start)
+    //         addAppointmentDialog.openDialog()
+    //     },
+    //     [addAppointmentDialog]
+    // )
 
-    const handleSelectEvent = useCallback(
-        (event: Event) => {
-            setSelectedEvent(event)
-            eventDialog.openDialog()
-        },
-        [eventDialog]
-    )
+    // const handleSelectEvent = useCallback(
+    //     (event: Event) => {
+    //         setSelectedEvent(event)
+    //         eventDialog.openDialog()
+    //     },
+    //     [eventDialog]
+    // )
 
-    const handleDeletedEvent = (event: Event) => {
-        deleteAppointment.mutate(event.resource.id)
-        eventDialog.closeDialog()
-        toast.success(content.textToastSuccessDelete)
-    }
+    // const handleDeletedEvent = (event: Event) => {
+    //     deleteAppointment.mutate(event.resource.id)
+    //     eventDialog.closeDialog()
+    //     toast.success(content.textToastSuccessDelete)
+    // }
 
-    const handleFormSuccess = () => {
-        addAppointmentDialog.closeDialog()
-        setSelectedDate(null)
-        refetch()
-    }
+    // const handleFormSuccess = () => {
+    //     addAppointmentDialog.closeDialog()
+    //     setSelectedDate(null)
+    //     refetch()
+    // }
 
-    if (isPending) return <Loading />
+    // if (isPending) return <Loading />
 
-    if (isError && error) return <ErrorApi message={error.message} />
+    // if (isError && error) return <ErrorApi message={error.message} />
 
-    const allEvents = transformAppointmentsToEvents(appointments || [])
+    // const allEvents = transformAppointmentsToEvents(appointments || [])
 
-    const dataItems = [
-        {
-            label: content.labelPatient,
-            value: selectedEvent
-                ? `${selectedEvent.resource?.medical_patient?.user_name}
-                   ${selectedEvent.resource?.medical_patient?.user_last_name}`
-                : '',
-        },
-        {
-            label: content.labelPhysician,
-            value: selectedEvent
-                ? `${selectedEvent.resource?.medical_user?.user_name} ${selectedEvent.resource?.medical_user?.user_last_name}`
-                : '',
-        },
-        {
-            label: content.labelSchedule,
-            value: selectedEvent ? formEventData(selectedEvent) : '',
-        },
-    ]
+    // const dataItems = [
+    //     {
+    //         label: content.labelPatient,
+    //         value: selectedEvent
+    //             ? `${selectedEvent.resource?.medical_patient?.user_name}
+    //                ${selectedEvent.resource?.medical_patient?.user_last_name}`
+    //             : '',
+    //     },
+    //     {
+    //         label: content.labelPhysician,
+    //         value: selectedEvent
+    //             ? `${selectedEvent.resource?.medical_user?.user_name} ${selectedEvent.resource?.medical_user?.user_last_name}`
+    //             : '',
+    //     },
+    //     {
+    //         label: content.labelSchedule,
+    //         value: selectedEvent ? formEventData(selectedEvent) : '',
+    //     },
+    // ]
 
     return (
         <>
             <HeaderArticle title={content.title}>
-                <Button
+                {/* <Button
                     size="sm"
                     onClick={() => addAppointmentDialog.openDialog()}
                 >
                     {content.textButtonAdd}
-                </Button>
+                </Button> */}
             </HeaderArticle>
             <ContentArticle>
                 <div className="h-[80vh] w-full">
-                    <Calendar
+                    {/* <Calendar
                         localizer={calendarLocalizer}
                         startAccessor="start"
                         endAccessor="end"
@@ -124,11 +124,11 @@ const CalendarPatient = () => {
                         onSelectEvent={handleSelectEvent}
                         onSelectSlot={handleSelectSlot}
                         selectable
-                    />
+                    /> */}
                 </div>
             </ContentArticle>
             <ButtonBack />
-            <Dialog
+            {/* <Dialog
                 open={addAppointmentDialog.isOpen}
                 onOpenChange={addAppointmentDialog.setIsOpen}
             >
@@ -137,7 +137,7 @@ const CalendarPatient = () => {
                     <DialogTitle className="mb-2">
                         {content.titleDialogAppointment}
                     </DialogTitle>
-                    <RegisterAppointmentForm
+                    <AddNewAppointmentForm
                         onSuccess={handleFormSuccess}
                         initialDate={selectedDate}
                     />
@@ -165,7 +165,7 @@ const CalendarPatient = () => {
                         </>
                     )}
                 </DialogContent>
-            </Dialog>
+            </Dialog> */}
         </>
     )
 }

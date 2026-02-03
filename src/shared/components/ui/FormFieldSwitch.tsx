@@ -6,8 +6,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
-import { Switch } from '@/components/ui/base/switch'
+} from '@shared/components/ui/base/form'
+import { Switch } from '@shared/components/ui/base/switch'
 type FormFieldProps<T extends FieldValues> = {
     className?: string
     control: Control<T>

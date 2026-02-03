@@ -1,4 +1,4 @@
-import type { RoutesProps } from '@/types/interfaces'
+import type { RoutesProps } from '@shared/types/routes.model'
 import {
     CalendarDays,
     ClipboardPlus,
@@ -24,7 +24,7 @@ const patientsMenu: RoutesProps[] = [
     {
         id: 3,
         icon: CalendarDays,
-        url: 'patient/calendar',
+        url: 'appointment/calendar',
         text: 'Appointments',
         orderMenu: 3,
     },

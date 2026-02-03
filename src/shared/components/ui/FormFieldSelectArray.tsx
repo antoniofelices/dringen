@@ -7,14 +7,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
+} from '@shared/components/ui/base/form'
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/ui/base/select'
+} from '@shared/components/ui/base/select'
 
 type OptionType = {
     label: string
@@ -54,7 +54,9 @@ const FormFieldSelectArray = <T extends FieldValues>({
                         </FormLabel>
                         <Select
                             onValueChange={(value) => {
-                                const selectedOption = options.find(option => option.value === value)
+                                const selectedOption = options.find(
+                                    (option) => option.value === value
+                                )
                                 field.onChange(selectedOption || null)
                             }}
                             defaultValue={field.value?.value || ''}

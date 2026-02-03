@@ -8,8 +8,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
-import { Textarea } from '@components/ui/base/textarea'
+} from '@shared/components/ui/base/form'
+import { Textarea } from '@shared/components/ui/base/textarea'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

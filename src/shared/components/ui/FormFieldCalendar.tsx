@@ -1,8 +1,8 @@
 import { CalendarIcon } from 'lucide-react'
 import type { Control, FieldValues, Path } from 'react-hook-form'
-import { transformDate } from '@/lib/utils'
-import { Button } from '@components/ui/base/button'
-import { Calendar } from '@/components/ui/base/calendar'
+import { transformDate } from '@shared/utils/utils'
+import { Button } from '@shared/components/ui/base/button'
+import { Calendar } from '@shared/components/ui/base/calendar'
 import {
     FormControl,
     FormDescription,
@@ -10,12 +10,12 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
+} from '@shared/components/ui/base/form'
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from '@/components/ui/base/popover'
+} from '@shared/components/ui/base/popover'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

@@ -7,14 +7,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
+} from '@shared/components/ui/base/form'
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/ui/base/select'
+} from '@shared/components/ui/base/select'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

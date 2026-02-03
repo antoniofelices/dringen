@@ -1,6 +1,6 @@
 import { useRouter } from '@tanstack/react-router'
 import { ChevronLeft } from 'lucide-react'
-import content from '@data/ui/buttonBack'
+import content from './ButtonBack.content'
 
 const ButtonBack = () => {
     const router = useRouter()

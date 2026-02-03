@@ -1,5 +1,5 @@
 import { LoaderCircle } from 'lucide-react'
-import content from '@data/ui/loading'
+import content from './Loading.content'
 
 const Loading = () => {
     return (

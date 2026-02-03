@@ -1,7 +1,7 @@
 import { Check, ChevronsUpDown } from 'lucide-react'
 import type { Control, FieldValues, Path } from 'react-hook-form'
-import { cn } from '@/lib/utils'
-import { Button } from '@components/ui/base/button'
+import { cn } from '@shared/utils/utils'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Command,
     CommandEmpty,
@@ -9,7 +9,7 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from '@/components/ui/base/command'
+} from '@shared/components/ui/base/command'
 import {
     FormControl,
     FormDescription,
@@ -17,12 +17,12 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
+} from '@shared/components/ui/base/form'
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from '@/components/ui/base/popover'
+} from '@shared/components/ui/base/popover'
 
 type OptionType = {
     label: string

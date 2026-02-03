@@ -1,44 +1,34 @@
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
-import { format } from 'date-fns'
-import { toast } from 'sonner'
+// import { format } from 'date-fns'
+// import { toast } from 'sonner'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { registerAppointment } from '@/services/supabaseService'
-import { usePatientsNames } from '@/hooks/usePatients'
-import { usePhysicians } from '@hooks/useUsers'
-import { useLogger } from '@/hooks/useLogger'
-import { Button } from '@components/ui/base/button'
-import { Form } from '@components/ui/base/form'
-import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
-import FormFieldCombobox from '@components/ui/FormFieldCombobox'
-import FormFieldInput from '@components/ui/FormFieldInput'
-import content from '@data/patient/registerAppointmentForm'
+// import { usePatientsNames } from '@/hooks/usePatients'
+// import { usePhysicians } from '@hooks/useUsers'
+// import { useLogger } from '@shared/hooks/useLogger'
+import { Button } from '@shared/components/ui/base/button'
+import { Form } from '@shared/components/ui/base/form'
+import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
+import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import content from './AddNewAppointmentForm.content'
+import { addNewAppointmentSchema } from '@resources/appointment/schemas/addNewAppointment.schema'
 
-const registetAppointmentSchema = z.object({
-    patient: z.string().min(1, content.errorPatientRequired),
-    physician: z.string().min(1, content.errorPhysicianRequired),
-    appointmentDate: z.date(),
-    appointmentTime: z
-        .string()
-        .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, content.errorInvalidTime),
-    notes: z.string().optional(),
-})
-
-type FormData = z.infer<typeof registetAppointmentSchema>
+type FormData = z.infer<typeof addNewAppointmentSchema>
 
 type RegisterAppointmentFormProps = {
     onSuccess?: () => void
     initialDate?: Date | null
 }
 
-const RegisterAppointmentForm = ({
+const AddNewAppointmentForm = ({
     onSuccess,
     initialDate,
 }: RegisterAppointmentFormProps) => {
-    const { logError, logSuccess } = useLogger('RegisterAppointmentFormProps')
-    const patients = usePatientsNames()
-    const physicians = usePhysicians()
+    // const { logError, logSuccess } = useLogger('RegisterAppointmentFormProps')
+    // const patients = usePatientsNames()
+    // const physicians = usePhysicians()
 
     const defaultValues = {
         patient: '',
@@ -49,7 +39,7 @@ const RegisterAppointmentForm = ({
     }
 
     const form = useForm<FormData>({
-        resolver: zodResolver(registetAppointmentSchema),
+        resolver: zodResolver(addNewAppointmentSchema),
         defaultValues: defaultValues,
     })
 
@@ -59,32 +49,36 @@ const RegisterAppointmentForm = ({
         }
     }, [initialDate, form])
 
-    const onSubmit = async (formData: FormData) => {
-        const dateOnly = format(formData.appointmentDate, 'yyyy-MM-dd')
-        const dateComplete = `${dateOnly}T${formData.appointmentTime}:00`
-
-        try {
-            await registerAppointment(
-                formData.patient,
-                formData.physician,
-                dateComplete,
-                formData.notes
-            )
-            toast.success(content.textToastSuccess)
-            logSuccess(content.textToastSuccess, content.title)
-            form.reset()
-            onSuccess?.()
-        } catch (error) {
-            toast.error(`${content.textToastFail}`)
-            logError(content.textToastFail, error, content.title)
-            return
-        }
+    const onSubmit = () => {
+        return
     }
+
+    // const onSubmit = async (formData: FormData) => {
+    //     const dateOnly = format(formData.appointmentDate, 'yyyy-MM-dd')
+    //     const dateComplete = `${dateOnly}T${formData.appointmentTime}:00`
+
+    //     try {
+    //         await registerAppointment(
+    //             formData.patient,
+    //             formData.physician,
+    //             dateComplete,
+    //             formData.notes
+    //         )
+    //         toast.success(content.textToastSuccess)
+    //         logSuccess(content.textToastSuccess, content.title)
+    //         form.reset()
+    //         onSuccess?.()
+    //     } catch (error) {
+    //         toast.error(`${content.textToastFail}`)
+    //         logError(content.textToastFail, error, content.title)
+    //         return
+    //     }
+    // }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldCombobox
+                {/* <FormFieldCombobox
                     control={form.control}
                     textCommandEmpty={content.textNoCommandPatientFound}
                     fieldName="patient"
@@ -105,7 +99,7 @@ const RegisterAppointmentForm = ({
                         label: `${p.name}`,
                         value: p.id,
                     }))}
-                />
+                /> */}
                 <FormFieldCalendar
                     control={form.control}
                     fieldName="appointmentDate"
@@ -138,4 +132,4 @@ const RegisterAppointmentForm = ({
     )
 }
 
-export default RegisterAppointmentForm
+export default AddNewAppointmentForm
