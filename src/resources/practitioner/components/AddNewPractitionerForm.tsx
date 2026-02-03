@@ -7,12 +7,12 @@ import { z } from 'zod'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import content from './RegisterForm.content'
-import { registerPractitionerSchema } from '../schemas/registerPractitioner.schema'
+import content from './AddNewPractitionerForm.content'
+import { addNewPractitionerSchema } from '../schemas/addNewPractitioner.schema'
 
-type FormData = z.infer<typeof registerPractitionerSchema>
+type FormData = z.infer<typeof addNewPractitionerSchema>
 
-const RegisterPractitionerForm = () => {
+const AddNewPractitionerForm = () => {
     // const { logError, logSuccess } = useLogger('RegisterUserForm')
 
     const defaultValues = {
@@ -25,7 +25,7 @@ const RegisterPractitionerForm = () => {
     }
 
     const form = useForm<FormData>({
-        resolver: zodResolver(registerPractitionerSchema),
+        resolver: zodResolver(addNewPractitionerSchema),
         defaultValues: defaultValues,
     })
 
@@ -117,4 +117,4 @@ const RegisterPractitionerForm = () => {
     )
 }
 
-export default RegisterPractitionerForm
+export default AddNewPractitionerForm

@@ -1,43 +1,21 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate } from '@tanstack/react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+// import { useNavigate } from '@tanstack/react-router'
+// import { toast } from 'sonner'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { registerPatient } from '@/services/supabaseService'
-import { useLogger } from '@/hooks/useLogger'
-import { Button } from '@components/ui/base/button'
-import { Form } from '@components/ui/base/form'
-import FormFieldInput from '@components/ui/FormFieldInput'
-import content from '@/config/data/patient/registerPatientForm'
+import { z } from 'zod'
+// import { useLogger } from '@shared/hooks/useLogger'
+import { Button } from '@shared/components/ui/base/button'
+import { Form } from '@shared/components/ui/base/form'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import content from './AddNewPatientForm.content'
+import { addNewPatientSchema } from '../schemas/addNewPatient.schema'
 
-const registerPatientSchema = z.object({
-    userName: z
-        .string()
-        .min(3, content.errorUserNameTooShort)
-        .max(20, content.errorUserNameTooLong),
-    userLastName: z
-        .string()
-        .min(3, content.errorUserLastNameTooShort)
-        .max(20, content.errorUserLastNameTooLong),
-    dni: z
-        .string()
-        .min(9, content.errorUserDniTooShort)
-        .max(9, content.errorUserDniTooLong)
-        .regex(/^\d{8}[A-Z]$/, content.errorUserDniInvalidFormat),
-    email: z
-        .string()
-        .email(content.errorEmailInvalid)
-        .min(1, content.errorEmailRequired),
-    phone: z.string().optional(),
-    placeOfResidence: z.string().optional(),
-})
+type FormData = z.infer<typeof addNewPatientSchema>
 
-type FormData = z.infer<typeof registerPatientSchema>
+const AddNewPatientForm = () => {
+    // const { logError, logSuccess } = useLogger('RegisterPatientForm')
 
-const RegisterPatientForm = () => {
-    const { logError, logSuccess } = useLogger('RegisterPatientForm')
-
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const defaultValues = {
         userName: '',
@@ -49,28 +27,32 @@ const RegisterPatientForm = () => {
     }
 
     const form = useForm<FormData>({
-        resolver: zodResolver(registerPatientSchema),
+        resolver: zodResolver(addNewPatientSchema),
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
-        try {
-            const data = await registerPatient(
-                formData.userName,
-                formData.userLastName,
-                formData.dni,
-                formData.email,
-                formData.phone,
-                formData.placeOfResidence
-            )
-            navigate({ to: `/patient/${data[0].id}` })
-            logSuccess(content.textToastSuccess, content.title)
-        } catch (error) {
-            logError(content.textToastFail, error, content.title)
-            toast.error(content.textToastFail)
-            return
-        }
+    const onSubmit = () => {
+        return
     }
+
+    // const onSubmit = async (formData: FormData) => {
+    //     try {
+    //         const data = await registerPatient(
+    //             formData.userName,
+    //             formData.userLastName,
+    //             formData.dni,
+    //             formData.email,
+    //             formData.phone,
+    //             formData.placeOfResidence
+    //         )
+    //         navigate({ to: `/patient/${data[0].id}` })
+    //         logSuccess(content.textToastSuccess, content.title)
+    //     } catch (error) {
+    //         logError(content.textToastFail, error, content.title)
+    //         toast.error(content.textToastFail)
+    //         return
+    //     }
+    // }
 
     return (
         <Form {...form}>
@@ -127,4 +109,4 @@ const RegisterPatientForm = () => {
     )
 }
 
-export default RegisterPatientForm
+export default AddNewPatientForm

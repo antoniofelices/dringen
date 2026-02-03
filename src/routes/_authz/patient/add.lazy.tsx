@@ -1,15 +1,11 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import AddPatient from '@pages/patient/AddPatient'
-import ProtectedRoute from '@/components/ProtectedRoute'
+import AddNewPatient from '@/resources/patient/pages/AddNewPatient'
+// import ProtectedRoute from '@shared/components/ProtectedRoute'
 
 export const Route = createLazyFileRoute('/_authz/patient/add')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    return (
-        <ProtectedRoute allowedRoles={['admin', 'physician', 'medical_office']}>
-            <AddPatient />
-        </ProtectedRoute>
-    )
+    return <AddNewPatient />
 }

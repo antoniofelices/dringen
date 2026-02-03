@@ -1,10 +1,10 @@
 import { Card, CardContent } from '@shared/components/ui/base/card'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import RegisterPractitionerForm from '@resources/practitioner/components/RegisterForm'
+import AddNewPractitionerForm from '@/resources/practitioner/components/AddNewPractitionerForm'
 import content from './AddNew.content'
 
-const AddUser = () => {
+const AddNewPractitioner = () => {
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -12,7 +12,7 @@ const AddUser = () => {
                 <CardContent>
                     <Card className="max-w-2xl mx-auto">
                         <CardContent>
-                            <RegisterPractitionerForm />
+                            <AddNewPractitionerForm />
                         </CardContent>
                     </Card>
                 </CardContent>
@@ -21,4 +21,4 @@ const AddUser = () => {
     )
 }
 
-export default AddUser
+export default AddNewPractitioner

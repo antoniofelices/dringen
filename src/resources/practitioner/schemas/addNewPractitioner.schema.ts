@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import content from './registerPractitioner.content'
+import content from './addNewPractitioner.content'
 
-export const registerPractitionerSchema = z
+export const addNewPractitionerSchema = z
     .object({
         userName: z
             .string()
