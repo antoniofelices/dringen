@@ -7,8 +7,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/components/ui/base/form'
-import { Input } from '@/components/ui/base/input'
+} from '@shared/components/ui/base/form'
+import { Input } from '@shared/components/ui/base/input'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

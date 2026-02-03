@@ -1,8 +1,8 @@
-import { Card, CardContent } from '@/components/ui/base/card'
-import ContentArticle from '@/components/ui/ContentArticle'
-import HeaderArticle from '@/components/ui/HeaderArticle'
-import RegisterUserForm from '@/components/user/RegisterUserForm'
-import content from '@/config/data/pages/addUser'
+import { Card, CardContent } from '@shared/components/ui/base/card'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import HeaderArticle from '@shared/components/ui/HeaderArticle'
+import RegisterPractitionerForm from '@resources/practitioner/components/RegisterForm'
+import content from './AddNew.content'
 
 const AddUser = () => {
     return (
@@ -12,7 +12,7 @@ const AddUser = () => {
                 <CardContent>
                     <Card className="max-w-2xl mx-auto">
                         <CardContent>
-                            <RegisterUserForm />
+                            <RegisterPractitionerForm />
                         </CardContent>
                     </Card>
                 </CardContent>

@@ -10,7 +10,7 @@ import HeaderArticle from '@shared/components/ui/HeaderArticle'
 // import Loading from '@shared/components/ui/Loading'
 import content from './List.content'
 
-const ListUser = () => {
+const ListPractitioner = () => {
     // const {
     //     data: listData,
     //     isPending: listLoading,
@@ -48,4 +48,4 @@ const ListUser = () => {
     )
 }
 
-export default ListUser
+export default ListPractitioner

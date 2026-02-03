@@ -1,7 +1,7 @@
 const content = {
-    title: 'List of users',
-    textCaptionTable: 'A list of users',
-    textButtonAddNew: 'Add User',
+    title: 'List of practitioners',
+    textCaptionTable: 'A list of practitioners',
+    textButtonAddNew: 'Add practitioner',
 }
 
 export default content

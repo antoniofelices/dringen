@@ -1,4 +1,4 @@
-import { logger } from '@/lib/Logger'
+import { logger } from '@shared/utils/Logger'
 
 export const useLogger = (componentName: string) => {
     const logError = (message: string, error?: unknown, action?: string) => {

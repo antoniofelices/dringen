@@ -1,19 +1,19 @@
-import type { RoutesProps } from '@/types/interfaces'
+import type { RoutesProps } from '@shared/types/routes.model'
 import { Users, UserRoundPlus } from 'lucide-react'
 
 const usersMenu: RoutesProps[] = [
     {
         id: 1,
         icon: Users,
-        url: 'user/list',
-        text: 'Users List',
+        url: 'practitioner/list',
+        text: 'Practititioners List',
         orderMenu: 1,
     },
     {
         id: 2,
         icon: UserRoundPlus,
-        url: 'user/add',
-        text: 'Add User',
+        url: 'practitioner/add',
+        text: 'Add Practititioner',
         orderMenu: 2,
     },
 ]
