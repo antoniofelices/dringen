@@ -1,46 +1,28 @@
 import { useState } from 'react'
-import { toast } from 'sonner'
+// import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { X } from 'lucide-react'
-import { updateAccountUser } from '@/services/supabaseService'
-import { useEditableForm } from '@/hooks/useEditableForm'
-import { transformDate } from '@/lib/utils'
-import type { UserType } from '@/types/interfaces'
-import { useCurrentUser } from '@hooks/useCurrentUser'
-import { Button } from '@components/ui/base/button'
+import { useEditableForm } from '@shared/hooks/useEditableForm'
+import { transformDate } from '@shared/utils/utils'
+import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
+import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentPractitioner'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
     CardAction,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import { Form } from '@components/ui/base/form'
-import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import ErrorApi from '@components/ui/ErrorApi'
-import Loading from '@components/ui/Loading'
-import content from '@data/settings/accountDetails'
-
-const updateAccountSchema = z.object({
-    userName: z
-        .string()
-        .min(3, content.errorUserNameTooShort)
-        .max(20, content.errorUserNameTooLong)
-        .optional(),
-    userLastName: z
-        .string()
-        .min(3, content.errorUserLastNameTooShort)
-        .max(20, content.errorUserLastNameTooLong)
-        .optional(),
-    email: z
-        .string()
-        .email(content.errorEmailInvalid)
-        .min(1, content.errorEmailRequired)
-        .optional(),
-})
+} from '@shared/components/ui/base/card'
+import { Form } from '@shared/components/ui/base/form'
+import DataDisplayList from '@shared/components/ui/DataDisplayList'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import ErrorApi from '@shared/components/ui/ErrorApi'
+import Loading from '@shared/components/ui/Loading'
+import content from './AccountDetails.content'
+import { updateAccountSchema } from '@resources/practitioner/schemas/updateAccountSchema.schema'
 
 type FormData = z.infer<typeof updateAccountSchema>
 
@@ -63,22 +45,8 @@ const FormUpdate = ({
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
-        setIsSubmitting(true)
-        try {
-            await updateAccountUser(
-                contentUser.id,
-                formData.userName,
-                formData.userLastName,
-                formData.email
-            )
-            toast.success(content.textToastSuccess)
-            onSuccess()
-        } catch {
-            toast.error(content.textToastFail)
-        } finally {
-            setIsSubmitting(false)
-        }
+    const onSubmit = () => {
+        return
     }
 
     return (
@@ -116,7 +84,8 @@ const FormUpdate = ({
 }
 
 const AccountDetails = () => {
-    const { user, isPending, isError, error, refetch } = useCurrentUser()
+    const { user, isPending, isError, error, refetch } =
+        useCurrentPractitioner()
 
     const completenessCheck = (data: UserType) =>
         Boolean(data.user_name || data.user_last_name || data.email)

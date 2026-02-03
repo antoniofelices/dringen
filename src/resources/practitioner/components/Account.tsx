@@ -1,5 +1,5 @@
-import AccountDetails from '@components/settings/AccountDetails'
-import AccountResetPassword from '@components/settings/AccountResetPassword'
+import AccountDetails from '@resources/practitioner/components/AccountDetails'
+import AccountResetPassword from '@resources/practitioner/components/AccountResetPassword'
 
 const Account = () => {
     return (

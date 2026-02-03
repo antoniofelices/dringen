@@ -1,14 +1,14 @@
-import { useThemeContext } from '@/hooks/useThemeContext'
+import { useThemeContext } from '@shared/hooks/useThemeContext'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
+} from '@shared/components/ui/base/card'
 import dark from '@/assets/images/dark.webp'
 import light from '@/assets/images/light.webp'
 import system from '@/assets/images/system.svg'
-import content from '@data/settings/appearance'
+import content from './Appearance.content'
 
 const Appearance = () => {
     const { setTheme } = useThemeContext()

@@ -3,9 +3,9 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import { ScrollArea } from '@/components/ui/base/scroll-area'
-import content from '@data/settings/termsOfUse'
+} from '@shared/components/ui/base/card'
+import { ScrollArea } from '@shared/components/ui/base/scroll-area'
+import content from './TermsOfUse.content'
 
 const TermsOfUse = () => {
     return (

@@ -3,20 +3,19 @@ import { Lock, LockKeyhole } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { resetPasswordUser } from '@/services/supabaseService'
 import { useCurrentUser } from '@hooks/useCurrentUser'
-import { Button } from '@components/ui/base/button'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import ErrorApi from '@components/ui/ErrorApi'
-import { Form } from '@components/ui/base/form'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import Loading from '@components/ui/Loading'
-import content from '@/config/data/settings/accountResetPassword'
+} from '@shared/components/ui/base/card'
+import ErrorApi from '@shared/components/ui/ErrorApi'
+import { Form } from '@shared/components/ui/base/form'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import Loading from '@shared/components/ui/Loading'
+import content from './ResetPasswordForm.content'
 
 const resetUserPasswordSchema = z
     .object({

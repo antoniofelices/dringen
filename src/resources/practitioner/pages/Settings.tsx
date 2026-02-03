@@ -1,17 +1,17 @@
-import { transformToId } from '@/lib/utils'
+import { transformToId } from '@shared/utils/utils'
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from '@components/ui/base/tabs'
-import ButtonSignOut from '@/components/ui/ButtonSignOut'
-import ContentArticle from '@/components/ui/ContentArticle'
-import HeaderArticle from '@/components/ui/HeaderArticle'
-import Account from '@/components/settings/Account'
-import Appearance from '@/components/settings/Appearance'
-import TermsOfUse from '@/components/settings/TermsOfUse'
-import content from '@/config/data/settings/settings'
+} from '@shared/components/ui/base/tabs'
+import ButtonSignOut from '@shared/components/ui/ButtonSignOut'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import HeaderArticle from '@shared/components/ui/HeaderArticle'
+import Account from '@resources/practitioner/components/Account'
+import Appearance from '@resources/practitioner/components/Appearance'
+import TermsOfUse from '@resources/practitioner/components/TermsOfUse'
+import content from './Settings.content'
 
 const Settings = () => {
     const account = transformToId(`${content.textAccount}`)
