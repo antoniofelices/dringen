@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import { chartAreaConfig } from '@/config/charts'
-import { useDataAssistanceTypeDate } from '@/hooks/usePatientsStadistics'
 import {
     Card,
     CardAction,
@@ -9,40 +8,39 @@ import {
     CardHeader,
     CardFooter,
     CardTitle,
-} from '@components/ui/base/card'
+} from '@shared/components/ui/base/card'
 import {
     ChartContainer,
     ChartLegend,
     ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
-} from '@/components/ui/base/chart'
+} from '@shared/components/ui/base/chart'
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/components/ui/base/select'
-import content from '@data/patient/patientsCharts'
+} from '@shared/components/ui/base/select'
+import content from './PatientCharts.content'
 
 const PatientsAssistanceTypeDateChart = () => {
-    const chartData = useDataAssistanceTypeDate()
     const [timeRange, setTimeRange] = useState('90d')
 
-    const filteredData = chartData.filter((item) => {
-        const date = new Date(item.date)
-        const referenceDate = new Date().toISOString().slice(0, 10)
-        let daysToSubtract = 90
-        if (timeRange === '30d') {
-            daysToSubtract = 30
-        } else if (timeRange === '7d') {
-            daysToSubtract = 7
-        }
-        const startDate = new Date(referenceDate)
-        startDate.setDate(startDate.getDate() - daysToSubtract)
-        return date >= startDate
-    })
+    // const filteredData = chartData.filter((item) => {
+    //     const date = new Date(item.date)
+    //     const referenceDate = new Date().toISOString().slice(0, 10)
+    //     let daysToSubtract = 90
+    //     if (timeRange === '30d') {
+    //         daysToSubtract = 30
+    //     } else if (timeRange === '7d') {
+    //         daysToSubtract = 7
+    //     }
+    //     const startDate = new Date(referenceDate)
+    //     startDate.setDate(startDate.getDate() - daysToSubtract)
+    //     return date >= startDate
+    // })
 
     return (
         <Card>

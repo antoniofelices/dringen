@@ -1,32 +1,28 @@
 import { Label, Pie, PieChart } from 'recharts'
 import { chartPieConfig } from '@/config/charts'
 import {
-    useDataTotalPatients,
-    useDataResidence,
-} from '@/hooks/usePatientsStadistics'
-import {
     Card,
     CardContent,
     CardHeader,
     CardFooter,
     CardTitle,
-} from '@components/ui/base/card'
+} from '@shared/components/ui/base/card'
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from '@components/ui/base/chart'
-import content from '@data/patient/patientsCharts'
+} from '@shared/components/ui/base/chart'
+import content from './PatientCharts.content'
 
 const PatientsResidenceChart = () => {
-    const totalPatients = useDataTotalPatients()
-    const patientsResidences = useDataResidence()
+    // const totalPatients = useDataTotalPatients()
+    // const patientsResidences = useDataResidence()
 
-    const dataResidencesChart = patientsResidences.map((item, index) => {
-        const chartKey =
-            `var(--color-area${(index % 7) + 1})` as keyof typeof chartPieConfig
-        return { ...item, fill: chartKey }
-    })
+    // const dataResidencesChart = patientsResidences.map((item, index) => {
+    //     const chartKey =
+    //         `var(--color-area${(index % 7) + 1})` as keyof typeof chartPieConfig
+    //     return { ...item, fill: chartKey }
+    // })
 
     return (
         <Card>

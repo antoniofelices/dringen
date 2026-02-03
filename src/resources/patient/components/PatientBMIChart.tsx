@@ -1,18 +1,18 @@
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 import { chartLineConfig } from '@/config/charts'
-import { useDataBMI } from '@/hooks/usePatientMetrics'
+import { useDataBMI } from '@resources/patient/hooks/usePatientMetrics'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@components/ui/base/card'
+} from '@shared/components/ui/base/card'
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from '@components/ui/base/chart'
-import content from '@data/patient/patientCharts'
+} from '@shared/components/ui/base/chart'
+import content from './PatientCharts.content'
 
 const PatientBMIChart = () => {
     const patientDataBMI = useDataBMI()

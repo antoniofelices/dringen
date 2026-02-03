@@ -1,24 +1,21 @@
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
-import { toast } from 'sonner'
-import { usePatientContext } from '@/hooks/usePatientContext'
-import { useEditableForm } from '@/hooks/useEditableForm'
-import { updateGeneralDataPatient } from '@services/supabaseService'
+// import { toast } from 'sonner'
 import type { PatientWithRelationsType } from '@/types/interfaces'
 import { transformDate, normalizeDate } from '@/lib/utils'
-import { Button } from '@components/ui/base/button'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
     CardAction,
     CardContent,
     CardHeader,
     CardTitle,
-} from '@components/ui/base/card'
-import { Form } from '@components/ui/base/form'
-import DataDisplayList from '@components/ui/DataDisplayList'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import FormFieldCalendar from '@/components/ui/FormFieldCalendar'
-import content from '@/config/data/patient/patientGeneralData'
+} from '@shared/components/ui/base/card'
+import { Form } from '@shared/components/ui/base/form'
+import DataDisplayList from '@shared/components/ui/DataDisplayList'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
+import content from './PatientGeneralData.content'
 
 type FormData = {
     birthday?: string | null
@@ -47,22 +44,8 @@ const FormAdd = ({
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
-        try {
-            await updateGeneralDataPatient(
-                contentPatientGeneralData.id,
-                normalizeDate(formData.birthday),
-                formData.gender,
-                formData.birthplace,
-                formData.placeOfResidence,
-                formData.occupation
-            )
-            toast.success(content.textToastSuccess)
-            onSuccess()
-        } catch {
-            toast.error(content.textToastFail)
-            return
-        }
+    const onSubmit = () => {
+        return
     }
 
     return (
@@ -109,47 +92,47 @@ const FormAdd = ({
 }
 
 const PatientGeneralData = () => {
-    const { patientData, refetchPatient } = usePatientContext()
+    // const { patientData, refetchPatient } = usePatientContext()
 
-    const completenessCheck = (data: PatientWithRelationsType) =>
-        Boolean(
-            data.birthday ||
-                data.gender ||
-                data.birthplace ||
-                data.place_of_residence ||
-                data.occupation
-        )
+    // const completenessCheck = (data: PatientWithRelationsType) =>
+    //     Boolean(
+    //         data.birthday ||
+    //         data.gender ||
+    //         data.birthplace ||
+    //         data.place_of_residence ||
+    //         data.occupation
+    //     )
 
-    const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
-        patientData,
-        completenessCheck,
-        refetchPatient
-    )
+    // const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
+    //     patientData,
+    //     completenessCheck,
+    //     refetchPatient
+    // )
 
-    const dataItems = [
-        {
-            label: content.labelBirthday,
-            value: patientData?.birthday
-                ? transformDate(patientData?.birthday)
-                : '',
-        },
-        {
-            label: content.labelGender,
-            value: patientData?.gender,
-        },
-        {
-            label: content.labelBirthplace,
-            value: patientData?.birthplace,
-        },
-        {
-            label: content.labelPlaceOfResidence,
-            value: patientData?.place_of_residence,
-        },
-        {
-            label: content.labelOccupation,
-            value: patientData?.occupation,
-        },
-    ]
+    // const dataItems = [
+    //     {
+    //         label: content.labelBirthday,
+    //         value: patientData?.birthday
+    //             ? transformDate(patientData?.birthday)
+    //             : '',
+    //     },
+    //     {
+    //         label: content.labelGender,
+    //         value: patientData?.gender,
+    //     },
+    //     {
+    //         label: content.labelBirthplace,
+    //         value: patientData?.birthplace,
+    //     },
+    //     {
+    //         label: content.labelPlaceOfResidence,
+    //         value: patientData?.place_of_residence,
+    //     },
+    //     {
+    //         label: content.labelOccupation,
+    //         value: patientData?.occupation,
+    //     },
+    // ]
 
     return (
         <Card className="h-full">
