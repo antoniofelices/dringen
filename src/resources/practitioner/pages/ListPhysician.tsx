@@ -1,16 +1,15 @@
 // import { useQuery } from '@tanstack/react-query'
-import { useNavigate, Link } from '@tanstack/react-router'
+// import { useNavigate, Link } from '@tanstack/react-router'
 // import type { PractitionerType } from '../types/practitioner.model'
 // import { practitionerTableColumns } from '../presentation/practitionerTable.columns'
-import { Button } from '@shared/components/ui/base/button'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 // import DataTable from '@shared/components/ui/DataTable'
 // import ErrorApi from '@shared/components/ui/ErrorApi'
 // import Loading from '@shared/components/ui/Loading'
-import content from './List.content'
+import content from './ListPhysician.content'
 
-const ListPractitioner = () => {
+const ListPhysician = () => {
     // const {
     //     data: listData,
     //     isPending: listLoading,
@@ -21,7 +20,7 @@ const ListPractitioner = () => {
     //     queryFn: () => getUsers(),
     // })
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // if (listLoading) return <Loading />
 
@@ -30,14 +29,16 @@ const ListPractitioner = () => {
 
     return (
         <>
-            <HeaderArticle title={content.title}>
-                <Button asChild size="sm">
-                    <Link to="/practitioner/add">
-                        {content.textButtonAddNew}
-                    </Link>
-                </Button>
-            </HeaderArticle>
+            <HeaderArticle title={content.title} />
             <ContentArticle>
+                <p>Una lista de los Physicians. Tabla con:</p>
+                <ul>
+                    <li>Nombre</li>
+                    <li>Especialidad</li>
+                    <li>Dias de atencion</li>
+                    <li>Horario de atencion</li>
+                    <li>Acceso a cada single Physician</li>
+                </ul>
                 {/* <DataTable<UserType>
                     columns={createUserColumns(navigate)}
                     data={listData || []}
@@ -48,4 +49,4 @@ const ListPractitioner = () => {
     )
 }
 
-export default ListPractitioner
+export default ListPhysician

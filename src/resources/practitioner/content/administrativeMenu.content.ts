@@ -33,8 +33,8 @@ export const administrativeMenu: RoutesProps[] = [
     {
         id: 4,
         icon: Users,
-        url: 'practitioner/list',
-        text: 'Practititioners List',
+        url: 'practitioner/list-physician',
+        text: 'Physicians List',
         orderMenu: 4,
     },
 ]
