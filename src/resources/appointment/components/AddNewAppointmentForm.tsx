@@ -78,16 +78,16 @@ const AddNewAppointmentForm = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                {/* <FormFieldCombobox
+                <FormFieldCombobox
                     control={form.control}
                     textCommandEmpty={content.textNoCommandPatientFound}
                     fieldName="patient"
                     label={content.labelPatient}
                     placeholder={content.placeholderPatient}
-                    options={patients.map((p) => ({
-                        label: `${p.name} - ${p.dni}`,
-                        value: p.id,
-                    }))}
+                    options={[
+                        { label: 'patient-1', value: 'patient-1' },
+                        { label: 'patient-2', value: 'patient-2' },
+                    ]}
                 />
                 <FormFieldCombobox
                     control={form.control}
@@ -95,12 +95,11 @@ const AddNewAppointmentForm = ({
                     fieldName="physician"
                     label={content.labelPhysician}
                     placeholder={content.placeholderPhysician}
-                    options={physicians.map((p) => ({
-                        label: `${p.name}`,
-                        value: p.id,
-                    }))}
-                /> */}
-                <p className="mb-8">Faltan campos: Physician, Paciente</p>
+                    options={[
+                        { label: 'physician-1', value: 'physician-1' },
+                        { label: 'physician-2', value: 'physician-2' },
+                    ]}
+                />
                 <FormFieldCalendar
                     control={form.control}
                     fieldName="appointmentDate"
