@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import SinglePractitioner from '@resources/practitioner/pages/Single'
+import SinglePractitioner from '@/resources/practitioner/pages/SinglePractitioner'
 // import ProtectedRoute from '@shared/components/ProtectedRoute'
 
 export const Route = createFileRoute('/_authz/practitioner/$id/')({
