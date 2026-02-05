@@ -17,7 +17,7 @@
 - Create and manage patients. Each patient has their own clinical history, statistics and related attachment files.
 - Create and manage appointments.
 - Use charts to display statistics about patients, such as their place of residence, gender, and diagnosis.
-- The backend is built using Supabase and PostgreSQL.
+- The backend is built using Medplum.
 
 ## Technologies
 
@@ -32,7 +32,7 @@
 - Shadcn/ui.
 - React hook form.
 - React Big Calendar.
-- Supabase. In order to use Supabase, you will require an API key [Supabase](https://supabase.com/)
+- Medplum.
 
 ## Documentation
 
@@ -60,7 +60,6 @@ $ npm run dev
 
 - The database structure should be refactored.
 - Implement some standard, such as HL7 FHIR, to ensure data is shared securely and efficiently.
-- Improve mapSupabaseError to map specific errors to specific fields. Use the generic ServiceError with the correct FormData type. Reimplement granular error handling per field.
 - Improve dashboard screen.
 
 ## Contributing

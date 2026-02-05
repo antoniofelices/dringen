@@ -29,21 +29,12 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
-            "@context/*": ["src/context/*"],
-            "@components/*": ["src/components/*"],
-            "@data/*": ["src/config/data/*"],
-            "@helpers/*": ["src/helpers/*"],
-            "@hooks/*": ["src/hooks/*"],
+            "@config/*": ["src/config/*"],
             "@layouts/*": ["src/layouts/*"],
             "@pages/*": ["src/pages/*"],
-            "@tests/*": ["src/__tests__/*"],
-            "@types/*": ["src/types/*"],
-            "@services/*": ["src/services/*"]
+            "@resources/*": ["src/resources/*"],
+            "@shared/*": ["src/shared/*"]
         }
     },
-    "include": [
-        "src",
-        "src/__test__/setupTests.ts",
-        "src/routes/_authz/.lazy.tsx"
-    ]
+    "include": ["src", "src/routes/_authz/.lazy.tsx"]
 }
