@@ -7,9 +7,9 @@ import HeaderArticle from '@shared/components/ui/HeaderArticle'
 // import DataTable from '@shared/components/ui/DataTable'
 // import ErrorApi from '@shared/components/ui/ErrorApi'
 // import Loading from '@shared/components/ui/Loading'
-import content from './ListPhysician.content'
+import content from './PhysicianList.content'
 
-const ListPhysician = () => {
+const PhysicianList = () => {
     // const {
     //     data: listData,
     //     isPending: listLoading,
@@ -49,4 +49,4 @@ const ListPhysician = () => {
     )
 }
 
-export default ListPhysician
+export default PhysicianList

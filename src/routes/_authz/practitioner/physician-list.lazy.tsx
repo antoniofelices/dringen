@@ -1,13 +1,13 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import ListPhysician from '@/resources/practitioner/pages/ListPhysician'
+import PhysicianList from '@/resources/practitioner/pages/PhysicianList'
 // import ProtectedRoute from '@/components/ProtectedRoute'
 
-export const Route = createLazyFileRoute('/_authz/practitioner/list-physician')(
+export const Route = createLazyFileRoute('/_authz/practitioner/physician-list')(
     {
         component: RouteComponent,
     }
 )
 
 function RouteComponent() {
-    return <ListPhysician />
+    return <PhysicianList />
 }

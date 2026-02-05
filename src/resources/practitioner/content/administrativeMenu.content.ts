@@ -12,7 +12,7 @@ export const administrativeMenu: RoutesProps[] = [
     {
         id: 1,
         icon: ClipboardPlus,
-        url: 'patient/list',
+        url: 'patient/patient-list',
         text: 'Patients List',
         orderMenu: 1,
     },
@@ -33,7 +33,7 @@ export const administrativeMenu: RoutesProps[] = [
     {
         id: 4,
         icon: Users,
-        url: 'practitioner/list-physician',
+        url: 'practitioner/physician-list',
         text: 'Physicians List',
         orderMenu: 4,
     },

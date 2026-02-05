@@ -21,7 +21,7 @@ export const physicianMenu: RoutesProps[] = [
     {
         id: 3,
         icon: ClipboardPlus,
-        url: 'patient/list',
+        url: 'patient/my-patients',
         text: 'My Patients',
         orderMenu: 3,
     },
