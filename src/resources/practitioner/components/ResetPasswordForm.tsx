@@ -1,30 +1,14 @@
-import { toast } from 'sonner'
+// import { toast } from 'sonner'
 import { Lock, LockKeyhole } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from '@tanstack/react-router'
+// import { useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { resetPasswordUser } from '@/services/supabaseService'
-import { Button } from '@/components/ui/base/button'
-import { Form } from '@components/ui/base/form'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import content from '@/config/data/authn/resetPasswordForm'
-
-const resetPasswordSchema = z
-    .object({
-        password: z
-            .string()
-            .min(8, content.errorPasswordTooShort)
-            .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
-                content.errorPasswordMustContain
-            ),
-        confirmPassword: z.string().min(1, content.confirmPassword),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: content.errorPasswordNoMatch,
-        path: ['confirmPassword'],
-    })
+import { Button } from '@shared/components/ui/base/button'
+import { Form } from '@shared/components/ui/base/form'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import content from './ResetPasswordForm.content'
+import { resetPasswordSchema } from '@resources/practitioner/schemas/resetPasswordSchema.schema'
 
 type FormData = z.infer<typeof resetPasswordSchema>
 
@@ -33,23 +17,15 @@ const ResetPasswordForm = () => {
         password: '',
         confirmPassword: '',
     }
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const form = useForm<FormData>({
         resolver: zodResolver(resetPasswordSchema),
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
-        try {
-            await resetPasswordUser(formData.password)
-            toast.success(content.textToastSuccess)
-            navigate({ to: '/dashboard' })
-            form.reset()
-        } catch {
-            toast.error(`${content.textToastFail}`)
-            return
-        }
+    const onSubmit = () => {
+        return
     }
 
     return (

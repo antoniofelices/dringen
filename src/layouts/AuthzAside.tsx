@@ -24,8 +24,14 @@ import {
 import ButtonSignOut from '@shared/components/ui/ButtonSignOut'
 import Logo from '@shared/components/ui/Logo'
 import MenuItems from '@shared/components/ui/Menutems'
-import patientMenu from '@resources/patient/content/patientMenu.content'
-import practitionerMenu from '@resources/practitioner/content/practitionerMenu.content'
+import {
+    physicianMenuTitle,
+    physicianMenu,
+} from '@/resources/practitioner/content/physicianMenu.content'
+import {
+    administrativeTitleMenu,
+    administrativeMenu,
+} from '@/resources/practitioner/content/administrativeMenu.content'
 import content from './AuthzAside.content'
 
 const Aside = () => {
@@ -46,22 +52,22 @@ const Aside = () => {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>
-                        {content.titlePatients}
-                    </SidebarGroupLabel>
+                    <SidebarGroupLabel>{physicianMenuTitle}</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <MenuItems content={patientMenu} />
+                            <MenuItems content={physicianMenu} />
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarSeparator />
 
                 <SidebarGroup>
-                    <SidebarGroupLabel>{content.titleUsers}</SidebarGroupLabel>
+                    <SidebarGroupLabel>
+                        {administrativeTitleMenu}
+                    </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <MenuItems content={practitionerMenu} />
+                            <MenuItems content={administrativeMenu} />
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

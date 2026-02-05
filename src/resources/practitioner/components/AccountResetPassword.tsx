@@ -1,9 +1,9 @@
-import { toast } from 'sonner'
+// import { toast } from 'sonner'
 import { Lock, LockKeyhole } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useCurrentUser } from '@hooks/useCurrentUser'
+// import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentPractitioner'
 import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
@@ -11,56 +11,33 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import ErrorApi from '@shared/components/ui/ErrorApi'
+// import ErrorApi from '@shared/components/ui/ErrorApi'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import Loading from '@shared/components/ui/Loading'
+// import Loading from '@shared/components/ui/Loading'
 import content from './ResetPasswordForm.content'
+import { resetPasswordSchema } from '@resources/practitioner/schemas/resetPasswordSchema.schema'
 
-const resetUserPasswordSchema = z
-    .object({
-        password: z
-            .string()
-            .min(8, content.errorPasswordTooShort)
-            .regex(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
-                content.errorPasswordMustContain
-            ),
-        confirmPassword: z.string().min(1, content.errorConfirmPassword),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: content.errorPasswordNoMatch,
-        path: ['confirmPassword'],
-    })
-
-type FormData = z.infer<typeof resetUserPasswordSchema>
+type FormData = z.infer<typeof resetPasswordSchema>
 
 const AccountResetPassword = () => {
-    const { isPending, isError, error } = useCurrentUser()
+    // const { isPending, isError, error } = useCurrentPractitioner()
 
     const defaultValues = {
         password: '',
     }
 
     const form = useForm<FormData>({
-        resolver: zodResolver(resetUserPasswordSchema),
+        resolver: zodResolver(resetPasswordSchema),
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
-        try {
-            const updatePassword = await resetPasswordUser(formData.password)
-            toast.success(content.textToastSuccess)
-            form.reset()
-            return updatePassword
-        } catch {
-            toast.error(content.textToastFail)
-            return
-        }
+    const onSubmit = () => {
+        return
     }
 
-    if (isPending) return <Loading />
-    if (isError && error) return <ErrorApi message={error.message} />
+    // if (isPending) return <Loading />
+    // if (isError && error) return <ErrorApi message={error.message} />
 
     return (
         <Card>

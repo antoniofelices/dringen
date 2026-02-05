@@ -1,12 +1,14 @@
 import type { RoutesProps } from '@shared/types/routes.model'
 import {
+    Users,
+    PlusCircleIcon,
     CalendarDays,
     ClipboardPlus,
-    ChartColumnIncreasing,
-    PlusCircleIcon,
 } from 'lucide-react'
 
-const patientsMenu: RoutesProps[] = [
+export const administrativeTitleMenu = 'Menu Administratives'
+
+export const administrativeMenu: RoutesProps[] = [
     {
         id: 1,
         icon: ClipboardPlus,
@@ -30,11 +32,9 @@ const patientsMenu: RoutesProps[] = [
     },
     {
         id: 4,
-        icon: ChartColumnIncreasing,
-        url: 'patient/statistics',
-        text: 'Statistics',
+        icon: Users,
+        url: 'practitioner/list',
+        text: 'Practititioners List',
         orderMenu: 4,
     },
 ]
-
-export default patientsMenu

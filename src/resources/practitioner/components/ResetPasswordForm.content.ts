@@ -1,4 +1,5 @@
 const content = {
+    title: 'Reset Password',
     confirmPassword: 'Please confirm your password',
     labelEmail: 'Email',
     labelPassword: 'New password',
