@@ -100,6 +100,7 @@ const AddNewAppointmentForm = ({
                         value: p.id,
                     }))}
                 /> */}
+                <p className="mb-8">Faltan campos: Physician, Paciente</p>
                 <FormFieldCalendar
                     control={form.control}
                     fieldName="appointmentDate"
