@@ -1,5 +1,5 @@
 // import { useQuery } from '@tanstack/react-query'
-// import { useNavigate, Link } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 // import type { PractitionerType } from '../types/practitioner.model'
 // import { practitionerTableColumns } from '../presentation/practitionerTable.columns'
 import ContentArticle from '@shared/components/ui/ContentArticle'
@@ -38,7 +38,11 @@ const PhysicianList = () => {
                     <li>Especialidad</li>
                     <li>Dias de atencion</li>
                     <li>Horario de atencion</li>
-                    <li>Acceso a cada single Physician</li>
+                    <li>
+                        <Link to="/practitioner/lorem">
+                            Acceso a cada single Physician
+                        </Link>
+                    </li>
                 </ul>
                 {/* <DataTable<UserType>
                     columns={createUserColumns(navigate)}

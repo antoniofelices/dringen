@@ -1,5 +1,5 @@
 const content = {
-    title: 'Account Settings',
+    title: 'Practitioner Name',
 }
 
 export default content

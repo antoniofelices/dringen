@@ -110,6 +110,11 @@ const CalendarPatient = () => {
                 </Button> */}
             </HeaderArticle>
             <ContentArticle>
+                <p>
+                    Calendario con todas las citas de todos los medicos de toda
+                    la Organizacion.
+                </p>
+                <p>No es demasiado? Puede ser un caos de Calendar 🤯</p>
                 <div className="h-[80vh] w-full">
                     {/* <Calendar
                         localizer={calendarLocalizer}

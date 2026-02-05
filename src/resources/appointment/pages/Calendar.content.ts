@@ -1,5 +1,5 @@
 const content = {
-    title: 'Patient Appointments',
+    title: 'Calendar Appointments',
     textButtonAdd: 'Add Appointment',
     titleDialogAppointment: 'Add appointment',
     titleDialogEvent: 'Event Details',
