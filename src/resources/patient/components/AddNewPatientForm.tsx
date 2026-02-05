@@ -23,7 +23,6 @@ const AddNewPatientForm = () => {
         dni: '',
         email: '',
         phone: '',
-        placeOfResidence: '',
     }
 
     const form = useForm<FormData>({
@@ -43,7 +42,6 @@ const AddNewPatientForm = () => {
     //             formData.dni,
     //             formData.email,
     //             formData.phone,
-    //             formData.placeOfResidence
     //         )
     //         navigate({ to: `/patient/${data[0].id}` })
     //         logSuccess(content.textToastSuccess, content.title)
@@ -71,12 +69,6 @@ const AddNewPatientForm = () => {
                 />
                 <FormFieldInput
                     control={form.control}
-                    fieldName="email"
-                    label={content.labelEmail}
-                    type="email"
-                />
-                <FormFieldInput
-                    control={form.control}
                     fieldName="dni"
                     label={content.labelDNI}
                     placeholder="12121212P"
@@ -84,14 +76,14 @@ const AddNewPatientForm = () => {
                 />
                 <FormFieldInput
                     control={form.control}
-                    fieldName="phone"
-                    label={content.labelPhone}
-                    type="text"
+                    fieldName="email"
+                    label={content.labelEmail}
+                    type="email"
                 />
                 <FormFieldInput
                     control={form.control}
-                    fieldName="placeOfResidence"
-                    label={content.labelPlaceOfResidence}
+                    fieldName="phone"
+                    label={content.labelPhone}
                     type="text"
                 />
                 <Button type="submit" className="w-full mt-4">

@@ -2,6 +2,7 @@
 // import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '@/styles/calendar.css'
+import { Link } from '@tanstack/react-router'
 // import { toast } from 'sonner'
 // import { useAppointments } from '@resources/appointment/hooks/useAppointment'
 // import { useDialog } from '@shared/hooks/useDialog'
@@ -102,17 +103,14 @@ const CalendarPatient = () => {
     return (
         <>
             <HeaderArticle title={content.title}>
-                {/* <Button
-                    size="sm"
-                    onClick={() => addAppointmentDialog.openDialog()}
-                >
-                    {content.textButtonAdd}
-                </Button> */}
+                <Button asChild size="sm">
+                    <Link to="/patient/add">{content.textButtonAdd}</Link>
+                </Button>
             </HeaderArticle>
             <ContentArticle>
                 <p>
-                    Calendario con todas las citas de todos los medicos de toda
-                    la Organizacion.
+                    Calendario por semanas con todas las citas de todos los
+                    medicos de toda la Organizacion.
                 </p>
                 <p>No es demasiado? Puede ser un caos de Calendar 🤯</p>
                 <div className="h-[80vh] w-full">
