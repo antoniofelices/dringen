@@ -2,13 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import SinglePractitioner from '@resources/practitioner/pages/Single'
 // import ProtectedRoute from '@shared/components/ProtectedRoute'
 
-export const Route = createFileRoute('/_authz/practitioner/$id')({
+export const Route = createFileRoute('/_authz/practitioner/$id/')({
     component: RouteComponent,
-    params: {
-        parse: (params) => ({
-            id: params.id,
-        }),
-    },
 })
 
 function RouteComponent() {

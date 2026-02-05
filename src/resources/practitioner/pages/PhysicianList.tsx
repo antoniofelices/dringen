@@ -31,7 +31,8 @@ const PhysicianList = () => {
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
-                <p>Una lista de los Physicians. Tabla con:</p>
+                <p>Una lista de todos los Physicians de una Organization.</p>
+                <p>Tabla con:</p>
                 <ul>
                     <li>Nombre</li>
                     <li>Especialidad</li>

@@ -9,7 +9,7 @@ import UserDetails from '@/components/user/UserDetails'
 import AddActions from '@/components/user/AddActions'
 import content from '@/config/data/pages/singleUser'
 
-const SingleUser = ({ id }: { id: string }) => {
+const SinglePractitioner = ({ id }: { id: string }) => {
     const {
         data: userData,
         isPending: userLoading,
@@ -38,4 +38,4 @@ const SingleUser = ({ id }: { id: string }) => {
     )
 }
 
-export default SingleUser
+export default SinglePractitioner
