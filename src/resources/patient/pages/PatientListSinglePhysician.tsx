@@ -1,11 +1,9 @@
-import { useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import content from './PatientListSinglePhysician.content'
 
 const PatientListSinglePysician = ({ id }: { id: string }) => {
-    const navigate = useNavigate()
-
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -16,7 +14,11 @@ const PatientListSinglePysician = ({ id }: { id: string }) => {
                     <li>Nombre</li>
                     <li>Apellido</li>
                     <li>DNI</li>
-                    <li>Acceso a cada single Patient</li>
+                    <li>
+                        <Link to="/patient/VARIABLE">
+                            Acceso a cada single Patient{' '}
+                        </Link>
+                    </li>{' '}
                 </ul>
             </ContentArticle>
         </>

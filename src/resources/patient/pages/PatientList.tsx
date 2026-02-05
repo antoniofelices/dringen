@@ -48,7 +48,11 @@ const PatientList = () => {
                     <li>Nombre</li>
                     <li>Apellido</li>
                     <li>DNI</li>
-                    <li>Acceso a cada single Patient</li>
+                    <li>
+                        <Link to="/patient/VARIABLE">
+                            Acceso a cada single Patient{' '}
+                        </Link>
+                    </li>
                 </ul>
             </ContentArticle>
         </>
