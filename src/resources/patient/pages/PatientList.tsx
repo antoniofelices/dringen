@@ -11,7 +11,7 @@ import HeaderArticle from '@shared/components/ui/HeaderArticle'
 // import Loading from '@shared/components/ui/Loading'
 import content from './PatientList.content'
 
-const PatientList = ({ id }: { id: string }) => {
+const PatientList = () => {
     // const {
     //     data: listData,
     //     isPending: listLoading,
@@ -42,7 +42,7 @@ const PatientList = ({ id }: { id: string }) => {
                     data={listData || []}
                     caption={content.textCaptionTable}
                 /> */}
-                <p>Lista de pacientes de UN Medico Singular.</p>
+                <p>Lista de todos los pacientes de la Organization.</p>
                 <p>Tabla con:</p>
                 <ul>
                     <li>Nombre</li>

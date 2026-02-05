@@ -3,7 +3,7 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import content from './TodayPhysician.content'
 
-const TodayPhysician = ({ id }: { id: string }) => {
+const TodaySinglePhysician = ({ id }: { id: string }) => {
     return (
         <>
             <HeaderArticle title={content.title} />
@@ -21,4 +21,4 @@ const TodayPhysician = ({ id }: { id: string }) => {
     )
 }
 
-export default TodayPhysician
+export default TodaySinglePhysician

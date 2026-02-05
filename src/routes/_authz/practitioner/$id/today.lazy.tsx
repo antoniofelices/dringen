@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import TodayPhysician from '@/resources/practitioner/pages/TodayPhysician'
+import TodaySinglePhysician from '@/resources/practitioner/pages/TodaySinglePhysician'
 // import ProtectedRoute from '@/components/ProtectedRoute'
 
 export const Route = createLazyFileRoute('/_authz/practitioner/$id/today')({
@@ -8,5 +8,5 @@ export const Route = createLazyFileRoute('/_authz/practitioner/$id/today')({
 
 function RouteComponent() {
     const { id } = Route.useParams()
-    return <TodayPhysician id={id} />
+    return <TodaySinglePhysician id={id} />
 }
