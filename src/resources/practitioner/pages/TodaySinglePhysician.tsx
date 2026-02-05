@@ -1,7 +1,7 @@
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import content from './TodayPhysician.content'
+import content from './TodaySinglePhysician.content'
 
 const TodaySinglePhysician = ({ id }: { id: string }) => {
     return (
