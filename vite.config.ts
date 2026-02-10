@@ -7,6 +7,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
+    envPrefix: 'APP_',
     plugins: [
         tanstackRouter({
             target: 'react',

@@ -1,13 +1,13 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { NavigateFn } from '@tanstack/react-router'
-import type { PatientType } from '../types/patient.model'
+import type { PatientType } from '@resources/patient/types/patient.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
 
 const patientTableColumns = (
     navigate: NavigateFn
 ): ColumnDef<PatientType>[] => [
     {
-        accessorKey: 'user_name',
+        accessorKey: 'firstName',
         header: ({ column }) => {
             return (
                 <button
@@ -24,7 +24,7 @@ const patientTableColumns = (
         },
     },
     {
-        accessorKey: 'user_last_name',
+        accessorKey: 'lastName',
         header: ({ column }) => {
             return (
                 <button
