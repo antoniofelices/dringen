@@ -1,3 +1,6 @@
+import type { z } from 'zod'
+import type { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
+
 export type PatientType = {
     id: string
     firstName: string
@@ -8,3 +11,5 @@ export type PatientType = {
     dni: string
     gender: 'male' | 'female' | 'other' | 'unknown'
 }
+
+export type AddNewPatientType = z.infer<typeof addNewPatientSchema>

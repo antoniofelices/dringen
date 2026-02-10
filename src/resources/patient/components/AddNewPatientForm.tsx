@@ -1,56 +1,42 @@
 import { useForm } from 'react-hook-form'
-// import { useNavigate } from '@tanstack/react-router'
-// import { toast } from 'sonner'
+import { useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-// import { useLogger } from '@shared/hooks/useLogger'
+import { useLogger } from '@shared/hooks/useLogger'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
+import { useCreatePatient } from '@resources/patient/hooks/useCreatePatient'
+import type { AddNewPatientType } from '@resources/patient/types/patient.model'
 import content from './AddNewPatientForm.content'
-import { addNewPatientSchema } from '../schemas/addNewPatient.schema'
-
-type FormData = z.infer<typeof addNewPatientSchema>
 
 const AddNewPatientForm = () => {
-    // const { logError, logSuccess } = useLogger('RegisterPatientForm')
+    const { logError, logSuccess } = useLogger('RegisterPatientForm')
+    const navigate = useNavigate()
+    const createPatient = useCreatePatient()
 
-    // const navigate = useNavigate()
-
-    const defaultValues = {
-        userName: '',
-        userLastName: '',
-        dni: '',
-        email: '',
-        phone: '',
-    }
-
-    const form = useForm<FormData>({
+    const form = useForm<AddNewPatientType>({
         resolver: zodResolver(addNewPatientSchema),
-        defaultValues: defaultValues,
+        defaultValues: {
+            userName: '',
+            userLastName: '',
+            dni: '',
+            email: '',
+            phone: '',
+        },
     })
 
-    const onSubmit = () => {
-        return
+    const onSubmit = async (formData: AddNewPatientType) => {
+        try {
+            const patient = await createPatient.mutateAsync(formData)
+            logSuccess(content.textToastSuccess, content.title)
+            navigate({ to: `/patient/${patient.id}` })
+        } catch (error) {
+            logError(content.textToastFail, error, content.title)
+            toast.error(content.textToastFail)
+        }
     }
-
-    // const onSubmit = async (formData: FormData) => {
-    //     try {
-    //         const data = await registerPatient(
-    //             formData.userName,
-    //             formData.userLastName,
-    //             formData.dni,
-    //             formData.email,
-    //             formData.phone,
-    //         )
-    //         navigate({ to: `/patient/${data[0].id}` })
-    //         logSuccess(content.textToastSuccess, content.title)
-    //     } catch (error) {
-    //         logError(content.textToastFail, error, content.title)
-    //         toast.error(content.textToastFail)
-    //         return
-    //     }
-    // }
 
     return (
         <Form {...form}>
