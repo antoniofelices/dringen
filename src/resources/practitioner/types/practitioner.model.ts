@@ -1,1 +1,6 @@
-export type PractitionerType = {}
+export type PractitionerType = {
+    id: string
+    firstName: string
+    lastName: string
+    email: string
+}
