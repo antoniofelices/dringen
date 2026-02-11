@@ -1,72 +1,31 @@
-import { useForm } from 'react-hook-form'
-// import { useNavigate } from '@tanstack/react-router'
-// import { toast } from 'sonner'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-// import { useLogger } from '@shared/hooks/useLogger'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
+import { useAddNewPatientForm } from '@resources/patient/hooks/useAddNewPatientForm'
 import content from './AddNewPatientForm.content'
-import { addNewPatientSchema } from '../schemas/addNewPatient.schema'
-
-type FormData = z.infer<typeof addNewPatientSchema>
 
 const AddNewPatientForm = () => {
-    // const { logError, logSuccess } = useLogger('RegisterPatientForm')
-
-    // const navigate = useNavigate()
-
-    const defaultValues = {
-        userName: '',
-        userLastName: '',
-        dni: '',
-        email: '',
-        phone: '',
-    }
-
-    const form = useForm<FormData>({
-        resolver: zodResolver(addNewPatientSchema),
-        defaultValues: defaultValues,
-    })
-
-    const onSubmit = () => {
-        return
-    }
-
-    // const onSubmit = async (formData: FormData) => {
-    //     try {
-    //         const data = await registerPatient(
-    //             formData.userName,
-    //             formData.userLastName,
-    //             formData.dni,
-    //             formData.email,
-    //             formData.phone,
-    //         )
-    //         navigate({ to: `/patient/${data[0].id}` })
-    //         logSuccess(content.textToastSuccess, content.title)
-    //     } catch (error) {
-    //         logError(content.textToastFail, error, content.title)
-    //         toast.error(content.textToastFail)
-    //         return
-    //     }
-    // }
+    const { form, onSubmit } = useAddNewPatientForm()
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="userName"
-                    label={content.labelUserName}
-                    type="text"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="userLastName"
-                    label={content.labelUserLastName}
-                    type="text"
-                />
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="userName"
+                        label={content.labelUserName}
+                        type="text"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="userLastName"
+                        label={content.labelUserLastName}
+                        type="text"
+                    />
+                </div>
                 <FormFieldInput
                     control={form.control}
                     fieldName="dni"
@@ -74,18 +33,72 @@ const AddNewPatientForm = () => {
                     placeholder="12121212P"
                     type="text"
                 />
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldCombobox
+                        control={form.control}
+                        fieldName="gender"
+                        label={content.labelGender}
+                        options={[
+                            { label: 'Male', value: 'male' },
+                            { label: 'Female', value: 'female' },
+                            { label: 'Other', value: 'other' },
+                            { label: 'Unknown', value: 'unknown' },
+                        ]}
+                    />
+                    <FormFieldCalendar
+                        control={form.control}
+                        fieldName="birthDate"
+                        label={content.labelBirthday}
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="email"
+                        label={content.labelEmail}
+                        type="email"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="phone"
+                        label={content.labelPhone}
+                        type="text"
+                    />
+                </div>
                 <FormFieldInput
                     control={form.control}
-                    fieldName="email"
-                    label={content.labelEmail}
-                    type="email"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="phone"
-                    label={content.labelPhone}
+                    fieldName="street"
+                    label={content.labelStreet}
                     type="text"
                 />
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="district"
+                        label={content.labelDistrict}
+                        type="text"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="city"
+                        label={content.labelCity}
+                        type="text"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="postcode"
+                        label={content.labelPostcode}
+                        type="text"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="country"
+                        label={content.labelCountry}
+                        type="text"
+                    />
+                </div>
                 <Button type="submit" className="w-full mt-4">
                     {form.formState.isSubmitting
                         ? content.textButtonSending

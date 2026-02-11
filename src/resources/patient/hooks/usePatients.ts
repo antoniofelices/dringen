@@ -1,11 +1,13 @@
-import { useMemo } from 'react'
+// import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getPatients } from '@services/supabaseService'
+import { getListPatients } from '@/resources/patient/services/patient.service'
+import { fhirToPatient } from '@resources/patient/domain/patient.adapter'
 
 export const usePatients = () => {
     const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['listPatients'],
-        queryFn: () => getPatients(),
+        queryFn: () => getListPatients(),
+        select: (data) => data.map(fhirToPatient),
     })
 
     return {
@@ -17,20 +19,19 @@ export const usePatients = () => {
     }
 }
 
-export const usePatientsNames = () => {
-    const { patients } = usePatients()
+// export const usePatientsNames = () => {
+//     const { patients } = usePatients()
 
-    const patientsData = useMemo(() => {
-        return (
-            patients
-                ?.map((item) => ({
-                    name: `${item.user_last_name} ${item.user_name}`,
-                    id: item.id,
-                    dni: item.dni,
-                }))
-                .sort((a, b) => a.name.localeCompare(b.name)) || []
-        )
-    }, [patients])
+//     const patientsData = useMemo(() => {
+//         return (
+//             patients?.map((item) => ({
+//                 name: `${item.name[0].given} ${item.name[0].family}`,
+//                 id: item.id,
+//             })) ||
+//             .sort((a, b) => a.name.localeCompare(b.name)) || []
+//             []
+//         )
+//     }, [patients])
 
-    return patientsData
-}
+//     return patientsData
+// }

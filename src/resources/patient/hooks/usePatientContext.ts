@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { PatientContext } from '@/context/patientContext'
+import { PatientContext } from '@resources/patient/context/patientContext'
 
 export const usePatientContext = () => {
     const context = useContext(PatientContext)
