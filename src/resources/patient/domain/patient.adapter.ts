@@ -29,6 +29,7 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
         ],
         identifier: [
             {
+                use: 'official',
                 type: {
                     coding: [
                         {
@@ -36,10 +37,13 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
                             code: 'NI',
                         },
                     ],
+                    text: 'DNI',
                 },
+                system: 'http://reniec.gob.pe/dni',
                 value: formData.dni,
             },
         ],
+        active: true,
         gender: formData.gender,
         birthDate: formData.birthDate.toISOString().split('T')[0],
         telecom: [
@@ -51,8 +55,14 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
                 ? [{ system: 'phone' as const, value: formData.phone }]
                 : []),
         ],
-        ...(formData.placeOfResidence
-            ? { address: [{ text: formData.placeOfResidence }] }
-            : {}),
+        address: [
+            {
+                line: formData.street ? [formData.street] : [],
+                district: formData.district,
+                city: formData.city,
+                postalCode: formData.postcode,
+                country: formData.country,
+            },
+        ],
     }
 }

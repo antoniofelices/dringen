@@ -14,6 +14,7 @@ const content = {
     errorPasswordNoMatch: 'Passwords do not match',
     errorUserDniTooShort: 'DNI to short',
     errorUserDniTooLong: 'DNI too long',
+    errorUserDniLength: 'DNI has to be 8 digits without letter',
     errorUserDniInvalidFormat: 'Invalid DNI format',
     errorGenderRequired: 'Please select a gender',
     errorBirthDateRequired: 'Please select a birth date',

@@ -23,9 +23,8 @@ export const addNewPatientSchema = z.object({
 
     dni: z
         .string()
-        .min(9, content.errorUserDniTooShort)
-        .max(9, content.errorUserDniTooLong)
-        .regex(/^\d{8}[A-Z]$/, content.errorUserDniInvalidFormat),
+        .length(8, content.errorUserDniLength)
+        .regex(/^\d{8}$/, content.errorUserDniInvalidFormat),
 
     gender: z.enum(['male', 'female', 'other', 'unknown'], {
         error: content.errorGenderRequired,
@@ -43,5 +42,9 @@ export const addNewPatientSchema = z.object({
         .regex(/^(\+?\d{7,15})?$/, content.errorPhoneInvalid)
         .optional(),
 
-    placeOfResidence: z.string().min(1).optional(),
+    street: z.string().trim().optional(),
+    district: z.string().trim().optional(),
+    city: z.string().trim().optional(),
+    postcode: z.string().trim().optional(),
+    country: z.string().trim().optional(),
 })
