@@ -1,13 +1,14 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { PractitionerType } from '../types/practitioner.model'
 import type { NavigateFn } from '@tanstack/react-router'
+import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
+import content from './practitionerTable.content'
 
 const practitionerTableColumns = (
     navigate: NavigateFn
-): ColumnDef<UserType>[] => [
+): ColumnDef<PractitionerType>[] => [
     {
-        accessorKey: 'user_name',
+        accessorKey: 'firstName',
         header: ({ column }) => {
             return (
                 <button
@@ -16,7 +17,7 @@ const practitionerTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        Name
+                        {content.labelUserName}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -24,7 +25,7 @@ const practitionerTableColumns = (
         },
     },
     {
-        accessorKey: 'user_last_name',
+        accessorKey: 'lastName',
         header: ({ column }) => {
             return (
                 <button
@@ -33,7 +34,7 @@ const practitionerTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        Last Name
+                        {content.labelUserLastName}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -41,7 +42,7 @@ const practitionerTableColumns = (
         },
     },
     {
-        accessorKey: 'dni',
+        accessorKey: 'email',
         header: ({ column }) => {
             return (
                 <button
@@ -50,24 +51,7 @@ const practitionerTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        DNI
-                        <ArrowUpDown size="12" />
-                    </span>
-                </button>
-            )
-        },
-    },
-    {
-        accessorKey: 'role',
-        header: ({ column }) => {
-            return (
-                <button
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === 'asc')
-                    }
-                >
-                    <span className="flex items-center gap-2">
-                        Role
+                        {content.labelEmail}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -80,7 +64,7 @@ const practitionerTableColumns = (
         cell: ({ row }) => {
             const id = row.original.id
             return (
-                <button onClick={() => navigate({ to: `/user/${id}` })}>
+                <button onClick={() => navigate({ to: `/practitioner/${id}` })}>
                     <ArrowRight size="16" />
                 </button>
             )
@@ -88,4 +72,4 @@ const practitionerTableColumns = (
     },
 ]
 
-export default createUserColumns
+export default practitionerTableColumns
