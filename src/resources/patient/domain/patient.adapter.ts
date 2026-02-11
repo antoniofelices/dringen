@@ -1,4 +1,5 @@
 import type { Patient } from '@medplum/fhirtypes'
+import { capitalize } from '@medplum/core'
 import type { PatientType } from '@resources/patient/types/patient.model'
 import type { AddNewPatientType } from '@resources/patient/types/patient.model'
 
@@ -23,8 +24,8 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
         resourceType: 'Patient',
         name: [
             {
-                given: [formData.userName],
-                family: formData.userLastName,
+                given: [capitalize(formData.userName)],
+                family: capitalize(formData.userLastName),
             },
         ],
         identifier: [
@@ -57,11 +58,13 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
         ],
         address: [
             {
-                line: formData.street ? [formData.street] : [],
-                district: formData.district,
-                city: formData.city,
-                postalCode: formData.postcode,
-                country: formData.country,
+                line: formData.street ? [capitalize(formData.street)] : [],
+                district: formData.district
+                    ? capitalize(formData.district)
+                    : '',
+                city: formData.city ? capitalize(formData.city) : '',
+                postalCode: formData.postcode ? formData.postcode : '',
+                country: formData.country ? capitalize(formData.country) : '',
             },
         ],
     }
