@@ -9,13 +9,11 @@ const AddNewPatient = () => {
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
-                <CardContent>
-                    <Card className="max-w-2xl mx-auto">
-                        <CardContent>
-                            <AddNewPatientForm />
-                        </CardContent>
-                    </Card>
-                </CardContent>
+                <Card>
+                    <CardContent>
+                        <AddNewPatientForm />
+                    </CardContent>
+                </Card>
             </ContentArticle>
         </>
     )

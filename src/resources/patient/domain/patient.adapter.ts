@@ -40,6 +40,8 @@ export function patientToFhir(formData: AddNewPatientType): Patient {
                 value: formData.dni,
             },
         ],
+        gender: formData.gender,
+        birthDate: formData.birthDate.toISOString().split('T')[0],
         telecom: [
             {
                 system: 'email',
