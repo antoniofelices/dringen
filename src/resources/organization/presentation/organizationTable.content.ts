@@ -1,7 +1,7 @@
 const content = {
     labelName: 'Name',
     labelType: 'Type',
-    labelIdentifier: 'Identifier',
+    labelIdentifier: 'RUC',
 }
 
 export default content

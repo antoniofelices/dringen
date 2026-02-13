@@ -4,7 +4,9 @@ import {
     PlusCircleIcon,
     CalendarDays,
     ClipboardPlus,
+    Building,
 } from 'lucide-react'
+import { MEDPLUM_CONFIG } from '@config/config'
 
 export const administrativeTitleMenu = 'Menu Administratives'
 
@@ -43,5 +45,12 @@ export const administrativeMenu: RoutesProps[] = [
         url: 'practitioner/physician-list',
         text: 'Physicians List',
         orderMenu: 5,
+    },
+    {
+        id: 6,
+        icon: Building,
+        url: `organization/${MEDPLUM_CONFIG.organizationId}`,
+        text: 'Organization',
+        orderMenu: 6,
     },
 ]
