@@ -3,4 +3,10 @@ export type OrganizationType = {
     name: string
     type: string
     identifier: string
+    address: string
+    phone: string
+    email: string
+    adminContact: string
+    adminPhone: string
+    adminEmail: string
 }

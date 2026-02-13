@@ -9,5 +9,21 @@ export function fhirToOrganization(
         name: organization.name ?? '',
         type: organization.type?.[0]?.coding?.[0]?.display ?? '',
         identifier: organization.identifier?.[0]?.value ?? '',
+        address: organization.address?.[0]?.text ?? '',
+        phone:
+            organization.telecom?.find((t) => t.system === 'phone')?.value ??
+            '',
+        email:
+            organization.telecom?.find((t) => t.system === 'email')?.value ??
+            '',
+        adminContact: organization.contact?.[0]?.name?.text ?? '',
+        adminPhone:
+            organization.contact?.[0]?.telecom?.find(
+                (t) => t.system === 'phone'
+            )?.value ?? '',
+        adminEmail:
+            organization.contact?.[0]?.telecom?.find(
+                (t) => t.system === 'email'
+            )?.value ?? '',
     }
 }

@@ -1,9 +1,13 @@
 const content = {
     title: 'Details',
     labelName: 'Name',
+    labelType: 'Type',
+    labelIdentifier: 'RUC',
     labelAddress: 'Address',
-    labelEmail: 'Email',
-    labelSchedule: 'Schedule',
+    labelGeneralPhone: 'General Phone',
+    labelGeneralEmail: 'General Email',
+    labelAdminPhone: 'Admin Phone',
+    labelAdminEmail: 'Admin Email',
 }
 
 export default content
