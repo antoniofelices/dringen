@@ -25,6 +25,8 @@ const PhysicianList = () => {
                     columns={practitionerTableColumns(navigate)}
                     data={practitioners || []}
                     caption={content.textCaptionTable}
+                    filterColumn="email"
+                    filterPlaceholder={content.textFilterPlaceholder}
                 />
             </ContentArticle>
         </>
