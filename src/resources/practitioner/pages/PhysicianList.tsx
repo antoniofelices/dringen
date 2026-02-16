@@ -5,12 +5,12 @@ import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
-import { usePractitioners } from '@/resources/practitioner/hooks/usePractitioner'
+import { usePhysicians } from '@/resources/practitioner/hooks/usePractitioner'
 import practitionerTableColumns from '@resources/practitioner/presentation/practitionerTable.columns'
 import content from './PhysicianList.content'
 
 const PhysicianList = () => {
-    const { practitioners, isPending, isError, error } = usePractitioners()
+    const { physicians, isPending, isError, error } = usePhysicians()
     const navigate = useNavigate()
 
     if (isPending) return <Loading />
@@ -23,7 +23,7 @@ const PhysicianList = () => {
             <ContentArticle>
                 <DataTable<PractitionerType>
                     columns={practitionerTableColumns(navigate)}
-                    data={practitioners || []}
+                    data={physicians || []}
                     caption={content.textCaptionTable}
                     filterColumn="email"
                     filterPlaceholder={content.textFilterPlaceholder}

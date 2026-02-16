@@ -8,7 +8,7 @@ export const createPatient = async (patient: Patient): Promise<Patient> => {
 
         return await medplum.createResource(patient)
     } catch (error) {
-        logger.error('Error creating patient in Medplum', error, {
+        logger.error('Error creating patient in Server', error, {
             component: 'patient.service',
             action: 'createPatient',
         })
@@ -26,7 +26,7 @@ export const getListPatients = async (): Promise<Patient[]> => {
 
         return bundle
     } catch (error) {
-        logger.error('Error fetching patients from Medplum', error, {
+        logger.error('Error fetching patients from Server', error, {
             component: 'patient.service',
             action: 'getListPatients',
         })
