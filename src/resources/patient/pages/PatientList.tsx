@@ -30,6 +30,8 @@ const PatientList = () => {
                     columns={patientTableColumns(navigate)}
                     data={patients || []}
                     caption={content.textCaptionTable}
+                    filterColumn="dni"
+                    filterPlaceholder={content.textFilterPlaceholder}
                 />
             </ContentArticle>
         </>

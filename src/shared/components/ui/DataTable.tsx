@@ -22,20 +22,23 @@ import {
     TableRow,
 } from '@shared/components/ui/base/table'
 
-import { Label } from '@shared/components/ui/base/label'
-import { Input } from '@shared/components/ui/base/input'
+import DataTableFilter from './DataTableFilter'
 import content from './DataTable.content'
 
 type DataTableProps<TData> = {
     columns: ColumnDef<TData>[]
     data: TData[]
     caption?: string
+    filterColumn: string
+    filterPlaceholder: string
 }
 
 const DataTable = <TData,>({
     columns,
     data,
     caption,
+    filterColumn,
+    filterPlaceholder,
 }: DataTableProps<TData>) => {
     const initialPageIndex = 0
     const initialPageSize = 15
@@ -68,22 +71,11 @@ const DataTable = <TData,>({
 
     return (
         <>
-            <div className="flex items-center py-4">
-                <Label className="sr-only">{content.textFilterByDNI}</Label>
-                <Input
-                    placeholder={`${content.textFilterByDNI}…`}
-                    value={
-                        (table.getColumn('dni')?.getFilterValue() as string) ??
-                        ''
-                    }
-                    onChange={(event) =>
-                        table
-                            .getColumn('dni')
-                            ?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm"
-                />
-            </div>
+            <DataTableFilter
+                table={table}
+                column={filterColumn}
+                placeholder={filterPlaceholder}
+            />
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableCaption className="sr-only">{caption}</TableCaption>
@@ -109,12 +101,7 @@ const DataTable = <TData,>({
                     <TableBody className="bg-white dark:bg-gray-950">
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={
-                                        row.getIsSelected() && 'selected'
-                                    }
-                                >
+                                <TableRow key={row.id}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(

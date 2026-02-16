@@ -25,6 +25,8 @@ const OrganizationList = () => {
                     columns={organizationTableColumns(navigate)}
                     data={organizations || []}
                     caption={content.textCaptionTable}
+                    filterColumn="name"
+                    filterPlaceholder={content.textFilterPlaceholder}
                 />
             </ContentArticle>
         </>
