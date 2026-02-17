@@ -1,12 +1,12 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { NavigateFn } from '@tanstack/react-router'
-import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
+import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
 import content from './practitionerTable.content'
 
 const practitionerTableColumns = (
     navigate: NavigateFn
-): ColumnDef<PractitionerType>[] => [
+): ColumnDef<PhysicianType>[] => [
     {
         accessorKey: 'firstName',
         header: ({ column }) => {
@@ -42,7 +42,7 @@ const practitionerTableColumns = (
         },
     },
     {
-        accessorKey: 'email',
+        accessorKey: 'specialty',
         header: ({ column }) => {
             return (
                 <button
@@ -51,7 +51,7 @@ const practitionerTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        {content.labelEmail}
+                        {content.labelSpecialty}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
