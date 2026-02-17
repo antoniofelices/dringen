@@ -1,8 +1,8 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import AuthzMain from '@layouts/AuthzMain'
+import Aside from '@layouts/AuthzAside'
 import ThemeProvider from '@shared/context/ThemeProvider'
-import AuthzMain from '@/layouts/AuthzMain'
 import { SidebarProvider } from '@shared/components/ui/base/sidebar'
-import Aside from '@/layouts/AuthzAside'
 import { medplum } from '@shared/fhir/medplum'
 
 export const Route = createFileRoute('/_authz')({
