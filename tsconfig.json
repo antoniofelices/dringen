@@ -5,6 +5,7 @@
         "types": ["@vitest/browser/providers/playwright"],
         "paths": {
             "@/*": ["src/*"],
+            "@auth/*": ["src/auth/*"],
             "@config/*": ["src/config/*"],
             "@layouts/*": ["src/layouts/*"],
             "@pages/*": ["src/pages/*"],

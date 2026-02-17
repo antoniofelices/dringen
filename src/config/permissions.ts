@@ -1,4 +1,4 @@
-import type { UserRoleType } from '@/types/interfaces'
+import type { UserRoleType } from '@auth/types/auth.model'
 
 export const PERMISSIONS = {
     ROUTES: {

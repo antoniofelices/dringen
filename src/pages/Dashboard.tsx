@@ -1,4 +1,3 @@
-// import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentPractitioner'
 import {
     Card,
     CardContent,
@@ -6,16 +5,9 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import ContentArticle from '@shared/components/ui/ContentArticle'
-// import Loading from '@shared/components/ui/Loading'
-// import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './Dashboard.content'
 
 const Dashboard = () => {
-    // const { user, isPending, isError, error } = useCurrentPractitioner()
-
-    // if (isPending) return <Loading />
-    // if (isError && error) return <ErrorApi message={error.message} />
-
     return (
         <ContentArticle>
             <div className="grid grid-cols-2 gap-6">
