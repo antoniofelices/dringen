@@ -3,7 +3,10 @@ import {
     getListPractitioners,
     getListPhysicians,
 } from '@resources/practitioner/services/practitioner.service'
-import { fhirToPractitioner } from '@resources/practitioner/domain/practitioner.adapter'
+import {
+    fhirToPractitioner,
+    fhirToPhysician,
+} from '@resources/practitioner/domain/practitioner.adapter'
 
 export const usePractitioners = () => {
     const { data, isPending, isError, error, refetch } = useQuery({
@@ -25,7 +28,7 @@ export const usePhysicians = () => {
     const { data, isPending, isError, error, refetch } = useQuery({
         queryKey: ['listPhysicians'],
         queryFn: () => getListPhysicians(),
-        select: (data) => data.map(fhirToPractitioner),
+        select: (data) => data.map(fhirToPhysician),
     })
 
     return {

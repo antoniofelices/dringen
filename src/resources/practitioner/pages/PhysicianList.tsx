@@ -4,7 +4,7 @@ import DataTable from '@shared/components/ui/DataTable'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
-import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
+import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
 import { usePhysicians } from '@/resources/practitioner/hooks/usePractitioner'
 import practitionerTableColumns from '@resources/practitioner/presentation/practitionerTable.columns'
 import content from './PhysicianList.content'
@@ -21,11 +21,11 @@ const PhysicianList = () => {
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
-                <DataTable<PractitionerType>
+                <DataTable<PhysicianType>
                     columns={practitionerTableColumns(navigate)}
                     data={physicians || []}
                     caption={content.textCaptionTable}
-                    filterColumn="email"
+                    filterColumn="specialty"
                     filterPlaceholder={content.textFilterPlaceholder}
                 />
             </ContentArticle>

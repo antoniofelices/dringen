@@ -1,9 +1,14 @@
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
+export type PractitionerRoleInfo = {
+    practitionerId: string
+    specialty: string
+}
+
 export const getPractitionerIdsByRole = async (
     role: string
-): Promise<string[]> => {
+): Promise<PractitionerRoleInfo[]> => {
     try {
         await authenticateMedplum()
 
@@ -13,8 +18,17 @@ export const getPractitionerIdsByRole = async (
         })
 
         return roles
-            .map((role) => role.practitioner?.reference?.split('/')[1])
-            .filter((id): id is string => !!id)
+            .map((role) => {
+                const practitionerId =
+                    role.practitioner?.reference?.split('/')[1]
+                if (!practitionerId) return null
+
+                const specialty =
+                    role.specialty?.[0]?.coding?.[0]?.display ?? ''
+
+                return { practitionerId, specialty }
+            })
+            .filter((info): info is PractitionerRoleInfo => info !== null)
     } catch (error) {
         logger.error('Error fetching practitioner roles from Server', error, {
             component: 'practitionerRole.service',
