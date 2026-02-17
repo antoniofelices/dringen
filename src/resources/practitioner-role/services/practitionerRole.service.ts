@@ -1,10 +1,7 @@
+import type { PractitionerRole } from '@medplum/fhirtypes'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
-
-export type PractitionerRoleInfo = {
-    practitionerId: string
-    specialty: string
-}
+import type { PractitionerRoleInfo } from '@resources/practitioner-role/types/practitionerRole.model'
 
 export const getPractitionerIdsByRole = async (
     role: string
@@ -33,6 +30,26 @@ export const getPractitionerIdsByRole = async (
         logger.error('Error fetching practitioner roles from Server', error, {
             component: 'practitionerRole.service',
             action: 'getPractitionerIdsByRole',
+        })
+        throw error
+    }
+}
+
+export const getPractitionerRoleByPractitioner = async (
+    practitionerId: string
+): Promise<PractitionerRole | undefined> => {
+    try {
+        await authenticateMedplum()
+
+        const roles = await medplum.searchResources('PractitionerRole', {
+            practitioner: `Practitioner/${practitionerId}`,
+        })
+
+        return roles[0]
+    } catch (error) {
+        logger.error('Error fetching practitioner role from Server', error, {
+            component: 'practitionerRole.service',
+            action: 'getPractitionerRoleByPractitioner',
         })
         throw error
     }

@@ -1,3 +1,10 @@
+import type { Practitioner } from '@medplum/fhirtypes'
+
+export type PractitionerWithSpecialty = {
+    practitioner: Practitioner
+    specialty: string
+}
+
 export type PractitionerType = {
     id: string
     firstName: string

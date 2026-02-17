@@ -1,7 +1,7 @@
 import type { Practitioner } from '@medplum/fhirtypes'
 import type { PractitionerType } from '@resources/practitioner/types/practitioner.model'
 import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
-import type { PractitionerWithSpecialty } from '@resources/practitioner/services/practitioner.service'
+import type { PractitionerWithSpecialty } from '@resources/practitioner/types/practitioner.model'
 
 export function fhirToPractitioner(
     practitioner: Practitioner

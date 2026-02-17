@@ -1,13 +1,9 @@
 import type { Practitioner } from '@medplum/fhirtypes'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
-import type { PractitionerRoleInfo } from '@resources/practitioner-role/services/practitionerRole.service'
+import type { PractitionerRoleInfo } from '@resources/practitioner-role/types/practitionerRole.model'
+import type { PractitionerWithSpecialty } from '@resources/practitioner/types/practitioner.model'
 import { getPractitionerIdsByRole } from '@resources/practitioner-role/services/practitionerRole.service'
-
-export type PractitionerWithSpecialty = {
-    practitioner: Practitioner
-    specialty: string
-}
 
 export const getListPractitioners = async (): Promise<Practitioner[]> => {
     try {
@@ -53,7 +49,8 @@ export const getListPhysicians = async (): Promise<
 
         return practitioners.map((practitioner) => ({
             practitioner,
-            specialty: specialtyByPractitionerId.get(practitioner.id ?? '') ?? '',
+            specialty:
+                specialtyByPractitionerId.get(practitioner.id ?? '') ?? '',
         }))
     } catch (error) {
         logger.error('Error fetching physicians from Server', error, {
