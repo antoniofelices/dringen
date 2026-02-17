@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
-// import { useCurrentPractitioner } from '@resources/practitioner/hooks/useCurrentUser'
+import { useCurrentUser } from '@auth/hooks/useCurrentUser'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,20 +21,22 @@ import {
     SidebarSeparator,
     SidebarRail,
 } from '@shared/components/ui/base/sidebar'
-import ButtonSignOut from '@shared/components/ui/ButtonSignOut'
+import ButtonSignOut from '@auth/components/ButtonSignOut'
 import Logo from '@shared/components/ui/Logo'
 import MenuItems from '@shared/components/ui/Menutems'
 import {
     physicianMenuTitle,
     physicianMenu,
-} from '@/resources/practitioner/content/physicianMenu.content'
+} from '@resources/practitioner/content/physicianMenu.content'
 import {
     administrativeTitleMenu,
     administrativeMenu,
-} from '@/resources/practitioner/content/administrativeMenu.content'
+} from '@resources/practitioner/content/administrativeMenu.content'
 import content from './AuthzAside.content'
 
 const Aside = () => {
+    const { user } = useCurrentUser()
+
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -81,6 +83,7 @@ const Aside = () => {
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
                                     <Circle className="stroke-blue-600" />
+                                    {user?.firstName}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>

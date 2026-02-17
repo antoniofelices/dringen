@@ -1,15 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { type VariantProps } from 'class-variance-authority'
-import { Button, buttonVariants } from '@shared/components/ui/base/button'
+import { Button } from '@shared/components/ui/base/button'
 import ErrorApi from '@shared/components/ui/ErrorApi'
+import { signOut } from '@auth/services/auth.service'
+import type { ButtonSignOutType } from '@auth/types/auth.model'
 import content from './ButtonSignOut.content'
-
-type ButtonSignOutProps = VariantProps<typeof buttonVariants> & {
-    asbutton?: boolean
-    className?: string
-    children?: React.ReactNode
-}
 
 const ButtonSignOut = ({
     asbutton = true,
@@ -18,24 +13,24 @@ const ButtonSignOut = ({
     className,
     children,
     ...props
-}: ButtonSignOutProps) => {
+}: ButtonSignOutType) => {
     const navigate = useNavigate()
     const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
     const handleLogout = async () => {
-        // setIsLoading(true)
-        // setError(null)
+        setIsLoading(true)
+        setError(null)
 
-        // const { error } = null
-
-        // if (error) {
-        //     setError(error.message)
-        //     setIsLoading(false)
-        //     return
-        // }
-
-        navigate({ to: '/' })
+        try {
+            await signOut()
+            navigate({ to: '/' })
+        } catch (err) {
+            const message =
+                err instanceof Error ? err.message : 'Error signing out'
+            setError(message)
+            setIsLoading(false)
+        }
     }
 
     return (

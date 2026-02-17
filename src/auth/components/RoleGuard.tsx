@@ -1,22 +1,13 @@
-import { usePermissions } from '@/hooks/usePermissions'
-import type { ReactNode } from 'react'
-import type { UserRoleType } from '@/types/interfaces'
-import Loading from '@components/ui/Loading'
-
-type Props = {
-    children: ReactNode
-    allowedRoles: UserRoleType[]
-    fallback?: ReactNode
-    requireActive?: boolean
-    showLoadingFallback?: boolean
-}
+import { usePermissions } from '@auth/hooks/usePermissions'
+import Loading from '@shared/components/ui/Loading'
+import type { RoleGuardType } from '@auth/types/auth.model'
 
 const RoleGuard = ({
     children,
     allowedRoles,
     fallback = null,
     showLoadingFallback = false,
-}: Props) => {
+}: RoleGuardType) => {
     const { canAccess, isPending } = usePermissions()
 
     if (isPending && showLoadingFallback) {

@@ -5,7 +5,7 @@ import {
     TabsList,
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
-import ButtonSignOut from '@shared/components/ui/ButtonSignOut'
+import ButtonSignOut from '@auth/components/ButtonSignOut'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails'

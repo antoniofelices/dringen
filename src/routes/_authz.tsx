@@ -3,14 +3,14 @@ import ThemeProvider from '@shared/context/ThemeProvider'
 import AuthzMain from '@/layouts/AuthzMain'
 import { SidebarProvider } from '@shared/components/ui/base/sidebar'
 import Aside from '@/layouts/AuthzAside'
+import { medplum } from '@shared/fhir/medplum'
 
 export const Route = createFileRoute('/_authz')({
-    // beforeLoad: async () => {
-    //     const { data } = null
-    //     if (!data.session) {
-    //         throw redirect({ to: '/' })
-    //     }
-    // },
+    beforeLoad: async () => {
+        if (!medplum.getActiveLogin()) {
+            throw redirect({ to: '/' })
+        }
+    },
     component: RouteComponent,
 })
 

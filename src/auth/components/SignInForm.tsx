@@ -2,24 +2,14 @@ import { toast } from 'sonner'
 import { Mail, Lock } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from '@tanstack/react-router'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signInWithPassword } from '@/services/supabaseService'
-import mapSupabaseError from '@/services/mapSupabaseErrors'
-import { Button } from '@/components/ui/base/button'
-import { Form } from '@components/ui/base/form'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import content from '@/config/data/authn/signInForm'
-
-const signInSchema = z.object({
-    email: z
-        .string()
-        .min(1, content.errorEmailRequired)
-        .email(content.errorEmailInvalid),
-    password: z.string().min(6, content.errorPasswordTooShort),
-})
-
-type FormData = z.infer<typeof signInSchema>
+import { Button } from '@shared/components/ui/base/button'
+import { Form } from '@shared/components/ui/base/form'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import { signInSchema } from '@auth/schemas/auth.schema'
+import { signIn } from '@auth/services/auth.service'
+import type { SignInFormType } from '@auth/types/auth.model'
+import content from './SignInForm.content'
 
 const SignInForm = () => {
     const defaultValues = {
@@ -28,39 +18,19 @@ const SignInForm = () => {
     }
     const navigate = useNavigate()
 
-    const form = useForm<FormData>({
+    const form = useForm<SignInFormType>({
         resolver: zodResolver(signInSchema),
         defaultValues: defaultValues,
     })
 
-    const onSubmit = async (formData: FormData) => {
+    const onSubmit = async (formData: SignInFormType) => {
         try {
-            const { error } = await signInWithPassword(
-                formData.email,
-                formData.password
-            )
-            if (error) {
-                const { message } = mapSupabaseError(error.message)
-
-                form.setError('root', {
-                    type: 'server',
-                    message,
-                })
-                toast.error(`${content.textToastFail}: ${message}`)
-                return
-            }
-            navigate({ to: '/patient/list' })
+            await signIn(formData.email, formData.password)
+            navigate({ to: '/dashboard' })
         } catch (error) {
-            const errorMessage =
+            const message =
                 error instanceof Error ? error.message : content.textToastFail
-            const { message } = mapSupabaseError(errorMessage)
-
-            form.setError('root', {
-                type: 'server',
-                message,
-            })
-            toast.error(`${content.textToastFail}: ${message}`)
-            return
+            toast.error(message)
         }
     }
 

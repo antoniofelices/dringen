@@ -4,7 +4,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-// import SignInForm from '@/components/authn/SignInForm'
+import SignInForm from '@auth/components/SignInForm'
 import content from './Index.content.ts'
 
 const Index = () => {
@@ -13,7 +13,9 @@ const Index = () => {
             <CardHeader className="text-center">
                 <CardTitle className="text-2xl">{content.title}</CardTitle>
             </CardHeader>
-            <CardContent>{/* <SignInForm /> */}</CardContent>
+            <CardContent>
+                <SignInForm />
+            </CardContent>
         </Card>
     )
 }
