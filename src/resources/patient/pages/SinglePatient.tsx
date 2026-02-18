@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getAgeFromDate } from '@shared/utils/utils'
 import { Button } from '@shared/components/ui/base/button'
 import {
     Drawer,
@@ -20,9 +21,13 @@ const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+    if (!patient) return null
+
     return (
         <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-            <HeaderArticle title="Patient name">
+            <HeaderArticle
+                title={`${patient.firstName} - ${getAgeFromDate(patient.birthDate)} ${content.textYears}`}
+            >
                 <Button asChild size="sm">
                     <DrawerTrigger>
                         {content.textButtonAddClinicalHistory}
