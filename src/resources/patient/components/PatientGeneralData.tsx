@@ -16,30 +16,11 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import { useEditableForm } from '@shared/hooks/useEditableForm'
 import content from './PatientGeneralData.content'
 
-const genderOptions = [
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-    { label: 'Other', value: 'other' },
-    { label: 'Unknown', value: 'unknown' },
-]
-
-const maritalStatusOptions = [
-    { label: 'Annulled', value: 'A' },
-    { label: 'Divorced', value: 'D' },
-    { label: 'Interlocutory', value: 'I' },
-    { label: 'Legally Separated', value: 'L' },
-    { label: 'Married', value: 'M' },
-    { label: 'Polygamous', value: 'P' },
-    { label: 'Never Married', value: 'S' },
-    { label: 'Domestic Partner', value: 'T' },
-    { label: 'Unmarried', value: 'U' },
-    { label: 'Widowed', value: 'W' },
-    { label: 'Unknown', value: 'UNK' },
-]
+const { genderOptions, maritalStatusOptions } = content
 
 type FormData = {
-    userName: string
-    userLastName: string
+    firstName: string
+    lastName: string
     gender: string
     maritalStatus: string
 }
@@ -53,8 +34,8 @@ const FormAdd = ({
 }) => {
     const form = useForm<FormData>({
         defaultValues: {
-            userName: patientData.firstName || '',
-            userLastName: patientData.lastName || '',
+            firstName: patientData.firstName || '',
+            lastName: patientData.lastName || '',
             gender: patientData.gender || '',
             maritalStatus: patientData.maritalStatus || '',
         },
@@ -70,14 +51,14 @@ const FormAdd = ({
                 <div className="grid grid-cols-2 gap-4">
                     <FormFieldInput
                         control={form.control}
-                        fieldName="userName"
-                        label={content.labelUserName}
+                        fieldName="firstName"
+                        label={content.labelFirstName}
                         type="text"
                     />
                     <FormFieldInput
                         control={form.control}
-                        fieldName="userLastName"
-                        label={content.labelUserLastName}
+                        fieldName="lastName"
+                        label={content.labelLastName}
                         type="text"
                     />
                 </div>
@@ -117,8 +98,10 @@ const PatientGeneralData = ({
     patientData: PatientType | null
     onRefetch: () => void
 }) => {
+    if (!patientData) return null
+
     const completenessCheck = (data: PatientType) =>
-        Boolean(data.firstName || data.lastName || data.gender || data.maritalStatus)
+        Boolean(data.firstName && data.lastName && data.gender && data.maritalStatus)
 
     const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
         patientData,
@@ -127,16 +110,16 @@ const PatientGeneralData = ({
     )
 
     const genderLabel = genderOptions.find(
-        (o) => o.value === patientData?.gender
+        (o) => o.value === patientData.gender
     )?.label
 
     const maritalStatusLabel = maritalStatusOptions.find(
-        (o) => o.value === patientData?.maritalStatus
+        (o) => o.value === patientData.maritalStatus
     )?.label
 
     const dataItems = [
-        { label: content.labelUserName, value: patientData?.firstName },
-        { label: content.labelUserLastName, value: patientData?.lastName },
+        { label: content.labelFirstName, value: patientData.firstName },
+        { label: content.labelLastName, value: patientData.lastName },
         { label: content.labelGender, value: genderLabel },
         { label: content.labelMaritalStatus, value: maritalStatusLabel },
     ]
@@ -147,27 +130,25 @@ const PatientGeneralData = ({
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                {patientData && (
-                    <CardAction>
-                        <Button
-                            size="xs"
-                            variant="outline"
-                            onClick={handleToggle}
-                        >
-                            {!isEditing ? <>{content.textButtonEdit}</> : <X />}
-                        </Button>
-                    </CardAction>
-                )}
+                <CardAction>
+                    <Button
+                        size="xs"
+                        variant="outline"
+                        onClick={handleToggle}
+                    >
+                        {!isEditing ? <>{content.textButtonEdit}</> : <X />}
+                    </Button>
+                </CardAction>
             </CardHeader>
             <CardContent>
-                {!isEditing && patientData ? (
+                {!isEditing ? (
                     <DataDisplayList items={dataItems} />
-                ) : patientData ? (
+                ) : (
                     <FormAdd
                         patientData={patientData}
                         onSuccess={handleFormSuccess}
                     />
-                ) : null}
+                )}
             </CardContent>
         </Card>
     )
