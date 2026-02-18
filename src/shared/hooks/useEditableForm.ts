@@ -1,19 +1,25 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 export const useEditableForm = <T>(
     data: T | null,
     completenessCheck: (data: T) => boolean,
-    onRefetch: () => void
+    onRefetch?: () => void
 ) => {
     const isDataComplete = Boolean(data && completenessCheck(data))
     const [isEditing, setIsEditing] = useState(!isDataComplete)
+
+    useEffect(() => {
+        if (isDataComplete) {
+            setIsEditing(false)
+        }
+    }, [isDataComplete])
 
     const handleToggle = useCallback(() => {
         setIsEditing(!isEditing)
     }, [isEditing])
 
     const handleFormSuccess = useCallback(() => {
-        onRefetch()
+        onRefetch?.()
         setIsEditing(false)
     }, [onRefetch])
 

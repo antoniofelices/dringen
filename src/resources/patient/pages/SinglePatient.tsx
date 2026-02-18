@@ -12,8 +12,8 @@ import {
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import { useSinglePatient } from '@resources/patient/hooks/usePatient'
-import PatientGeneralData from '@resources/patient/components/PatientGeneralData'
+import { useSinglePatient } from '@/resources/patient/hooks/useGetPatient'
+import PatientDemographics from '@/resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
 const SinglePatient = ({ id }: { id: string }) => {
@@ -32,7 +32,7 @@ const SinglePatient = ({ id }: { id: string }) => {
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
-                        <PatientGeneralData patientData={patient} />
+                        <PatientDemographics patientData={patient} />
                     </div>
                     <div className="col-span-3">Anemesis</div>
                     <div className="col-span-6">Clinical History</div>

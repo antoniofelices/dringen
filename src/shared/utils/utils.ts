@@ -46,3 +46,8 @@ export function normalizeFileName(fileName: string): string {
             .replace(/-+/g, '-')
     )
 }
+
+export const getLabelFromOptions = (
+    options: { value: string; label: string }[],
+    value: string | undefined
+): string => options.find((o) => o.value === value)?.label ?? ''

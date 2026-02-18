@@ -26,4 +26,11 @@ export type PatientType = {
     maritalStatus: MaritalStatusCode | undefined
 }
 
+export type PatientDemographicsFormType = {
+    firstName: string
+    lastName: string
+    gender: string
+    maritalStatus: string
+}
+
 export type AddNewPatientType = z.infer<typeof addNewPatientSchema>

@@ -1,7 +1,10 @@
 import type { Patient } from '@medplum/fhirtypes'
 import { capitalize } from '@medplum/core'
-import type { PatientType } from '@resources/patient/types/patient.model'
-import type { AddNewPatientType } from '@resources/patient/types/patient.model'
+import type {
+    AddNewPatientType,
+    PatientType,
+    PatientDemographicsFormType,
+} from '@resources/patient/types/patient.model'
 
 export function fhirToPatient(patient: Patient): PatientType {
     return {
@@ -16,6 +19,35 @@ export function fhirToPatient(patient: Patient): PatientType {
                 id.type?.coding?.some((c) => c.code === 'NI')
             )?.value ?? '',
         gender: patient.gender ?? 'unknown',
+        maritalStatus: patient.maritalStatus?.coding?.[0]
+            ?.code as PatientType['maritalStatus'],
+    }
+}
+
+export function patientDemographicsToFhir(
+    formData: PatientDemographicsFormType,
+    existingPatient: Patient
+): Patient {
+    return {
+        ...existingPatient,
+        name: [
+            {
+                ...existingPatient.name?.[0],
+                given: [capitalize(formData.firstName)],
+                family: capitalize(formData.lastName),
+            },
+        ],
+        gender: formData.gender as Patient['gender'],
+        maritalStatus: formData.maritalStatus
+            ? {
+                  coding: [
+                      {
+                          system: 'http://terminology.hl7.org/CodeSystem/v3-MaritalStatus',
+                          code: formData.maritalStatus,
+                      },
+                  ],
+              }
+            : undefined,
     }
 }
 
