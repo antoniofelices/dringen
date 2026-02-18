@@ -20,6 +20,7 @@ const content = {
     labelDNI: 'DNI',
     labelEmail: 'Email',
     labelGender: 'Gender',
+    labelMaritalStatus: 'Marital Status',
     labelPhone: 'Phone',
     labelBirthday: 'Birthday',
     labelBirthplace: 'Birthplace',

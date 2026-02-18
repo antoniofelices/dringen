@@ -6,7 +6,7 @@ import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import type { PatientType } from '@resources/patient/types/patient.model.ts'
-import { usePatients } from '@/resources/patient/hooks/usePatient'
+import { usePatients } from '@/resources/patient/hooks/useGetPatient'
 import patientTableColumns from '@resources/patient/presentation/patientTable.columns'
 import content from './PatientList.content'
 

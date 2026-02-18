@@ -46,3 +46,23 @@ export function normalizeFileName(fileName: string): string {
             .replace(/-+/g, '-')
     )
 }
+
+export const getLabelFromOptions = (
+    options: { value: string; label: string }[],
+    value: string | undefined
+): string => options.find((o) => o.value === value)?.label ?? ''
+
+export const getAgeFromDate = (dateString: string): number => {
+    const birthDate = new Date(dateString)
+    const today = new Date()
+
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const hasHadBirthdayThisYear =
+        today.getMonth() > birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() &&
+            today.getDate() >= birthDate.getDate())
+
+    if (!hasHadBirthdayThisYear) age--
+
+    return age
+}

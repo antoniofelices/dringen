@@ -37,6 +37,12 @@ export const addNewPatientSchema = z.object({
         .max(new Date(), content.errorBirthDateFuture)
         .min(new Date('1900-01-01'), content.errorBirthDateTooOld),
 
+    maritalStatus: z
+        .enum(['A', 'D', 'I', 'L', 'M', 'P', 'S', 'T', 'U', 'W', 'UNK'], {
+            error: content.errorMaritalStatusRequired,
+        })
+        .optional(),
+
     phone: z
         .string()
         .regex(/^(\+?\d{7,15})?$/, content.errorPhoneInvalid)

@@ -33,3 +33,34 @@ export const getListPatients = async (): Promise<Patient[]> => {
         throw error
     }
 }
+
+export const getSinglePatientById = async (id: string): Promise<Patient> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.readResource('Patient', id)
+    } catch (error) {
+        logger.error('Error fetching patient from Server', error, {
+            component: 'patient.service',
+            action: 'getSinglePatientById',
+        })
+        throw error
+    }
+}
+
+export const updatePatient = async (
+    id: string,
+    patient: Patient
+): Promise<Patient> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.updateResource({ ...patient, id })
+    } catch (error) {
+        logger.error('Error updating patient in Server', error, {
+            component: 'patient.service',
+            action: 'updatePatient',
+        })
+        throw error
+    }
+}
