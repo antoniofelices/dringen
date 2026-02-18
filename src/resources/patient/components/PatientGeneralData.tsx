@@ -1,8 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { X } from 'lucide-react'
-// import { toast } from 'sonner'
-import type { PatientWithRelationsType } from '@/types/interfaces'
-import { transformDate, normalizeDate } from '@/lib/utils'
+import type { PatientType } from '@resources/patient/types/patient.model'
 import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
@@ -14,68 +12,89 @@ import {
 import { Form } from '@shared/components/ui/base/form'
 import DataDisplayList from '@shared/components/ui/DataDisplayList'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
+import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import { useEditableForm } from '@shared/hooks/useEditableForm'
 import content from './PatientGeneralData.content'
 
+const genderOptions = [
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' },
+    { label: 'Other', value: 'other' },
+    { label: 'Unknown', value: 'unknown' },
+]
+
+const maritalStatusOptions = [
+    { label: 'Annulled', value: 'A' },
+    { label: 'Divorced', value: 'D' },
+    { label: 'Interlocutory', value: 'I' },
+    { label: 'Legally Separated', value: 'L' },
+    { label: 'Married', value: 'M' },
+    { label: 'Polygamous', value: 'P' },
+    { label: 'Never Married', value: 'S' },
+    { label: 'Domestic Partner', value: 'T' },
+    { label: 'Unmarried', value: 'U' },
+    { label: 'Widowed', value: 'W' },
+    { label: 'Unknown', value: 'UNK' },
+]
+
 type FormData = {
-    birthday?: string | null
-    gender?: string
-    birthplace?: string
-    placeOfResidence?: string
-    occupation?: string
+    userName: string
+    userLastName: string
+    gender: string
+    maritalStatus: string
 }
 
 const FormAdd = ({
-    contentPatientGeneralData,
+    patientData,
     onSuccess,
 }: {
-    contentPatientGeneralData: PatientWithRelationsType
+    patientData: PatientType
     onSuccess: () => void
 }) => {
-    const defaultValues = {
-        birthday: contentPatientGeneralData.birthday || '',
-        gender: contentPatientGeneralData.gender || '',
-        birthplace: contentPatientGeneralData.birthplace || '',
-        placeOfResidence: contentPatientGeneralData.place_of_residence || '',
-        occupation: contentPatientGeneralData.occupation || '',
-    }
-
     const form = useForm<FormData>({
-        defaultValues: defaultValues,
+        defaultValues: {
+            userName: patientData.firstName || '',
+            userLastName: patientData.lastName || '',
+            gender: patientData.gender || '',
+            maritalStatus: patientData.maritalStatus || '',
+        },
     })
 
     const onSubmit = () => {
-        return
+        onSuccess()
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldCalendar
-                    control={form.control}
-                    fieldName="birthday"
-                    label={content.labelBirthday}
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="gender"
-                    label={content.labelGender}
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="birthplace"
-                    label={content.labelBirthplace}
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="placeOfResidence"
-                    label={content.labelPlaceOfResidence}
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="occupation"
-                    label={content.labelOccupation}
-                />
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="userName"
+                        label={content.labelUserName}
+                        type="text"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="userLastName"
+                        label={content.labelUserLastName}
+                        type="text"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldCombobox
+                        control={form.control}
+                        fieldName="gender"
+                        label={content.labelGender}
+                        options={genderOptions}
+                    />
+                    <FormFieldCombobox
+                        control={form.control}
+                        fieldName="maritalStatus"
+                        label={content.labelMaritalStatus}
+                        options={maritalStatusOptions}
+                    />
+                </div>
                 <Button
                     type="submit"
                     className="mt-4"
@@ -91,48 +110,36 @@ const FormAdd = ({
     )
 }
 
-const PatientGeneralData = () => {
-    // const { patientData, refetchPatient } = usePatientContext()
+const PatientGeneralData = ({
+    patientData,
+    onRefetch,
+}: {
+    patientData: PatientType | null
+    onRefetch: () => void
+}) => {
+    const completenessCheck = (data: PatientType) =>
+        Boolean(data.firstName || data.lastName || data.gender || data.maritalStatus)
 
-    // const completenessCheck = (data: PatientWithRelationsType) =>
-    //     Boolean(
-    //         data.birthday ||
-    //         data.gender ||
-    //         data.birthplace ||
-    //         data.place_of_residence ||
-    //         data.occupation
-    //     )
+    const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
+        patientData,
+        completenessCheck,
+        onRefetch
+    )
 
-    // const { isEditing, handleToggle, handleFormSuccess } = useEditableForm(
-    //     patientData,
-    //     completenessCheck,
-    //     refetchPatient
-    // )
+    const genderLabel = genderOptions.find(
+        (o) => o.value === patientData?.gender
+    )?.label
 
-    // const dataItems = [
-    //     {
-    //         label: content.labelBirthday,
-    //         value: patientData?.birthday
-    //             ? transformDate(patientData?.birthday)
-    //             : '',
-    //     },
-    //     {
-    //         label: content.labelGender,
-    //         value: patientData?.gender,
-    //     },
-    //     {
-    //         label: content.labelBirthplace,
-    //         value: patientData?.birthplace,
-    //     },
-    //     {
-    //         label: content.labelPlaceOfResidence,
-    //         value: patientData?.place_of_residence,
-    //     },
-    //     {
-    //         label: content.labelOccupation,
-    //         value: patientData?.occupation,
-    //     },
-    // ]
+    const maritalStatusLabel = maritalStatusOptions.find(
+        (o) => o.value === patientData?.maritalStatus
+    )?.label
+
+    const dataItems = [
+        { label: content.labelUserName, value: patientData?.firstName },
+        { label: content.labelUserLastName, value: patientData?.lastName },
+        { label: content.labelGender, value: genderLabel },
+        { label: content.labelMaritalStatus, value: maritalStatusLabel },
+    ]
 
     return (
         <Card className="h-full">
@@ -153,16 +160,14 @@ const PatientGeneralData = () => {
                 )}
             </CardHeader>
             <CardContent>
-                <>
-                    {!isEditing && patientData ? (
-                        <DataDisplayList items={dataItems} />
-                    ) : patientData ? (
-                        <FormAdd
-                            contentPatientGeneralData={patientData}
-                            onSuccess={handleFormSuccess}
-                        />
-                    ) : null}
-                </>
+                {!isEditing && patientData ? (
+                    <DataDisplayList items={dataItems} />
+                ) : patientData ? (
+                    <FormAdd
+                        patientData={patientData}
+                        onSuccess={handleFormSuccess}
+                    />
+                ) : null}
             </CardContent>
         </Card>
     )

@@ -26,13 +26,20 @@ const AddNewPatientForm = () => {
                         type="text"
                     />
                 </div>
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="dni"
-                    label={content.labelDNI}
-                    placeholder="12121212P"
-                    type="text"
-                />
+                <div className="grid grid-cols-2 gap-4">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="dni"
+                        label={content.labelDNI}
+                        placeholder="12121212P"
+                        type="text"
+                    />
+                    <FormFieldCalendar
+                        control={form.control}
+                        fieldName="birthDate"
+                        label={content.labelBirthday}
+                    />
+                </div>
                 <div className="grid grid-cols-2 gap-4">
                     <FormFieldCombobox
                         control={form.control}
@@ -45,10 +52,23 @@ const AddNewPatientForm = () => {
                             { label: 'Unknown', value: 'unknown' },
                         ]}
                     />
-                    <FormFieldCalendar
+                    <FormFieldCombobox
                         control={form.control}
-                        fieldName="birthDate"
-                        label={content.labelBirthday}
+                        fieldName="maritalStatus"
+                        label={content.labelMaritalStatus}
+                        options={[
+                            { label: 'Annulled', value: 'A' },
+                            { label: 'Divorced', value: 'D' },
+                            { label: 'Interlocutory', value: 'I' },
+                            { label: 'Legally Separated', value: 'L' },
+                            { label: 'Married', value: 'M' },
+                            { label: 'Polygamous', value: 'P' },
+                            { label: 'Never Married', value: 'S' },
+                            { label: 'Domestic Partner', value: 'T' },
+                            { label: 'Unmarried', value: 'U' },
+                            { label: 'Widowed', value: 'W' },
+                            { label: 'Unknown', value: 'UNK' },
+                        ]}
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">

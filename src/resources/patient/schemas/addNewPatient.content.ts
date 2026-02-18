@@ -21,6 +21,7 @@ const content = {
     errorBirthDateFuture: 'This is imposible',
     errorBirthDateTooOld: 'Too old',
     errorPhoneInvalid: 'Phone invalid',
+    errorMaritalStatusRequired: 'Please select a marital status',
     labelUserName: 'Name',
     labelUserLastName: 'Last Name',
     labelDNI: 'DNI',
