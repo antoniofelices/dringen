@@ -1,8 +1,9 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import AuthProvider from '@auth/context/AuthProvider'
+import AuthzMain from '@layouts/AuthzMain'
+import Aside from '@layouts/AuthzAside'
 import ThemeProvider from '@shared/context/ThemeProvider'
-import AuthzMain from '@/layouts/AuthzMain'
 import { SidebarProvider } from '@shared/components/ui/base/sidebar'
-import Aside from '@/layouts/AuthzAside'
 import { medplum } from '@shared/fhir/medplum'
 
 export const Route = createFileRoute('/_authz')({
@@ -16,13 +17,15 @@ export const Route = createFileRoute('/_authz')({
 
 function RouteComponent() {
     return (
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <SidebarProvider>
-                <Aside />
-                <AuthzMain>
-                    <Outlet />
-                </AuthzMain>
-            </SidebarProvider>
-        </ThemeProvider>
+        <AuthProvider>
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                <SidebarProvider>
+                    <Aside />
+                    <AuthzMain>
+                        <Outlet />
+                    </AuthzMain>
+                </SidebarProvider>
+            </ThemeProvider>
+        </AuthProvider>
     )
 }

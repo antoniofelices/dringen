@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { ProfileResource } from '@medplum/core'
 import { z } from 'zod'
 import type { VariantProps } from 'class-variance-authority'
 import { buttonVariants } from '@shared/components/ui/base/button'
@@ -27,4 +28,10 @@ export type ProtectedRouteType = {
     allowedRoles: UserRoleType[]
     fallbackPath?: string
     requireActive?: boolean
+}
+
+export type AuthContextState = {
+    profile: ProfileResource | undefined
+    loading: boolean
+    isLoggedIn: boolean
 }

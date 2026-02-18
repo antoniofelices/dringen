@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@auth/hooks/useCurrentUser'
 import { transformToId } from '@shared/utils/utils'
 import {
     Tabs,
@@ -14,6 +15,7 @@ import TermsOfUse from '@resources/practitioner/components/TermsOfUse'
 import content from './Settings.content'
 
 const Settings = () => {
+    const { user } = useCurrentUser()
     const account = transformToId(`${content.textAccount}`)
     const appearance = transformToId(`${content.textAppearence}`)
     const textTermsOfUse = transformToId(`${content.textTermsOfUse}`)
@@ -39,7 +41,9 @@ const Settings = () => {
                         </TabsList>
                     </div>
                     <TabsContent value={account}>
-                        <PractitionerDetails />
+                        {user?.id && (
+                            <PractitionerDetails practitionerId={user.id} />
+                        )}
                     </TabsContent>
                     <TabsContent value={appearance}>
                         <Appearance />
