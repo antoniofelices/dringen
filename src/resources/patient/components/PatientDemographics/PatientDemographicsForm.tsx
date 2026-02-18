@@ -1,12 +1,14 @@
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import type { PatientType } from '@resources/patient/types/patient.model'
+import type { PatientDemographicsFormType } from '@resources/patient/types/patient.model'
+import { patientDemographicsSchema } from '@resources/patient/schemas/patientDemographics.schema'
 import { useUpdatePatientDemographics } from '@resources/patient/hooks/useUpdatePatient'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
-import type { PatientDemographicsFormType } from '@resources/patient/types/patient.model'
 import content from './PatientDemographics.content'
 
 const { genderOptions, maritalStatusOptions } = content
@@ -21,11 +23,12 @@ const PatientDemographicsForm = ({
     const updatePatient = useUpdatePatientDemographics(patientData.id)
 
     const form = useForm<PatientDemographicsFormType>({
+        resolver: zodResolver(patientDemographicsSchema),
         defaultValues: {
             firstName: patientData.firstName || '',
             lastName: patientData.lastName || '',
-            gender: patientData.gender || '',
-            maritalStatus: patientData.maritalStatus || '',
+            gender: patientData.gender || undefined,
+            maritalStatus: patientData.maritalStatus || undefined,
         },
     })
 

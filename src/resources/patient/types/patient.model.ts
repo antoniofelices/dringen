@@ -1,5 +1,6 @@
 import type { z } from 'zod'
 import type { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
+import type { patientDemographicsSchema } from '@resources/patient/schemas/patientDemographics.schema'
 
 export type MaritalStatusCode =
     | 'A'
@@ -26,11 +27,8 @@ export type PatientType = {
     maritalStatus: MaritalStatusCode | undefined
 }
 
-export type PatientDemographicsFormType = {
-    firstName: string
-    lastName: string
-    gender: string
-    maritalStatus: string
-}
+export type PatientDemographicsFormType = z.infer<
+    typeof patientDemographicsSchema
+>
 
 export type AddNewPatientType = z.infer<typeof addNewPatientSchema>
