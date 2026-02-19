@@ -60,3 +60,19 @@ export const getListPhysicians = async (): Promise<
         throw error
     }
 }
+
+export const getSinglePractitionerById = async (
+    id: string
+): Promise<Practitioner> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.readResource('Practitioner', id)
+    } catch (error) {
+        logger.error('Error fetching practitioner from Server', error, {
+            component: 'practitioner.service',
+            action: 'getSinglePractitionerById',
+        })
+        throw error
+    }
+}

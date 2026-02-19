@@ -13,8 +13,8 @@ import {
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import { useSinglePatient } from '@/resources/patient/hooks/useGetPatient'
-import PatientDemographics from '@/resources/patient/components/PatientDemographics/PatientDemographics'
+import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
+import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
 const SinglePatient = ({ id }: { id: string }) => {
