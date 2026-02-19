@@ -18,3 +18,20 @@ export const getLocationsByIds = async (
         throw error
     }
 }
+
+export const getLocationsByParent = async (
+    parentId: string
+): Promise<Location[]> => {
+    try {
+        await authenticateMedplum()
+        return await medplum.searchResources('Location', {
+            partof: `Location/${parentId}`,
+        })
+    } catch (error) {
+        logger.error('Error fetching locations from Server', error, {
+            component: 'location.service',
+            action: 'getLocationsByParent',
+        })
+        throw error
+    }
+}

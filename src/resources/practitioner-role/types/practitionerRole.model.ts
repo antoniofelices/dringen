@@ -14,3 +14,8 @@ export type PractitionerRoleDetailType = {
     availableTime: AvailableTimeType[]
     locationIds: string[]
 }
+
+export type PractitionerDetailsFormData = {
+    specialty: string
+    outpatientFacility?: string
+}
