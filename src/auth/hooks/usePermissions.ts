@@ -1,16 +1,23 @@
-import { PERMISSIONS } from '@config/permissions'
+import { permissions } from '@auth/config/permissions'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
+import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
 import type { UserRoleType } from '@auth/types/auth.model'
 
 export const usePermissions = () => {
-    const { user, isAuthenticated, isPending } = useCurrentUser()
+    const { user, isAuthenticated, isPending: isUserPending } = useCurrentUser()
+    const { practitionerRole, isPending: isRolePending } =
+        usePractitionerRoleDetail(user?.id ?? '')
 
-    const hasRole = (_role: UserRoleType): boolean => {
-        return isAuthenticated
+    const isPending = isUserPending || isRolePending
+
+    const hasRole = (role: UserRoleType): boolean => {
+        if (!isAuthenticated || !practitionerRole) return false
+        return practitionerRole.role === role
     }
 
-    const hasAnyRole = (_roles: UserRoleType[]): boolean => {
-        return isAuthenticated
+    const hasAnyRole = (roles: UserRoleType[]): boolean => {
+        if (!isAuthenticated || !practitionerRole) return false
+        return roles.includes(practitionerRole.role as UserRoleType)
     }
 
     const getDisplayName = (): string => {
@@ -19,17 +26,17 @@ export const usePermissions = () => {
     }
 
     const hasRouteAccess = (
-        routeKey: keyof typeof PERMISSIONS.ROUTES
+        routeKey: keyof typeof permissions.ROUTES
     ): boolean => {
         if (!isAuthenticated || isPending) return false
-        return hasAnyRole(PERMISSIONS.ROUTES[routeKey])
+        return hasAnyRole(permissions.ROUTES[routeKey])
     }
 
     const hasActionPermission = (
-        actionKey: keyof typeof PERMISSIONS.ACTIONS
+        actionKey: keyof typeof permissions.ACTIONS
     ): boolean => {
         if (!isAuthenticated || isPending) return false
-        return hasAnyRole(PERMISSIONS.ACTIONS[actionKey])
+        return hasAnyRole(permissions.ACTIONS[actionKey])
     }
 
     const canAccess = (allowedRoles: UserRoleType[]): boolean => {

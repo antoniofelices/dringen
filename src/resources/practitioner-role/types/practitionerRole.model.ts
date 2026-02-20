@@ -10,6 +10,7 @@ export type AvailableTimeType = {
 }
 
 export type PractitionerRoleDetailType = {
+    role: string
     specialty: string
     availableTime: AvailableTimeType[]
     locationIds: string[]
