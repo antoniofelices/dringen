@@ -1,7 +1,7 @@
 const content = {
-    title: 'List of patients for a Single Physician',
+    title: 'List of my patients',
     textCaptionTable: 'A list of patients',
-    textButtonAddNew: 'Add Patient',
+    textFilterPlaceholder: 'Filter by DNI...',
 }
 
 export default content
