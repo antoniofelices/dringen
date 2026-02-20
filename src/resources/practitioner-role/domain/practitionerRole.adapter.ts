@@ -35,6 +35,7 @@ export function practitionerDetailsToFhir(
 export function fhirToPractitionerRoleDetail(
     role: PractitionerRole
 ): PractitionerRoleDetailType {
+    const roleCode = role.code?.[0]?.coding?.[0]?.code ?? ''
     const specialty = role.specialty?.[0]?.coding?.[0]?.display ?? ''
 
     const availableTime = (role.availableTime ?? []).map((time) => ({
@@ -48,6 +49,7 @@ export function fhirToPractitionerRoleDetail(
         .filter((id): id is string => !!id)
 
     return {
+        role: roleCode,
         specialty,
         availableTime,
         locationIds,

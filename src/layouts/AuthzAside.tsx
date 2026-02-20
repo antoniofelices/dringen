@@ -32,10 +32,12 @@ import {
     administrativeTitleMenu,
     administrativeMenu,
 } from '@resources/practitioner/content/administrativeMenu.content'
+import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
 import content from './AuthzAside.content'
 
-const Aside = () => {
+const AuthzAside = () => {
     const { user } = useCurrentUser()
+    const { practitionerRole } = usePractitionerRoleDetail(user?.id ?? '')
 
     return (
         <Sidebar collapsible="icon">
@@ -53,26 +55,35 @@ const Aside = () => {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                <SidebarGroup>
-                    <SidebarGroupLabel>{physicianMenuTitle}</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <MenuItems content={physicianMenu(user?.id ?? '')} />
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-                <SidebarSeparator />
-
-                <SidebarGroup>
-                    <SidebarGroupLabel>
-                        {administrativeTitleMenu}
-                    </SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <MenuItems content={administrativeMenu} />
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                {practitionerRole?.role === 'doctor' && (
+                    <>
+                        <SidebarGroup>
+                            <SidebarGroupLabel>
+                                {physicianMenuTitle}
+                            </SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    <MenuItems
+                                        content={physicianMenu(user?.id ?? '')}
+                                    />
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </SidebarGroup>
+                        <SidebarSeparator />
+                    </>
+                )}
+                {practitionerRole?.role === '224608005' && (
+                    <SidebarGroup>
+                        <SidebarGroupLabel>
+                            {administrativeTitleMenu}
+                        </SidebarGroupLabel>
+                        <SidebarGroupContent>
+                            <SidebarMenu>
+                                <MenuItems content={administrativeMenu} />
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                )}
             </SidebarContent>
             <SidebarSeparator />
 
@@ -106,4 +117,4 @@ const Aside = () => {
     )
 }
 
-export default Aside
+export default AuthzAside

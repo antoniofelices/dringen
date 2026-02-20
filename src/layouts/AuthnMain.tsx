@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
-const MainAuthn = ({ children }: PropsWithChildren) => {
+const AuthnMain = ({ children }: PropsWithChildren) => {
     return (
         <main className="grid min-h-screen place-items-center">
             <div className="w-full max-w-md mx-auto p-4">{children}</div>
@@ -8,4 +8,4 @@ const MainAuthn = ({ children }: PropsWithChildren) => {
     )
 }
 
-export default MainAuthn
+export default AuthnMain
