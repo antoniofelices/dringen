@@ -8,7 +8,7 @@ export function fhirRoleToUserRole(
 
     switch (code) {
         case '224608005':
-            return 'receptionist'
+            return 'administrative'
         case 'doctor':
             return 'doctor'
         default:
