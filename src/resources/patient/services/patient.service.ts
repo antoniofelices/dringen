@@ -34,6 +34,27 @@ export const getListPatients = async (): Promise<Patient[]> => {
     }
 }
 
+export const getPatientsByPractitioner = async (
+    practitionerId: string
+): Promise<Patient[]> => {
+    try {
+        await authenticateMedplum()
+
+        const bundle = await medplum.searchResources('Patient', {
+            'general-practitioner': `Practitioner/${practitionerId}`,
+            _count: 1000,
+        })
+
+        return bundle
+    } catch (error) {
+        logger.error('Error fetching patients by practitioner from Server', error, {
+            component: 'patient.service',
+            action: 'getPatientsByPractitioner',
+        })
+        throw error
+    }
+}
+
 export const getSinglePatientById = async (id: string): Promise<Patient> => {
     try {
         await authenticateMedplum()

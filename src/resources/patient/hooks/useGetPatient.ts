@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import {
     getListPatients,
+    getPatientsByPractitioner,
     getSinglePatientById,
 } from '@resources/patient/services/patient.service'
 import { fhirToPatient } from '@resources/patient/domain/patient.adapter'
@@ -15,6 +16,23 @@ export const useSinglePatient = (patientId: string) => {
 
     return {
         patient: data,
+        isPending,
+        isError,
+        error,
+        refetch,
+    }
+}
+
+export const usePatientsByPractitioner = (practitionerId: string) => {
+    const { data, isPending, isError, error, refetch } = useQuery({
+        queryKey: ['listPatientsByPractitioner', practitionerId],
+        queryFn: () => getPatientsByPractitioner(practitionerId),
+        select: (data) => data.map(fhirToPatient),
+        enabled: !!practitionerId,
+    })
+
+    return {
+        patients: data,
         isPending,
         isError,
         error,
