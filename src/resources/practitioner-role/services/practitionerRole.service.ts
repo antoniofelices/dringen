@@ -35,6 +35,23 @@ export const getPractitionerIdsByRole = async (
     }
 }
 
+export const updatePractitionerRole = async (
+    id: string,
+    role: PractitionerRole
+): Promise<PractitionerRole> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.updateResource({ ...role, id })
+    } catch (error) {
+        logger.error('Error updating practitioner role in Server', error, {
+            component: 'practitionerRole.service',
+            action: 'updatePractitionerRole',
+        })
+        throw error
+    }
+}
+
 export const getPractitionerRoleByPractitioner = async (
     practitionerId: string
 ): Promise<PractitionerRole | undefined> => {

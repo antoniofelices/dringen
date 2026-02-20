@@ -57,7 +57,7 @@ const Aside = () => {
                     <SidebarGroupLabel>{physicianMenuTitle}</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <MenuItems content={physicianMenu} />
+                            <MenuItems content={physicianMenu(user?.id ?? '')} />
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

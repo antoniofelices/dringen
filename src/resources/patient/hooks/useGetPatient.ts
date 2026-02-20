@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { getListPatients, getSinglePatientById } from '@/resources/patient/services/patient.service'
+import {
+    getListPatients,
+    getSinglePatientById,
+} from '@resources/patient/services/patient.service'
 import { fhirToPatient } from '@resources/patient/domain/patient.adapter'
 
 export const useSinglePatient = (patientId: string) => {

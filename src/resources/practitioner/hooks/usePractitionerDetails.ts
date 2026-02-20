@@ -1,5 +1,8 @@
 import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
-import { useLocations } from '@resources/location/hooks/useLocation'
+import {
+    useLocations,
+    useLocationsByParent,
+} from '@resources/location/hooks/useLocation'
 
 export const usePractitionerDetails = (practitionerId: string) => {
     const {
@@ -18,6 +21,15 @@ export const usePractitionerDetails = (practitionerId: string) => {
         (l) => l.type === 'Outpatient Facility'
     )
 
+    const { locations: outpatientLocations } = useLocationsByParent(
+        hospital?.id ?? ''
+    )
+
+    const outpatientOptions = outpatientLocations.map((l) => ({
+        label: l.name,
+        value: l.id,
+    }))
+
     const availableTime = (practitionerRole?.availableTime ?? [])
         .map(
             (time) =>
@@ -28,11 +40,14 @@ export const usePractitionerDetails = (practitionerId: string) => {
     return {
         specialty: practitionerRole?.specialty ?? '',
         hospital: hospital?.name ?? '',
+        hospitalId: hospital?.id ?? '',
         outpatientFacility: outpatientFacility?.name ?? '',
+        outpatientFacilityId: outpatientFacility?.id ?? '',
+        outpatientOptions,
         availableTime,
         isPending: isRolePending || isLocationsPending,
-        isError: isError,
-        error: error,
+        isError,
+        error,
         hasData: !!practitionerRole,
     }
 }

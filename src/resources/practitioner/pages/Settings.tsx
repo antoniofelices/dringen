@@ -9,7 +9,7 @@ import {
 import ButtonSignOut from '@auth/components/ButtonSignOut'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails'
+import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails'
 import Appearance from '@resources/practitioner/components/Appearance'
 import TermsOfUse from '@resources/practitioner/components/TermsOfUse'
 import content from './Settings.content'

@@ -1,5 +1,36 @@
 import type { PractitionerRole } from '@medplum/fhirtypes'
-import type { PractitionerRoleDetailType } from '@resources/practitioner-role/types/practitionerRole.model'
+import type {
+    PractitionerRoleDetailType,
+    PractitionerDetailsFormData,
+} from '@resources/practitioner-role/types/practitionerRole.model'
+
+export function practitionerDetailsToFhir(
+    formData: PractitionerDetailsFormData,
+    existingRole: PractitionerRole,
+    hospitalId?: string
+): PractitionerRole {
+    const locationRefs = [
+        ...(hospitalId ? [{ reference: `Location/${hospitalId}` }] : []),
+        ...(formData.outpatientFacility
+            ? [{ reference: `Location/${formData.outpatientFacility}` }]
+            : []),
+    ]
+
+    return {
+        ...existingRole,
+        specialty: [
+            {
+                coding: [
+                    {
+                        ...existingRole.specialty?.[0]?.coding?.[0],
+                        display: formData.specialty,
+                    },
+                ],
+            },
+        ],
+        location: locationRefs,
+    }
+}
 
 export function fhirToPractitionerRoleDetail(
     role: PractitionerRole

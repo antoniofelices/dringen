@@ -5,7 +5,7 @@ import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
-import { usePhysicians } from '@/resources/practitioner/hooks/usePractitioner'
+import { usePhysicians } from '@/resources/practitioner/hooks/useGetPractitioner'
 import practitionerTableColumns from '@resources/practitioner/presentation/practitionerTable.columns'
 import content from './PhysicianList.content'
 
