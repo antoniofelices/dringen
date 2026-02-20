@@ -7,7 +7,7 @@ import { signInSchema } from '@auth/schemas/auth.schema'
 
 export type SignInFormType = z.infer<typeof signInSchema>
 
-export type UserRoleType = 'doctor' | 'receptionist'
+export type UserRoleType = 'doctor' | 'administrative'
 
 export type ButtonSignOutType = VariantProps<typeof buttonVariants> & {
     asbutton?: boolean
