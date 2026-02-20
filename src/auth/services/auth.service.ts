@@ -1,7 +1,7 @@
 import type { ProfileResource } from '@medplum/core'
 import { medplum } from '@shared/fhir/medplum'
-import { MEDPLUM_CONFIG } from '@config/config'
 import { logger } from '@shared/utils/Logger'
+import { MEDPLUM_CONFIG } from '@config/config'
 
 export const signIn = async (
     email: string,

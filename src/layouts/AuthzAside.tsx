@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
+import RoleGuard from '@auth/components/RoleGuard'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,7 +22,6 @@ import {
     SidebarSeparator,
     SidebarRail,
 } from '@shared/components/ui/base/sidebar'
-import ButtonSignOut from '@auth/components/ButtonSignOut'
 import Logo from '@shared/components/ui/Logo'
 import MenuItems from '@shared/components/ui/Menutems'
 import {
@@ -32,12 +32,11 @@ import {
     administrativeTitleMenu,
     administrativeMenu,
 } from '@resources/practitioner/content/administrativeMenu.content'
-import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
+import ButtonSignOut from '@auth/components/ButtonSignOut'
 import content from './AuthzAside.content'
 
 const AuthzAside = () => {
     const { user } = useCurrentUser()
-    const { practitionerRole } = usePractitionerRoleDetail(user?.id ?? '')
 
     return (
         <Sidebar collapsible="icon">
@@ -55,24 +54,22 @@ const AuthzAside = () => {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                {practitionerRole?.role === 'doctor' && (
-                    <>
-                        <SidebarGroup>
-                            <SidebarGroupLabel>
-                                {physicianMenuTitle}
-                            </SidebarGroupLabel>
-                            <SidebarGroupContent>
-                                <SidebarMenu>
-                                    <MenuItems
-                                        content={physicianMenu(user?.id ?? '')}
-                                    />
-                                </SidebarMenu>
-                            </SidebarGroupContent>
-                        </SidebarGroup>
-                        <SidebarSeparator />
-                    </>
-                )}
-                {practitionerRole?.role === '224608005' && (
+                <RoleGuard allowedRoles={['doctor']}>
+                    <SidebarGroup>
+                        <SidebarGroupLabel>
+                            {physicianMenuTitle}
+                        </SidebarGroupLabel>
+                        <SidebarGroupContent>
+                            <SidebarMenu>
+                                <MenuItems
+                                    content={physicianMenu(user?.id ?? '')}
+                                />
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    </SidebarGroup>
+                    <SidebarSeparator />
+                </RoleGuard>
+                <RoleGuard allowedRoles={['receptionist']}>
                     <SidebarGroup>
                         <SidebarGroupLabel>
                             {administrativeTitleMenu}
@@ -83,7 +80,7 @@ const AuthzAside = () => {
                             </SidebarMenu>
                         </SidebarGroupContent>
                     </SidebarGroup>
-                )}
+                </RoleGuard>
             </SidebarContent>
             <SidebarSeparator />
 
