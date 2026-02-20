@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import RoleGuard from '@auth/components/RoleGuard'
 import { getAgeFromDate } from '@shared/utils/utils'
 import { Button } from '@shared/components/ui/base/button'
 import {
@@ -28,20 +29,24 @@ const SinglePatient = ({ id }: { id: string }) => {
             <HeaderArticle
                 title={`${patient.firstName} - ${getAgeFromDate(patient.birthDate)} ${content.textYears}`}
             >
-                <Button asChild size="sm">
-                    <DrawerTrigger>
-                        {content.textButtonAddClinicalHistory}
-                    </DrawerTrigger>
-                </Button>
+                <RoleGuard allowedRoles={['doctor']}>
+                    <Button asChild size="sm">
+                        <DrawerTrigger>
+                            {content.textButtonAddClinicalHistory}
+                        </DrawerTrigger>
+                    </Button>
+                </RoleGuard>
             </HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
                         <PatientDemographics patientData={patient} />
                     </div>
-                    <div className="col-span-3">Anemesis</div>
-                    <div className="col-span-6">Clinical History</div>
-                    <div className="col-span-6">Analysis</div>
+                    <RoleGuard allowedRoles={['doctor']}>
+                        <div className="col-span-3">Anemesis</div>
+                        <div className="col-span-6">Clinical History</div>
+                        <div className="col-span-6">Analysis</div>
+                    </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                         <DrawerHeader className="sr-only">
