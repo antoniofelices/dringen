@@ -18,7 +18,7 @@ import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
-import ClinicalEncounter from '@workflows/clinical-encounter'
+import ClinicalEncounter from '@workflows/clinical-encounter/index'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
