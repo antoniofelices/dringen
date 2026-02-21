@@ -18,7 +18,7 @@ import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
-import AddEncounter from '@workflows/encounter/components/AddEncounter'
+import ClinicalEncounter from '@workflows/clinical-encounter'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
@@ -60,7 +60,7 @@ const SinglePatient = ({ id }: { id: string }) => {
                                 {content.textPesentIllnesForm}
                             </DrawerDescription>
                         </DrawerHeader>
-                        <AddEncounter />
+                        <ClinicalEncounter />
                     </DrawerContent>
                 </div>
             </ContentArticle>

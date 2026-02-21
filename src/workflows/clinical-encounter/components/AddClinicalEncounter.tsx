@@ -14,9 +14,9 @@ import ObservationTab from './tabs/ObservationTab'
 import ConditionTab from './tabs/ConditionTab'
 import ServiceRequestTab from './tabs/ServiceRequestTab'
 import MedicationRequestTab from './tabs/MedicationRequestTab'
-import content from './AddEncounter.content'
+import content from './AddClinicalEncounter.content'
 
-const AddEncounter = () => {
+const AddClinicalEncounter = () => {
     // const { logError, logSuccess } = useLogger('RegisterPatientForm')
 
     // const { patientData } = usePatientContext()
@@ -79,4 +79,4 @@ const AddEncounter = () => {
     )
 }
 
-export default AddEncounter
+export default AddClinicalEncounter
