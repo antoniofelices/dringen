@@ -1,11 +1,11 @@
 // import type { Control } from 'react-hook-form'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import content from './AddServiceRequest.content'
+import content from './ServiceRequestTab.content'
 type Props = {
     control: null
 }
 
-const AddServiceRequest = ({ control }: Props) => {
+const ServiceRequestTab = ({ control }: Props) => {
     return (
         <>
             <FormFieldTextarea
@@ -17,4 +17,4 @@ const AddServiceRequest = ({ control }: Props) => {
     )
 }
 
-export default AddServiceRequest
+export default ServiceRequestTab

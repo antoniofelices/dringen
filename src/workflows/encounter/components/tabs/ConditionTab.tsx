@@ -4,13 +4,13 @@ import { CirclePlus, Trash2 } from 'lucide-react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import { Button } from '@shared/components/ui/base/button'
-import content from './AddCondition.content'
+import content from './ConditionTab.content'
 
 type Props = {
     control: null
 }
 
-const AddCondition = ({ control }: Props) => {
+const ConditionTab = ({ control }: Props) => {
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'diagnoses',
@@ -93,4 +93,4 @@ const AddCondition = ({ control }: Props) => {
     )
 }
 
-export default AddCondition
+export default ConditionTab

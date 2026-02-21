@@ -34,7 +34,8 @@
             "@layouts/*": ["src/layouts/*"],
             "@pages/*": ["src/pages/*"],
             "@resources/*": ["src/resources/*"],
-            "@shared/*": ["src/shared/*"]
+            "@shared/*": ["src/shared/*"],
+            "@workflows/*": ["src/workflows/*"]
         }
     },
     "include": ["src", "src/routes/_authz/.lazy.tsx"]

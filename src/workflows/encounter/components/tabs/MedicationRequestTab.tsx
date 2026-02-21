@@ -1,12 +1,12 @@
 // import type { Control } from 'react-hook-form'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import content from './AddMedicationRequest.content'
+import content from './MedicationRequestTab.content'
 
 type Props = {
     control: null
 }
 
-const AddMedicationRequest = ({ control }: Props) => {
+const MedicationRequestTab = ({ control }: Props) => {
     return (
         <>
             <FormFieldTextarea
@@ -18,4 +18,4 @@ const AddMedicationRequest = ({ control }: Props) => {
     )
 }
 
-export default AddMedicationRequest
+export default MedicationRequestTab

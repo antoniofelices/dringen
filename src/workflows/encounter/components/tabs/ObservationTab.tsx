@@ -2,9 +2,9 @@
 import { Fragment } from 'react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import content from './AddObservation.content'
+import content from './ObservationTab.content'
 
-const AddObservation = () => {
+const ObservationTab = () => {
     const fcInputs = [
         'temperature',
         'pas',
@@ -91,4 +91,4 @@ const AddObservation = () => {
     )
 }
 
-export default AddObservation
+export default ObservationTab

@@ -10,10 +10,10 @@ import {
     TabsList,
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
-import AddObservation from './AddObservation'
-import AddCondition from './AddCondition'
-import AddServiceRequest from './AddServiceRequest'
-import AddMedicationRequest from './AddMedicationRequest'
+import ObservationTab from './tabs/ObservationTab'
+import ConditionTab from './tabs/ConditionTab'
+import ServiceRequestTab from './tabs/ServiceRequestTab'
+import MedicationRequestTab from './tabs/MedicationRequestTab'
 import content from './AddEncounter.content'
 
 const AddEncounter = () => {
@@ -58,19 +58,19 @@ const AddEncounter = () => {
                     <div className="mt-4">
                         <TabsContent value="observation">
                             {/* <AddObservation control={form.control} /> */}
-                            <AddObservation />
+                            <ObservationTab />
                         </TabsContent>
                         <TabsContent value="condition">
                             {/* <AddCondition control={form.control} /> */}
-                            <AddCondition />
+                            <ConditionTab />
                         </TabsContent>
                         <TabsContent value="service-request">
                             {/* <AddServiceRequest control={form.control} /> */}
-                            <AddServiceRequest />
+                            <ServiceRequestTab />
                         </TabsContent>
                         <TabsContent value="medication-request">
                             {/* <AddMedicationRequest control={form.control} /> */}
-                            <AddMedicationRequest />
+                            <MedicationRequestTab />
                         </TabsContent>
                     </div>
                 </Tabs>
