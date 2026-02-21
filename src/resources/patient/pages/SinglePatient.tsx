@@ -18,6 +18,8 @@ import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
+import AddEncounter from '@resources/encounter/components/AddEncounter'
+
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -32,7 +34,7 @@ const SinglePatient = ({ id }: { id: string }) => {
                 <RoleGuard allowedRoles={['doctor']}>
                     <Button asChild size="sm">
                         <DrawerTrigger>
-                            {content.textButtonAddClinicalHistory}
+                            {content.textButtonAddEncounter}
                         </DrawerTrigger>
                     </Button>
                 </RoleGuard>
@@ -43,9 +45,10 @@ const SinglePatient = ({ id }: { id: string }) => {
                         <PatientDemographics patientData={patient} />
                     </div>
                     <RoleGuard allowedRoles={['doctor']}>
-                        <div className="col-span-3">Anemesis</div>
-                        <div className="col-span-6">Clinical History</div>
-                        <div className="col-span-6">Analysis</div>
+                        <div className="col-span-3">Allergy Intolerance</div>
+                        <div className="col-span-3">Family Member History</div>
+                        <div className="col-span-6">Encounters</div>
+                        <div className="col-span-6">Diagnostic Report</div>
                     </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />
                     <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
@@ -57,6 +60,7 @@ const SinglePatient = ({ id }: { id: string }) => {
                                 {content.textPesentIllnesForm}
                             </DrawerDescription>
                         </DrawerHeader>
+                        <AddEncounter />
                     </DrawerContent>
                 </div>
             </ContentArticle>

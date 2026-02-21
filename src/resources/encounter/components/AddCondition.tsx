@@ -1,18 +1,16 @@
 import { useFieldArray } from 'react-hook-form'
 import { CirclePlus, Trash2 } from 'lucide-react'
-import type { Control } from 'react-hook-form'
-import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
-import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import FormFieldSelect from '@/components/ui/FormFieldSelect'
-import { Button } from '@components/ui/base/button'
-import content from '@data/clinical-history/addDiagnosis'
+// import type { Control } from 'react-hook-form'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
+import { Button } from '@shared/components/ui/base/button'
+import content from './AddCondition.content'
 
 type Props = {
-    control: Control<ClinicalHistoryFormDataType>
+    control: null
 }
 
-const AddDiagnosis = ({ control }: Props) => {
+const AddCondition = ({ control }: Props) => {
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'diagnoses',
@@ -49,24 +47,24 @@ const AddDiagnosis = ({ control }: Props) => {
                 >
                     <FormFieldInput
                         className="w-full"
-                        fieldName={`diagnoses.${index}.cie10`}
+                        fieldName={`condition.${index}.cie10`}
                         label={content.labelCIE}
-                        control={control}
+                        // control={control}
                         type="text"
                     />
                     <FormFieldInput
                         className="w-full"
-                        fieldName={`diagnoses.${index}.diagnosis`}
-                        label={content.labelDiagnosis}
-                        control={control}
+                        fieldName={`condition.${index}.diagnosis`}
+                        label={content.labelCondition}
+                        // control={control}
                         type="text"
                     />
                     <FormFieldSelect
                         className="w-full"
-                        control={control}
-                        fieldName={`diagnoses.${index}.certainty`}
+                        // control={control}
+                        fieldName={`condition.${index}.certainty`}
                         label={content.labelCertainty}
-                        options={DIAGNOSISCERTAINTYVALUES}
+                        options={['suspected', 'probable', 'confirmed']}
                         placeholder={content.placeholderCertainty}
                     />
                     <div className="flex items-center gap-2 mt-6">
@@ -95,4 +93,4 @@ const AddDiagnosis = ({ control }: Props) => {
     )
 }
 
-export default AddDiagnosis
+export default AddCondition
