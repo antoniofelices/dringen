@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import type { TabProps } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
+import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import content from './ObservationTab.content'
 
-const ObservationTab = ({ control }: TabProps) => {
+const ObservationTab = ({ control }: TabPropsType) => {
     const fcInputs = [
         'temperature',
         'pas',

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import type { Bundle, BundleEntry } from '@medplum/fhirtypes'
-import type { AggregateParams } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
+import type { AggregateParamsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import {
     OBSERVATION_FIELDS,
     BIOLOGICAL_FIELDS,
@@ -23,7 +23,7 @@ export function buildClinicalEncounterBundle({
     formData,
     patientId,
     practitionerId,
-}: AggregateParams): Bundle {
+}: AggregateParamsType): Bundle {
     const encounterUuid = uuidv4()
     const entries: BundleEntry[] = []
     const observationUuids: string[] = []

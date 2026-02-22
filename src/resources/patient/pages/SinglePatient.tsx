@@ -18,7 +18,9 @@ import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import content from './SinglePatient.content'
 
-import ClinicalEncounter from '@workflows/clinical-encounter/index'
+import ClinicalEncounter, {
+    EncounterList,
+} from '@workflows/clinical-encounter/index'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
@@ -47,7 +49,9 @@ const SinglePatient = ({ id }: { id: string }) => {
                     <RoleGuard allowedRoles={['doctor']}>
                         <div className="col-span-3">Allergy Intolerance</div>
                         <div className="col-span-3">Family Member History</div>
-                        <div className="col-span-6">Encounters</div>
+                        <div className="col-span-6">
+                            <EncounterList patientId={id} />
+                        </div>
                         <div className="col-span-6">Diagnostic Report</div>
                     </RoleGuard>
                     <DrawerOverlay className="bg-black/60" />

@@ -3,10 +3,10 @@ import { CirclePlus, Trash2 } from 'lucide-react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import { Button } from '@shared/components/ui/base/button'
-import type { TabProps } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
+import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import content from './ConditionTab.content'
 
-const ConditionTab = ({ control }: TabProps) => {
+const ConditionTab = ({ control }: TabPropsType) => {
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'diagnoses',

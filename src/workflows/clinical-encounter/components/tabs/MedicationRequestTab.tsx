@@ -1,8 +1,8 @@
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import type { TabProps } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
+import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import content from './MedicationRequestTab.content'
 
-const MedicationRequestTab = ({ control }: TabProps) => {
+const MedicationRequestTab = ({ control }: TabPropsType) => {
     return (
         <>
             <FormFieldTextarea
