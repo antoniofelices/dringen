@@ -60,7 +60,10 @@ const SinglePatient = ({ id }: { id: string }) => {
                                 {content.textPesentIllnesForm}
                             </DrawerDescription>
                         </DrawerHeader>
-                        <ClinicalEncounter />
+                        <ClinicalEncounter
+                            patientId={id}
+                            onSuccess={() => setIsDrawerOpen(false)}
+                        />
                     </DrawerContent>
                 </div>
             </ContentArticle>

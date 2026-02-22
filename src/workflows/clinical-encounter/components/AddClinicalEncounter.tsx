@@ -1,7 +1,3 @@
-import { useForm } from 'react-hook-form'
-// import { toast } from 'sonner'
-// import { usePatientContext } from '@resources/patient/hooks/usePatientContext'
-// import { useLogger } from '@shared/hooks/useLogger'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import {
@@ -10,30 +6,24 @@ import {
     TabsList,
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
+import { useClinicalEncounter } from '@workflows/clinical-encounter/hooks/useClinicalEncounter'
 import ObservationTab from './tabs/ObservationTab'
 import ConditionTab from './tabs/ConditionTab'
 import ServiceRequestTab from './tabs/ServiceRequestTab'
 import MedicationRequestTab from './tabs/MedicationRequestTab'
 import content from './AddClinicalEncounter.content'
 
-const AddClinicalEncounter = () => {
-    // const { logError, logSuccess } = useLogger('RegisterPatientForm')
+type Props = {
+    patientId: string
+    onSuccess?: () => void
+}
 
-    // const { patientData } = usePatientContext()
-
-    // const defaultValues: { null }
-
-    const form = useForm({
-        defaultValues: undefined,
-    })
-
-    const onSubmit = async () => {
-        return
-    }
+const AddClinicalEncounter = ({ patientId, onSuccess }: Props) => {
+    const { form, onSubmit } = useClinicalEncounter(patientId, onSuccess)
 
     return (
         <Form {...form}>
-            <form onSubmit={undefined}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
                 <Tabs aria-label="Encounter" defaultValue="observation">
                     <div className="flex justify-between items-center">
                         <TabsList>
@@ -50,27 +40,29 @@ const AddClinicalEncounter = () => {
                                 {content.textMedicationRequest}
                             </TabsTrigger>
                         </TabsList>
-                        <Button type="submit" size="sm" className="mr-2">
-                            {content.textSaving}
-                            {/* {form.formState.isSubmitting ? {content.textSaving} : {content.textSave}} */}
+                        <Button
+                            type="submit"
+                            size="sm"
+                            className="mr-2"
+                            disabled={form.formState.isSubmitting}
+                        >
+                            {form.formState.isSubmitting
+                                ? content.textSaving
+                                : content.textSave}
                         </Button>
                     </div>
                     <div className="mt-4">
                         <TabsContent value="observation">
-                            {/* <AddObservation control={form.control} /> */}
-                            <ObservationTab />
+                            <ObservationTab control={form.control} />
                         </TabsContent>
                         <TabsContent value="condition">
-                            {/* <AddCondition control={form.control} /> */}
-                            <ConditionTab />
+                            <ConditionTab control={form.control} />
                         </TabsContent>
                         <TabsContent value="service-request">
-                            {/* <AddServiceRequest control={form.control} /> */}
-                            <ServiceRequestTab />
+                            <ServiceRequestTab control={form.control} />
                         </TabsContent>
                         <TabsContent value="medication-request">
-                            {/* <AddMedicationRequest control={form.control} /> */}
-                            <MedicationRequestTab />
+                            <MedicationRequestTab control={form.control} />
                         </TabsContent>
                     </div>
                 </Tabs>

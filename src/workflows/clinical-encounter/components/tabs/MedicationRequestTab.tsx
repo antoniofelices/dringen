@@ -1,18 +1,14 @@
-// import type { Control } from 'react-hook-form'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
+import type { TabProps } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import content from './MedicationRequestTab.content'
 
-type Props = {
-    control: null
-}
-
-const MedicationRequestTab = ({ control }: Props) => {
+const MedicationRequestTab = ({ control }: TabProps) => {
     return (
         <>
             <FormFieldTextarea
                 fieldName="treatment"
                 label={content.labelTreatment}
-                // control={control}
+                control={control}
             />
         </>
     )

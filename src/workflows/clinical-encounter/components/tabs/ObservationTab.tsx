@@ -1,10 +1,10 @@
-// import type { Control } from 'react-hook-form'
 import { Fragment } from 'react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
+import type { TabProps } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 import content from './ObservationTab.content'
 
-const ObservationTab = () => {
+const ObservationTab = ({ control }: TabProps) => {
     const fcInputs = [
         'temperature',
         'pas',
@@ -27,8 +27,7 @@ const ObservationTab = () => {
             <FormFieldTextarea
                 fieldName="description"
                 label={content.labelDescription}
-                type="text"
-                // control={control}
+                control={control}
             />
             <h4 className="text-xs mb-2 text-gray-500">
                 {content.textGeneral}
@@ -39,20 +38,20 @@ const ObservationTab = () => {
                     label={content.labelExamination}
                     type="text"
                     className="w-full"
-                    // control={control}
+                    control={control}
                 />
                 <div className="flex gap-4 justify-between">
                     <FormFieldInput
                         fieldName="person_weight"
                         label={content.labelWeight}
                         type="number"
-                        // control={control}
+                        control={control}
                     />
                     <FormFieldInput
                         fieldName="person_height"
                         label={content.labelHeight}
                         type="number"
-                        // control={control}
+                        control={control}
                     />
                 </div>
             </div>
@@ -64,7 +63,7 @@ const ObservationTab = () => {
                             <FormFieldInput
                                 fieldName={item}
                                 label={item}
-                                // control={control}
+                                control={control}
                                 type="number"
                             />
                         </Fragment>
@@ -81,7 +80,7 @@ const ObservationTab = () => {
                             <FormFieldInput
                                 fieldName={item}
                                 label={item}
-                                // control={control}
+                                control={control}
                             />
                         </Fragment>
                     )
