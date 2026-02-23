@@ -1,18 +1,12 @@
 import { useFieldArray } from 'react-hook-form'
 import { CirclePlus, Trash2 } from 'lucide-react'
-import type { Control } from 'react-hook-form'
-import type { ClinicalHistoryFormDataType } from '@/types/interfaces'
-import { DIAGNOSISCERTAINTYVALUES } from '@/config/config.ts'
-import FormFieldInput from '@/components/ui/FormFieldInput'
-import FormFieldSelect from '@/components/ui/FormFieldSelect'
-import { Button } from '@components/ui/base/button'
-import content from '@data/clinical-history/addDiagnosis'
+import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
+import { Button } from '@shared/components/ui/base/button'
+import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
+import content from './ConditionTab.content'
 
-type Props = {
-    control: Control<ClinicalHistoryFormDataType>
-}
-
-const AddDiagnosis = ({ control }: Props) => {
+const ConditionTab = ({ control }: TabPropsType) => {
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'diagnoses',
@@ -57,7 +51,7 @@ const AddDiagnosis = ({ control }: Props) => {
                     <FormFieldInput
                         className="w-full"
                         fieldName={`diagnoses.${index}.diagnosis`}
-                        label={content.labelDiagnosis}
+                        label={content.labelCondition}
                         control={control}
                         type="text"
                     />
@@ -66,7 +60,7 @@ const AddDiagnosis = ({ control }: Props) => {
                         control={control}
                         fieldName={`diagnoses.${index}.certainty`}
                         label={content.labelCertainty}
-                        options={DIAGNOSISCERTAINTYVALUES}
+                        options={['suspected', 'probable', 'confirmed']}
                         placeholder={content.placeholderCertainty}
                     />
                     <div className="flex items-center gap-2 mt-6">
@@ -95,4 +89,4 @@ const AddDiagnosis = ({ control }: Props) => {
     )
 }
 
-export default AddDiagnosis
+export default ConditionTab

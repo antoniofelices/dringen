@@ -31,6 +31,7 @@ export default defineConfig({
             '@pages': path.resolve(__dirname, './src/pages'),
             '@resources': path.resolve(__dirname, './src/resources'),
             '@shared': path.resolve(__dirname, './src/shared'),
+            '@workflows': path.resolve(__dirname, './src/workflows'),
         },
     },
 })
