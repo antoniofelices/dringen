@@ -30,4 +30,4 @@ dist-ssr
 src/routeTree.gen.ts
 
 # Claude
-docs/tasks/
+docs/

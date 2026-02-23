@@ -108,7 +108,9 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                 <DrawerOverlay className="bg-black/60" />
                 <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                     <DrawerHeader>
-                        <DrawerTitle>{content.textReadEncounter}</DrawerTitle>
+                        <DrawerTitle className="sr-only">
+                            {content.textReadEncounter}
+                        </DrawerTitle>
                         <DrawerDescription className="sr-only">
                             {content.textReadEncounter}
                         </DrawerDescription>
