@@ -8,12 +8,13 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from '@shared/components/ui/base/dialog'
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerTitle,
+} from '@shared/components/ui/base/drawer'
 import {
     Table,
     TableBody,
@@ -98,22 +99,27 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                 </CardContent>
             </Card>
 
-            <Dialog
+            <Drawer
                 open={selectedEncounterId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedEncounterId(null)
                 }}
             >
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>{content.textReadEncounter}</DialogTitle>
-                        <DialogDescription className="sr-only">
+                <DrawerOverlay className="bg-black/60" />
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                    <DrawerHeader>
+                        <DrawerTitle>{content.textReadEncounter}</DrawerTitle>
+                        <DrawerDescription className="sr-only">
                             {content.textReadEncounter}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <ReadClinicalEncounter />
-                </DialogContent>
-            </Dialog>
+                        </DrawerDescription>
+                    </DrawerHeader>
+                    {selectedEncounterId && (
+                        <ReadClinicalEncounter
+                            encounterId={selectedEncounterId}
+                        />
+                    )}
+                </DrawerContent>
+            </Drawer>
         </>
     )
 }
