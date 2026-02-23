@@ -10,6 +10,7 @@ import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import AllergyIntoleranceList from '@resources/allergy-intolerance/components/AllergyIntoleranceList'
 import AllergyIntoleranceDrawer from '@/resources/allergy-intolerance/components/AllergyIntoleranceDrawer'
+import FamilyMemberHistoryList from '@resources/family-member-history/components/FamilyMemberHistoryList'
 import {
     ClinicalEncounterDrawer,
     EncounterList,
@@ -77,8 +78,10 @@ const SinglePatient = ({ id }: { id: string }) => {
                         <div className="col-span-3">
                             <AllergyIntoleranceList patientId={id} />
                         </div>
-                        <div className="col-span-3">Family Member History</div>
-                        <div className="col-span-6">
+                        <div className="col-span-3">
+                            <FamilyMemberHistoryList patientId={id} />
+                        </div>
+                        <div className="col-span-3">
                             <EncounterList patientId={id} />
                         </div>
                         <div className="col-span-6">Diagnostic Report</div>
