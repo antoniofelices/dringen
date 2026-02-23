@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import type {
-    AllergyIntoleranceType,
     AllergyIntoleranceFormType,
+    AllergyIntoleranceFormProps,
 } from '@resources/allergy-intolerance/types/allergyIntolerance.model'
 import { allergyIntoleranceSchema } from '@resources/allergy-intolerance/schemas/allergyIntolerance.schema'
 import { useCreateAllergyIntolerance } from '@resources/allergy-intolerance/hooks/useCreateAllergyIntolerance'
@@ -15,13 +15,6 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
 import content from './AllergyIntoleranceForm.content'
-
-type AllergyIntoleranceFormProps = {
-    patientId: string
-    allergyData?: AllergyIntoleranceType
-    mode: 'create' | 'edit'
-    onSuccess: () => void
-}
 
 const AllergyIntoleranceForm = ({
     patientId,
@@ -41,7 +34,7 @@ const AllergyIntoleranceForm = ({
         resolver: zodResolver(allergyIntoleranceSchema),
         defaultValues: {
             noKnownAllergies: isNoKnownAllergy,
-            substance: isNoKnownAllergy ? '' : allergyData?.substance ?? '',
+            substance: isNoKnownAllergy ? '' : (allergyData?.substance ?? ''),
             type:
                 (allergyData?.type as AllergyIntoleranceFormType['type']) ||
                 undefined,
@@ -85,7 +78,7 @@ const AllergyIntoleranceForm = ({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                 <FormFieldSwitch
                     control={form.control}
                     fieldName="noKnownAllergies"
@@ -170,7 +163,6 @@ const AllergyIntoleranceForm = ({
                 />
                 <Button
                     type="submit"
-                    className="mt-4"
                     size="sm"
                     disabled={form.formState.isSubmitting}
                 >

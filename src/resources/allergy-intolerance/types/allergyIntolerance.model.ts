@@ -15,6 +15,13 @@ export type AllergyIntoleranceType = {
     note: string
 }
 
+export type AllergyIntoleranceFormProps = {
+    patientId: string
+    allergyData?: AllergyIntoleranceType
+    mode: 'create' | 'edit'
+    onSuccess: () => void
+}
+
 export type AllergyIntoleranceFormType = z.infer<
     typeof allergyIntoleranceSchema
 >
