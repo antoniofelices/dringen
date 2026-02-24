@@ -11,4 +11,14 @@ const MEDPLUM_CONFIG = {
     organizationId: import.meta.env.APP_MEDPLUM_ORGANIZATION_ID,
 }
 
-export { HEADERSCONFIG, MEDPLUM_CONFIG }
+const LOINC_SYSTEM = 'http://loinc.org'
+const SNOMED_SYSTEM = 'http://snomed.info/sct'
+const ICD10_SYSTEM = 'http://hl7.org/fhir/sid/icd-10'
+
+export {
+    HEADERSCONFIG,
+    MEDPLUM_CONFIG,
+    LOINC_SYSTEM,
+    SNOMED_SYSTEM,
+    ICD10_SYSTEM,
+}

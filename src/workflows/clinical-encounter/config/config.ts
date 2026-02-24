@@ -1,6 +1,5 @@
-const LOINC_SYSTEM = 'http://loinc.org'
-const SNOMED_SYSTEM = 'http://snomed.info/sct'
-const ICD10_SYSTEM = 'http://hl7.org/fhir/sid/icd-10'
+import { SNOMED_SYSTEM } from '@config/config'
+
 const CERTAINTY_MAP = {
     suspected: { code: '415684004', display: 'Suspected' },
     probable: { code: '2931005', display: 'Probable diagnosis' },
@@ -67,11 +66,4 @@ const BIOLOGICAL_FIELDS = {
     mood: { code: '373931001', display: 'Mood', system: SNOMED_SYSTEM },
 } as const
 
-export {
-    LOINC_SYSTEM,
-    SNOMED_SYSTEM,
-    ICD10_SYSTEM,
-    CERTAINTY_MAP,
-    OBSERVATION_FIELDS,
-    BIOLOGICAL_FIELDS,
-}
+export { CERTAINTY_MAP, OBSERVATION_FIELDS, BIOLOGICAL_FIELDS }

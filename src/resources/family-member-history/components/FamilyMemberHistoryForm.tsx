@@ -38,9 +38,7 @@ const FamilyMemberHistoryForm = ({
             relationship: isNoKnownHistory
                 ? ''
                 : (findRelationshipCode(historyData?.relationship) ?? ''),
-            condition: isNoKnownHistory
-                ? ''
-                : (historyData?.condition ?? ''),
+            condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),
             status:
                 (historyData?.status as FamilyMemberHistoryFormType['status']) ||
                 'health-unknown',
@@ -76,7 +74,7 @@ const FamilyMemberHistoryForm = ({
                     description={content.descriptionNoKnownFamilyHistory}
                 />
                 <fieldset disabled={noKnownFamilyHistory}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                         <FormFieldCombobox
                             control={form.control}
                             fieldName="relationship"
@@ -91,13 +89,13 @@ const FamilyMemberHistoryForm = ({
                             placeholder={content.placeholderSelect}
                             options={content.statusOptions}
                         />
+                        <FormFieldInput
+                            control={form.control}
+                            fieldName="condition"
+                            label={content.labelCondition}
+                            placeholder={content.placeholderCondition}
+                        />
                     </div>
-                    <FormFieldInput
-                        control={form.control}
-                        fieldName="condition"
-                        label={content.labelCondition}
-                        placeholder={content.placeholderCondition}
-                    />
                     <FormFieldSwitch
                         control={form.control}
                         fieldName="deceasedBoolean"
