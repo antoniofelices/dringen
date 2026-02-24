@@ -9,14 +9,6 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Drawer,
-    DrawerContent,
-    DrawerDescription,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerTitle,
-} from '@shared/components/ui/base/drawer'
-import {
     Table,
     TableBody,
     TableCell,
@@ -24,6 +16,7 @@ import {
     TableHeader,
     TableRow,
 } from '@shared/components/ui/base/table'
+import DrawerWrapper from '@/shared/components/ui/DrawerWrapper'
 import { useFamilyMemberHistoryList } from '@resources/family-member-history/hooks/useFamilyMemberHistory'
 import FamilyMemberHistoryDetail from './FamilyMemberHistoryDetail'
 import FamilyMemberHistoryForm from './FamilyMemberHistoryForm'
@@ -131,49 +124,37 @@ const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
                 </CardContent>
             </Card>
 
-            <Drawer
+            <DrawerWrapper
                 open={selectedHistoryId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedHistoryId(null)
                 }}
+                title={content.textDialogTitle}
+                description={content.textDialogDescription}
             >
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    {' '}
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textDialogTitle}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textDialogDescription}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    {selectedHistoryId && (
-                        <FamilyMemberHistoryDetail
-                            historyId={selectedHistoryId}
-                            patientId={patientId}
-                            onSuccess={() => setSelectedHistoryId(null)}
-                        />
-                    )}
-                </DrawerContent>
-            </Drawer>
+                {selectedHistoryId && (
+                    <FamilyMemberHistoryDetail
+                        historyId={selectedHistoryId}
+                        patientId={patientId}
+                        onSuccess={() => setSelectedHistoryId(null)}
+                    />
+                )}
+            </DrawerWrapper>
 
-            <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textAddDrawerDescription}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    <div className="p-4">
-                        <FamilyMemberHistoryForm
-                            patientId={patientId}
-                            mode="create"
-                            onSuccess={() => setIsAddDrawerOpen(false)}
-                        />
-                    </div>
-                </DrawerContent>
-            </Drawer>
+            <DrawerWrapper
+                open={isAddDrawerOpen}
+                onOpenChange={setIsAddDrawerOpen}
+                title={content.textAddDrawerTitle}
+                description={content.textAddDrawerDescription}
+            >
+                <div className="p-4">
+                    <FamilyMemberHistoryForm
+                        patientId={patientId}
+                        mode="create"
+                        onSuccess={() => setIsAddDrawerOpen(false)}
+                    />
+                </div>
+            </DrawerWrapper>
         </>
     )
 }

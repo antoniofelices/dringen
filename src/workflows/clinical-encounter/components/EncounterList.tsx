@@ -9,14 +9,6 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Drawer,
-    DrawerContent,
-    DrawerDescription,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerTitle,
-} from '@shared/components/ui/base/drawer'
-import {
     Table,
     TableBody,
     TableCell,
@@ -24,6 +16,7 @@ import {
     TableHeader,
     TableRow,
 } from '@shared/components/ui/base/table'
+import DrawerWrapper from '@/shared/components/ui/DrawerWrapper'
 import { useEncounterList } from '@workflows/clinical-encounter/hooks/useEncounterList'
 import ReadClinicalEncounter from './ReadClinicalEncounter'
 import AddClinicalEncounter from './AddClinicalEncounter'
@@ -112,43 +105,30 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                 </CardContent>
             </Card>
 
-            <Drawer
+            <DrawerWrapper
                 open={selectedEncounterId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedEncounterId(null)
                 }}
+                title={content.textReadEncounter}
+                description={content.textReadEncounter}
             >
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textReadEncounter}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textReadEncounter}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    {selectedEncounterId && (
-                        <ReadClinicalEncounter
-                            encounterId={selectedEncounterId}
-                        />
-                    )}
-                </DrawerContent>
-            </Drawer>
+                {selectedEncounterId && (
+                    <ReadClinicalEncounter encounterId={selectedEncounterId} />
+                )}
+            </DrawerWrapper>
 
-            <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textAddDrawerDescription}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    <AddClinicalEncounter
-                        patientId={patientId}
-                        onSuccess={() => setIsAddDrawerOpen(false)}
-                    />
-                </DrawerContent>
-            </Drawer>
+            <DrawerWrapper
+                open={isAddDrawerOpen}
+                onOpenChange={setIsAddDrawerOpen}
+                title={content.textAddDrawerTitle}
+                description={content.textAddDrawerDescription}
+            >
+                <AddClinicalEncounter
+                    patientId={patientId}
+                    onSuccess={() => setIsAddDrawerOpen(false)}
+                />
+            </DrawerWrapper>
         </>
     )
 }

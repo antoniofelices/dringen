@@ -35,7 +35,6 @@ const SinglePatient = ({ id }: { id: string }) => {
                         <div className="col-span-3">
                             <EncounterList patientId={id} />
                         </div>
-                        <div className="col-span-6">Diagnostic Report</div>
                     </RoleGuard>
                 </div>
             </ContentArticle>
