@@ -17,6 +17,12 @@ export type FamilyMemberHistoryFormProps = {
     onSuccess: () => void
 }
 
+export type FamilyMemberHistoryDetailProps = {
+    historyId: string
+    patientId: string
+    onSuccess: () => void
+}
+
 export type FamilyMemberHistoryFormType = z.infer<
     typeof familyMemberHistorySchema
 >

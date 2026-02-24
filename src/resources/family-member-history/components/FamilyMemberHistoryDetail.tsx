@@ -7,13 +7,8 @@ import {
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
 import FamilyMemberHistoryForm from './FamilyMemberHistoryForm'
+import type { FamilyMemberHistoryDetailProps } from '@resources/family-member-history/types/familyMemberHistory.model'
 import content from './FamilyMemberHistoryDetail.content'
-
-type FamilyMemberHistoryDetailProps = {
-    historyId: string
-    patientId: string
-    onSuccess: () => void
-}
 
 const FamilyMemberHistoryDetail = ({
     historyId,
