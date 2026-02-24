@@ -38,10 +38,6 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
         return <p className="text-sm text-red-500">{content.textError}</p>
     }
 
-    if (items.length === 0) {
-        return <p className="text-sm text-gray-500">{content.textEmpty}</p>
-    }
-
     return (
         <>
             <Card className="h-full">
@@ -60,48 +56,60 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                     </CardAction>
                 </CardHeader>
                 <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>{content.headerDate}</TableHead>
-                                <TableHead>{content.headerCondition}</TableHead>
-                                <TableHead>{content.headerActions}</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {items.map(({ encounter, condition }) => {
-                                const date = encounter.period?.start
-                                    ? new Date(
-                                          encounter.period.start
-                                      ).toLocaleDateString()
-                                    : '-'
-                                const conditionName =
-                                    condition?.code?.text ??
-                                    content.textNoCondition
+                    {items.length === 0 ? (
+                        <p className="text-sm text-gray-500">
+                            {content.textEmpty}
+                        </p>
+                    ) : (
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>{content.headerDate}</TableHead>
+                                    <TableHead>
+                                        {content.headerCondition}
+                                    </TableHead>
+                                    <TableHead>
+                                        {content.headerActions}
+                                    </TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {items.map(({ encounter, condition }) => {
+                                    const date = encounter.period?.start
+                                        ? new Date(
+                                              encounter.period.start
+                                          ).toLocaleDateString()
+                                        : '-'
+                                    const conditionName =
+                                        condition?.code?.text ??
+                                        content.textNoCondition
 
-                                return (
-                                    <TableRow key={encounter.id}>
-                                        <TableCell>{date}</TableCell>
-                                        <TableCell>{conditionName}</TableCell>
-                                        <TableCell>
-                                            <Button
-                                                type="button"
-                                                variant="ghost"
-                                                size="sm"
-                                                onClick={() =>
-                                                    setSelectedEncounterId(
-                                                        encounter.id ?? null
-                                                    )
-                                                }
-                                            >
-                                                <ChevronRight size={16} />
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
+                                    return (
+                                        <TableRow key={encounter.id}>
+                                            <TableCell>{date}</TableCell>
+                                            <TableCell>
+                                                {conditionName}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    type="button"
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        setSelectedEncounterId(
+                                                            encounter.id ?? null
+                                                        )
+                                                    }
+                                                >
+                                                    <ChevronRight size={16} />
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })}
+                            </TableBody>
+                        </Table>
+                    )}
                 </CardContent>
             </Card>
 
