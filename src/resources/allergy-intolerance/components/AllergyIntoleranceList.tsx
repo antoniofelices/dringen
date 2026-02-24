@@ -8,13 +8,6 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from '@shared/components/ui/base/dialog'
-import {
     Drawer,
     DrawerContent,
     DrawerDescription,
@@ -46,10 +39,6 @@ const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
         return <p className="text-sm text-red-500">{content.textError}</p>
     }
 
-    if (!allergyIntolerances || allergyIntolerances.length === 0) {
-        return <p className="text-sm text-gray-500">{content.textEmpty}</p>
-    }
-
     return (
         <>
             <Card className="h-full">
@@ -68,56 +57,67 @@ const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
                     </CardAction>
                 </CardHeader>
                 <CardContent>
-                    <ul className="space-y-2">
-                        {allergyIntolerances.map((allergy) => (
-                            <li
-                                key={allergy.id}
-                                className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer"
-                                onClick={() => setSelectedAllergyId(allergy.id)}
-                            >
-                                <span
-                                    className={`w-2.5 h-2.5 rounded-full shrink-0 ${
-                                        criticalityColor[allergy.criticality] ??
-                                        'bg-gray-300'
-                                    }`}
-                                />
-                                <span className="font-medium text-sm flex-1">
-                                    {allergy.substance}
-                                </span>
-                                {allergy.category && (
-                                    <Badge variant="secondary">
-                                        {allergy.category}
-                                    </Badge>
-                                )}
-                                {allergy.criticality && (
-                                    <Badge variant="outline">
-                                        {allergy.criticality}
-                                    </Badge>
-                                )}
-                                {allergy.clinicalStatus && (
-                                    <Badge variant="outline">
-                                        {allergy.clinicalStatus}
-                                    </Badge>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+                    {!allergyIntolerances ||
+                    allergyIntolerances.length === 0 ? (
+                        <p className="text-sm text-gray-500">
+                            {content.textEmpty}
+                        </p>
+                    ) : (
+                        <ul className="space-y-2">
+                            {allergyIntolerances.map((allergy) => (
+                                <li
+                                    key={allergy.id}
+                                    className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 cursor-pointer"
+                                    onClick={() =>
+                                        setSelectedAllergyId(allergy.id)
+                                    }
+                                >
+                                    <span
+                                        className={`w-2.5 h-2.5 rounded-full shrink-0 ${
+                                            criticalityColor[
+                                                allergy.criticality
+                                            ] ?? 'bg-gray-300'
+                                        }`}
+                                    />
+                                    <span className="font-medium text-sm flex-1">
+                                        {allergy.substance}
+                                    </span>
+                                    {allergy.category && (
+                                        <Badge variant="secondary">
+                                            {allergy.category}
+                                        </Badge>
+                                    )}
+                                    {allergy.criticality && (
+                                        <Badge variant="outline">
+                                            {allergy.criticality}
+                                        </Badge>
+                                    )}
+                                    {allergy.clinicalStatus && (
+                                        <Badge variant="outline">
+                                            {allergy.clinicalStatus}
+                                        </Badge>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </CardContent>
             </Card>
 
-            <Dialog
+            <Drawer
                 open={selectedAllergyId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedAllergyId(null)
                 }}
             >
-                <DialogContent className="sm:max-w-2xl">
-                    <DialogHeader>
-                        <DialogTitle>{content.textDialogTitle}</DialogTitle>
-                        <DialogDescription className="sr-only">
+                <DrawerOverlay className="bg-black/60" />
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                    <DrawerHeader className="sr-only">
+                        <DrawerTitle>{content.textDialogTitle}</DrawerTitle>
+                        <DrawerDescription>
                             {content.textDialogDescription}
-                        </DialogDescription>
-                    </DialogHeader>
+                        </DrawerDescription>
+                    </DrawerHeader>
                     {selectedAllergyId && (
                         <AllergyIntoleranceDetail
                             allergyId={selectedAllergyId}
@@ -125,15 +125,15 @@ const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
                             onSuccess={() => setSelectedAllergyId(null)}
                         />
                     )}
-                </DialogContent>
-            </Dialog>
+                </DrawerContent>
+            </Drawer>
 
             <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
                 <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[98vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                     <DrawerHeader className="sr-only">
                         <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
-                        <DrawerDescription className="sr-only">
+                        <DrawerDescription>
                             {content.textAddDrawerDescription}
                         </DrawerDescription>
                     </DrawerHeader>
