@@ -6,14 +6,14 @@ import {
     DrawerTitle,
 } from '@shared/components/ui/base/drawer'
 import AllergyIntoleranceForm from './AllergyIntoleranceForm'
-import content from './AllergyIntoleranceDrawer.content'
+import content from './__AllDrawer.content'
 
 type Props = {
     patientId: string
     onSuccess: () => void
 }
 
-const AllergyIntoleranceDrawer = ({ patientId, onSuccess }: Props) => {
+const AllDrawer = ({ patientId, onSuccess }: Props) => {
     return (
         <>
             <DrawerOverlay className="bg-black/60" />
@@ -34,4 +34,4 @@ const AllergyIntoleranceDrawer = ({ patientId, onSuccess }: Props) => {
     )
 }
 
-export default AllergyIntoleranceDrawer
+export default AllDrawer

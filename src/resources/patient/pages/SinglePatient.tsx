@@ -9,7 +9,6 @@ import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
 import PatientDemographics from '@resources/patient/components/PatientDemographics/PatientDemographics'
 import AllergyIntoleranceList from '@resources/allergy-intolerance/components/AllergyIntoleranceList'
-import AllergyIntoleranceDrawer from '@/resources/allergy-intolerance/components/AllergyIntoleranceDrawer'
 import FamilyMemberHistoryList from '@resources/family-member-history/components/FamilyMemberHistoryList'
 import {
     ClinicalEncounterDrawer,
@@ -20,7 +19,6 @@ import content from './SinglePatient.content'
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)
     const [isEncounterDrawerOpen, setIsEncounterDrawerOpen] = useState(false)
-    const [isAllergyDrawerOpen, setIsAllergyDrawerOpen] = useState(false)
 
     if (!patient) return null
 
@@ -31,25 +29,6 @@ const SinglePatient = ({ id }: { id: string }) => {
             >
                 <RoleGuard allowedRoles={['doctor']}>
                     <div>
-                        <Drawer
-                            open={isAllergyDrawerOpen}
-                            onOpenChange={setIsAllergyDrawerOpen}
-                        >
-                            <Button
-                                asChild
-                                size="sm"
-                                variant="outline"
-                                className="mr-4"
-                            >
-                                <DrawerTrigger>
-                                    {content.textButtonAddAllergy}
-                                </DrawerTrigger>
-                            </Button>
-                            <AllergyIntoleranceDrawer
-                                patientId={id}
-                                onSuccess={() => setIsAllergyDrawerOpen(false)}
-                            />
-                        </Drawer>
                         <Drawer
                             open={isEncounterDrawerOpen}
                             onOpenChange={setIsEncounterDrawerOpen}
