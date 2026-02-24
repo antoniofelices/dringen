@@ -18,8 +18,7 @@ export function fhirToFamilyMemberHistory(
             resource.condition?.[0]?.code?.text ??
             '',
         status: resource.status ?? '',
-        deceasedBoolean:
-            (resource as Record<string, unknown>).deceasedBoolean === true,
+        deceasedBoolean: resource.deceasedBoolean === true,
         note: resource.note?.[0]?.text ?? '',
     }
 }
@@ -66,7 +65,9 @@ export function familyMemberHistoryToFhir(
             {
                 system: 'http://terminology.hl7.org/CodeSystem/v3-RoleCode',
                 code: formData.relationship,
-                display: relationshipDisplayMap[formData.relationship] ?? formData.relationship,
+                display:
+                    relationshipDisplayMap[formData.relationship] ??
+                    formData.relationship,
             },
         ],
     }
@@ -80,7 +81,7 @@ export function familyMemberHistoryToFhir(
     }
 
     if (formData.deceasedBoolean) {
-        ;(resource as Record<string, unknown>).deceasedBoolean = true
+        resource.deceasedBoolean = true
     }
 
     if (formData.note) {
@@ -94,8 +95,7 @@ export function familyMemberHistoryFormToFhir(
     formData: FamilyMemberHistoryFormType,
     existing: FamilyMemberHistory
 ): FamilyMemberHistory {
-    const patientId =
-        existing.patient?.reference?.replace('Patient/', '') ?? ''
+    const patientId = existing.patient?.reference?.replace('Patient/', '') ?? ''
     const updated = familyMemberHistoryToFhir(formData, patientId)
     return {
         ...existing,

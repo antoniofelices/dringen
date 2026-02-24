@@ -34,21 +34,11 @@ import {
 import { useFamilyMemberHistoryList } from '@resources/family-member-history/hooks/useFamilyMemberHistory'
 import FamilyMemberHistoryDetail from './FamilyMemberHistoryDetail'
 import FamilyMemberHistoryForm from './FamilyMemberHistoryForm'
+import {
+    statusColor,
+    statusDotColor,
+} from '@resources/family-member-history/presentation/familyMemberHistoryList.colors'
 import content from './FamilyMemberHistoryList.content'
-
-const statusColor: Record<string, string> = {
-    completed: 'text-green-400',
-    partial: 'text-yellow-400',
-    'health-unknown': 'text-gray-400',
-    'entered-in-error': 'text-red-400',
-}
-
-const statusDotColor: Record<string, string> = {
-    completed: 'bg-green-400',
-    partial: 'bg-yellow-400',
-    'health-unknown': 'bg-gray-400',
-    'entered-in-error': 'bg-red-400',
-}
 
 const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
     const { familyMemberHistories, isPending, isError } =
@@ -155,9 +145,9 @@ const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
                 }}
             >
                 <DialogContent className="sm:max-w-2xl">
-                    <DialogHeader>
+                    <DialogHeader className="sr-only">
                         <DialogTitle>{content.textDialogTitle}</DialogTitle>
-                        <DialogDescription className="sr-only">
+                        <DialogDescription>
                             {content.textDialogDescription}
                         </DialogDescription>
                     </DialogHeader>
@@ -171,17 +161,12 @@ const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
                 </DialogContent>
             </Dialog>
 
-            <Drawer
-                open={isAddDrawerOpen}
-                onOpenChange={setIsAddDrawerOpen}
-            >
+            <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
                 <DrawerOverlay className="bg-black/60" />
                 <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader>
-                        <DrawerTitle>
-                            {content.textAddDrawerTitle}
-                        </DrawerTitle>
-                        <DrawerDescription className="sr-only">
+                    <DrawerHeader className="sr-only">
+                        <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
+                        <DrawerDescription>
                             {content.textAddDrawerDescription}
                         </DrawerDescription>
                     </DrawerHeader>
