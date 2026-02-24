@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react'
 import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
+    CardAction,
     CardContent,
     CardHeader,
     CardTitle,
@@ -25,6 +26,7 @@ import {
 } from '@shared/components/ui/base/table'
 import { useEncounterList } from '@workflows/clinical-encounter/hooks/useEncounterList'
 import ReadClinicalEncounter from './ReadClinicalEncounter'
+import AddClinicalEncounter from './AddClinicalEncounter'
 import content from './EncounterList.content'
 
 const EncounterList = ({ patientId }: { patientId: string }) => {
@@ -32,6 +34,8 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
     const [selectedEncounterId, setSelectedEncounterId] = useState<
         string | null
     >(null)
+
+    const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false)
 
     if (loading) {
         return <p className="text-sm text-gray-500">{content.textLoading}</p>
@@ -52,6 +56,15 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                     <CardTitle>
                         <h2 className="font-extrabold">{content.title}</h2>
                     </CardTitle>
+                    <CardAction>
+                        <Button
+                            size="xs"
+                            variant="outline"
+                            onClick={() => setIsAddDrawerOpen(true)}
+                        >
+                            {content.textButtonAdd}
+                        </Button>
+                    </CardAction>
                 </CardHeader>
                 <CardContent>
                     <Table>
@@ -107,11 +120,9 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
             >
                 <DrawerOverlay className="bg-black/60" />
                 <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader>
-                        <DrawerTitle className="sr-only">
-                            {content.textReadEncounter}
-                        </DrawerTitle>
-                        <DrawerDescription className="sr-only">
+                    <DrawerHeader className="sr-only">
+                        <DrawerTitle>{content.textReadEncounter}</DrawerTitle>
+                        <DrawerDescription>
                             {content.textReadEncounter}
                         </DrawerDescription>
                     </DrawerHeader>
@@ -120,6 +131,22 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                             encounterId={selectedEncounterId}
                         />
                     )}
+                </DrawerContent>
+            </Drawer>
+
+            <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
+                <DrawerOverlay className="bg-black/60" />
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[98vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                    <DrawerHeader className="sr-only">
+                        <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
+                        <DrawerDescription className="sr-only">
+                            {content.textAddDrawerDescription}
+                        </DrawerDescription>
+                    </DrawerHeader>
+                    <AddClinicalEncounter
+                        patientId={patientId}
+                        onSuccess={() => setIsAddDrawerOpen(false)}
+                    />
                 </DrawerContent>
             </Drawer>
         </>
