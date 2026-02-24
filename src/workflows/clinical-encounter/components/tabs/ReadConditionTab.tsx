@@ -1,5 +1,5 @@
 import type { Condition } from '@medplum/fhirtypes'
-import { ICD10_SYSTEM } from '@workflows/clinical-encounter/config/config'
+import { ICD10_SYSTEM } from '@config/config'
 import content from './ReadConditionTab.content'
 
 const ReadConditionTab = ({ conditions }: { conditions: Condition[] }) => {

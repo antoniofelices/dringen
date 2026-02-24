@@ -14,6 +14,7 @@ import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
+import { getValueFromOptions } from '@shared/utils/utils'
 import content from './FamilyMemberHistoryForm.content'
 
 const FamilyMemberHistoryForm = ({
@@ -37,10 +38,8 @@ const FamilyMemberHistoryForm = ({
             noKnownFamilyHistory: isNoKnownHistory,
             relationship: isNoKnownHistory
                 ? ''
-                : (findRelationshipCode(historyData?.relationship) ?? ''),
-            condition: isNoKnownHistory
-                ? ''
-                : (historyData?.condition ?? ''),
+                : (getValueFromOptions(content.relationshipOptions, historyData?.relationship) ?? ''),
+            condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),
             status:
                 (historyData?.status as FamilyMemberHistoryFormType['status']) ||
                 'health-unknown',
@@ -76,7 +75,7 @@ const FamilyMemberHistoryForm = ({
                     description={content.descriptionNoKnownFamilyHistory}
                 />
                 <fieldset disabled={noKnownFamilyHistory}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                         <FormFieldCombobox
                             control={form.control}
                             fieldName="relationship"
@@ -91,13 +90,13 @@ const FamilyMemberHistoryForm = ({
                             placeholder={content.placeholderSelect}
                             options={content.statusOptions}
                         />
+                        <FormFieldInput
+                            control={form.control}
+                            fieldName="condition"
+                            label={content.labelCondition}
+                            placeholder={content.placeholderCondition}
+                        />
                     </div>
-                    <FormFieldInput
-                        control={form.control}
-                        fieldName="condition"
-                        label={content.labelCondition}
-                        placeholder={content.placeholderCondition}
-                    />
                     <FormFieldSwitch
                         control={form.control}
                         fieldName="deceasedBoolean"
@@ -123,14 +122,6 @@ const FamilyMemberHistoryForm = ({
             </form>
         </Form>
     )
-}
-
-function findRelationshipCode(display: string | undefined): string {
-    if (!display) return ''
-    const match = content.relationshipOptions.find(
-        (opt) => opt.label === display
-    )
-    return match?.value ?? ''
 }
 
 export default FamilyMemberHistoryForm

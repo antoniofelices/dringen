@@ -7,15 +7,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import {
-    Drawer,
-    DrawerContent,
-    DrawerDescription,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerTitle,
-} from '@shared/components/ui/base/drawer'
 import { Badge } from '@shared/components/ui/base/badge'
+import DrawerWrapper from '@/shared/components/ui/DrawerWrapper'
 import { useAllergyIntoleranceList } from '@resources/allergy-intolerance/hooks/useAllergyIntolerance'
 import AllergyIntoleranceDetail from './AllergyIntoleranceDetail'
 import AllergyIntoleranceForm from './AllergyIntoleranceForm'
@@ -104,46 +97,35 @@ const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
                 </CardContent>
             </Card>
 
-            <Drawer
+            <DrawerWrapper
                 open={selectedAllergyId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedAllergyId(null)
                 }}
+                title={content.textDialogTitle}
+                description={content.textDialogDescription}
             >
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textDialogTitle}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textDialogDescription}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    {selectedAllergyId && (
-                        <AllergyIntoleranceDetail
-                            allergyId={selectedAllergyId}
-                            patientId={patientId}
-                            onSuccess={() => setSelectedAllergyId(null)}
-                        />
-                    )}
-                </DrawerContent>
-            </Drawer>
-
-            <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
-                <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
-                    <DrawerHeader className="sr-only">
-                        <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
-                        <DrawerDescription>
-                            {content.textAddDrawerDescription}
-                        </DrawerDescription>
-                    </DrawerHeader>
-                    <AllergyIntoleranceForm
+                {selectedAllergyId && (
+                    <AllergyIntoleranceDetail
+                        allergyId={selectedAllergyId}
                         patientId={patientId}
-                        mode="create"
-                        onSuccess={() => setIsAddDrawerOpen(false)}
+                        onSuccess={() => setSelectedAllergyId(null)}
                     />
-                </DrawerContent>
-            </Drawer>
+                )}
+            </DrawerWrapper>
+
+            <DrawerWrapper
+                open={isAddDrawerOpen}
+                onOpenChange={setIsAddDrawerOpen}
+                title={content.textAddDrawerTitle}
+                description={content.textAddDrawerDescription}
+            >
+                <AllergyIntoleranceForm
+                    patientId={patientId}
+                    mode="create"
+                    onSuccess={() => setIsAddDrawerOpen(false)}
+                />
+            </DrawerWrapper>
         </>
     )
 }

@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import type { BundleEntry, Observation } from '@medplum/fhirtypes'
+import { LOINC_SYSTEM, SNOMED_SYSTEM } from '@config/config'
 import {
-    LOINC_SYSTEM,
-    SNOMED_SYSTEM,
     OBSERVATION_FIELDS,
     BIOLOGICAL_FIELDS,
 } from '@workflows/clinical-encounter/config/config'
