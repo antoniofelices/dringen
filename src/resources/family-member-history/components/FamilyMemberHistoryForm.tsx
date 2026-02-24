@@ -14,6 +14,7 @@ import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
+import { getValueFromOptions } from '@shared/utils/utils'
 import content from './FamilyMemberHistoryForm.content'
 
 const FamilyMemberHistoryForm = ({
@@ -37,7 +38,7 @@ const FamilyMemberHistoryForm = ({
             noKnownFamilyHistory: isNoKnownHistory,
             relationship: isNoKnownHistory
                 ? ''
-                : (findRelationshipCode(historyData?.relationship) ?? ''),
+                : (getValueFromOptions(content.relationshipOptions, historyData?.relationship) ?? ''),
             condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),
             status:
                 (historyData?.status as FamilyMemberHistoryFormType['status']) ||
@@ -121,14 +122,6 @@ const FamilyMemberHistoryForm = ({
             </form>
         </Form>
     )
-}
-
-function findRelationshipCode(display: string | undefined): string {
-    if (!display) return ''
-    const match = content.relationshipOptions.find(
-        (opt) => opt.label === display
-    )
-    return match?.value ?? ''
 }
 
 export default FamilyMemberHistoryForm

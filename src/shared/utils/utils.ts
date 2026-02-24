@@ -52,6 +52,11 @@ export const getLabelFromOptions = (
     value: string | undefined
 ): string => options.find((o) => o.value === value)?.label ?? ''
 
+export const getValueFromOptions = (
+    options: { value: string; label: string }[],
+    label: string | undefined
+): string => options.find((o) => o.label === label)?.value ?? ''
+
 export const getAgeFromDate = (dateString: string): number => {
     const birthDate = new Date(dateString)
     const today = new Date()
