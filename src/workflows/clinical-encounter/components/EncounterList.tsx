@@ -119,7 +119,7 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
                 }}
             >
                 <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                     <DrawerHeader className="sr-only">
                         <DrawerTitle>{content.textReadEncounter}</DrawerTitle>
                         <DrawerDescription>
@@ -136,10 +136,10 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
 
             <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
                 <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[98vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                     <DrawerHeader className="sr-only">
                         <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
-                        <DrawerDescription className="sr-only">
+                        <DrawerDescription>
                             {content.textAddDrawerDescription}
                         </DrawerDescription>
                     </DrawerHeader>

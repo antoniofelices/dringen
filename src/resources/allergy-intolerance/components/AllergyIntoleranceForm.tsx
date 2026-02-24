@@ -86,7 +86,7 @@ const AllergyIntoleranceForm = ({
                     description={content.descriptionNoKnownAllergies}
                 />
                 <fieldset disabled={noKnownAllergies}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                         <FormFieldInput
                             control={form.control}
                             fieldName="substance"
@@ -100,8 +100,6 @@ const AllergyIntoleranceForm = ({
                             placeholder={content.placeholderSelect}
                             options={content.typeOptions}
                         />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
                         <FormFieldCombobox
                             control={form.control}
                             fieldName="category"
@@ -109,6 +107,11 @@ const AllergyIntoleranceForm = ({
                             placeholder={content.placeholderSelect}
                             options={content.categoryOptions}
                         />
+                    </div>
+                    {/* <div className="grid grid-cols-2 gap-4"> */}
+
+                    {/* </div> */}
+                    <div className="grid grid-cols-3 gap-4">
                         <FormFieldCombobox
                             control={form.control}
                             fieldName="criticality"
@@ -116,8 +119,6 @@ const AllergyIntoleranceForm = ({
                             placeholder={content.placeholderSelect}
                             options={content.criticalityOptions}
                         />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
                         <FormFieldInput
                             control={form.control}
                             fieldName="manifestation"
@@ -132,14 +133,14 @@ const AllergyIntoleranceForm = ({
                             options={content.severityOptions}
                         />
                     </div>
+                </fieldset>
+                <div className="grid grid-cols-3 gap-4">
                     <FormFieldInput
                         control={form.control}
                         fieldName="onsetDateTime"
                         label={content.labelOnsetDateTime}
                         type="date"
                     />
-                </fieldset>
-                <div className="grid grid-cols-2 gap-4">
                     <FormFieldCombobox
                         control={form.control}
                         fieldName="clinicalStatus"

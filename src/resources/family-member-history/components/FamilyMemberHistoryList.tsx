@@ -9,13 +9,6 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from '@shared/components/ui/base/dialog'
-import {
     Drawer,
     DrawerContent,
     DrawerDescription,
@@ -138,19 +131,21 @@ const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
                 </CardContent>
             </Card>
 
-            <Dialog
+            <Drawer
                 open={selectedHistoryId !== null}
                 onOpenChange={(open) => {
                     if (!open) setSelectedHistoryId(null)
                 }}
             >
-                <DialogContent className="sm:max-w-2xl">
-                    <DialogHeader className="sr-only">
-                        <DialogTitle>{content.textDialogTitle}</DialogTitle>
-                        <DialogDescription>
+                <DrawerOverlay className="bg-black/60" />
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                    {' '}
+                    <DrawerHeader className="sr-only">
+                        <DrawerTitle>{content.textDialogTitle}</DrawerTitle>
+                        <DrawerDescription>
                             {content.textDialogDescription}
-                        </DialogDescription>
-                    </DialogHeader>
+                        </DrawerDescription>
+                    </DrawerHeader>
                     {selectedHistoryId && (
                         <FamilyMemberHistoryDetail
                             historyId={selectedHistoryId}
@@ -158,12 +153,12 @@ const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
                             onSuccess={() => setSelectedHistoryId(null)}
                         />
                     )}
-                </DialogContent>
-            </Dialog>
+                </DrawerContent>
+            </Drawer>
 
             <Drawer open={isAddDrawerOpen} onOpenChange={setIsAddDrawerOpen}>
                 <DrawerOverlay className="bg-black/60" />
-                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[80vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
+                <DrawerContent className="sm:max-w-6xl sm:m-auto sm:px-6 min-h-[90vh] border border-gray-300 dark:border-gray-800 dark:bg-black">
                     <DrawerHeader className="sr-only">
                         <DrawerTitle>{content.textAddDrawerTitle}</DrawerTitle>
                         <DrawerDescription>
