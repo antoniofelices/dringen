@@ -83,10 +83,6 @@ const PractitionerDetails = ({
                                     label: content.labelHospital,
                                     value: hospital,
                                 },
-                                {
-                                    label: content.labelAvailableTime,
-                                    value: availableTime,
-                                },
                             ]}
                         />
                         <PractitionerDetailsForm
@@ -96,6 +92,7 @@ const PractitionerDetails = ({
                                 specialty,
                                 outpatientFacility:
                                     outpatientFacilityId || undefined,
+                                availableTime,
                             }}
                             outpatientOptions={outpatientOptions}
                             onSuccess={handleFormSuccess}

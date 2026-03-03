@@ -30,13 +30,6 @@ export const usePractitionerDetails = (practitionerId: string) => {
         value: l.id,
     }))
 
-    const availableTime = (practitionerRole?.availableTime ?? [])
-        .map(
-            (time) =>
-                `${time.daysOfWeek}: ${time.startTime} - ${time.endTime}`
-        )
-        .join(' | ')
-
     return {
         specialty: practitionerRole?.specialty ?? '',
         hospital: hospital?.name ?? '',
@@ -44,7 +37,7 @@ export const usePractitionerDetails = (practitionerId: string) => {
         outpatientFacility: outpatientFacility?.name ?? '',
         outpatientFacilityId: outpatientFacility?.id ?? '',
         outpatientOptions,
-        availableTime,
+        availableTime: practitionerRole?.availableTime ?? [],
         isPending: isRolePending || isLocationsPending,
         isError,
         error,

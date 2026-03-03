@@ -1,5 +1,6 @@
 import type { z } from 'zod'
 import type { Practitioner } from '@medplum/fhirtypes'
+import type { AvailableTimeType } from '@shared/fhir/availableTime.model'
 import type { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
 
 export type PractitionerWithSpecialty = {
@@ -27,7 +28,7 @@ export type PractitionerDetailsData = {
     hospitalId?: string
     outpatientFacility: string
     outpatientFacilityId?: string
-    availableTime?: string
+    availableTime: AvailableTimeType[]
     hasData?: boolean
 }
 
