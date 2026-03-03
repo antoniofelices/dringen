@@ -23,11 +23,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@shared/components/ui/base/popover'
-
-type OptionType = {
-    label: string
-    value: string
-}
+import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string
