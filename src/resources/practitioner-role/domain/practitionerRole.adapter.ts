@@ -17,6 +17,15 @@ export function practitionerDetailsToFhir(
             : []),
     ]
 
+    const toFhirTime = (time: string) =>
+        time.length === 5 ? `${time}:00` : time
+
+    const availableTime = formData.availableTime.map((time) => ({
+        daysOfWeek: [time.daysOfWeek],
+        availableStartTime: toFhirTime(time.startTime),
+        availableEndTime: toFhirTime(time.endTime),
+    }))
+
     return {
         ...existingRole,
         specialty: [
@@ -30,6 +39,7 @@ export function practitionerDetailsToFhir(
             },
         ],
         location: locationRefs,
+        availableTime,
     }
 }
 

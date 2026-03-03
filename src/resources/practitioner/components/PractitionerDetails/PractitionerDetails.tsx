@@ -14,7 +14,7 @@ import { useEditableForm } from '@shared/hooks/useEditableForm'
 import { usePractitionerDetails } from '@resources/practitioner/hooks/usePractitionerDetails'
 import type { PractitionerDetailsData } from '@resources/practitioner/types/practitioner.model'
 import PractitionerDetailsForm from './PractitionerDetailsForm'
-import { buildDataItems, formatAvailableTime } from './PractitionerDetails.presenter'
+import { buildDataItems } from './PractitionerDetails.presenter'
 import content from './PractitionerDetails.content'
 
 const completenessCheck = (data: PractitionerDetailsData) =>
@@ -83,10 +83,6 @@ const PractitionerDetails = ({
                                     label: content.labelHospital,
                                     value: hospital,
                                 },
-                                {
-                                    label: content.labelAvailableTime,
-                                    value: formatAvailableTime(availableTime),
-                                },
                             ]}
                         />
                         <PractitionerDetailsForm
@@ -96,6 +92,7 @@ const PractitionerDetails = ({
                                 specialty,
                                 outpatientFacility:
                                     outpatientFacilityId || undefined,
+                                availableTime,
                             }}
                             outpatientOptions={outpatientOptions}
                             onSuccess={handleFormSuccess}

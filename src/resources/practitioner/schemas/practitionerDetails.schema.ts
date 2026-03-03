@@ -9,4 +9,12 @@ export const practitionerDetailsSchema = z.object({
         .trim(),
 
     outpatientFacility: z.string().optional(),
+
+    availableTime: z.array(
+        z.object({
+            daysOfWeek: z.string().min(1, content.errorDaysOfWeekRequired),
+            startTime: z.string().min(1, content.errorStartTimeRequired),
+            endTime: z.string().min(1, content.errorEndTimeRequired),
+        })
+    ),
 })
