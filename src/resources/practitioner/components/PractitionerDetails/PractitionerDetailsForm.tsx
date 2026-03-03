@@ -1,19 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
-import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
-import { useUpdatePractitionerDetails } from '@resources/practitioner/hooks/useUpdatePractitionerDetails'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import type { OptionType } from '@shared/types/FormFieldCombobox.model'
+import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
+import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
+import { useUpdatePractitionerDetails } from '@resources/practitioner/hooks/useUpdatePractitionerDetails'
 import content from './PractitionerDetails.content'
-
-type OutpatientOption = {
-    label: string
-    value: string
-}
 
 const PractitionerDetailsForm = ({
     practitionerId,
@@ -25,7 +21,7 @@ const PractitionerDetailsForm = ({
     practitionerId: string
     hospitalId: string
     defaultValues: PractitionerDetailsFormType
-    outpatientOptions: OutpatientOption[]
+    outpatientOptions: OptionType[]
     onSuccess: () => void
 }) => {
     const updateDetails = useUpdatePractitionerDetails(
@@ -68,7 +64,9 @@ const PractitionerDetailsForm = ({
                     type="submit"
                     className="mt-4"
                     size="sm"
-                    disabled={form.formState.isSubmitting}
+                    disabled={
+                        !form.formState.isDirty || form.formState.isSubmitting
+                    }
                 >
                     {form.formState.isSubmitting
                         ? content.textButtonSending
