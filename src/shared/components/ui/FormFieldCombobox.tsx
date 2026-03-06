@@ -31,6 +31,7 @@ type FormFieldProps<T extends FieldValues> = {
     description?: string
     fieldName: Path<T>
     label: string
+    modal?: boolean
     placeholder?: string
     options: OptionType[]
     textCommandEmpty?: string
@@ -42,6 +43,7 @@ const FormFieldCombobox = <T extends FieldValues>({
     description,
     fieldName,
     label,
+    modal,
     placeholder = '',
     options,
     textCommandEmpty = '',
@@ -54,7 +56,7 @@ const FormFieldCombobox = <T extends FieldValues>({
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
                         <FormLabel>{label}</FormLabel>
-                        <Popover>
+                        <Popover modal={modal}>
                             <PopoverTrigger asChild>
                                 <FormControl>
                                     <Button

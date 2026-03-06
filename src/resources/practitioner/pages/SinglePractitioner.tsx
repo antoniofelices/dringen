@@ -3,6 +3,8 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails'
 import { useSinglePractitioner } from '@/resources/practitioner/hooks/useGetPractitioner'
+// import AppointmentPicker from '@workflows/clinical-appointment/components/AppointmentPicker'
+import { AppointmentSelector } from '@workflows/clinical-appointment'
 
 const SinglePractitioner = ({ id }: { id: string }) => {
     const { practitioner } = useSinglePractitioner(id)
@@ -15,6 +17,8 @@ const SinglePractitioner = ({ id }: { id: string }) => {
             />
             <ContentArticle>
                 <PractitionerDetails practitionerId={id} />
+                {/* <AppointmentPicker /> */}
+                <AppointmentSelector />
             </ContentArticle>
             <ButtonBack />
         </>
