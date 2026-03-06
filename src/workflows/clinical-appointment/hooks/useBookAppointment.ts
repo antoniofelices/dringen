@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
+import type { Appointment } from '@medplum/fhirtypes'
 import { bookAppointmentSchema } from '@workflows/clinical-appointment/schemas/bookAppointment.schema'
 import type {
     BookAppointmentFormType,
@@ -8,6 +10,7 @@ import type {
 } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
 import { bookAppointment } from '@workflows/clinical-appointment/services/bookAppointment'
 import { SLOT_INTERVAL } from '@workflows/clinical-appointment/config/config'
+import content from '@workflows/clinical-appointment/hooks/useBookAppointment.content'
 
 const defaultValues: BookAppointmentFormType = {
     patient: '',
@@ -45,11 +48,13 @@ export const useBookAppointment = (
                 data.notes
             )
         },
-        onSuccess: () => {
+        onSuccess: (createdAppointment) => {
             form.reset()
-            queryClient.invalidateQueries({
-                queryKey: ['appointments'],
-            })
+            queryClient.setQueryData<Appointment[]>(
+                ['appointments', practitionerId],
+                (old = []) => [...old, createdAppointment]
+            )
+            toast.success(content.textToastSuccess)
             onSuccess?.()
         },
     })
