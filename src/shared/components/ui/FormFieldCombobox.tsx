@@ -35,6 +35,7 @@ type FormFieldProps<T extends FieldValues> = {
     placeholder?: string
     options: OptionType[]
     textCommandEmpty?: string
+    isSrOnlyLabel?: boolean
 }
 
 const FormFieldCombobox = <T extends FieldValues>({
@@ -47,6 +48,7 @@ const FormFieldCombobox = <T extends FieldValues>({
     placeholder = '',
     options,
     textCommandEmpty = '',
+    isSrOnlyLabel = false,
 }: FormFieldProps<T>) => {
     return (
         <div className={className}>
@@ -55,7 +57,9 @@ const FormFieldCombobox = <T extends FieldValues>({
                 name={fieldName}
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
-                        <FormLabel>{label}</FormLabel>
+                        <FormLabel className={cn(isSrOnlyLabel && 'sr-only')}>
+                            {label}
+                        </FormLabel>
                         <Popover modal={modal}>
                             <PopoverTrigger asChild>
                                 <FormControl>
