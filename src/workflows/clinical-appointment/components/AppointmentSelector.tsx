@@ -1,21 +1,14 @@
-import { useState, useMemo, useCallback } from 'react'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import { usePractitionerDetails } from '@resources/practitioner/hooks/usePractitionerDetails'
-import { useAvailableSlots } from '@workflows/clinical-appointment/hooks/useAvailableSlots'
-import {
-    DAYS_VISIBLE,
-    DAYS,
-} from '@workflows/clinical-appointment/config/config'
-import type { SelectedSlot } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
+import { useAppointmentSelector } from '@workflows/clinical-appointment/hooks/useAppointmentSelector'
+import { DAYS_VISIBLE, DAYS } from '@workflows/clinical-appointment/config/config'
 import ConfirmationBar from '@workflows/clinical-appointment/components/ConfirmationBar'
 import MiniCalendar from '@workflows/clinical-appointment/components/MiniCalendar'
 import {
-    addDays,
     isSameDay,
     getKey,
 } from '@workflows/clinical-appointment/utils/clinicalAppointment.utils'
@@ -26,36 +19,21 @@ const AppointmentSelector = ({
 }: {
     practitionerId: string
 }) => {
-    const { availableTime } = usePractitionerDetails(practitionerId)
-    const { today, availMap, slots } = useAvailableSlots(availableTime)
-
-    const [weekOffset, setWeekOffset] = useState(0)
-    const [selected, setSelected] = useState<SelectedSlot>(null)
-    const [calMonth, setCalMonth] = useState(
-        () => new Date(today.getFullYear(), today.getMonth(), 1)
-    )
-
-    const visibleDays = useMemo(
-        () =>
-            Array.from({ length: DAYS_VISIBLE }, (_, i) =>
-                addDays(today, weekOffset * DAYS_VISIBLE + i)
-            ),
-        [today, weekOffset]
-    )
-
-    const handleCalDayClick = useCallback(
-        (d: Date) => {
-            const daysDiff = Math.floor(
-                (d.getTime() - today.getTime()) / 86400000
-            )
-            setWeekOffset(Math.floor(daysDiff / DAYS_VISIBLE))
-        },
-        [today]
-    )
-
-    const handleCancel = useCallback(() => {
-        setSelected(null)
-    }, [])
+    const {
+        today,
+        availMap,
+        slots,
+        weekOffset,
+        selected,
+        calMonth,
+        setCalMonth,
+        visibleDays,
+        handleCalDayClick,
+        handlePrevWeek,
+        handleNextWeek,
+        handleSlotClick,
+        handleCancel,
+    } = useAppointmentSelector(practitionerId)
 
     return (
         <Card className="h-full">
@@ -78,9 +56,7 @@ const AppointmentSelector = ({
                     <div className="flex-1 min-w-0 border border-gray-200 dark:border-gray-800 rounded-xl p-5 overflow-x-auto">
                         <div className="flex items-center gap-2 mb-4">
                             <button
-                                onClick={() =>
-                                    setWeekOffset((o) => Math.max(0, o - 1))
-                                }
+                                onClick={handlePrevWeek}
                                 disabled={weekOffset === 0}
                                 className="text-lg px-1 disabled:opacity-30"
                             >
@@ -118,7 +94,7 @@ const AppointmentSelector = ({
                             </div>
 
                             <button
-                                onClick={() => setWeekOffset((o) => o + 1)}
+                                onClick={handleNextWeek}
                                 className="text-lg px-1"
                             >
                                 &rsaquo;
@@ -167,13 +143,10 @@ const AppointmentSelector = ({
                                                     {avail ? (
                                                         <button
                                                             onClick={() =>
-                                                                setSelected(
-                                                                    sel
-                                                                        ? null
-                                                                        : {
-                                                                              date,
-                                                                              slot,
-                                                                          }
+                                                                handleSlotClick(
+                                                                    date,
+                                                                    slot,
+                                                                    !!sel
                                                                 )
                                                             }
                                                             className={[

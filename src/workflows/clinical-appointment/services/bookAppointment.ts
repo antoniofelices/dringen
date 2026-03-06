@@ -1,9 +1,10 @@
-import type { Appointment, Slot } from '@medplum/fhirtypes'
+import type { Appointment } from '@medplum/fhirtypes'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const bookAppointment = async (
-    slot: Slot,
+    start: string,
+    end: string,
     patientId: string,
     practitionerId: string,
     notes?: string
@@ -14,9 +15,8 @@ export const bookAppointment = async (
         const appointment: Appointment = {
             resourceType: 'Appointment',
             status: 'booked',
-            start: slot.start,
-            end: slot.end,
-            slot: [{ reference: `Slot/${slot.id}` }],
+            start,
+            end,
             participant: [
                 {
                     actor: { reference: `Patient/${patientId}` },
@@ -30,14 +30,7 @@ export const bookAppointment = async (
             ...(notes ? { description: notes } : {}),
         }
 
-        const createdAppointment = await medplum.createResource(appointment)
-
-        await medplum.updateResource({
-            ...slot,
-            status: 'busy',
-        })
-
-        return createdAppointment
+        return await medplum.createResource(appointment)
     } catch (error) {
         logger.error('Error booking appointment', error, {
             component: 'clinicalAppointment.service',

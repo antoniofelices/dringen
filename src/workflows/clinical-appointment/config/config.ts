@@ -1,9 +1,6 @@
 const SLOT_INTERVAL = 15
-const START_HOUR = 9
-const END_HOUR = 13
 const DAYS_VISIBLE = 5
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const DAYSLETTER = ['S', 'M', 'T', 'W', 'TH', 'F', 'S']
 const MONTHS = [
     'January',
     'February',
@@ -18,13 +15,16 @@ const MONTHS = [
     'November',
     'December',
 ]
+const DAYS_AHEAD = 90
 
-export {
-    SLOT_INTERVAL,
-    START_HOUR,
-    END_HOUR,
-    DAYS_VISIBLE,
-    DAYS,
-    DAYSLETTER,
-    MONTHS,
+const JS_DAY_TO_FHIR: Record<number, string> = {
+    0: 'sun',
+    1: 'mon',
+    2: 'tue',
+    3: 'wed',
+    4: 'thu',
+    5: 'fri',
+    6: 'sat',
 }
+
+export { SLOT_INTERVAL, DAYS_VISIBLE, DAYS, MONTHS, DAYS_AHEAD, JS_DAY_TO_FHIR }
