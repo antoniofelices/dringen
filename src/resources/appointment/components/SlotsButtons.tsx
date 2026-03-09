@@ -1,12 +1,9 @@
-import {
-    DAYS_VISIBLE,
-    DAYS,
-} from '@workflows/clinical-appointment/config/config'
+import { DAYS_VISIBLE, DAYS } from '@resources/appointment/config/config'
 import {
     isSameDay,
     getKey,
-} from '@workflows/clinical-appointment/utils/clinicalAppointment.utils'
-import type { SlotsButtonsProps } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
+} from '@resources/appointment/utils/clinicalAppointment.utils'
+import type { SlotsButtonsProps } from '@resources/appointment/types/clinicalAppointment.model'
 
 const SlotsButtons = ({
     availMap,

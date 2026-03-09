@@ -3,14 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import type { Appointment } from '@medplum/fhirtypes'
-import { bookAppointmentSchema } from '@workflows/clinical-appointment/schemas/bookAppointment.schema'
+import { bookAppointmentSchema } from '@resources/appointment/schemas/bookAppointment.schema'
 import type {
     BookAppointmentFormType,
     SelectedSlot,
-} from '@workflows/clinical-appointment/types/clinicalAppointment.model'
-import { bookAppointment } from '@workflows/clinical-appointment/services/bookAppointment'
-import { SLOT_INTERVAL } from '@workflows/clinical-appointment/config/config'
-import content from '@workflows/clinical-appointment/hooks/useBookAppointment.content'
+} from '@resources/appointment/types/clinicalAppointment.model'
+import { bookAppointment } from '@resources/appointment/services/bookAppointment'
+import { SLOT_INTERVAL } from '@resources/appointment/config/config'
+import content from '@resources/appointment/hooks/useBookAppointment.content'
 
 const defaultValues: BookAppointmentFormType = {
     patient: '',

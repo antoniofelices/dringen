@@ -5,13 +5,6 @@ export const physicianMenuTitle = 'Menu Physician'
 
 export const physicianMenu = (practitionerId: string): RoutesProps[] => [
     {
-        id: 1,
-        icon: CalendarDays,
-        url: `/practitioner/${practitionerId}/today`,
-        text: 'Today',
-        orderMenu: 1,
-    },
-    {
         id: 2,
         icon: ClipboardPlus,
         url: `/practitioner/${practitionerId}/schedule`,

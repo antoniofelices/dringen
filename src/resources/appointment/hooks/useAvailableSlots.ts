@@ -1,13 +1,16 @@
 import { useMemo } from 'react'
 import type { Appointment } from '@medplum/fhirtypes'
 import type { AvailableTimeType } from '@shared/fhir/availableTime.model'
-import type { AvailabilityMap } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
+import type { AvailabilityMap } from '@resources/appointment/types/clinicalAppointment.model'
 import {
     SLOT_INTERVAL,
     DAYS_AHEAD,
     JS_DAY_TO_FHIR,
-} from '@workflows/clinical-appointment/config/config'
-import { addDays, getKey } from '@workflows/clinical-appointment/utils/clinicalAppointment.utils'
+} from '@resources/appointment/config/config'
+import {
+    addDays,
+    getKey,
+} from '@resources/appointment/utils/clinicalAppointment.utils'
 
 function buildAvailabilityMap(
     availableTime: AvailableTimeType[],
@@ -97,7 +100,11 @@ export const useAvailableSlots = (
     }, [])
 
     const availMap = useMemo(() => {
-        const baseMap = buildAvailabilityMap(availableTime, today, SLOT_INTERVAL)
+        const baseMap = buildAvailabilityMap(
+            availableTime,
+            today,
+            SLOT_INTERVAL
+        )
         return markBookedSlots(baseMap, appointments)
     }, [availableTime, today, appointments])
 

@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import type { bookAppointmentSchema } from '@workflows/clinical-appointment/schemas/bookAppointment.schema'
+import type { bookAppointmentSchema } from '@resources/appointment/schemas/bookAppointment.schema'
 
 export type BookAppointmentFormType = z.infer<typeof bookAppointmentSchema>
 

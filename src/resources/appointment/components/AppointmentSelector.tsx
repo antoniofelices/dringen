@@ -4,10 +4,10 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import { useAppointmentSelector } from '@workflows/clinical-appointment/hooks/useAppointmentSelector'
-import ConfirmationBar from '@workflows/clinical-appointment/components/ConfirmationBar'
-import MiniCalendar from '@workflows/clinical-appointment/components/MiniCalendar'
-import SlotsButtons from '@workflows/clinical-appointment/components/SlotsButtons'
+import { useAppointmentSelector } from '@resources/appointment/hooks/useAppointmentSelector'
+import ConfirmationBar from '@resources/appointment/components/ConfirmationBar'
+import MiniCalendar from '@resources/appointment/components/MiniCalendar'
+import SlotsButtons from '@resources/appointment/components/SlotsButtons'
 import content from './AppointmentSelector.content'
 
 const AppointmentSelector = ({
