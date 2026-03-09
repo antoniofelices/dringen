@@ -57,6 +57,9 @@ export const useBookAppointment = (
             toast.success(content.textToastSuccess)
             onSuccess?.()
         },
+        onError: () => {
+            toast.error(content.textToastError)
+        },
     })
 
     const onSubmit = form.handleSubmit((data) => mutation.mutate(data))

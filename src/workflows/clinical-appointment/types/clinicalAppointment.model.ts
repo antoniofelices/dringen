@@ -24,3 +24,14 @@ export type MiniCalendarProps = {
     availMap: AvailabilityMap
     onDayClick: (date: Date) => void
 }
+
+export type SlotsButtonsProps = {
+    availMap: AvailabilityMap
+    slots: string[]
+    weekOffset: number
+    selected: SelectedSlot
+    visibleDays: Date[]
+    handlePrevWeek: () => void
+    handleNextWeek: () => void
+    handleSlotClick: (date: Date, slot: string, isSelected: boolean) => void
+}

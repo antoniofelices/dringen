@@ -33,7 +33,6 @@ const MiniCalendar = ({
     const isCalAvail = (d: Date | null) => {
         if (!d || d < today) return false
         const key = getKey(d)
-        // const key = d.toISOString().split('T')[0]
         return availMap[key] && Object.values(availMap[key]).some((v) => v)
     }
 
