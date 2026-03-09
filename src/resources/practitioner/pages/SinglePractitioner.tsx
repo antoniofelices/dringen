@@ -3,7 +3,7 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails'
 import { useSinglePractitioner } from '@/resources/practitioner/hooks/useGetPractitioner'
-import { AppointmentSelector } from '@workflows/clinical-appointment'
+import AppointmentSelector from '@resources/appointment/components/AppointmentSelector'
 
 const SinglePractitioner = ({ id }: { id: string }) => {
     const { practitioner } = useSinglePractitioner(id)

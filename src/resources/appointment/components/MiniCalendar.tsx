@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
-import { MONTHS } from '@workflows/clinical-appointment/config/config'
-import type { MiniCalendarProps } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
+import { MONTHS } from '@resources/appointment/config/config'
+import type { MiniCalendarProps } from '@resources/appointment/types/clinicalAppointment.model'
 import {
     isSameDay,
     getKey,
-} from '@workflows/clinical-appointment/utils/clinicalAppointment.utils'
+} from '@resources/appointment/utils/clinicalAppointment.utils'
 import content from './MiniCalendar.content'
 
 const MiniCalendar = ({

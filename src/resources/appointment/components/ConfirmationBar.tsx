@@ -1,9 +1,9 @@
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
-import { useConfirmationBar } from '@workflows/clinical-appointment/hooks/useConfirmationBar'
-import { DAYS, MONTHS } from '@workflows/clinical-appointment/config/config'
-import type { ConfirmationBarProps } from '@workflows/clinical-appointment/types/clinicalAppointment.model'
+import { useConfirmationBar } from '@resources/appointment/hooks/useConfirmationBar'
+import { DAYS, MONTHS } from '@resources/appointment/config/config'
+import type { ConfirmationBarProps } from '@resources/appointment/types/clinicalAppointment.model'
 import content from './ConfirmationBar.content'
 
 const ConfirmationBar = ({
