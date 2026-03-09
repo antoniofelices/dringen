@@ -26,7 +26,7 @@ export const administrativeMenu: RoutesProps[] = [
     {
         id: 3,
         icon: CalendarDays,
-        url: 'appointment/calendar',
+        url: 'appointment/appointment-list',
         text: 'Appointments',
         orderMenu: 3,
     },
