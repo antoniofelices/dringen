@@ -8,6 +8,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 // import { usePhysicians } from '@hooks/useUsers'
 // import { useLogger } from '@shared/hooks/useLogger'
 import { Button } from '@shared/components/ui/base/button'
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from '@shared/components/ui/base/card'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
@@ -76,59 +83,75 @@ const AddNewAppointmentForm = ({
     // }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldCombobox
-                    control={form.control}
-                    textCommandEmpty={content.textNoCommandPatientFound}
-                    fieldName="patient"
-                    label={content.labelPatient}
-                    placeholder={content.placeholderPatient}
-                    options={[
-                        { label: 'patient-1', value: 'patient-1' },
-                        { label: 'patient-2', value: 'patient-2' },
-                    ]}
-                />
-                <FormFieldCombobox
-                    control={form.control}
-                    textCommandEmpty={content.textNoCommandPhysicianFound}
-                    fieldName="physician"
-                    label={content.labelPhysician}
-                    placeholder={content.placeholderPhysician}
-                    options={[
-                        { label: 'physician-1', value: 'physician-1' },
-                        { label: 'physician-2', value: 'physician-2' },
-                    ]}
-                />
-                <FormFieldCalendar
-                    control={form.control}
-                    fieldName="appointmentDate"
-                    label={content.labelDate}
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="appointmentTime"
-                    label={content.labelTime}
-                    type="time"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="notes"
-                    label={content.labelNotes}
-                    type="text"
-                />
-                <Button type="submit" className="w-full mt-4">
-                    {form.formState.isSubmitting
-                        ? content.textButtonSending
-                        : content.textButtonSend}
-                </Button>
-            </form>
-            {form.formState.errors.root && (
-                <div className="text-red text-sm mt-2 text-center">
-                    {form.formState.errors.root.message}
-                </div>
-            )}
-        </Form>
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    <h2 className="font-extrabold">{content.title}</h2>
+                </CardTitle>
+                <CardAction>
+                    <Button size="xs" variant="outline">
+                        Lorem
+                    </Button>
+                </CardAction>
+            </CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <FormFieldCombobox
+                            control={form.control}
+                            textCommandEmpty={content.textNoCommandPatientFound}
+                            fieldName="patient"
+                            label={content.labelPatient}
+                            placeholder={content.placeholderPatient}
+                            options={[
+                                { label: 'patient-1', value: 'patient-1' },
+                                { label: 'patient-2', value: 'patient-2' },
+                            ]}
+                        />
+                        <FormFieldCombobox
+                            control={form.control}
+                            textCommandEmpty={
+                                content.textNoCommandPhysicianFound
+                            }
+                            fieldName="physician"
+                            label={content.labelPhysician}
+                            placeholder={content.placeholderPhysician}
+                            options={[
+                                { label: 'physician-1', value: 'physician-1' },
+                                { label: 'physician-2', value: 'physician-2' },
+                            ]}
+                        />
+                        <FormFieldCalendar
+                            control={form.control}
+                            fieldName="appointmentDate"
+                            label={content.labelDate}
+                        />
+                        <FormFieldInput
+                            control={form.control}
+                            fieldName="appointmentTime"
+                            label={content.labelTime}
+                            type="time"
+                        />
+                        <FormFieldInput
+                            control={form.control}
+                            fieldName="notes"
+                            label={content.labelNotes}
+                            type="text"
+                        />
+                        <Button type="submit" className="w-full mt-4">
+                            {form.formState.isSubmitting
+                                ? content.textButtonSending
+                                : content.textButtonSend}
+                        </Button>
+                    </form>
+                    {form.formState.errors.root && (
+                        <div className="text-red text-sm mt-2 text-center">
+                            {form.formState.errors.root.message}
+                        </div>
+                    )}
+                </Form>
+            </CardContent>
+        </Card>
     )
 }
 
