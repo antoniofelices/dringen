@@ -1,6 +1,6 @@
 import { usePatientsByPractitioner } from '@resources/patient/hooks/useGetPatient'
 import { useBookAppointment } from '@resources/appointment/hooks/useBookAppointment'
-import type { SelectedSlot } from '@resources/appointment/types/clinicalAppointment.model'
+import type { SelectedSlot } from '@resources/appointment/types/appointment.model'
 
 export const useConfirmationBar = (
     practitionerId: string,

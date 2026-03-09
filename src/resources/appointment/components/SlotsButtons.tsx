@@ -3,7 +3,7 @@ import {
     isSameDay,
     getKey,
 } from '@resources/appointment/utils/clinicalAppointment.utils'
-import type { SlotsButtonsProps } from '@resources/appointment/types/clinicalAppointment.model'
+import type { SlotsButtonsProps } from '@resources/appointment/types/appointment.model'
 
 const SlotsButtons = ({
     availMap,

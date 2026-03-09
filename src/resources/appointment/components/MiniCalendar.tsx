@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { MONTHS } from '@resources/appointment/config/config'
-import type { MiniCalendarProps } from '@resources/appointment/types/clinicalAppointment.model'
+import type { MiniCalendarProps } from '@resources/appointment/types/appointment.model'
 import {
     isSameDay,
     getKey,
