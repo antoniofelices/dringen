@@ -1,12 +1,22 @@
-import '@/styles/calendar.css'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@shared/components/ui/base/button'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
+import DataTable from '@shared/components/ui/DataTable'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
+import Loading from '@shared/components/ui/Loading'
+import type { AppointmentType } from '@resources/appointment/types/appointment.model'
+import { useAppointments } from '@resources/appointment/hooks/useAppointment'
+import appointmentTableColumns from '@resources/appointment/presentation/appointmentTable.columns'
 import content from './AppointmentList.content'
 
 const AppointmentList = () => {
+    const { appointments, isPending, isError, error } = useAppointments()
+
+    if (isPending) return <Loading />
+
+    if (isError && error) return <ErrorApi message={error.message} />
+
     return (
         <>
             <HeaderArticle title={content.title}>
@@ -15,36 +25,14 @@ const AppointmentList = () => {
                 </Button>
             </HeaderArticle>
             <ContentArticle>
-                <p>Listado de todas las citas futuras 🤯</p>
-                <p>Filtrado por paciente</p>
-                <p>
-                    Quizas tabs: 1.Citas de hoy 2.Citas de la semana 3.Resto de
-                    citas
-                </p>
-                <hr className="my-4" />
-                <h2>
-                    // Esto va a ser un componente.
-                    <br />
-                    // Valorar si se va a reutilizar en Single Practitioner
-                    <br />
-                    // Si tiene demasiada logica el apartado de status no
-                    reutilizar en Single Practitioner
-                </h2>
-                <p className="mt-4">Contenido de cada cita:</p>
-                <ul>
-                    <li>Dia y hora</li>
-                    <li>Nombre Patient</li>
-                    <li>Telefono. Opcional solo aqui.</li>
-                    <li>Nombre Physician. Opcional solo aqui.</li>
-                    <li>Facility. Opcional solo aqui.</li>
-                    <li>
-                        Status - opcion cambiar status (booked, arrived,
-                        cancelled == anula la cita, libera slot en el
-                        practitioner). Opcional solo aqui.
-                    </li>
-                </ul>
+                <DataTable<AppointmentType>
+                    columns={appointmentTableColumns()}
+                    data={appointments || []}
+                    caption={content.textCaptionTable}
+                    filterColumn="patientName"
+                    filterPlaceholder={content.textFilterPlaceholder}
+                />
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }

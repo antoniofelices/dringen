@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type { Appointment } from '@medplum/fhirtypes'
 import type { AvailableTimeType } from '@shared/fhir/availableTime.model'
-import type { AvailabilityMap } from '@resources/appointment/types/clinicalAppointment.model'
+import type { AvailabilityMap } from '@resources/appointment/types/appointment.model'
 import {
     SLOT_INTERVAL,
     DAYS_AHEAD,

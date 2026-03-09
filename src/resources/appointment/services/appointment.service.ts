@@ -34,3 +34,21 @@ export const updateAppointment = async (
         throw error
     }
 }
+
+export const getListAppointments = async (): Promise<Appointment[]> => {
+    try {
+        await authenticateMedplum()
+
+        const bundle = await medplum.searchResources('Appointment', {
+            _count: 1000,
+        })
+
+        return bundle
+    } catch (error) {
+        logger.error('Error fetching appointments from Server', error, {
+            component: 'appointment.service',
+            action: 'getListAppointments',
+        })
+        throw error
+    }
+}

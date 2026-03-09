@@ -7,7 +7,7 @@ import { bookAppointmentSchema } from '@resources/appointment/schemas/bookAppoin
 import type {
     BookAppointmentFormType,
     SelectedSlot,
-} from '@resources/appointment/types/clinicalAppointment.model'
+} from '@resources/appointment/types/appointment.model'
 import { bookAppointment } from '@resources/appointment/services/bookAppointment'
 import { SLOT_INTERVAL } from '@resources/appointment/config/config'
 import content from '@resources/appointment/hooks/useBookAppointment.content'
