@@ -43,6 +43,7 @@ export type AppointmentType = {
     end: string
     patientId: string
     patientName: string
+    patientPhone: string
     practitionerId: string
     practitionerName: string
     notes: string

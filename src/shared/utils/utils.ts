@@ -11,6 +11,17 @@ export function transformDate(value: string): string {
     return date.toLocaleDateString('es-ES')
 }
 
+export function transformDateTime(value: string): string {
+    const date = new Date(value)
+    if (isNaN(date.getTime())) return ''
+    const day = date.toLocaleDateString('es-ES')
+    const time = date.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+    })
+    return `${day} - ${time}`
+}
+
 export function normalizeDate(value: unknown): string | null {
     if (!value) return null
     if (typeof value === 'string') {

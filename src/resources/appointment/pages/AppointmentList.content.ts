@@ -8,6 +8,8 @@ const content = {
     labelSchedule: 'Schedule',
     textButtonDeleteEvent: 'Delete',
     textToastSuccessDelete: 'Appointment deleted succesfuly',
+    textCaptionTable: 'A list of appointments',
+    textFilterPlaceholder: 'Filter by patient family name...',
 }
 
 export default content

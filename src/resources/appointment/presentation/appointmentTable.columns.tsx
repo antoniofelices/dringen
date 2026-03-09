@@ -1,9 +1,10 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { ArrowUpDown } from 'lucide-react'
+import { transformDateTime } from '@shared/utils/utils'
 import content from './appointmentTable.content'
 
-const practitionerTableColumns = (): ColumnDef<AppointmentType>[] => [
+const appointmentTableColumns = (): ColumnDef<AppointmentType>[] => [
     {
         accessorKey: 'patientName',
         header: ({ column }) => {
@@ -22,11 +23,11 @@ const practitionerTableColumns = (): ColumnDef<AppointmentType>[] => [
         },
     },
     {
-        accessorKey: 'start',
+        accessorKey: 'patientPhone',
         header: () => {
             return (
                 <span className="flex items-center gap-2">
-                    {content.labelDay} - {content.labelHour}
+                    {content.labelPatientPhone}
                 </span>
             )
         },
@@ -49,6 +50,24 @@ const practitionerTableColumns = (): ColumnDef<AppointmentType>[] => [
         },
     },
     {
+        accessorKey: 'start',
+        header: ({ column }) => {
+            return (
+                <button
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === 'asc')
+                    }
+                >
+                    <span className="flex items-center gap-2">
+                        {content.labelSchedule}
+                        <ArrowUpDown size="12" />
+                    </span>
+                </button>
+            )
+        },
+        cell: ({ row }) => transformDateTime(row.getValue('start')),
+    },
+    {
         accessorKey: 'status',
         header: ({ column }) => {
             return (
@@ -67,4 +86,4 @@ const practitionerTableColumns = (): ColumnDef<AppointmentType>[] => [
     },
 ]
 
-export default practitionerTableColumns
+export default appointmentTableColumns

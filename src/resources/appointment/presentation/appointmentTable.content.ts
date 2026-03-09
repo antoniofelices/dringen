@@ -1,8 +1,8 @@
 const content = {
+    labelId: 'Id',
     labelPatientName: 'Patient',
     labelPatientPhone: 'Contact',
-    labelDay: 'Day',
-    labelHour: 'Hour',
+    labelSchedule: 'Schedule',
     labelPractitionerName: 'Practitioner',
     labelStatus: 'Status',
 }

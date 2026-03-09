@@ -1,12 +1,22 @@
-import '@/styles/calendar.css'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@shared/components/ui/base/button'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
+import DataTable from '@shared/components/ui/DataTable'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
+import Loading from '@shared/components/ui/Loading'
+import type { AppointmentType } from '@resources/appointment/types/appointment.model'
+import { useAppointments } from '@resources/appointment/hooks/useAppointment'
+import appointmentTableColumns from '@resources/appointment/presentation/appointmentTable.columns'
 import content from './AppointmentList.content'
 
 const AppointmentList = () => {
+    const { appointments, isPending, isError, error } = useAppointments()
+
+    if (isPending) return <Loading />
+
+    if (isError && error) return <ErrorApi message={error.message} />
+
     return (
         <>
             <HeaderArticle title={content.title}>
@@ -14,8 +24,15 @@ const AppointmentList = () => {
                     <Link to="/patient/add">{content.textButtonAdd}</Link>
                 </Button>
             </HeaderArticle>
-            <ContentArticle>'A list of Appointments'</ContentArticle>
-            <ButtonBack />
+            <ContentArticle>
+                <DataTable<AppointmentType>
+                    columns={appointmentTableColumns()}
+                    data={appointments || []}
+                    caption={content.textCaptionTable}
+                    filterColumn="patientName"
+                    filterPlaceholder={content.textFilterPlaceholder}
+                />
+            </ContentArticle>
         </>
     )
 }
