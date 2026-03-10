@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { ColumnFiltersState, SortingState } from '@tanstack/react-table'
@@ -22,7 +22,6 @@ import {
     TableRow,
 } from '@shared/components/ui/base/table'
 
-import DataTableFilter from './DataTableFilter'
 import content from './DataTable.content'
 
 type DataTableProps<TData> = {
@@ -30,7 +29,7 @@ type DataTableProps<TData> = {
     data: TData[]
     caption?: string
     filterColumn: string
-    filterPlaceholder: string
+    filterValue: string
 }
 
 const DataTable = <TData,>({
@@ -38,13 +37,17 @@ const DataTable = <TData,>({
     data,
     caption,
     filterColumn,
-    filterPlaceholder,
+    filterValue,
 }: DataTableProps<TData>) => {
     const initialPageIndex = 0
-    const initialPageSize = 15
+    const initialPageSize = 20
 
     const [sorting, setSorting] = useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+    const columnFilters = useMemo<ColumnFiltersState>(
+        () => (filterValue ? [{ id: filterColumn, value: filterValue }] : []),
+        [filterColumn, filterValue]
+    )
 
     const table = useReactTable({
         data,
@@ -59,7 +62,6 @@ const DataTable = <TData,>({
         getPaginationRowModel: getPaginationRowModel(),
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
-        onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
         state: {
             sorting,
@@ -71,11 +73,6 @@ const DataTable = <TData,>({
 
     return (
         <>
-            <DataTableFilter
-                table={table}
-                column={filterColumn}
-                placeholder={filterPlaceholder}
-            />
             <div className="overflow-hidden rounded-md border">
                 <Table>
                     <TableCaption className="sr-only">{caption}</TableCaption>
