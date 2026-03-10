@@ -9,14 +9,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@shared/components/ui/base/select'
+import { STATUS_OPTIONS } from '@resources/appointment/config/config'
 import content from './appointmentTable.content'
-
-const statusOptions = [
-    { value: 'booked', label: content.statusBooked },
-    { value: 'arrived', label: content.statusArrived },
-    { value: 'cancelled', label: content.statusCancelled },
-    { value: 'noshow', label: content.statusNoshow },
-] as const
 
 const appointmentTableColumns = (
     onStatusChange: (appointmentId: string, newStatus: string) => void
@@ -110,7 +104,7 @@ const appointmentTableColumns = (
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                    {statusOptions.map((option) => (
+                    {STATUS_OPTIONS.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                             {option.label}
                         </SelectItem>
