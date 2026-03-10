@@ -5,6 +5,10 @@ const content = {
     labelSchedule: 'Schedule',
     labelPractitionerName: 'Practitioner',
     labelStatus: 'Status',
+    statusBooked: 'Booked',
+    statusArrived: 'Arrived',
+    statusCancelled: 'Cancelled',
+    statusNoshow: 'No Show',
 }
 
 export default content
