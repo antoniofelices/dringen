@@ -27,4 +27,19 @@ const JS_DAY_TO_FHIR: Record<number, string> = {
     6: 'sat',
 }
 
-export { SLOT_INTERVAL, DAYS_VISIBLE, DAYS, MONTHS, DAYS_AHEAD, JS_DAY_TO_FHIR }
+const STATUS_OPTIONS = [
+    { value: 'booked', label: 'Booked' },
+    { value: 'arrived', label: 'Arrived' },
+    { value: 'cancelled', label: 'Cancelled' },
+    { value: 'noshow', label: 'No Show' },
+]
+
+export {
+    SLOT_INTERVAL,
+    DAYS_VISIBLE,
+    DAYS,
+    MONTHS,
+    DAYS_AHEAD,
+    JS_DAY_TO_FHIR,
+    STATUS_OPTIONS,
+}

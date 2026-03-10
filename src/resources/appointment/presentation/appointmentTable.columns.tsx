@@ -2,9 +2,19 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { ArrowUpDown } from 'lucide-react'
 import { transformDateTime } from '@shared/utils/utils'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@shared/components/ui/base/select'
+import { STATUS_OPTIONS } from '@resources/appointment/config/config'
 import content from './appointmentTable.content'
 
-const appointmentTableColumns = (): ColumnDef<AppointmentType>[] => [
+const appointmentTableColumns = (
+    onStatusChange: (appointmentId: string, newStatus: string) => void
+): ColumnDef<AppointmentType>[] => [
     {
         accessorKey: 'patientName',
         header: ({ column }) => {
@@ -83,6 +93,25 @@ const appointmentTableColumns = (): ColumnDef<AppointmentType>[] => [
                 </button>
             )
         },
+        cell: ({ row }) => (
+            <Select
+                value={row.original.status}
+                onValueChange={(value) =>
+                    onStatusChange(row.original.id, value)
+                }
+            >
+                <SelectTrigger size="sm">
+                    <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                    {STATUS_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+        ),
     },
 ]
 
