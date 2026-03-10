@@ -2,6 +2,14 @@ import { z } from 'zod'
 import content from './practitionerDetails.content'
 
 export const practitionerDetailsSchema = z.object({
+    phone: z.string().optional(),
+
+    email: z
+        .string()
+        .email(content.errorEmailInvalid)
+        .optional()
+        .or(z.literal('')),
+
     specialty: z
         .string()
         .min(2, content.errorSpecialtyTooShort)

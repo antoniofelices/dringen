@@ -11,9 +11,8 @@ import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
 import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
 import { useUpdatePractitionerDetails } from '@resources/practitioner/hooks/useUpdatePractitionerDetails'
+import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import content from './PractitionerDetails.content'
-
-const daysOfWeekOptions = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 const PractitionerDetailsForm = ({
     practitionerId,
@@ -65,6 +64,18 @@ const PractitionerDetailsForm = ({
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormFieldInput
+                    control={form.control}
+                    fieldName="phone"
+                    label={content.labelPhone}
+                    type="tel"
+                />
+                <FormFieldInput
+                    control={form.control}
+                    fieldName="email"
+                    label={content.labelEmail}
+                    type="email"
+                />
                 <FormFieldInput
                     control={form.control}
                     fieldName="specialty"

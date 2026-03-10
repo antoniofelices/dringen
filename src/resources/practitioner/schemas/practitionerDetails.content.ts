@@ -1,4 +1,5 @@
 const content = {
+    errorEmailInvalid: 'Please enter a valid email address',
     errorSpecialtyTooShort: 'Specialty must be at least 2 characters long',
     errorSpecialtyTooLong: 'Specialty cannot be longer than 50 characters',
     errorDaysOfWeekRequired: 'Day of week is required',

@@ -10,6 +10,8 @@ export const formatAvailableTime = (availableTime: AvailableTimeType[]) =>
         .join(' | ')
 
 export const buildDataItems = (data: PractitionerDetailsData) => [
+    { label: content.labelPhone, value: data.phone },
+    { label: content.labelEmail, value: data.email },
     { label: content.labelSpecialty, value: data.specialty },
     { label: content.labelHospital, value: data.hospital },
     { label: content.labelOutpatientFacility, value: data.outpatientFacility },
