@@ -1,6 +1,7 @@
 const content = {
-    title: 'List of my patients',
+    title: 'My patients',
     textCaptionTable: 'A list of patients',
+    textButtonAddNew: 'Add Patient',
     textFilterPlaceholder: 'Filter by DNI...',
 }
 

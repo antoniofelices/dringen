@@ -100,7 +100,7 @@ const appointmentTableColumns = (
                     onStatusChange(row.original.id, value)
                 }
             >
-                <SelectTrigger size="sm">
+                <SelectTrigger size="sm" className="w-40">
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

@@ -16,6 +16,7 @@ const SinglePractitioner = ({ id }: { id: string }) => {
             />
             <ContentArticle>
                 <PractitionerDetails practitionerId={id} />
+                <div className="my-4"></div>
                 <AppointmentSelector practitionerId={id} />
             </ContentArticle>
             <ButtonBack />

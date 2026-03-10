@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import DataTable from '@shared/components/ui/DataTable'
+import DataTableFilter from '@shared/components/ui/DataTableFilter'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
@@ -12,6 +14,7 @@ import content from './PhysicianList.content'
 const PhysicianList = () => {
     const { physicians, isPending, isError, error } = usePhysicians()
     const navigate = useNavigate()
+    const [filterValue, setFilterValue] = useState('')
 
     if (isPending) return <Loading />
 
@@ -19,14 +22,22 @@ const PhysicianList = () => {
 
     return (
         <>
-            <HeaderArticle title={content.title} />
+            <HeaderArticle title={content.title}>
+                <div className="flex gap-2">
+                    <DataTableFilter
+                        value={filterValue}
+                        onChange={setFilterValue}
+                        placeholder={content.textFilterPlaceholder}
+                    />
+                </div>
+            </HeaderArticle>
             <ContentArticle>
                 <DataTable<PhysicianType>
                     columns={practitionerTableColumns(navigate)}
                     data={physicians || []}
                     caption={content.textCaptionTable}
                     filterColumn="specialty"
-                    filterPlaceholder={content.textFilterPlaceholder}
+                    filterValue={filterValue}
                 />
             </ContentArticle>
         </>
