@@ -1,16 +1,31 @@
+import { useQuery } from '@tanstack/react-query'
 import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
 import {
     useLocations,
     useLocationsByParent,
 } from '@resources/location/hooks/useLocation'
+import { getSinglePractitionerById } from '@resources/practitioner/services/practitioner.service'
+import { fhirToPractitioner } from '@resources/practitioner/domain/practitioner.adapter'
 
 export const usePractitionerDetails = (practitionerId: string) => {
     const {
         practitionerRole,
         isPending: isRolePending,
-        isError,
-        error,
+        isError: isRoleError,
+        error: roleError,
     } = usePractitionerRoleDetail(practitionerId)
+
+    const {
+        data: practitioner,
+        isPending: isPractitionerPending,
+        isError: isPractitionerError,
+        error: practitionerError,
+    } = useQuery({
+        queryKey: ['practitioner', practitionerId],
+        queryFn: () => getSinglePractitionerById(practitionerId),
+        select: fhirToPractitioner,
+        enabled: !!practitionerId,
+    })
 
     const { locations, isPending: isLocationsPending } = useLocations(
         practitionerRole?.locationIds ?? []
@@ -31,6 +46,8 @@ export const usePractitionerDetails = (practitionerId: string) => {
     }))
 
     return {
+        phone: practitioner?.phone ?? '',
+        email: practitioner?.email ?? '',
         specialty: practitionerRole?.specialty ?? '',
         hospital: hospital?.name ?? '',
         hospitalId: hospital?.id ?? '',
@@ -38,9 +55,9 @@ export const usePractitionerDetails = (practitionerId: string) => {
         outpatientFacilityId: outpatientFacility?.id ?? '',
         outpatientOptions,
         availableTime: practitionerRole?.availableTime ?? [],
-        isPending: isRolePending || isLocationsPending,
-        isError,
-        error,
+        isPending: isRolePending || isLocationsPending || isPractitionerPending,
+        isError: isRoleError || isPractitionerError,
+        error: roleError || practitionerError,
         hasData: !!practitionerRole,
     }
 }

@@ -26,6 +26,8 @@ const PractitionerDetails = ({
     practitionerId: string
 }) => {
     const {
+        phone,
+        email,
         specialty,
         hospital,
         hospitalId,
@@ -40,6 +42,8 @@ const PractitionerDetails = ({
     } = usePractitionerDetails(practitionerId)
 
     const detailsData: PractitionerDetailsData = {
+        phone,
+        email,
         specialty,
         hospital,
         hospitalId,
@@ -89,6 +93,8 @@ const PractitionerDetails = ({
                             practitionerId={practitionerId}
                             hospitalId={hospitalId}
                             defaultValues={{
+                                phone,
+                                email,
                                 specialty,
                                 outpatientFacility:
                                     outpatientFacilityId || undefined,

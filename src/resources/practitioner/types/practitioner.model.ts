@@ -12,6 +12,7 @@ export type PractitionerType = {
     id: string
     firstName: string
     lastName: string
+    phone: string
     email: string
 }
 
@@ -23,6 +24,8 @@ export type PhysicianType = {
 }
 
 export type PractitionerDetailsData = {
+    phone: string
+    email: string
     specialty: string
     hospital: string
     hospitalId?: string

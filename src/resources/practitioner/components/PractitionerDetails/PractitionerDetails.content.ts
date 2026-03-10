@@ -1,6 +1,8 @@
 const content = {
     title: 'Details',
     textButtonEdit: 'Edit',
+    labelPhone: 'Phone',
+    labelEmail: 'Email',
     labelSpecialty: 'Specialty',
     labelHospital: 'Hospital',
     labelOutpatientFacility: 'Outpatient Facility',

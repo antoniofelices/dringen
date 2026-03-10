@@ -61,6 +61,23 @@ export const getListPhysicians = async (): Promise<
     }
 }
 
+export const updatePractitioner = async (
+    id: string,
+    practitioner: Practitioner
+): Promise<Practitioner> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.updateResource({ ...practitioner, id })
+    } catch (error) {
+        logger.error('Error updating practitioner in Server', error, {
+            component: 'practitioner.service',
+            action: 'updatePractitioner',
+        })
+        throw error
+    }
+}
+
 export const getSinglePractitionerById = async (
     id: string
 ): Promise<Practitioner> => {
