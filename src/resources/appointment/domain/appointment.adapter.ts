@@ -1,5 +1,6 @@
 import type { Appointment, Patient, Practitioner } from '@medplum/fhirtypes'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
+import { CALLED_EXTENSION_URL } from '@resources/appointment/config/config'
 
 export function fhirToAppointment(
     appointment: Appointment,
@@ -27,6 +28,10 @@ export function fhirToAppointment(
         ? `${practitioner.name?.[0]?.family ?? ''} ${practitioner.name?.[0]?.given?.[0] ?? ''}`.trim()
         : ''
 
+    const called =
+        appointment.extension?.find((e) => e.url === CALLED_EXTENSION_URL)
+            ?.valueBoolean ?? false
+
     return {
         id: appointment.id ?? '',
         status: appointment.status ?? '',
@@ -38,5 +43,6 @@ export function fhirToAppointment(
         practitionerId,
         practitionerName,
         notes: appointment.description ?? '',
+        called,
     }
 }
