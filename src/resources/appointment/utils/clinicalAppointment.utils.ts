@@ -21,3 +21,6 @@ export const getKey = (d: Date) => {
 
 export const byStart = (a: { start: string }, b: { start: string }) =>
     a.start < b.start ? -1 : a.start > b.start ? 1 : 0
+
+export const byStartDesc = (a: { start: string }, b: { start: string }) =>
+    a.start > b.start ? -1 : a.start < b.start ? 1 : 0

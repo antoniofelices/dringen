@@ -1,6 +1,6 @@
 const content = {
     title: 'Appointments',
-    tabFuture: 'Bokked appointments',
+    tabFuture: 'Booked appointments',
     tabPast: 'Past appointments',
 }
 

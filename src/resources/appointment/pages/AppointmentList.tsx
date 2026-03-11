@@ -21,7 +21,14 @@ import appointmentTableColumns from '@resources/appointment/presentation/appoint
 import content from './AppointmentList.content'
 
 const AppointmentList = () => {
-    const { todayAppointments, tomorrowAppointments, restAppointments, isPending, isError, error } = useAppointments()
+    const {
+        todayAppointments,
+        tomorrowAppointments,
+        restAppointments,
+        isPending,
+        isError,
+        error,
+    } = useAppointments()
     const { updateStatus } = useUpdateAppointmentStatus()
     const { toggleCalled } = useToggleAppointmentCalled()
     const [filterValue, setFilterValue] = useState('')
@@ -60,7 +67,11 @@ const AppointmentList = () => {
                     <div className="mt-4">
                         <TabsContent value="today">
                             <DataTable<AppointmentType>
-                                columns={appointmentTableColumns(updateStatus, toggleCalled)}
+                                columns={appointmentTableColumns(
+                                    updateStatus,
+                                    toggleCalled,
+                                    false
+                                )}
                                 data={todayAppointments}
                                 caption={content.textCaptionTable}
                                 filterColumn="patientName"
@@ -69,7 +80,11 @@ const AppointmentList = () => {
                         </TabsContent>
                         <TabsContent value="tomorrow">
                             <DataTable<AppointmentType>
-                                columns={appointmentTableColumns(updateStatus, toggleCalled)}
+                                columns={appointmentTableColumns(
+                                    updateStatus,
+                                    toggleCalled,
+                                    false
+                                )}
                                 data={tomorrowAppointments}
                                 caption={content.textCaptionTable}
                                 filterColumn="patientName"
@@ -78,7 +93,10 @@ const AppointmentList = () => {
                         </TabsContent>
                         <TabsContent value="rest">
                             <DataTable<AppointmentType>
-                                columns={appointmentTableColumns(updateStatus, toggleCalled)}
+                                columns={appointmentTableColumns(
+                                    updateStatus,
+                                    toggleCalled
+                                )}
                                 data={restAppointments}
                                 caption={content.textCaptionTable}
                                 filterColumn="patientName"

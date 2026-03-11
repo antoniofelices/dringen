@@ -20,6 +20,7 @@ export type PatientType = {
     firstName: string
     lastName: string
     birthDate: string
+    phone: string
     email: string
     address: string
     dni: string

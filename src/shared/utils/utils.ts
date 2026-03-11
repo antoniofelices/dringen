@@ -11,6 +11,16 @@ export function transformDate(value: string): string {
     return date.toLocaleDateString('es-ES')
 }
 
+export function transformTime(value: string): string {
+    const date = new Date(value)
+    if (isNaN(date.getTime())) return ''
+    const time = date.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+    })
+    return `${time}`
+}
+
 export function transformDateTime(value: string): string {
     const date = new Date(value)
     if (isNaN(date.getTime())) return ''

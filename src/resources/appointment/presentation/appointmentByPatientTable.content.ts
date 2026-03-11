@@ -1,12 +1,9 @@
 const content = {
-    labelId: 'Id',
-    labelPatientName: 'Patient',
-    labelPatientPhone: 'Contact',
-    labelHour: 'Hour',
     labelDay: 'Day',
+    labelHour: 'Hour',
     labelPractitionerName: 'Practitioner',
-    labelStatus: 'Status',
     labelConfirmed: 'Called',
+    labelStatus: 'Status',
 }
 
 export default content

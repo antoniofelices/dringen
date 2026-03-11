@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { ArrowUpDown, Check } from 'lucide-react'
-import { transformDateTime } from '@shared/utils/utils'
+import { transformDate, transformTime } from '@shared/utils/utils'
 import {
     Select,
     SelectContent,
@@ -15,9 +15,12 @@ import content from './appointmentTable.content'
 
 const appointmentTableColumns = (
     onStatusChange: (appointmentId: string, newStatus: string) => void,
-    onCalledChange: (appointmentId: string, called: boolean) => void
-): ColumnDef<AppointmentType>[] => [
+    onCalledChange: (appointmentId: string, called: boolean) => void,
+    showDay = true
+): ColumnDef<AppointmentType>[] => {
+    const columns: ColumnDef<AppointmentType>[] = [
     {
+        id: 'day',
         accessorKey: 'start',
         header: ({ column }) => {
             return (
@@ -27,13 +30,32 @@ const appointmentTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        {content.labelSchedule}
+                        {content.labelDay}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
             )
         },
-        cell: ({ row }) => transformDateTime(row.getValue('start')),
+        cell: ({ row }) => transformDate(row.getValue('day')),
+    },
+    {
+        id: 'hour',
+        accessorFn: (row) => row.start,
+        header: ({ column }) => {
+            return (
+                <button
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === 'asc')
+                    }
+                >
+                    <span className="flex items-center gap-2">
+                        {content.labelHour}
+                        <ArrowUpDown size="12" />
+                    </span>
+                </button>
+            )
+        },
+        cell: ({ row }) => transformTime(row.getValue('hour')),
     },
     {
         accessorKey: 'patientName',
@@ -141,5 +163,7 @@ const appointmentTableColumns = (
         ),
     },
 ]
+    return showDay ? columns : columns.filter((col) => col.id !== 'day')
+}
 
 export default appointmentTableColumns
