@@ -13,6 +13,7 @@ export function fhirToPatient(patient: Patient): PatientType {
         lastName: patient.name?.[0]?.family ?? '',
         birthDate: patient.birthDate ?? '',
         email: patient.telecom?.find((t) => t.system === 'email')?.value ?? '',
+        phone: patient.telecom?.find((t) => t.system === 'phone')?.value ?? '',
         address: patient.address?.[0]?.text ?? '',
         dni:
             patient.identifier?.find((id) =>

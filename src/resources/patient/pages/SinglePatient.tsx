@@ -1,3 +1,4 @@
+import { Phone } from 'lucide-react'
 import RoleGuard from '@auth/components/RoleGuard'
 import { getAgeFromDate } from '@shared/utils/utils'
 import ButtonBack from '@shared/components/ui/ButtonBack'
@@ -20,7 +21,12 @@ const SinglePatient = ({ id }: { id: string }) => {
         <>
             <HeaderArticle
                 title={`${patient.firstName} ${patient.lastName} - ${getAgeFromDate(patient.birthDate)} ${content.textYears}`}
-            ></HeaderArticle>
+            >
+                <div className="flex gap-2 items-center">
+                    <Phone size="12" />
+                    {patient.phone}
+                </div>
+            </HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-6">
