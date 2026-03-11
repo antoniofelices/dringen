@@ -20,7 +20,7 @@ import appointmentTableColumns from '@resources/appointment/presentation/appoint
 import content from './AppointmentList.content'
 
 const AppointmentList = () => {
-    const { appointments, isPending, isError, error } = useAppointments()
+    const { todayAppointments, tomorrowAppointments, restAppointments, isPending, isError, error } = useAppointments()
     const { updateStatus } = useUpdateAppointmentStatus()
     const [filterValue, setFilterValue] = useState('')
 
@@ -59,14 +59,30 @@ const AppointmentList = () => {
                         <TabsContent value="today">
                             <DataTable<AppointmentType>
                                 columns={appointmentTableColumns(updateStatus)}
-                                data={appointments || []}
+                                data={todayAppointments}
                                 caption={content.textCaptionTable}
                                 filterColumn="patientName"
                                 filterValue={filterValue}
                             />
                         </TabsContent>
-                        <TabsContent value="tomorrow">Tomorrow</TabsContent>
-                        <TabsContent value="rest">Rest of the days</TabsContent>
+                        <TabsContent value="tomorrow">
+                            <DataTable<AppointmentType>
+                                columns={appointmentTableColumns(updateStatus)}
+                                data={tomorrowAppointments}
+                                caption={content.textCaptionTable}
+                                filterColumn="patientName"
+                                filterValue={filterValue}
+                            />
+                        </TabsContent>
+                        <TabsContent value="rest">
+                            <DataTable<AppointmentType>
+                                columns={appointmentTableColumns(updateStatus)}
+                                data={restAppointments}
+                                caption={content.textCaptionTable}
+                                filterColumn="patientName"
+                                filterValue={filterValue}
+                            />
+                        </TabsContent>
                     </div>
                 </Tabs>
             </ContentArticle>
