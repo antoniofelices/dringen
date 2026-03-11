@@ -27,6 +27,11 @@ const JS_DAY_TO_FHIR: Record<number, string> = {
     6: 'sat',
 }
 
+// FHIR extension URLs are identifiers, not endpoints. Therefore this hardcoding is a correct practice.
+// The correct FHIR practice: pick one stable URI and keep it forever. It doesn't even need to point to a real page, though if it did resolve it should serve the StructureDefinition describing the extension (useful for interoperability with other FHIR systems).
+const CALLED_EXTENSION_URL =
+    'https://dringen.app/fhir/StructureDefinition/appointment-called'
+
 const STATUS_OPTIONS = [
     { value: 'booked', label: 'Booked' },
     { value: 'arrived', label: 'Arrived' },
@@ -42,4 +47,5 @@ export {
     DAYS_AHEAD,
     JS_DAY_TO_FHIR,
     STATUS_OPTIONS,
+    CALLED_EXTENSION_URL,
 }

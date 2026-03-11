@@ -5,6 +5,7 @@ const content = {
     labelSchedule: 'Schedule',
     labelPractitionerName: 'Practitioner',
     labelStatus: 'Status',
+    labelConfirmed: 'Called',
 }
 
 export default content

@@ -47,4 +47,5 @@ export type AppointmentType = {
     practitionerId: string
     practitionerName: string
     notes: string
+    called: boolean
 }

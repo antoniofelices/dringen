@@ -35,12 +35,15 @@ export const updateAppointment = async (
     }
 }
 
-export const getListAppointments = async (): Promise<Appointment[]> => {
+export const getListAppointments = async (params?: {
+    date?: string
+}): Promise<Appointment[]> => {
     try {
         await authenticateMedplum()
 
         const bundle = await medplum.searchResources('Appointment', {
             _count: 1000,
+            ...(params?.date ? { date: `ge${params.date}` } : {}),
         })
 
         return bundle

@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown, Check } from 'lucide-react'
 import { transformDateTime } from '@shared/utils/utils'
 import {
     Select,
@@ -9,11 +9,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@shared/components/ui/base/select'
+import { Toggle } from '@shared/components/ui/base/toggle'
 import { STATUS_OPTIONS } from '@resources/appointment/config/config'
 import content from './appointmentTable.content'
 
 const appointmentTableColumns = (
-    onStatusChange: (appointmentId: string, newStatus: string) => void
+    onStatusChange: (appointmentId: string, newStatus: string) => void,
+    onCalledChange: (appointmentId: string, called: boolean) => void
 ): ColumnDef<AppointmentType>[] => [
     {
         accessorKey: 'patientName',
@@ -111,6 +113,31 @@ const appointmentTableColumns = (
                     ))}
                 </SelectContent>
             </Select>
+        ),
+    },
+    {
+        accessorKey: 'called',
+        header: () => {
+            return (
+                <span className="flex items-center gap-2">
+                    {content.labelConfirmed}
+                </span>
+            )
+        },
+        cell: ({ row }) => (
+            <Toggle
+                aria-label="Toggle called"
+                size="xs"
+                variant="outline"
+                className="rounded-full"
+                pressed={row.original.called}
+                onPressedChange={(pressed) =>
+                    onCalledChange(row.original.id, pressed)
+                }
+            >
+                <Check className="group-data-[state=on]/toggle:fill-foreground" />
+                <span className="sr-only">{content.labelConfirmed}</span>
+            </Toggle>
         ),
     },
 ]
