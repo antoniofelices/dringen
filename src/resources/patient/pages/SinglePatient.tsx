@@ -8,6 +8,7 @@ import PatientDemographics from '@resources/patient/components/PatientDemographi
 import AllergyIntoleranceList from '@resources/allergy-intolerance/components/AllergyIntoleranceList'
 import FamilyMemberHistoryList from '@resources/family-member-history/components/FamilyMemberHistoryList'
 import { EncounterList } from '@workflows/clinical-encounter/index'
+import AppointmentListByPatient from '@resources/appointment/components/AppointmentListByPatient'
 import content from './SinglePatient.content'
 
 const SinglePatient = ({ id }: { id: string }) => {
@@ -18,11 +19,11 @@ const SinglePatient = ({ id }: { id: string }) => {
     return (
         <>
             <HeaderArticle
-                title={`${patient.firstName} - ${getAgeFromDate(patient.birthDate)} ${content.textYears}`}
+                title={`${patient.firstName} ${patient.lastName} - ${getAgeFromDate(patient.birthDate)} ${content.textYears}`}
             ></HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
-                    <div className="col-span-3">
+                    <div className="col-span-6">
                         <PatientDemographics patientData={patient} />
                     </div>
                     <RoleGuard allowedRoles={['doctor']}>
@@ -36,6 +37,10 @@ const SinglePatient = ({ id }: { id: string }) => {
                             <EncounterList patientId={id} />
                         </div>
                     </RoleGuard>
+
+                    <div className="col-span-6">
+                        <AppointmentListByPatient />
+                    </div>
                 </div>
             </ContentArticle>
             <ButtonBack />
