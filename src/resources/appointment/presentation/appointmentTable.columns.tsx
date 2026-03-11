@@ -15,9 +15,12 @@ import content from './appointmentTable.content'
 
 const appointmentTableColumns = (
     onStatusChange: (appointmentId: string, newStatus: string) => void,
-    onCalledChange: (appointmentId: string, called: boolean) => void
-): ColumnDef<AppointmentType>[] => [
+    onCalledChange: (appointmentId: string, called: boolean) => void,
+    showDay = true
+): ColumnDef<AppointmentType>[] => {
+    const columns: ColumnDef<AppointmentType>[] = [
     {
+        id: 'day',
         accessorKey: 'start',
         header: ({ column }) => {
             return (
@@ -33,7 +36,7 @@ const appointmentTableColumns = (
                 </button>
             )
         },
-        cell: ({ row }) => transformDate(row.getValue('start')),
+        cell: ({ row }) => transformDate(row.getValue('day')),
     },
     {
         id: 'hour',
@@ -160,5 +163,7 @@ const appointmentTableColumns = (
         ),
     },
 ]
+    return showDay ? columns : columns.filter((col) => col.id !== 'day')
+}
 
 export default appointmentTableColumns
