@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { ArrowUpDown, Check } from 'lucide-react'
-import { transformDateTime } from '@shared/utils/utils'
+import { transformDate, transformTime } from '@shared/utils/utils'
 import {
     Select,
     SelectContent,
@@ -27,13 +27,32 @@ const appointmentTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        {content.labelSchedule}
+                        {content.labelDay}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
             )
         },
-        cell: ({ row }) => transformDateTime(row.getValue('start')),
+        cell: ({ row }) => transformDate(row.getValue('start')),
+    },
+    {
+        id: 'hour',
+        accessorFn: (row) => row.start,
+        header: ({ column }) => {
+            return (
+                <button
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === 'asc')
+                    }
+                >
+                    <span className="flex items-center gap-2">
+                        {content.labelHour}
+                        <ArrowUpDown size="12" />
+                    </span>
+                </button>
+            )
+        },
+        cell: ({ row }) => transformTime(row.getValue('hour')),
     },
     {
         accessorKey: 'patientName',
