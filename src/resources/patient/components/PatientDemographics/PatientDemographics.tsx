@@ -45,7 +45,7 @@ const PatientDemographics = ({
             </CardHeader>
             <CardContent>
                 {!isEditing ? (
-                    <DataDisplayList items={dataItems} />
+                    <DataDisplayList items={dataItems} className="flex gap-2" />
                 ) : (
                     <PatientDemographicsForm
                         patientData={patientData}
