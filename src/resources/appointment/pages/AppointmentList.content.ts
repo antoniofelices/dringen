@@ -9,7 +9,10 @@ const content = {
     textButtonDeleteEvent: 'Delete',
     textToastSuccessDelete: 'Appointment deleted succesfuly',
     textCaptionTable: 'A list of appointments',
-    textFilterPlaceholder: 'Filter by patient family name...',
+    textFilterPlaceholder: 'Filter by patient family name…',
+    textToday: 'Today',
+    textTomorrow: 'Tomorrow',
+    textRest: 'Rest of the days',
 }
 
 export default content
