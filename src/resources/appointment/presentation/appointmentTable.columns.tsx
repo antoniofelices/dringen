@@ -18,6 +18,24 @@ const appointmentTableColumns = (
     onCalledChange: (appointmentId: string, called: boolean) => void
 ): ColumnDef<AppointmentType>[] => [
     {
+        accessorKey: 'start',
+        header: ({ column }) => {
+            return (
+                <button
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === 'asc')
+                    }
+                >
+                    <span className="flex items-center gap-2">
+                        {content.labelSchedule}
+                        <ArrowUpDown size="12" />
+                    </span>
+                </button>
+            )
+        },
+        cell: ({ row }) => transformDateTime(row.getValue('start')),
+    },
+    {
         accessorKey: 'patientName',
         header: ({ column }) => {
             return (
@@ -31,16 +49,6 @@ const appointmentTableColumns = (
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
-            )
-        },
-    },
-    {
-        accessorKey: 'patientPhone',
-        header: () => {
-            return (
-                <span className="flex items-center gap-2">
-                    {content.labelPatientPhone}
-                </span>
             )
         },
     },
@@ -62,22 +70,39 @@ const appointmentTableColumns = (
         },
     },
     {
-        accessorKey: 'start',
-        header: ({ column }) => {
+        accessorKey: 'patientPhone',
+        header: () => {
             return (
-                <button
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === 'asc')
-                    }
-                >
-                    <span className="flex items-center gap-2">
-                        {content.labelSchedule}
-                        <ArrowUpDown size="12" />
-                    </span>
-                </button>
+                <span className="flex items-center gap-2">
+                    {content.labelPatientPhone}
+                </span>
             )
         },
-        cell: ({ row }) => transformDateTime(row.getValue('start')),
+    },
+    {
+        accessorKey: 'called',
+        header: () => {
+            return (
+                <span className="flex items-center gap-2">
+                    {content.labelConfirmed}
+                </span>
+            )
+        },
+        cell: ({ row }) => (
+            <Toggle
+                aria-label="Toggle called"
+                size="xs"
+                variant="outline"
+                className="rounded-full"
+                pressed={row.original.called}
+                onPressedChange={(pressed) =>
+                    onCalledChange(row.original.id, pressed)
+                }
+            >
+                <Check className="group-data-[state=on]/toggle:fill-foreground" />
+                <span className="sr-only">{content.labelConfirmed}</span>
+            </Toggle>
+        ),
     },
     {
         accessorKey: 'status',
@@ -113,31 +138,6 @@ const appointmentTableColumns = (
                     ))}
                 </SelectContent>
             </Select>
-        ),
-    },
-    {
-        accessorKey: 'called',
-        header: () => {
-            return (
-                <span className="flex items-center gap-2">
-                    {content.labelConfirmed}
-                </span>
-            )
-        },
-        cell: ({ row }) => (
-            <Toggle
-                aria-label="Toggle called"
-                size="xs"
-                variant="outline"
-                className="rounded-full"
-                pressed={row.original.called}
-                onPressedChange={(pressed) =>
-                    onCalledChange(row.original.id, pressed)
-                }
-            >
-                <Check className="group-data-[state=on]/toggle:fill-foreground" />
-                <span className="sr-only">{content.labelConfirmed}</span>
-            </Toggle>
         ),
     },
 ]
