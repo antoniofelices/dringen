@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
-import { ArrowUpDown, Check, X } from 'lucide-react'
+import { ArrowUpDown, Check } from 'lucide-react'
 import { transformDateTime } from '@shared/utils/utils'
 import {
     Select,
