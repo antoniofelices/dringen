@@ -39,7 +39,7 @@ const SinglePatient = ({ id }: { id: string }) => {
                     </RoleGuard>
 
                     <div className="col-span-6">
-                        <AppointmentListByPatient />
+                        <AppointmentListByPatient patientId={id} />
                     </div>
                 </div>
             </ContentArticle>

@@ -35,6 +35,25 @@ export const updateAppointment = async (
     }
 }
 
+export const getAppointmentsByPatient = async (
+    patientId: string
+): Promise<Appointment[]> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.searchResources('Appointment', {
+            actor: `Patient/${patientId}`,
+            _count: 1000,
+        })
+    } catch (error) {
+        logger.error('Error fetching appointments from Server', error, {
+            component: 'appointment.service',
+            action: 'getAppointmentsByPatient',
+        })
+        throw error
+    }
+}
+
 export const getListAppointments = async (params?: {
     date?: string
 }): Promise<Appointment[]> => {

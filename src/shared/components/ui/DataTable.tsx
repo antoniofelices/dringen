@@ -28,8 +28,8 @@ type DataTableProps<TData> = {
     columns: ColumnDef<TData>[]
     data: TData[]
     caption?: string
-    filterColumn: string
-    filterValue: string
+    filterColumn?: string
+    filterValue?: string
 }
 
 const DataTable = <TData,>({
@@ -45,7 +45,10 @@ const DataTable = <TData,>({
     const [sorting, setSorting] = useState<SortingState>([])
 
     const columnFilters = useMemo<ColumnFiltersState>(
-        () => (filterValue ? [{ id: filterColumn, value: filterValue }] : []),
+        () =>
+            filterColumn && filterValue
+                ? [{ id: filterColumn, value: filterValue }]
+                : [],
         [filterColumn, filterValue]
     )
 
