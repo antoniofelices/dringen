@@ -1,7 +1,9 @@
 import type { z } from 'zod'
 import type { bookAppointmentSchema } from '@resources/appointment/schemas/bookAppointment.schema'
+import type { addNewAppointmentSchema } from '@resources/appointment/schemas/addNewAppointment.schema'
 
 export type BookAppointmentFormType = z.infer<typeof bookAppointmentSchema>
+export type AddNewAppointmentType = z.infer<typeof addNewAppointmentSchema>
 
 export type SelectedSlot = {
     date: Date

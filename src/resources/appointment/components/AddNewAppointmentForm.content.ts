@@ -1,5 +1,5 @@
 const content = {
-    title: 'Register Appointment Form',
+    title: 'Form',
     errorPatientRequired: 'Please use a valid email address',
     errorPhysicianRequired: 'The email address is required',
     errorInvalidTime: 'Invalid time format',
