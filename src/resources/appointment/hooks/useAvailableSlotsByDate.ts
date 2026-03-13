@@ -15,10 +15,17 @@ export const useAvailableSlotsByDate = (physicianId: string, date: Date) => {
 
     const { availMap } = useAvailableSlots(availableTime, appointments)
 
-    const daySlots = availMap[getKey(date)] ?? {}
+    const isDateDisabled = (d: Date) => {
+        const daySlots = availMap[getKey(d)]
+        if (!daySlots) return true
+        return !Object.values(daySlots).some(Boolean)
+    }
 
-    return Object.entries(daySlots)
+    const daySlots = availMap[getKey(date)] ?? {}
+    const slotOptions = Object.entries(daySlots)
         .filter(([, available]) => available)
         .map(([time]) => time)
         .sort()
+
+    return { slotOptions, isDateDisabled }
 }

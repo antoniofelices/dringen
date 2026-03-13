@@ -63,7 +63,7 @@ export const useAddNewAppointmentForm = ({
 
     const { patients } = usePatients()
     const { physicians } = usePhysicians()
-    const slotOptions = useAvailableSlotsByDate(physicianId, appointmentDate)
+    const { slotOptions, isDateDisabled } = useAvailableSlotsByDate(physicianId, appointmentDate)
 
     const patientOptions = (patients ?? [])
         .filter((p) => {
@@ -119,6 +119,7 @@ export const useAddNewAppointmentForm = ({
         patientOptions,
         physicianOptions,
         slotOptions,
+        isDateDisabled,
         setPatientSearch,
         setPhysicianSearch,
     }

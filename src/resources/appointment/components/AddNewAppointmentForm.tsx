@@ -29,6 +29,7 @@ const AddNewAppointmentForm = ({
         patientOptions,
         physicianOptions,
         slotOptions,
+        isDateDisabled,
     } = useAddNewAppointmentForm({ initialDate, onSuccess })
 
     return (
@@ -64,6 +65,7 @@ const AddNewAppointmentForm = ({
                                 control={form.control}
                                 fieldName="appointmentDate"
                                 label={content.labelDate}
+                                disabled={isDateDisabled}
                             />
                             <FormFieldSelect
                                 control={form.control}
