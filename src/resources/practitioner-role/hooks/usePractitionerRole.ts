@@ -8,6 +8,7 @@ export const usePractitionerRoleDetail = (practitionerId: string) => {
         queryFn: () => getPractitionerRoleByPractitioner(practitionerId),
         select: (data) =>
             data ? fhirToPractitionerRoleDetail(data) : undefined,
+        enabled: !!practitionerId,
     })
 
     return {

@@ -1,21 +1,19 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
+import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
+import { useAddNewAppointmentForm } from '@resources/appointment/hooks/useAddNewAppointmentForm'
 import content from './AddNewAppointmentForm.content'
-import { addNewAppointmentSchema } from '@resources/appointment/schemas/addNewAppointment.schema'
-import type { AddNewAppointmentType } from '@resources/appointment/types/appointment.model'
 
-type RegisterAppointmentFormProps = {
+type AddNewAppointmentFormProps = {
     onSuccess?: () => void
     initialDate?: Date | null
 }
@@ -23,23 +21,15 @@ type RegisterAppointmentFormProps = {
 const AddNewAppointmentForm = ({
     onSuccess,
     initialDate,
-}: RegisterAppointmentFormProps) => {
-    const defaultValues = {
-        patient: '',
-        physician: '',
-        appointmentDate: initialDate || new Date(),
-        appointmentTime: '10:00',
-        notes: '',
-    }
-
-    const form = useForm<AddNewAppointmentType>({
-        resolver: zodResolver(addNewAppointmentSchema),
-        defaultValues: defaultValues,
-    })
-
-    const onSubmit = () => {
-        return
-    }
+}: AddNewAppointmentFormProps) => {
+    const {
+        form,
+        onSubmit,
+        isSubmitting,
+        patientOptions,
+        physicianOptions,
+        slotOptions,
+    } = useAddNewAppointmentForm({ initialDate, onSuccess })
 
     return (
         <Card>
@@ -50,17 +40,14 @@ const AddNewAppointmentForm = ({
             </CardHeader>
             <CardContent>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <form onSubmit={onSubmit}>
                         <FormFieldCombobox
                             control={form.control}
                             textCommandEmpty={content.textNoCommandPatientFound}
                             fieldName="patient"
                             label={content.labelPatient}
                             placeholder={content.placeholderPatient}
-                            options={[
-                                { label: 'patient-1', value: 'patient-1' },
-                                { label: 'patient-2', value: 'patient-2' },
-                            ]}
+                            options={patientOptions}
                         />
                         <FormFieldCombobox
                             control={form.control}
@@ -70,22 +57,22 @@ const AddNewAppointmentForm = ({
                             fieldName="physician"
                             label={content.labelPhysician}
                             placeholder={content.placeholderPhysician}
-                            options={[
-                                { label: 'physician-1', value: 'physician-1' },
-                                { label: 'physician-2', value: 'physician-2' },
-                            ]}
+                            options={physicianOptions}
                         />
-                        <FormFieldCalendar
-                            control={form.control}
-                            fieldName="appointmentDate"
-                            label={content.labelDate}
-                        />
-                        <FormFieldInput
-                            control={form.control}
-                            fieldName="appointmentTime"
-                            label={content.labelTime}
-                            type="time"
-                        />
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormFieldCalendar
+                                control={form.control}
+                                fieldName="appointmentDate"
+                                label={content.labelDate}
+                            />
+                            <FormFieldSelect
+                                control={form.control}
+                                fieldName="appointmentTime"
+                                label={content.labelTime}
+                                placeholder={content.placeholderTime}
+                                options={slotOptions}
+                            />
+                        </div>
                         <FormFieldInput
                             control={form.control}
                             fieldName="notes"
@@ -93,7 +80,7 @@ const AddNewAppointmentForm = ({
                             type="text"
                         />
                         <Button type="submit" className="w-full mt-4">
-                            {form.formState.isSubmitting
+                            {isSubmitting
                                 ? content.textButtonSending
                                 : content.textButtonSend}
                         </Button>

@@ -51,3 +51,8 @@ export type AppointmentType = {
     notes: string
     called: boolean
 }
+
+export type UseAddNewAppointmentFormProps = {
+    initialDate?: Date | null
+    onSuccess?: () => void
+}
