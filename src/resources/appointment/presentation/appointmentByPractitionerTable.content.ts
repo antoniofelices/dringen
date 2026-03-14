@@ -3,6 +3,7 @@ const content = {
     labelHour: 'Hour',
     labelPatientName: 'Patient',
     labelStatus: 'Status',
+    labelEdit: 'Edit',
 }
 
 export default content

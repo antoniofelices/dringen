@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router'
 import DataTable from '@shared/components/ui/DataTable'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import Loading from '@shared/components/ui/Loading'
@@ -17,6 +18,7 @@ const AppointmentListByPractitioner = ({
 }: {
     practitionerId: string
 }) => {
+    const navigate = useNavigate()
     const { todayAppointments, isPending, isError, error } =
         useAppointmentsByPractitioner(practitionerId)
 
@@ -34,7 +36,7 @@ const AppointmentListByPractitioner = ({
                 </CardHeader>
                 <CardContent>
                     <DataTable<AppointmentType>
-                        columns={appointmentByPractitionerTableColumns()}
+                        columns={appointmentByPractitionerTableColumns(navigate)}
                         data={todayAppointments}
                     />
                 </CardContent>

@@ -1,10 +1,13 @@
 import type { ColumnDef } from '@tanstack/react-table'
+import type { NavigateFn } from '@tanstack/react-router'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown, ArrowRight } from 'lucide-react'
 import { transformTime } from '@shared/utils/utils'
 import content from './appointmentByPractitionerTable.content'
 
-const appointmentByPractitionerTableColumns = (): ColumnDef<AppointmentType>[] => [
+const appointmentByPractitionerTableColumns = (
+    navigate: NavigateFn
+): ColumnDef<AppointmentType>[] => [
     {
         id: 'hour',
         accessorKey: 'start',
@@ -54,6 +57,19 @@ const appointmentByPractitionerTableColumns = (): ColumnDef<AppointmentType>[] =
             </button>
         ),
         cell: ({ row }) => row.original.status,
+    },
+    {
+        accessorKey: 'patientId',
+        header: content.labelEdit,
+        cell: ({ row }) => (
+            <button
+                onClick={() =>
+                    navigate({ to: `/patient/${row.original.patientId}` })
+                }
+            >
+                <ArrowRight size="16" />
+            </button>
+        ),
     },
 ]
 
