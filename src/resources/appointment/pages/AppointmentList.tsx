@@ -66,7 +66,7 @@ const AppointmentList = () => {
                             {content.textRest}
                         </TabsTrigger>
                     </TabsList>
-                    <div className="mt-4">
+                    <div>
                         <TabsContent value="today">
                             <DataTable<AppointmentType>
                                 columns={appointmentTableColumns(
