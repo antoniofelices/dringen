@@ -17,6 +17,7 @@ import {
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
 import DrawerWrapper from '@/shared/components/ui/DrawerWrapper'
+import AddNewAppointmentFormByPatient from '@resources/appointment/components/AddNewAppointmentFormByPatient'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { useAppointmentsByPatient } from '@resources/appointment/hooks/useAppointmentsByPatient'
 import { useUpdateAppointmentStatus } from '@resources/appointment/hooks/useUpdateAppointmentStatus'
@@ -91,7 +92,10 @@ const AppointmentListByPatient = ({ patientId }: { patientId: string }) => {
                 title={content.textAddDrawerTitle}
                 description={content.textAddDrawerDescription}
             >
-                A form to add a new appointment for this patient
+                <AddNewAppointmentFormByPatient
+                    patientId={patientId}
+                    onSuccess={() => setIsAddDrawerOpen(false)}
+                />
             </DrawerWrapper>
         </>
     )
