@@ -39,6 +39,8 @@ const STATUS_OPTIONS = [
     { value: 'noshow', label: 'No Show' },
 ]
 
+const DEBOUNCE_MS = 300
+
 export {
     SLOT_INTERVAL,
     DAYS_VISIBLE,
@@ -48,4 +50,5 @@ export {
     JS_DAY_TO_FHIR,
     STATUS_OPTIONS,
     CALLED_EXTENSION_URL,
+    DEBOUNCE_MS,
 }

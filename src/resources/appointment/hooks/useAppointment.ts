@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { getListAppointments } from '@resources/appointment/services/appointment.service'
 import { getListPatients } from '@resources/patient/services/patient.service'
 import { getListPractitioners } from '@resources/practitioner/services/practitioner.service'
 import { fhirToAppointment } from '@resources/appointment/domain/appointment.adapter'
+import { getListAppointments } from '@resources/appointment/services/appointment.service'
 import {
     addDays,
     isSameDay,

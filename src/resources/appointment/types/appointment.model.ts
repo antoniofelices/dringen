@@ -1,7 +1,13 @@
 import type { z } from 'zod'
 import type { bookAppointmentSchema } from '@resources/appointment/schemas/bookAppointment.schema'
+import type { addNewAppointmentSchema } from '@resources/appointment/schemas/addNewAppointment.schema'
+import type { addNewAppointmentByPatientSchema } from '@resources/appointment/schemas/addNewAppointmentByPatient.schema'
 
 export type BookAppointmentFormType = z.infer<typeof bookAppointmentSchema>
+export type AddNewAppointmentType = z.infer<typeof addNewAppointmentSchema>
+export type AddNewAppointmentByPatientType = z.infer<
+    typeof addNewAppointmentByPatientSchema
+>
 
 export type SelectedSlot = {
     date: Date
@@ -48,4 +54,19 @@ export type AppointmentType = {
     practitionerName: string
     notes: string
     called: boolean
+}
+
+export type UseAddNewAppointmentFormProps = {
+    initialDate?: Date | null
+    onSuccess?: () => void
+}
+
+export type UseAddNewAppointmentFormByPatientProps = {
+    patientId: string
+    onSuccess?: () => void
+}
+
+export type AddNewAppointmentFormByPatientProps = {
+    patientId: string
+    onSuccess?: () => void
 }

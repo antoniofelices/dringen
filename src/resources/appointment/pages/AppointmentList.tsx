@@ -47,7 +47,9 @@ const AppointmentList = () => {
                         placeholder={content.textFilterPlaceholder}
                     />
                     <Button asChild size="sm">
-                        <Link to="/patient/add">{content.textButtonAdd}</Link>
+                        <Link to="/appointment/add">
+                            {content.textButtonAdd}
+                        </Link>
                     </Button>
                 </div>
             </HeaderArticle>
@@ -64,7 +66,7 @@ const AppointmentList = () => {
                             {content.textRest}
                         </TabsTrigger>
                     </TabsList>
-                    <div className="mt-4">
+                    <div>
                         <TabsContent value="today">
                             <DataTable<AppointmentType>
                                 columns={appointmentTableColumns(

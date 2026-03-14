@@ -21,6 +21,7 @@ type FormFieldProps<T extends FieldValues> = {
     className?: string
     control: Control<T>
     description?: string
+    disabled?: (date: Date) => boolean
     fieldName: Path<T>
     label: string
 }
@@ -29,6 +30,7 @@ const FormFieldCalendar = <T extends FieldValues>({
     className = 'mb-5',
     control,
     description,
+    disabled,
     fieldName,
     label,
 }: FormFieldProps<T>) => {
@@ -65,7 +67,8 @@ const FormFieldCalendar = <T extends FieldValues>({
                                     selected={field.value}
                                     onSelect={field.onChange}
                                     disabled={(date) =>
-                                        date < new Date('2000-01-01')
+                                        date < new Date('2000-01-01') ||
+                                        (disabled?.(date) ?? false)
                                     }
                                     captionLayout="dropdown"
                                 />
