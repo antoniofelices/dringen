@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { usePractitionerDetails } from '@resources/practitioner/hooks/usePractitionerDetails'
+import { DAYS_VISIBLE } from '@resources/appointment/config/config'
 import { useAvailableSlots } from '@resources/appointment/hooks/useAvailableSlots'
 import { getAppointmentsByPractitioner } from '@resources/appointment/services/bookAppointment'
-import { DAYS_VISIBLE } from '@resources/appointment/config/config'
 import { addDays } from '@resources/appointment/utils/clinicalAppointment.utils'
 import type { SelectedSlot } from '@resources/appointment/types/appointment.model'
 

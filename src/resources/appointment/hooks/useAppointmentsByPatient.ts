@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { getAppointmentsByPatient } from '@resources/appointment/services/appointment.service'
 import { getListPractitioners } from '@resources/practitioner/services/practitioner.service'
 import { fhirToAppointment } from '@resources/appointment/domain/appointment.adapter'
+import { getAppointmentsByPatient } from '@resources/appointment/services/appointment.service'
 import {
     byStart,
     byStartDesc,
