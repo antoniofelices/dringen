@@ -47,7 +47,9 @@ const AppointmentList = () => {
                         placeholder={content.textFilterPlaceholder}
                     />
                     <Button asChild size="sm">
-                        <Link to="/patient/add">{content.textButtonAdd}</Link>
+                        <Link to="/appointment/add">
+                            {content.textButtonAdd}
+                        </Link>
                     </Button>
                 </div>
             </HeaderArticle>
