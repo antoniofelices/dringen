@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
+import type { Appointment } from '@medplum/fhirtypes'
 import { usePhysicians } from '@resources/practitioner/hooks/useGetPractitioner'
 import { SLOT_INTERVAL } from '@resources/appointment/config/config'
 import { useAvailableSlotsByDate } from '@resources/appointment/hooks/useAvailableSlotsByDate'
@@ -64,13 +65,61 @@ export const useAddNewAppointmentFormByPatient = ({
                 data.notes
             )
         },
+        onMutate: async (data) => {
+            const [h, m] = data.appointmentTime.split(':').map(Number)
+            const startDate = new Date(data.appointmentDate)
+            startDate.setHours(h, m, 0, 0)
+            const endDate = new Date(startDate)
+            endDate.setMinutes(endDate.getMinutes() + SLOT_INTERVAL)
+
+            const optimisticAppointment: Appointment = {
+                resourceType: 'Appointment',
+                status: 'booked',
+                start: startDate.toISOString(),
+                end: endDate.toISOString(),
+                participant: [
+                    {
+                        actor: { reference: `Patient/${patientId}` },
+                        status: 'accepted',
+                    },
+                    {
+                        actor: { reference: `Practitioner/${data.physician}` },
+                        status: 'accepted',
+                    },
+                ],
+            }
+
+            await queryClient.cancelQueries({
+                queryKey: ['appointments', data.physician],
+            })
+
+            const previousSlots = queryClient.getQueryData<Appointment[]>([
+                'appointments',
+                data.physician,
+            ])
+
+            queryClient.setQueryData<Appointment[]>(
+                ['appointments', data.physician],
+                (old) => [...(old ?? []), optimisticAppointment]
+            )
+
+            return { previousSlots, physicianId: data.physician }
+        },
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['listAppointments'] })
+            queryClient.invalidateQueries({ queryKey: ['appointmentsByPatient'] })
             queryClient.invalidateQueries({ queryKey: ['appointments'] })
             toast.success(content.textToastSuccess)
             form.reset()
             onSuccess?.()
         },
-        onError: () => {
+        onError: (_, __, context) => {
+            if (context?.previousSlots !== undefined) {
+                queryClient.setQueryData(
+                    ['appointments', context.physicianId],
+                    context.previousSlots
+                )
+            }
             toast.error(content.textToastFail)
         },
     })
