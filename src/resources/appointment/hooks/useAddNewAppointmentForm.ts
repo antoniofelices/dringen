@@ -143,6 +143,7 @@ export const useAddNewAppointmentForm = ({
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['listAppointments'] })
             queryClient.invalidateQueries({ queryKey: ['appointmentsByPatient'] })
+            queryClient.invalidateQueries({ queryKey: ['appointmentsByPractitioner'] })
             queryClient.invalidateQueries({ queryKey: ['appointments'] })
             toast.success(content.textToastSuccess)
             form.reset()

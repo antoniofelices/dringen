@@ -1,26 +1,24 @@
+import { Calendar } from 'lucide-react'
+import { theDateAndTime } from '@shared/utils/utils'
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
+import AppointmentListByPractitioner from '@resources/appointment/components/AppointmentListByPractitioner'
 import content from './ScheduleSinglePhysician.content'
 
 const ScheduleSinglePhysician = ({ id }: { id: string }) => {
     return (
         <>
-            <HeaderArticle title={content.title} />
+            <HeaderArticle title={content.title}>
+                <div className="flex gap-2 items-center">
+                    <Calendar size="12" />
+                    {theDateAndTime()}
+                </div>
+            </HeaderArticle>
             <ContentArticle>
-                <p>Agenda del dia de Un Medico Singular.</p>
-                <hr className="my-4" />
-                <p>Metaboxes:</p>
-                <ul className="list-disc my-2">
-                    <li>
-                        Agenda del dia. Listado de citas, mas sencillo que
-                        Appointments, solo: hora + nombre paciente
-                    </li>
-                    <li>
-                        Notas. Input donde se puede añadir texto. Posibilidad de
-                        borrar nota.
-                    </li>
-                </ul>
+                <div className="grid grid-cols-2 gap-4">
+                    <AppointmentListByPractitioner practitionerId={id} />
+                </div>
             </ContentArticle>
             <ButtonBack />
         </>

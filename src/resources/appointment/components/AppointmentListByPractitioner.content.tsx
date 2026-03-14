@@ -1,5 +1,5 @@
 const content = {
-    title: "Today's Schedule",
+    title: 'Appointments',
 }
 
 export default content

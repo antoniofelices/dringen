@@ -5,6 +5,16 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
+export function theDateAndTime() {
+    const date = new Date()
+    const day = date.toLocaleDateString('es-ES')
+    const time = date.toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+    })
+    return `${day} - ${time}`
+}
+
 export function transformDate(value: string): string {
     const date = new Date(value)
     if (isNaN(date.getTime())) return ''
