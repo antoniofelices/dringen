@@ -54,6 +54,9 @@ export const useBookAppointment = (
                 ['appointments', practitionerId],
                 (old = []) => [...old, createdAppointment]
             )
+            queryClient.invalidateQueries({ queryKey: ['appointmentsByPractitioner'] })
+            queryClient.invalidateQueries({ queryKey: ['listAppointments'] })
+            queryClient.invalidateQueries({ queryKey: ['appointmentsByPatient'] })
             toast.success(content.textToastSuccess)
             onSuccess?.()
         },
