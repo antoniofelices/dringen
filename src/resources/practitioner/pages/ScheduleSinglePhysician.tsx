@@ -3,7 +3,7 @@ import { theDateAndTime } from '@shared/utils/utils'
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
-import NotesPractitioner from '@resources/practitioner/components/NotesPractitioner'
+import NotesPractitioner from '@resources/basic/physician-note/components/NotesPractitioner'
 import AppointmentListByPractitioner from '@resources/appointment/components/AppointmentListByPractitioner'
 import content from './ScheduleSinglePhysician.content'
 
