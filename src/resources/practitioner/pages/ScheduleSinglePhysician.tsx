@@ -19,7 +19,7 @@ const ScheduleSinglePhysician = ({ id }: { id: string }) => {
             <ContentArticle>
                 <div className="grid grid-cols-2 gap-4">
                     <AppointmentListByPractitioner practitionerId={id} />
-                    <NotesPractitioner />
+                    <NotesPractitioner practitionerId={id} />
                 </div>
             </ContentArticle>
             <ButtonBack />
