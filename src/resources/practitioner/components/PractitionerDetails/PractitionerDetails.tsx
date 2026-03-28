@@ -1,4 +1,5 @@
 import { X } from 'lucide-react'
+import RoleGuard from '@auth/components/RoleGuard'
 import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
@@ -70,11 +71,17 @@ const PractitionerDetails = ({
                 <CardTitle>
                     <h2 className="font-extrabold">{content.title}</h2>
                 </CardTitle>
-                <CardAction>
-                    <Button size="xs" variant="outline" onClick={handleToggle}>
-                        {!isEditing ? <>{content.textButtonEdit}</> : <X />}
-                    </Button>
-                </CardAction>
+                <RoleGuard allowedRoles={['administrative_hr']}>
+                    <CardAction>
+                        <Button
+                            size="xs"
+                            variant="outline"
+                            onClick={handleToggle}
+                        >
+                            {!isEditing ? <>{content.textButtonEdit}</> : <X />}
+                        </Button>
+                    </CardAction>
+                </RoleGuard>
             </CardHeader>
             <CardContent>
                 {!isEditing ? (
