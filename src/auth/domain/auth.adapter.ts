@@ -1,16 +1,17 @@
-import type { PractitionerRole } from '@medplum/fhirtypes'
-import type { UserRoleType } from '@auth/types/auth.model'
+import type { UserRoleType, AuthMeAccessPolicy } from '@auth/types/auth.model'
 
-export function fhirRoleToUserRole(
-    practitionerRole: PractitionerRole
+export function accessPolicyToUserRole(
+    accessPolicy: AuthMeAccessPolicy | undefined
 ): UserRoleType | null {
-    const code = practitionerRole.code?.[0]?.coding?.[0]?.code
+    const policyName = accessPolicy?.basedOn?.[0]?.display
 
-    switch (code) {
-        case '224608005':
-            return 'administrative'
-        case 'doctor':
+    switch (policyName) {
+        case 'Doctor Policy':
             return 'doctor'
+        case 'Administrative Policy':
+            return 'administrative'
+        case 'Administrative HR Policy':
+            return 'administrative_hr'
         default:
             return null
     }

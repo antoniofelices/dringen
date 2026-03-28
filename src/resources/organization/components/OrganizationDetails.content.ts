@@ -8,6 +8,7 @@ const content = {
     labelGeneralEmail: 'General Email',
     labelAdminPhone: 'Admin Phone',
     labelAdminEmail: 'Admin Email',
+    textButtonEdit: 'Edit',
 }
 
 export default content
