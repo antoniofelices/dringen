@@ -13,10 +13,12 @@ import { useAllergyIntoleranceList } from '@resources/allergy-intolerance/hooks/
 import AllergyIntoleranceDetail from './AllergyIntoleranceDetail'
 import AllergyIntoleranceForm from './AllergyIntoleranceForm'
 import { criticalityColor } from '@resources/allergy-intolerance/presentation/AllergyIntoleranceList.colors'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './AllergyIntoleranceList.content'
 
 const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
-    const { allergyIntolerances, isPending, isError } =
+    const { allergyIntolerances, isPending, isError, error } =
         useAllergyIntoleranceList(patientId)
     const [selectedAllergyId, setSelectedAllergyId] = useState<string | null>(
         null
@@ -24,13 +26,8 @@ const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
 
     const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false)
 
-    if (isPending) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
-
-    if (isError) {
-        return <p className="text-sm text-red-500">{content.textError}</p>
-    }
+    if (isPending) return <Loading />
+    if (isError && error) return <ErrorApi message={error.message} />
 
     return (
         <>

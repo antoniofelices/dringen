@@ -6,8 +6,6 @@ const content = {
     labelStatus: 'Status',
     labelDeceased: 'Deceased',
     labelNote: 'Notes',
-    textLoading: 'Loading...',
-    textError: 'Could not load family member history details',
     textYes: 'Yes',
     textNo: 'No',
 }

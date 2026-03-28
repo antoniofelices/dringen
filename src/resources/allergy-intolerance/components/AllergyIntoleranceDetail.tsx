@@ -7,6 +7,8 @@ import {
     TabsTrigger,
 } from '@shared/components/ui/base/tabs'
 import AllergyIntoleranceForm from './AllergyIntoleranceForm'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './AllergyIntoleranceDetail.content'
 
 type AllergyIntoleranceDetailProps = {
@@ -20,16 +22,12 @@ const AllergyIntoleranceDetail = ({
     patientId,
     onSuccess,
 }: AllergyIntoleranceDetailProps) => {
-    const { allergyIntolerance, isPending, isError } =
+    const { allergyIntolerance, isPending, isError, error } =
         useAllergyIntolerance(allergyId)
 
-    if (isPending) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
-
-    if (isError || !allergyIntolerance) {
-        return <p className="text-sm text-red-500">{content.textError}</p>
-    }
+    if (isPending) return <Loading />
+    if (isError && error) return <ErrorApi message={error.message} />
+    if (!allergyIntolerance) return null
 
     const dataItems = [
         { label: content.labelSubstance, value: allergyIntolerance.substance },

@@ -8,6 +8,8 @@ import {
 } from '@shared/components/ui/base/tabs'
 import FamilyMemberHistoryForm from './FamilyMemberHistoryForm'
 import type { FamilyMemberHistoryDetailProps } from '@resources/family-member-history/types/familyMemberHistory.model'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './FamilyMemberHistoryDetail.content'
 
 const FamilyMemberHistoryDetail = ({
@@ -15,16 +17,12 @@ const FamilyMemberHistoryDetail = ({
     patientId,
     onSuccess,
 }: FamilyMemberHistoryDetailProps) => {
-    const { familyMemberHistory, isPending, isError } =
+    const { familyMemberHistory, isPending, isError, error } =
         useFamilyMemberHistory(historyId)
 
-    if (isPending) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
-
-    if (isError || !familyMemberHistory) {
-        return <p className="text-sm text-red-500">{content.textError}</p>
-    }
+    if (isPending) return <Loading />
+    if (isError && error) return <ErrorApi message={error.message} />
+    if (!familyMemberHistory) return null
 
     const dataItems = [
         {

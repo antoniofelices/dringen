@@ -9,18 +9,15 @@ import ReadObservationTab from './tabs/ReadObservationTab'
 import ReadConditionTab from './tabs/ReadConditionTab'
 import ReadServiceRequestTab from './tabs/ReadServiceRequestTab'
 import ReadMedicationRequestTab from './tabs/ReadMedicationRequestTab'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './ReadClinicalEncounter.content'
 
 const ReadClinicalEncounter = ({ encounterId }: { encounterId: string }) => {
     const { data, loading, error } = useReadClinicalEncounter(encounterId)
 
-    if (loading) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
-
-    if (error || !data) {
-        return <p className="text-sm text-red-500">{content.textError}</p>
-    }
+    if (loading) return <Loading />
+    if (error || !data) return <ErrorApi message={error ?? 'Could not load encounter'} />
 
     return (
         <Tabs aria-label="Encounter" defaultValue="observation">

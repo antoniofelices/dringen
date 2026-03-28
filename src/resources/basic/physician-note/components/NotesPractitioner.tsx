@@ -22,12 +22,16 @@ import {
 } from '@shared/components/ui/base/dialog'
 import { Textarea } from '@shared/components/ui/base/textarea'
 import { useNotesPractitioner } from '@resources/basic/physician-note/hooks/useNotesPractitioner'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './NotesPractitioner.content'
 
 const NotesPractitioner = ({ practitionerId }: { practitionerId: string }) => {
     const {
         notes,
         isPending,
+        isError,
+        error,
         editingId,
         editText,
         setEditText,
@@ -45,9 +49,8 @@ const NotesPractitioner = ({ practitionerId }: { practitionerId: string }) => {
         isCreating,
     } = useNotesPractitioner(practitionerId)
 
-    if (isPending) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
+    if (isPending) return <Loading />
+    if (isError && error) return <ErrorApi message={error.message} />
 
     return (
         <>

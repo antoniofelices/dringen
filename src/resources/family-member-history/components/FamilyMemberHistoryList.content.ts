@@ -4,8 +4,6 @@ const content = {
     headerCondition: 'Condition',
     headerStatus: 'Status',
     headerActions: '',
-    textLoading: 'Loading family history...',
-    textError: 'Could not load family history',
     textEmpty: 'No family history recorded',
     textDialogTitle: 'Family member history detail',
     textDialogDescription: 'View or edit family member history record',

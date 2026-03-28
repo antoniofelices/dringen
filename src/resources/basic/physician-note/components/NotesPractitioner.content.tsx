@@ -6,7 +6,6 @@ const content = {
     textDialogPlaceholder: 'Write your note here...',
     textButtonCancel: 'Cancel',
     textButtonSave: 'Save',
-    textLoading: 'Loading…',
 }
 
 export default content
