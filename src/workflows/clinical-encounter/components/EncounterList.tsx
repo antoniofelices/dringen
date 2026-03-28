@@ -20,6 +20,8 @@ import DrawerWrapper from '@/shared/components/ui/DrawerWrapper'
 import { useEncounterList } from '@workflows/clinical-encounter/hooks/useEncounterList'
 import ReadClinicalEncounter from './ReadClinicalEncounter'
 import AddClinicalEncounter from './AddClinicalEncounter'
+import Loading from '@shared/components/ui/Loading'
+import ErrorApi from '@shared/components/ui/ErrorApi'
 import content from './EncounterList.content'
 
 const EncounterList = ({ patientId }: { patientId: string }) => {
@@ -30,13 +32,8 @@ const EncounterList = ({ patientId }: { patientId: string }) => {
 
     const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false)
 
-    if (loading) {
-        return <p className="text-sm text-gray-500">{content.textLoading}</p>
-    }
-
-    if (error) {
-        return <p className="text-sm text-red-500">{content.textError}</p>
-    }
+    if (loading) return <Loading />
+    if (error) return <ErrorApi message={error} />
 
     return (
         <>

@@ -11,8 +11,6 @@ const content = {
     labelManifestation: 'Manifestation',
     labelSeverity: 'Severity',
     labelNote: 'Notes',
-    textLoading: 'Loading...',
-    textError: 'Could not load allergy details',
     textNoData: '-',
 }
 
