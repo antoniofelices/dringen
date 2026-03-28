@@ -7,7 +7,7 @@ import { signInSchema } from '@auth/schemas/auth.schema'
 
 export type SignInFormType = z.infer<typeof signInSchema>
 
-export type UserRoleType = 'doctor' | 'administrative'
+export type UserRoleType = 'doctor' | 'administrative' | 'administrative_hr'
 
 export type ButtonSignOutType = VariantProps<typeof buttonVariants> & {
     asbutton?: boolean
@@ -32,6 +32,20 @@ export type ProtectedRouteType = {
 
 export type AuthContextState = {
     profile: ProfileResource | undefined
+    role: UserRoleType | null
     loading: boolean
     isLoggedIn: boolean
+}
+
+export type AccessPolicyReference = {
+    reference?: string
+    display?: string
+}
+
+export type AuthMeAccessPolicy = {
+    basedOn?: AccessPolicyReference[]
+}
+
+export type AuthMeResponse = {
+    accessPolicy?: AuthMeAccessPolicy
 }
