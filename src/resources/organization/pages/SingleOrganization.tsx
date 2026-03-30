@@ -1,3 +1,4 @@
+import RoleGuard from '@auth/components/RoleGuard'
 import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import ErrorApi from '@shared/components/ui/ErrorApi'
@@ -18,7 +19,18 @@ const SingleOrganization = ({ id }: { id: string }) => {
         <>
             <HeaderArticle title={content.title} />
             <ContentArticle>
-                <OrganizationDetails organization={organization} />
+                <div className="grid lg:grid-cols-6 gap-6 place-content-between">
+                    <div className="col-span-3">
+                        <OrganizationDetails organization={organization} />
+                    </div>
+                    <RoleGuard allowedRoles={['administrative_hr']}>
+                        <div className="col-span-3">
+                            <h2>
+                                A single component to display a list of location
+                            </h2>
+                        </div>
+                    </RoleGuard>
+                </div>
             </ContentArticle>
             <ButtonBack />
         </>

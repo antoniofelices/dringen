@@ -1,5 +1,5 @@
 import type { RoutesProps } from '@shared/types/routes.model'
-import { CalendarDays, ClipboardPlus, Users, PlusCircle } from 'lucide-react'
+import { ClipboardPlus, Users, PlusCircle } from 'lucide-react'
 
 export const physicianMenuTitle = 'Menu Physician'
 
