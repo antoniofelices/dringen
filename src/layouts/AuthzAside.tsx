@@ -35,7 +35,8 @@ import {
 import {
     organizationMenuTitle,
     organizationMenu,
-} from '@resources/organization/content/organizationMenu.content'
+} from '@resources/practitioner/content/organizationMenu.content'
+import { administrativeHrMenu } from '@resources/practitioner/content/administrativeHrMenu.content'
 import ButtonSignOut from '@auth/components/ButtonSignOut'
 import content from './AuthzAside.content'
 
@@ -73,7 +74,9 @@ const AuthzAside = () => {
                     </SidebarGroup>
                     <SidebarSeparator />
                 </RoleGuard>
-                <RoleGuard allowedRoles={['administrative']}>
+                <RoleGuard
+                    allowedRoles={['administrative', 'administrative_hr']}
+                >
                     <SidebarGroup>
                         <SidebarGroupLabel>
                             {administrativeTitleMenu}
@@ -92,6 +95,9 @@ const AuthzAside = () => {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <MenuItems content={organizationMenu} />
+                            <RoleGuard allowedRoles={['administrative_hr']}>
+                                <MenuItems content={administrativeHrMenu} />
+                            </RoleGuard>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
