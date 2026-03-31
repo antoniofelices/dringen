@@ -14,15 +14,15 @@ export const administrativeHrMenu: RoutesProps[] = [
     {
         id: 2,
         icon: Info,
-        url: '#',
-        text: 'Comunications',
+        url: 'communication/communication-list',
+        text: 'Comumnications',
         orderMenu: 2,
     },
     {
         id: 3,
         icon: PlusCircleIcon,
-        url: '#',
-        text: 'Add Comunication',
+        url: 'communication/add',
+        text: 'Add Communication',
         orderMenu: 3,
     },
 ]
