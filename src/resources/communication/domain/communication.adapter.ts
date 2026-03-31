@@ -1,17 +1,12 @@
 import type { Communication } from '@medplum/fhirtypes'
-import type { CommunicationType } from '@resources/communication/types/communication.model'
-
-type CommunicationPayload = {
-    title: string
-    content: string
-    startDate: string
-    endDate: string
-    location: string
-}
+import type {
+    CommunicationType,
+    CommunicationPayloadType,
+} from '@resources/communication/types/communication.model'
 
 function parseContentString(
     contentString: string | undefined
-): CommunicationPayload | null {
+): CommunicationPayloadType | null {
     if (!contentString) return null
     try {
         return JSON.parse(contentString)
@@ -23,9 +18,7 @@ function parseContentString(
 export function fhirToCommunication(
     communication: Communication
 ): CommunicationType | null {
-    const parsed = parseContentString(
-        communication.payload?.[0]?.contentString
-    )
+    const parsed = parseContentString(communication.payload?.[0]?.contentString)
     if (!parsed) return null
     return {
         id: communication.id ?? '',

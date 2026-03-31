@@ -7,3 +7,11 @@ export type CommunicationType = {
     location: string
     sent: string
 }
+
+export type CommunicationPayloadType = {
+    title: string
+    content: string
+    startDate: string
+    endDate: string
+    location: string
+}
