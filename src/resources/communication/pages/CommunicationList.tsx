@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link } from '@tanstack/react-router'
+import { Button } from '@shared/components/ui/base/button'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import DataTable from '@shared/components/ui/DataTable'
 import DataTableFilter from '@shared/components/ui/DataTableFilter'
@@ -27,6 +29,11 @@ const CommunicationList = () => {
                         onChange={setFilterValue}
                         placeholder={content.textFilterPlaceholder}
                     />
+                    <Button asChild size="sm">
+                        <Link to="/communication/add">
+                            {content.textButtonAdd}
+                        </Link>
+                    </Button>
                 </div>
             </HeaderArticle>
             <ContentArticle>
