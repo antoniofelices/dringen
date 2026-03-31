@@ -23,6 +23,14 @@ const communicationTableColumns = (): ColumnDef<CommunicationType>[] => [
     {
         accessorKey: 'content',
         header: () => content.labelContent,
+        cell: ({ row }) => {
+            const value: string = row.getValue('content')
+            return (
+                <span className="block max-w-xs truncate" title={value}>
+                    {value}
+                </span>
+            )
+        },
     },
     {
         accessorKey: 'startDate',
