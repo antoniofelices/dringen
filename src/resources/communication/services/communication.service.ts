@@ -19,6 +19,22 @@ export const getListCommunications = async (): Promise<Communication[]> => {
     }
 }
 
+export const createCommunication = async (
+    communication: Communication
+): Promise<Communication> => {
+    try {
+        await authenticateMedplum()
+
+        return await medplum.createResource(communication)
+    } catch (error) {
+        logger.error('Error creating communication in Server', error, {
+            component: 'communication.service',
+            action: 'createCommunication',
+        })
+        throw error
+    }
+}
+
 export const getSingleCommunication = async (
     id: string
 ): Promise<Communication> => {

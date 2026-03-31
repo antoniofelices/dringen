@@ -1,3 +1,6 @@
+import type { z } from 'zod'
+import type { addNewCommunicationSchema } from '@resources/communication/schemas/addNewCommunication.schema'
+
 export type CommunicationType = {
     id: string
     title: string
@@ -14,4 +17,15 @@ export type CommunicationPayloadType = {
     startDate: string
     endDate: string
     location: string
+}
+
+export type AddNewCommunicationType = z.infer<typeof addNewCommunicationSchema>
+
+export type AddNewCommunicationFormProps = {
+    onSuccess?: () => void
+}
+
+export type CreateCommunicationParams = {
+    formData: AddNewCommunicationType
+    sender: { id: string; displayName: string }
 }
