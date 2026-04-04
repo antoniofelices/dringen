@@ -1,38 +1,12 @@
-import { toast } from 'sonner'
 import { Mail, Lock } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from '@tanstack/react-router'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useSignInForm } from '@auth/hooks/useSignInForm'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import { signInSchema } from '@auth/schemas/auth.schema'
-import { signIn } from '@auth/services/auth.service'
-import type { SignInFormType } from '@auth/types/auth.model'
 import content from './SignInForm.content'
 
 const SignInForm = () => {
-    const defaultValues = {
-        email: '',
-        password: '',
-    }
-    const navigate = useNavigate()
-
-    const form = useForm<SignInFormType>({
-        resolver: zodResolver(signInSchema),
-        defaultValues: defaultValues,
-    })
-
-    const onSubmit = async (formData: SignInFormType) => {
-        try {
-            await signIn(formData.email, formData.password)
-            navigate({ to: '/dashboard' })
-        } catch (error) {
-            const message =
-                error instanceof Error ? error.message : content.textToastFail
-            toast.error(message)
-        }
-    }
+    const { form, onSubmit } = useSignInForm()
 
     return (
         <Form {...form}>
