@@ -24,8 +24,6 @@ const Dashboard = () => {
                         <p>{content.textWelcome}</p>
                     </CardContent>
                 </Card>
-            </div>
-            <div className="grid grid-cols-1 gap-6 mt-4">
                 <CommunicationDetails />
             </div>
         </ContentArticle>

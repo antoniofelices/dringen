@@ -1,5 +1,6 @@
-import { Minus } from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
 import { transformDateTime } from '@shared/utils/utils'
+import { Button } from '@shared/components/ui/base/button'
 import {
     Card,
     CardContent,
@@ -7,10 +8,10 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import {
-    Alert,
-    AlertDescription,
-    AlertTitle,
-} from '@shared/components/ui/base/alert'
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from '@shared/components/ui/base/collapsible'
 import { useCommunicationDetails } from '@resources/communication/hooks/useCommunicationDetails'
 import content from './CommunicationDetails.content'
 
@@ -31,35 +32,54 @@ const CommunicationDetails = () => {
                             {content.textEmpty}
                         </p>
                     ) : (
-                        <div className="space-y-2">
+                        <div className="space-y-4">
                             {visibleCommunications.map((comm) => (
-                                <Alert key={comm.id}>
-                                    <Minus size="12" />
-                                    <AlertTitle>{comm.title}</AlertTitle>
-                                    <AlertDescription>
-                                        <div>{comm.content}</div>
-                                        <div>
-                                            <ul>
-                                                <li>
-                                                    {content.textStartDate}:{' '}
+                                <Collapsible
+                                    className="rounded-md data-[state=open]:bg-muted"
+                                    key={comm.id}
+                                >
+                                    <CollapsibleTrigger asChild>
+                                        <Button
+                                            variant="ghost"
+                                            className="group w-full p-8"
+                                        >
+                                            <div className="flex flex-col items-start gap-1">
+                                                <span>{comm.title}</span>
+                                                <span>
                                                     {transformDateTime(
                                                         comm.startDate
                                                     )}
-                                                </li>
-                                                <li>
-                                                    {content.textEndDate}:{' '}
-                                                    {transformDateTime(
-                                                        comm.endDate
-                                                    )}
-                                                </li>
-                                                <li>
-                                                    {content.textLocation}:{' '}
-                                                    {comm.location}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </AlertDescription>
-                                </Alert>
+                                                </span>
+                                            </div>
+                                            <ChevronDownIcon className="ml-auto group-data-[state=open]:rotate-180" />
+                                        </Button>
+                                    </CollapsibleTrigger>
+                                    <CollapsibleContent className="flex flex-col items-start gap-2 p-4 text-sm">
+                                        <>
+                                            <div>{comm.content}</div>
+                                            <div>
+                                                <ul>
+                                                    <li>
+                                                        {content.textStartDate}:{' '}
+                                                        {transformDateTime(
+                                                            comm.startDate
+                                                        )}
+                                                    </li>
+                                                    <li>
+                                                        {content.textEndDate}:{' '}
+                                                        {transformDateTime(
+                                                            comm.endDate
+                                                        )}
+                                                    </li>
+                                                    <li>
+                                                        {content.textLocation}:{' '}
+                                                        {comm.location}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </>
+                                    </CollapsibleContent>
+                                </Collapsible>
                             ))}
                         </div>
                     )}
