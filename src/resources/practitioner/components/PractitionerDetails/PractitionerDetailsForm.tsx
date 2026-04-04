@@ -1,6 +1,3 @@
-import { useForm, useFieldArray } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from 'sonner'
 import { CirclePlus, Trash2 } from 'lucide-react'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
@@ -9,9 +6,8 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
-import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
-import { useUpdatePractitionerDetails } from '@resources/practitioner/hooks/useUpdatePractitionerDetails'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
+import { usePractitionerDetailsForm } from '@resources/practitioner/hooks/usePractitionerDetailsForm'
 import content from './PractitionerDetails.content'
 
 const PractitionerDetailsForm = ({
@@ -27,39 +23,14 @@ const PractitionerDetailsForm = ({
     outpatientOptions: OptionType[]
     onSuccess: () => void
 }) => {
-    const updateDetails = useUpdatePractitionerDetails(
-        practitionerId,
-        hospitalId
-    )
-
-    const form = useForm<PractitionerDetailsFormType>({
-        resolver: zodResolver(practitionerDetailsSchema),
-        defaultValues,
-    })
-
-    const { fields, append, remove } = useFieldArray({
-        control: form.control,
-        name: 'availableTime',
-    })
-
-    const addTimeHandler = () => {
-        append({ daysOfWeek: '', startTime: '', endTime: '' })
-    }
-
-    const removeTimeHandler = (index: number) => {
-        remove(index)
-    }
-
-    const onSubmit = async (formData: PractitionerDetailsFormType) => {
-        try {
-            await updateDetails.mutateAsync(formData)
-        } catch {
-            toast.error(content.textToastFail)
-            return
-        }
-        toast.success(content.textToastSuccess)
-        onSuccess()
-    }
+    const { form, fields, addTimeHandler, removeTimeHandler, onSubmit } =
+        usePractitionerDetailsForm({
+            practitionerId,
+            hospitalId,
+            defaultValues,
+            outpatientOptions,
+            onSuccess,
+        })
 
     return (
         <Form {...form}>
