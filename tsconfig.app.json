@@ -32,6 +32,7 @@
             "@auth/*": ["src/auth/*"],
             "@config/*": ["src/config/*"],
             "@layouts/*": ["src/layouts/*"],
+            "@medplum/*": ["src/medplum/*"],
             "@pages/*": ["src/pages/*"],
             "@resources/*": ["src/resources/*"],
             "@shared/*": ["src/shared/*"],
