@@ -1,4 +1,5 @@
 import { Minus } from 'lucide-react'
+import { transformDateTime } from '@shared/utils/utils'
 import {
     Card,
     CardContent,
@@ -10,9 +11,12 @@ import {
     AlertDescription,
     AlertTitle,
 } from '@shared/components/ui/base/alert'
+import { useCommunicationDetails } from '@resources/communication/hooks/useCommunicationDetails'
 import content from './CommunicationDetails.content'
 
-const CommunicationDetails = ({}) => {
+const CommunicationDetails = () => {
+    const { visibleCommunications } = useCommunicationDetails()
+
     return (
         <>
             <Card>
@@ -22,20 +26,43 @@ const CommunicationDetails = ({}) => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Alert>
-                        <Minus size="12" />
-                        <AlertTitle>Title</AlertTitle>
-                        <AlertDescription>
-                            <div>Content…</div>
-                            <div>
-                                <ul>
-                                    <li>{content.textStartDate}: startDate</li>
-                                    <li>{content.textEndDate}: endDate</li>
-                                    <li>{content.textLocation}: location</li>
-                                </ul>
-                            </div>
-                        </AlertDescription>
-                    </Alert>
+                    {visibleCommunications.length === 0 ? (
+                        <p className="text-sm text-gray-500">
+                            {content.textEmpty}
+                        </p>
+                    ) : (
+                        <div className="space-y-2">
+                            {visibleCommunications.map((comm) => (
+                                <Alert key={comm.id}>
+                                    <Minus size="12" />
+                                    <AlertTitle>{comm.title}</AlertTitle>
+                                    <AlertDescription>
+                                        <div>{comm.content}</div>
+                                        <div>
+                                            <ul>
+                                                <li>
+                                                    {content.textStartDate}:{' '}
+                                                    {transformDateTime(
+                                                        comm.startDate
+                                                    )}
+                                                </li>
+                                                <li>
+                                                    {content.textEndDate}:{' '}
+                                                    {transformDateTime(
+                                                        comm.endDate
+                                                    )}
+                                                </li>
+                                                <li>
+                                                    {content.textLocation}:{' '}
+                                                    {comm.location}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </AlertDescription>
+                                </Alert>
+                            ))}
+                        </div>
+                    )}
                 </CardContent>
             </Card>
         </>

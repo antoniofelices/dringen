@@ -3,6 +3,7 @@ const content = {
     textStartDate: 'Start Date',
     textEndDate: 'End Date',
     textLocation: 'Location',
+    textEmpty: 'No communication yet',
 }
 
 export default content
