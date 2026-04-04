@@ -1,20 +1,11 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from 'sonner'
-import type {
-    FamilyMemberHistoryFormType,
-    FamilyMemberHistoryFormProps,
-} from '@resources/family-member-history/types/familyMemberHistory.model'
-import { familyMemberHistorySchema } from '@resources/family-member-history/schemas/familyMemberHistory.schema'
-import { useCreateFamilyMemberHistory } from '@resources/family-member-history/hooks/useCreateFamilyMemberHistory'
-import { useUpdateFamilyMemberHistory } from '@resources/family-member-history/hooks/useUpdateFamilyMemberHistory'
+import type { FamilyMemberHistoryFormProps } from '@resources/family-member-history/types/familyMemberHistory.model'
+import { useFamilyMemberHistoryForm } from '@resources/family-member-history/hooks/useFamilyMemberHistoryForm'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import { getValueFromOptions } from '@shared/utils/utils'
 import content from './FamilyMemberHistoryForm.content'
 
 const FamilyMemberHistoryForm = ({
@@ -23,47 +14,12 @@ const FamilyMemberHistoryForm = ({
     mode,
     onSuccess,
 }: FamilyMemberHistoryFormProps) => {
-    const createMutation = useCreateFamilyMemberHistory(patientId)
-    const updateMutation = useUpdateFamilyMemberHistory(
-        historyData?.id ?? '',
-        patientId
-    )
-
-    const isNoKnownHistory =
-        historyData?.condition === 'No family history of disorder'
-
-    const form = useForm<FamilyMemberHistoryFormType>({
-        resolver: zodResolver(familyMemberHistorySchema),
-        defaultValues: {
-            noKnownFamilyHistory: isNoKnownHistory,
-            relationship: isNoKnownHistory
-                ? ''
-                : (getValueFromOptions(content.relationshipOptions, historyData?.relationship) ?? ''),
-            condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),
-            status:
-                (historyData?.status as FamilyMemberHistoryFormType['status']) ||
-                'health-unknown',
-            deceasedBoolean: historyData?.deceasedBoolean ?? false,
-            note: historyData?.note || undefined,
-        },
+    const { form, onSubmit, noKnownFamilyHistory } = useFamilyMemberHistoryForm({
+        patientId,
+        historyData,
+        mode,
+        onSuccess,
     })
-
-    const noKnownFamilyHistory = form.watch('noKnownFamilyHistory')
-
-    const onSubmit = async (formData: FamilyMemberHistoryFormType) => {
-        try {
-            if (mode === 'create') {
-                await createMutation.mutateAsync(formData)
-            } else {
-                await updateMutation.mutateAsync(formData)
-            }
-        } catch {
-            toast.error(content.textToastFail)
-            return
-        }
-        toast.success(content.textToastSuccess)
-        onSuccess()
-    }
 
     return (
         <Form {...form}>
