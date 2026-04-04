@@ -26,7 +26,7 @@ const communicationTableColumns = (): ColumnDef<CommunicationType>[] => [
         cell: ({ row }) => {
             const value: string = row.getValue('content')
             return (
-                <span className="block max-w-xs truncate" title={value}>
+                <span className="block max-w-36 truncate" title={value}>
                     {value}
                 </span>
             )
