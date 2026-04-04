@@ -5,6 +5,7 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import ContentArticle from '@shared/components/ui/ContentArticle'
+import CommunicationDetails from '@resources/communication/components/CommunicationDetails'
 import content from './Dashboard.content'
 
 const Dashboard = () => {
@@ -23,6 +24,7 @@ const Dashboard = () => {
                         <p>{content.textWelcome}</p>
                     </CardContent>
                 </Card>
+                <CommunicationDetails />
             </div>
         </ContentArticle>
     )
