@@ -2,7 +2,8 @@ import type { z } from 'zod'
 import type { Practitioner } from '@medplum/fhirtypes'
 import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 import type { AvailableTimeType } from '@shared/fhir/availableTime.model'
-import type { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
+import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
+import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
 
 export type PractitionerWithSpecialty = {
     practitioner: Practitioner
@@ -39,6 +40,9 @@ export type PractitionerDetailsData = {
 export type PractitionerDetailsFormType = z.infer<
     typeof practitionerDetailsSchema
 >
+export type AddNewPractitionerFormType = z.infer<
+    typeof addNewPractitionerFormSchema
+>
 
 export type UsePractitionerDetailsFormProps = {
     practitionerId: string
@@ -46,4 +50,8 @@ export type UsePractitionerDetailsFormProps = {
     defaultValues: PractitionerDetailsFormType
     outpatientOptions: OptionType[]
     onSuccess: () => void
+}
+
+export type AddNewPractitionerFormProps = {
+    onSuccess?: () => void
 }

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { getAccessPolicyList } from '@medplum/access-policy/services/accessPolicy.service'
-import { fhirToAccessPolicy } from '@medplum/access-policy/domain/accessPolicy.adapter'
+import { getAccessPolicyList } from '@resourcesmedplum/access-policy/services/accessPolicy.service'
+import { fhirToAccessPolicy } from '@resourcesmedplum/access-policy/domain/accessPolicy.adapter'
 
 export const useAccessPolicyList = () => {
     const { data, isPending, isError, error } = useQuery({

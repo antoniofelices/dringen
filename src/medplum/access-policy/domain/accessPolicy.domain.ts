@@ -1,10 +1,10 @@
-import type { PractitionerRoleCode } from '@medplum/access-policy/types/accessPolicy.model'
+import type { PractitionerRoleCode } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 
-export const PRACTITIONER_ROLE_TO_POLICY_NAME: Record<
+export const ROLE_PRACTITIONER_TO_POLICY_NAME: Record<
     PractitionerRoleCode,
     string
 > = {
-    doctor: 'Doctor',
-    administrative: 'Administrative',
-    'administrative-hr': 'Administrative HR',
+    doctor: 'Doctor Policy',
+    administrative: 'Administrative Policy',
+    'administrative-hr': 'Administrative HR Policy',
 }
