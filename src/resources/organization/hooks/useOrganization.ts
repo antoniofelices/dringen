@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import {
     getOrganization,
     getListOrganizations,
-} from '@/resources/organization/services/organization.service'
+} from '@resources/organization/services/organization.service'
 import { fhirToOrganization } from '@resources/organization/domain/organization.adapter'
 
 export const useOrganization = (id: string) => {

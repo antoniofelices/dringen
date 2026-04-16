@@ -2,17 +2,15 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { useQuery } from '@tanstack/react-query'
-import { MEDPLUM_CONFIG } from '@config/config'
+import { MEDPLUM_CONFIG, SNOMED_SYSTEM } from '@config/config'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { useLogger } from '@shared/hooks/useLogger'
 import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-policy/domain/accessPolicy.domain'
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
+import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
 import { fhirToLocation } from '@resources/location/domain/location.adapter'
-import {
-    daysOfWeekOptions,
-    snomedSystemURL,
-} from '@resources/practitioner/config/config'
+import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
 import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
 import type {
@@ -26,6 +24,9 @@ export const useAddNewPractitionerForm = ({
 }: AddNewPractitionerFormProps = {}) => {
     const { logError, logSuccess } = useLogger('AddNewPractitionerForm')
     const { accessPolicies } = useAccessPolicyList()
+    const { organization } = useOrganization(
+        MEDPLUM_CONFIG.organizationId ?? ''
+    )
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -148,11 +149,15 @@ export const useAddNewPractitionerForm = ({
                     reference: practitionerReference.reference,
                     display: practitionerReference.display,
                 },
+                organization: {
+                    reference: `Organization/${organization?.id}`,
+                    display: organization?.name,
+                },
                 code: [
                     {
                         coding: [
                             {
-                                system: snomedSystemURL,
+                                system: SNOMED_SYSTEM,
                                 code: snomedCode,
                                 display: snomedDisplay,
                             },
