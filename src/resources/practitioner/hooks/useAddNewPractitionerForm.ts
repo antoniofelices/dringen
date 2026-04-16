@@ -7,7 +7,6 @@ import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { useLogger } from '@shared/hooks/useLogger'
 import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-policy/domain/accessPolicy.domain'
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
-import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
 import { fhirToLocation } from '@resources/location/domain/location.adapter'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
@@ -24,9 +23,6 @@ export const useAddNewPractitionerForm = ({
 }: AddNewPractitionerFormProps = {}) => {
     const { logError, logSuccess } = useLogger('AddNewPractitionerForm')
     const { accessPolicies } = useAccessPolicyList()
-    const { organization } = useOrganization(
-        MEDPLUM_CONFIG.organizationId ?? ''
-    )
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -150,9 +146,13 @@ export const useAddNewPractitionerForm = ({
                     display: practitionerReference.display,
                 },
                 organization: {
-                    reference: `Organization/${organization?.id}`,
-                    display: organization?.name,
+                    reference: `Organization/${MEDPLUM_CONFIG.organizationId}`,
                 },
+                location: [
+                    {
+                        reference: `Location/<ID clinica>`,
+                    },
+                ],
                 code: [
                     {
                         coding: [
