@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { ProfileResource } from '@medplum/core'
+import type { Project } from '@medplum/fhirtypes'
 import { z } from 'zod'
 import type { VariantProps } from 'class-variance-authority'
 import { buttonVariants } from '@shared/components/ui/base/button'
@@ -33,6 +34,7 @@ export type ProtectedRouteType = {
 export type AuthContextState = {
     profile: ProfileResource | undefined
     role: UserRoleType | null
+    project: Project | undefined
     loading: boolean
     isLoggedIn: boolean
 }

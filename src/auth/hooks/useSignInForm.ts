@@ -6,9 +6,11 @@ import { signInSchema } from '@auth/schemas/auth.schema'
 import { signIn } from '@auth/services/auth.service'
 import type { SignInFormType } from '@auth/types/auth.model'
 import content from '@auth/components/SignInForm.content'
+import { useProject } from '@auth/hooks/useProject'
 
 export const useSignInForm = () => {
     const navigate = useNavigate()
+    const { project } = useProject()
 
     const form = useForm<SignInFormType>({
         resolver: zodResolver(signInSchema),
@@ -20,7 +22,7 @@ export const useSignInForm = () => {
 
     const onSubmit = async (formData: SignInFormType) => {
         try {
-            await signIn(formData.email, formData.password)
+            await signIn(formData.email, formData.password, project?.id)
             navigate({ to: '/dashboard' })
         } catch (error) {
             const message =

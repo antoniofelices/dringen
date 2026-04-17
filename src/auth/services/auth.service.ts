@@ -5,13 +5,14 @@ import { MEDPLUM_CONFIG } from '@shared/fhir/config'
 
 export const signIn = async (
     email: string,
-    password: string
+    password: string,
+    projectId: string = MEDPLUM_CONFIG.projectId
 ): Promise<ProfileResource> => {
     try {
         const response = await medplum.startLogin({
             email,
             password,
-            projectId: MEDPLUM_CONFIG.projectId,
+            projectId,
         })
 
         if (response.code) {
