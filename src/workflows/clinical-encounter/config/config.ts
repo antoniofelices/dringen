@@ -1,4 +1,4 @@
-import { SNOMED_SYSTEM } from '@config/config'
+import { SNOMED_SYSTEM } from '@shared/fhir/config'
 
 const CERTAINTY_MAP = {
     suspected: { code: '415684004', display: 'Suspected' },

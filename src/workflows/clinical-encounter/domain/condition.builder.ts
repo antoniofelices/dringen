@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import type { BundleEntry, Condition } from '@medplum/fhirtypes'
-import { SNOMED_SYSTEM, ICD10_SYSTEM } from '@config/config'
+import { SNOMED_SYSTEM, ICD10_SYSTEM } from '@shared/fhir/config'
 import { CERTAINTY_MAP } from '@workflows/clinical-encounter/config/config'
 
 export function buildConditionEntry(
