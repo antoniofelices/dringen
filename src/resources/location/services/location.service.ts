@@ -36,6 +36,21 @@ export const getLocationsByParent = async (
     }
 }
 
+export const getLocationsHos = async (): Promise<Location[]> => {
+    try {
+        await authenticateMedplum()
+        return await medplum.searchResources('Location', {
+            type: 'HOS',
+        })
+    } catch (error) {
+        logger.error('Error fetching locations from Server', error, {
+            component: 'location.service',
+            action: 'getLocationsHos',
+        })
+        throw error
+    }
+}
+
 export const getRoomsByOrganization = async (
     organizationId: string
 ): Promise<Location[]> => {
