@@ -10,6 +10,7 @@ import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-polic
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
 import { fhirToLocation } from '@resources/location/domain/location.adapter'
+import { useLocationsHos } from '@resources/location/hooks/useLocationsHos'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
@@ -27,6 +28,7 @@ export const useAddNewPractitionerForm = ({
     const { accessPolicies } = useAccessPolicyList()
     const { project } = useProject()
     const { organization } = useOrganization()
+    const { locations } = useLocationsHos()
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -52,10 +54,8 @@ export const useAddNewPractitionerForm = ({
     const { data: roomLocations = [] } = useQuery({
         queryKey: ['locations', 'rooms', organization?.id],
         queryFn: async () => {
-            const locations = await getRoomsByOrganization(
-                organization?.id ?? ''
-            )
-            return locations.map(fhirToLocation)
+            const rooms = await getRoomsByOrganization(organization?.id ?? '')
+            return rooms.map(fhirToLocation)
         },
         enabled: role === 'doctor' && !!organization?.id,
     })
@@ -84,6 +84,8 @@ export const useAddNewPractitionerForm = ({
             const policy = accessPolicies.find((p) => p.name === policyName)
             const policyId = policy?.id
             const projectId = project?.id
+            const mainLocation = locations[0]
+            const hosLocationId = mainLocation?.id
 
             if (!policyId) {
                 form.setError('root', {
@@ -152,12 +154,18 @@ export const useAddNewPractitionerForm = ({
                 },
                 organization: {
                     reference: `Organization/${organization?.id}`,
+                    display: organization?.name,
                 },
-                location: [
-                    {
-                        reference: `Location/<ID clinica>`,
-                    },
-                ],
+                ...(hosLocationId
+                    ? {
+                          location: [
+                              {
+                                  reference: `Location/${hosLocationId}`,
+                                  display: mainLocation?.name,
+                              },
+                          ],
+                      }
+                    : {}),
                 code: [
                     {
                         coding: [

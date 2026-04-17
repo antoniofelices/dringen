@@ -14,6 +14,7 @@ const MEDPLUM_CONFIG = {
 const LOINC_SYSTEM = 'http://loinc.org'
 const SNOMED_SYSTEM = 'http://snomed.info/sct'
 const ICD10_SYSTEM = 'http://hl7.org/fhir/sid/icd-10'
+const HL7_TERMINOLOGY_BASE_URL = 'http://terminology.hl7.org/CodeSystem'
 
 export {
     HEADERSCONFIG,
@@ -21,4 +22,5 @@ export {
     LOINC_SYSTEM,
     SNOMED_SYSTEM,
     ICD10_SYSTEM,
+    HL7_TERMINOLOGY_BASE_URL,
 }

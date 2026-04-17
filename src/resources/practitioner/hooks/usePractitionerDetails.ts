@@ -1,9 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { usePractitionerRoleDetail } from '@resources/practitioner-role/hooks/usePractitionerRole'
-import {
-    useLocations,
-    useLocationsByParent,
-} from '@resources/location/hooks/useLocation'
+import { useLocationsByParent } from '@resources/location/hooks/useLocationsByParent'
+import { useLocations } from '@resources/location/hooks/useLocations'
 import { getSinglePractitionerById } from '@resources/practitioner/services/practitioner.service'
 import { fhirToPractitioner } from '@resources/practitioner/domain/practitioner.adapter'
 
