@@ -5,6 +5,6 @@ export function fhirToLocation(location: Location): LocationType {
     return {
         id: location.id ?? '',
         name: location.name ?? '',
-        type: location.type?.[0]?.coding?.[0]?.display ?? '',
+        type: location.type?.[0]?.coding?.[0]?.code ?? '',
     }
 }

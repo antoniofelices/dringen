@@ -1,10 +1,9 @@
 import type { Location } from '@medplum/fhirtypes'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
+import { HL7_TERMINOLOGY_BASE_URL } from '@shared/fhir/config'
 
-export const getLocationsByIds = async (
-    ids: string[]
-): Promise<Location[]> => {
+export const getLocationsByIds = async (ids: string[]): Promise<Location[]> => {
     try {
         await authenticateMedplum()
         return await medplum.searchResources('Location', {
@@ -40,7 +39,7 @@ export const getLocationsHos = async (): Promise<Location[]> => {
     try {
         await authenticateMedplum()
         return await medplum.searchResources('Location', {
-            type: 'HOS',
+            type: `${HL7_TERMINOLOGY_BASE_URL}/v3-RoleCode|HOSP`,
         })
     } catch (error) {
         logger.error('Error fetching locations from Server', error, {
