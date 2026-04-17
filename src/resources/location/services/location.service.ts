@@ -35,3 +35,23 @@ export const getLocationsByParent = async (
         throw error
     }
 }
+
+export const getRoomsByOrganization = async (
+    organizationId: string
+): Promise<Location[]> => {
+    try {
+        await authenticateMedplum()
+        const locations = await medplum.searchResources('Location', {
+            partof: `Organization/${organizationId}`,
+        })
+        return locations.filter(
+            (l) => l.physicalType?.coding?.[0]?.display === 'Room'
+        )
+    } catch (error) {
+        logger.error('Error fetching room locations from Server', error, {
+            component: 'location.service',
+            action: 'getRoomsByOrganization',
+        })
+        throw error
+    }
+}

@@ -1,5 +1,5 @@
 import type { AccessPolicy } from '@medplum/fhirtypes'
-import type { AccessPolicyType } from '@medplum/access-policy/types/accessPolicy.model'
+import type { AccessPolicyType } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 
 export function fhirToAccessPolicy(
     accessPolicy: AccessPolicy

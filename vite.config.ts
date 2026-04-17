@@ -28,6 +28,7 @@ export default defineConfig({
             '@auth': path.resolve(__dirname, './src/auth'),
             '@config': path.resolve(__dirname, './src/config'),
             '@layouts': path.resolve(__dirname, './src/layouts'),
+            '@resourcesmedplum': path.resolve(__dirname, './src/medplum'),
             '@pages': path.resolve(__dirname, './src/pages'),
             '@resources': path.resolve(__dirname, './src/resources'),
             '@shared': path.resolve(__dirname, './src/shared'),
