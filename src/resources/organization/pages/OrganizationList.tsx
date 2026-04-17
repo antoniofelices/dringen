@@ -5,7 +5,7 @@ import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import type { OrganizationType } from '@resources/organization/types/organization.model'
-import { useOrganizations } from '@resources/organization/hooks/useOrganization'
+import { useOrganizations } from '@resources/organization/hooks/useOrganizations'
 import organizationTableColumns from '@resources/organization/presentation/organizationTable.columns'
 import content from './OrganizationList.content'
 
@@ -26,7 +26,7 @@ const OrganizationList = () => {
                     data={organizations || []}
                     caption={content.textCaptionTable}
                     filterColumn="name"
-                    filterPlaceholder={content.textFilterPlaceholder}
+                    // filterPlaceholder={content.textFilterPlaceholder}
                 />
             </ContentArticle>
         </>
