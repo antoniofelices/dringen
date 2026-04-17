@@ -5,11 +5,11 @@ import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import OrganizationDetails from '@resources/organization/components/OrganizationDetails'
-import { useOrganization } from '@resources/organization/hooks/useOrganization'
+import { useOrganizationById } from '@resources/organization/hooks/useOrganizationById'
 import content from './SingleOrganization.content'
 
 const SingleOrganization = ({ id }: { id: string }) => {
-    const { organization, isPending, isError, error } = useOrganization(id)
+    const { organization, isPending, isError, error } = useOrganizationById(id)
 
     if (isPending) return <Loading />
     if (isError && error) return <ErrorApi message={error.message} />

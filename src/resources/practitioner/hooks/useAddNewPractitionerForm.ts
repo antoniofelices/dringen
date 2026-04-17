@@ -2,7 +2,7 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { useQuery } from '@tanstack/react-query'
-import { MEDPLUM_CONFIG, SNOMED_SYSTEM } from '@shared/fhir/config'
+import { SNOMED_SYSTEM } from '@shared/fhir/config'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { useLogger } from '@shared/hooks/useLogger'
 import { useProject } from '@auth/hooks/useProject'
@@ -10,6 +10,7 @@ import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-polic
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
 import { fhirToLocation } from '@resources/location/domain/location.adapter'
+import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
 import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
@@ -25,6 +26,7 @@ export const useAddNewPractitionerForm = ({
     const { logError, logSuccess } = useLogger('AddNewPractitionerForm')
     const { accessPolicies } = useAccessPolicyList()
     const { project } = useProject()
+    const { organization } = useOrganization()
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -48,14 +50,14 @@ export const useAddNewPractitionerForm = ({
     const role = form.watch('role')
 
     const { data: roomLocations = [] } = useQuery({
-        queryKey: ['locations', 'rooms', MEDPLUM_CONFIG.organizationId],
+        queryKey: ['locations', 'rooms', organization?.id],
         queryFn: async () => {
             const locations = await getRoomsByOrganization(
-                MEDPLUM_CONFIG.organizationId ?? ''
+                organization?.id ?? ''
             )
             return locations.map(fhirToLocation)
         },
-        enabled: role === 'doctor' && !!MEDPLUM_CONFIG.organizationId,
+        enabled: role === 'doctor' && !!organization?.id,
     })
 
     const roomOptions = roomLocations.map((l) => ({
@@ -149,7 +151,7 @@ export const useAddNewPractitionerForm = ({
                     display: practitionerReference.display,
                 },
                 organization: {
-                    reference: `Organization/${MEDPLUM_CONFIG.organizationId}`,
+                    reference: `Organization/${organization?.id}`,
                 },
                 location: [
                     {
