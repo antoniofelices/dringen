@@ -1,16 +1,14 @@
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import { useQuery } from '@tanstack/react-query'
 import { SNOMED_SYSTEM } from '@shared/fhir/config'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { useLogger } from '@shared/hooks/useLogger'
 import { useProject } from '@auth/hooks/useProject'
 import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-policy/domain/accessPolicy.domain'
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
-import { getRoomsByOrganization } from '@resources/location/services/location.service'
-import { fhirToLocation } from '@resources/location/domain/location.adapter'
 import { useClinicLocation } from '@resources/location/hooks/useClinicLocation'
+import { useLocationsByParent } from '@resources/location/hooks/useLocationsByParent'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
@@ -28,7 +26,10 @@ export const useAddNewPractitionerForm = ({
     const { accessPolicies } = useAccessPolicyList()
     const { project } = useProject()
     const { organization } = useOrganization()
-    const { locations } = useClinicLocation()
+    const { locations: clinicLocations } = useClinicLocation()
+    const { locations: rooms } = useLocationsByParent(
+        clinicLocations[0]?.id ?? ''
+    )
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -51,18 +52,9 @@ export const useAddNewPractitionerForm = ({
 
     const role = form.watch('role')
 
-    const { data: roomLocations = [] } = useQuery({
-        queryKey: ['locations', 'rooms', organization?.id],
-        queryFn: async () => {
-            const rooms = await getRoomsByOrganization(organization?.id ?? '')
-            return rooms.map(fhirToLocation)
-        },
-        enabled: role === 'doctor' && !!organization?.id,
-    })
-
-    const roomOptions = roomLocations.map((l) => ({
-        label: l.name,
-        value: l.id,
+    const roomOptions = rooms.map((r) => ({
+        label: r.name,
+        value: r.id,
     }))
 
     const addTimeHandler = () => {
@@ -84,7 +76,7 @@ export const useAddNewPractitionerForm = ({
             const policy = accessPolicies.find((p) => p.name === policyName)
             const policyId = policy?.id
             const projectId = project?.id
-            const mainLocation = locations[0]
+            const mainLocation = clinicLocations[0]
             const hosLocationId = mainLocation?.id
 
             if (!policyId) {
@@ -105,6 +97,7 @@ export const useAddNewPractitionerForm = ({
                 scope: 'server',
                 upsert: true,
                 membership: {
+                    admin: formData.role === 'administrative-hr' ? true : false,
                     accessPolicy: {
                         reference: `AccessPolicy/${policyId}`,
                         display: policyName,
@@ -156,16 +149,31 @@ export const useAddNewPractitionerForm = ({
                     reference: `Organization/${organization?.id}`,
                     display: organization?.name,
                 },
-                ...(hosLocationId
-                    ? {
-                          location: [
-                              {
-                                  reference: `Location/${hosLocationId}`,
-                                  display: mainLocation?.name,
-                              },
-                          ],
-                      }
-                    : {}),
+                ...(() => {
+                    const locationEntries = [
+                        ...(hosLocationId
+                            ? [
+                                  {
+                                      reference: `Location/${hosLocationId}`,
+                                      display: mainLocation?.name,
+                                  },
+                              ]
+                            : []),
+                        ...(formData.role === 'doctor' && formData.locationId
+                            ? [
+                                  {
+                                      reference: `Location/${formData.locationId}`,
+                                      display: rooms.find(
+                                          (r) => r.id === formData.locationId
+                                      )?.name,
+                                  },
+                              ]
+                            : []),
+                    ]
+                    return locationEntries.length > 0
+                        ? { location: locationEntries }
+                        : {}
+                })(),
                 code: [
                     {
                         coding: [
@@ -182,15 +190,6 @@ export const useAddNewPractitionerForm = ({
                     availableStartTime: toFhirTime(time.startTime),
                     availableEndTime: toFhirTime(time.endTime),
                 })),
-                ...(formData.role === 'doctor' && formData.locationId
-                    ? {
-                          location: [
-                              {
-                                  reference: `Location/${formData.locationId}`,
-                              },
-                          ],
-                      }
-                    : {}),
             })
 
             logSuccess(content.textToastSuccess, content.title)
