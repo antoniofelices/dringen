@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { MEDPLUM_CONFIG, SNOMED_SYSTEM } from '@shared/fhir/config'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { useLogger } from '@shared/hooks/useLogger'
+import { useProject } from '@auth/hooks/useProject'
 import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-policy/domain/accessPolicy.domain'
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
@@ -23,6 +24,7 @@ export const useAddNewPractitionerForm = ({
 }: AddNewPractitionerFormProps = {}) => {
     const { logError, logSuccess } = useLogger('AddNewPractitionerForm')
     const { accessPolicies } = useAccessPolicyList()
+    const { project } = useProject()
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),
@@ -78,14 +80,15 @@ export const useAddNewPractitionerForm = ({
 
             const policyName = ROLE_PRACTITIONER_TO_POLICY_NAME[formData.role]
             const policy = accessPolicies.find((p) => p.name === policyName)
+            const policyId = policy?.id
+            const projectId = project?.id
 
-            if (!policy?.id) {
+            if (!policyId) {
                 form.setError('root', {
                     message: `${content.errorNoAccessPolicy}: ${formData.role}`,
                 })
                 return
             }
-            const projectId = medplum.getProject()?.id
             if (!projectId) throw new Error('Project ID not found')
 
             // Step 1 — Invite user
@@ -99,7 +102,7 @@ export const useAddNewPractitionerForm = ({
                 upsert: true,
                 membership: {
                     accessPolicy: {
-                        reference: `AccessPolicy/${policy.id}`,
+                        reference: `AccessPolicy/${policyId}`,
                         display: policyName,
                     },
                 },
