@@ -10,7 +10,7 @@ import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-polic
 import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAccessPolicy'
 import { getRoomsByOrganization } from '@resources/location/services/location.service'
 import { fhirToLocation } from '@resources/location/domain/location.adapter'
-import { useLocationsHos } from '@resources/location/hooks/useLocationsHos'
+import { useClinicLocation } from '@resources/location/hooks/useClinicLocation'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
 import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
@@ -28,7 +28,7 @@ export const useAddNewPractitionerForm = ({
     const { accessPolicies } = useAccessPolicyList()
     const { project } = useProject()
     const { organization } = useOrganization()
-    const { locations } = useLocationsHos()
+    const { locations } = useClinicLocation()
 
     const form = useForm<AddNewPractitionerFormType>({
         resolver: zodResolver(addNewPractitionerFormSchema),

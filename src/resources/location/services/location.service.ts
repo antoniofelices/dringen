@@ -35,12 +35,19 @@ export const getLocationsByParent = async (
     }
 }
 
-export const getLocationsHos = async (): Promise<Location[]> => {
+export const getClinicLocation = async (): Promise<Location[]> => {
     try {
         await authenticateMedplum()
-        return await medplum.searchResources('Location', {
+        const locations = await medplum.searchResources('Location', {
             type: `${HL7_TERMINOLOGY_BASE_URL}/v3-RoleCode|HOSP`,
         })
+        if (locations.length === 0)
+            throw new Error("The clinic's main location could not be found")
+        if (locations.length > 1)
+            throw new Error(
+                'Inconsistency: multiple locations with the HOSP code'
+            )
+        return locations
     } catch (error) {
         logger.error('Error fetching locations from Server', error, {
             component: 'location.service',
