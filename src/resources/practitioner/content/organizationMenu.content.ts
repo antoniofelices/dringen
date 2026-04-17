@@ -1,6 +1,6 @@
 import type { RoutesProps } from '@shared/types/routes.model'
 import { Building } from 'lucide-react'
-import { MEDPLUM_CONFIG } from '@config/config'
+import { MEDPLUM_CONFIG } from '@shared/fhir/config'
 
 export const organizationMenuTitle = 'Menu Organization'
 
