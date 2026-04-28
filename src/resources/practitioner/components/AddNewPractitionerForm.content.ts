@@ -12,6 +12,7 @@ const content = {
     labelStartTime: 'Start',
     labelEndTime: 'End',
     labelLocation: 'Location',
+    labelSpecialty: 'Specialty',
     textButtonSend: 'Register Practitioner',
     textButtonSending: 'Registering...',
     textButtonAddTime: 'Add time slot',

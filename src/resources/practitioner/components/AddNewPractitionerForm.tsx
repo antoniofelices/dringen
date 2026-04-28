@@ -19,6 +19,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
         form,
         fields,
         roomOptions,
+        specialtyComboOptions,
         role,
         addTimeHandler,
         removeTimeHandler,
@@ -28,42 +29,48 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="firstName"
-                    label={content.labelFirstName}
-                    type="text"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="lastName"
-                    label={content.labelLastName}
-                    type="text"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="email"
-                    label={content.labelEmail}
-                    type="email"
-                />
-                <FormFieldInput
-                    control={form.control}
-                    fieldName="phone"
-                    label={content.labelPhone}
-                    type="tel"
-                />
-                <FormFieldCalendar
-                    control={form.control}
-                    fieldName="birthDate"
-                    label={content.labelBirthDate}
-                />
-                <FormFieldSelect
-                    control={form.control}
-                    fieldName="gender"
-                    label={content.labelGender}
-                    options={genderOptions}
-                    placeholder={content.labelGender}
-                />
+                <div className="grid grid-cols-2 gap-8">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="firstName"
+                        label={content.labelFirstName}
+                        type="text"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="lastName"
+                        label={content.labelLastName}
+                        type="text"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-8">
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="email"
+                        label={content.labelEmail}
+                        type="email"
+                    />
+                    <FormFieldInput
+                        control={form.control}
+                        fieldName="phone"
+                        label={content.labelPhone}
+                        type="tel"
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-8">
+                    <FormFieldCalendar
+                        control={form.control}
+                        fieldName="birthDate"
+                        label={content.labelBirthDate}
+                    />
+                    <FormFieldSelect
+                        control={form.control}
+                        fieldName="gender"
+                        label={content.labelGender}
+                        options={genderOptions}
+                        placeholder={content.labelGender}
+                    />
+                </div>
                 <FormFieldSelect
                     control={form.control}
                     fieldName="role"
@@ -72,14 +79,24 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                     placeholder={content.labelRole}
                 />
                 {role === 'doctor' && (
-                    <FormFieldCombobox
-                        control={form.control}
-                        fieldName="locationId"
-                        label={content.labelLocation}
-                        options={roomOptions}
-                        placeholder={content.labelLocation}
-                    />
+                    <div className="grid grid-cols-2 gap-8">
+                        <FormFieldCombobox
+                            control={form.control}
+                            fieldName="locationId"
+                            label={content.labelLocation}
+                            options={roomOptions}
+                            placeholder={content.labelLocation}
+                        />
+                        <FormFieldCombobox
+                            control={form.control}
+                            fieldName="specialty"
+                            label={content.labelSpecialty}
+                            options={specialtyComboOptions}
+                            placeholder={content.labelSpecialty}
+                        />
+                    </div>
                 )}
+
                 <div className="mt-4">
                     <h3 className="text-sm font-medium mb-2">
                         {content.labelAvailableTime}

@@ -9,6 +9,7 @@ const content = {
     errorDaysOfWeekRequired: 'Day is required',
     errorStartTimeRequired: 'Start time is required',
     errorEndTimeRequired: 'End time is required',
+    errorSpecialtyRequired: 'Specialty is required',
 }
 
 export default content
