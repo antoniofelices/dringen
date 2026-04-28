@@ -29,7 +29,9 @@ export const getListPhysicians = async (): Promise<
     try {
         await authenticateMedplum()
 
-        const roleInfos = await getPractitionerIdsByRole('doctor')
+        const roleInfos = await getPractitionerIdsByRole(
+            'Physician (occupation)'
+        )
 
         if (roleInfos.length === 0) return []
 
