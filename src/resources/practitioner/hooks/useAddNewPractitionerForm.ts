@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { SNOMED_SYSTEM } from '@shared/fhir/config'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { toFhirTime } from '@shared/fhir/utils'
 import { useLogger } from '@shared/hooks/useLogger'
 import { useProject } from '@auth/hooks/useProject'
 import { ROLE_PRACTITIONER_TO_POLICY_NAME } from '@resourcesmedplum/access-policy/domain/accessPolicy.domain'
@@ -11,7 +12,10 @@ import { useClinicLocation } from '@resources/location/hooks/useClinicLocation'
 import { useLocationsByParent } from '@resources/location/hooks/useLocationsByParent'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
-import { ROLE_PRACTITIONER_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
+import {
+    ROLE_PRACTITIONER_TO_SNOMED,
+    SPECIALTY_TO_SNOMED,
+} from '@resources/practitioner/domain/practitioner.domain'
 import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
 import type {
     AddNewPractitionerFormType,
@@ -42,6 +46,7 @@ export const useAddNewPractitionerForm = ({
             gender: undefined,
             availableTime: [],
             locationId: '',
+            specialty: undefined,
         },
     })
 
@@ -57,6 +62,10 @@ export const useAddNewPractitionerForm = ({
         value: r.id,
     }))
 
+    const specialtyComboOptions = Object.entries(SPECIALTY_TO_SNOMED).map(
+        ([key, [, display]]) => ({ label: display, value: key })
+    )
+
     const addTimeHandler = () => {
         append({ daysOfWeek: daysOfWeekOptions[0], startTime: '', endTime: '' })
     }
@@ -64,9 +73,6 @@ export const useAddNewPractitionerForm = ({
     const removeTimeHandler = (index: number) => {
         remove(index)
     }
-
-    const toFhirTime = (time: string) =>
-        time.length === 5 ? `${time}:00` : time
 
     const onSubmit = async (formData: AddNewPractitionerFormType) => {
         try {
@@ -185,6 +191,26 @@ export const useAddNewPractitionerForm = ({
                         ],
                     },
                 ],
+                ...(formData.specialty
+                    ? {
+                          specialty: [
+                              {
+                                  coding: [
+                                      {
+                                          system: SNOMED_SYSTEM,
+                                          code: SPECIALTY_TO_SNOMED[
+                                              formData.specialty
+                                          ][0],
+                                          display:
+                                              SPECIALTY_TO_SNOMED[
+                                                  formData.specialty
+                                              ][1],
+                                      },
+                                  ],
+                              },
+                          ],
+                      }
+                    : {}),
                 availableTime: formData.availableTime.map((time) => ({
                     daysOfWeek: [time.daysOfWeek],
                     availableStartTime: toFhirTime(time.startTime),
@@ -206,6 +232,7 @@ export const useAddNewPractitionerForm = ({
         form,
         fields,
         roomOptions,
+        specialtyComboOptions,
         role,
         addTimeHandler,
         removeTimeHandler,

@@ -3,6 +3,7 @@ import {
     daysOfWeekOptions,
     genderOptions,
     roleOptions,
+    specialtyOptions,
 } from '@resources/practitioner/config/config'
 import content from './addNewPractitionerForm.content'
 
@@ -31,4 +32,5 @@ export const addNewPractitionerFormSchema = z.object({
         })
     ),
     locationId: z.string().optional(),
+    specialty: z.enum(specialtyOptions, { error: content.errorSpecialtyRequired }).optional(),
 })
