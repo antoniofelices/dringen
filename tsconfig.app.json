@@ -26,17 +26,16 @@
         /* Vitest */
         "types": ["vitest/globals"],
 
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
-            "@auth/*": ["src/auth/*"],
-            "@config/*": ["src/config/*"],
-            "@layouts/*": ["src/layouts/*"],
-            "@resourcesmedplum/*": ["src/medplum/*"],
-            "@pages/*": ["src/pages/*"],
-            "@resources/*": ["src/resources/*"],
-            "@shared/*": ["src/shared/*"],
-            "@workflows/*": ["src/workflows/*"]
+            "@/*": ["./src/*"],
+            "@auth/*": ["./src/auth/*"],
+            "@config/*": ["./src/config/*"],
+            "@layouts/*": ["./src/layouts/*"],
+            "@resourcesmedplum/*": ["./src/medplum/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@resources/*": ["./src/resources/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@workflows/*": ["./src/workflows/*"]
         }
     },
     "include": ["src", "src/routes/_authz/.lazy.tsx"]
