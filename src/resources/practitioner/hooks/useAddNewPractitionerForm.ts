@@ -12,10 +12,8 @@ import { useClinicLocation } from '@resources/location/hooks/useClinicLocation'
 import { useLocationsByParent } from '@resources/location/hooks/useLocationsByParent'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
 import { daysOfWeekOptions } from '@resources/practitioner/config/config'
-import {
-    ROLE_PRACTITIONER_TO_SNOMED,
-    SPECIALTY_TO_SNOMED,
-} from '@resources/practitioner/domain/practitioner.domain'
+import { SPECIALTY_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
+import { PRACTITIONER_ROLE_TO_SNOMED } from '@resources/practitioner-role/domain/practitionerRole.domain'
 import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
 import type {
     AddNewPractitionerFormType,
@@ -142,8 +140,8 @@ export const useAddNewPractitionerForm = ({
             })
 
             // Step 3 — Create PractitionerRole
-            const snomedCode = ROLE_PRACTITIONER_TO_SNOMED[formData.role][0]
-            const snomedDisplay = ROLE_PRACTITIONER_TO_SNOMED[formData.role][1]
+            const snomedCode = PRACTITIONER_ROLE_TO_SNOMED[formData.role][0]
+            const snomedDisplay = PRACTITIONER_ROLE_TO_SNOMED[formData.role][1]
 
             await medplum.createResource({
                 resourceType: 'PractitionerRole',

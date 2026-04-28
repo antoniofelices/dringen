@@ -1,10 +1,18 @@
 import type { PractitionerRole } from '@medplum/fhirtypes'
+import { toFhirTime } from '@shared/fhir/utils'
+import type { PractitionerRoleCode } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 import type {
     PractitionerRoleDetailType,
     PractitionerDetailsFormData,
 } from '@resources/practitioner-role/types/practitionerRole.model'
+import { PRACTITIONER_ROLE_TO_SNOMED } from '@resources/practitioner-role/domain/practitionerRole.domain'
 import { accessPolicyToUserRole } from '@auth/domain/auth.adapter'
 
+export function practitionerRoleCodeToFhirDisplay(
+    roleCode: PractitionerRoleCode
+): string {
+    return PRACTITIONER_ROLE_TO_SNOMED[roleCode][1]
+}
 export function practitionerDetailsToFhir(
     formData: PractitionerDetailsFormData,
     existingRole: PractitionerRole,
@@ -16,9 +24,6 @@ export function practitionerDetailsToFhir(
             ? [{ reference: `Location/${formData.outpatientFacility}` }]
             : []),
     ]
-
-    const toFhirTime = (time: string) =>
-        time.length === 5 ? `${time}:00` : time
 
     const availableTime = formData.availableTime.map((time) => ({
         daysOfWeek: [time.daysOfWeek],

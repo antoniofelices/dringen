@@ -1,16 +1,18 @@
 import type { PractitionerRole } from '@medplum/fhirtypes'
 import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
+import type { PractitionerRoleCode } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 import type { PractitionerRoleInfo } from '@resources/practitioner-role/types/practitionerRole.model'
+import { practitionerRoleCodeToFhirDisplay } from '@resources/practitioner-role/domain/practitionerRole.adapter'
 
 export const getPractitionerIdsByRole = async (
-    role: string
+    roleCode: PractitionerRoleCode
 ): Promise<PractitionerRoleInfo[]> => {
     try {
         await authenticateMedplum()
 
         const roles = await medplum.searchResources('PractitionerRole', {
-            role,
+            role: practitionerRoleCodeToFhirDisplay(roleCode),
             _count: 1000,
         })
 
