@@ -8,8 +8,6 @@ const daysOfWeekOptions = [
     'sun',
 ] as const
 
-const genderOptions = ['male', 'female', 'other', 'unknown'] as const
-
 const roleOptions = ['doctor', 'administrative', 'administrative-hr'] as const
 
 const specialtyOptions = [
@@ -20,4 +18,4 @@ const specialtyOptions = [
     'dermatology',
 ] as const
 
-export { daysOfWeekOptions, genderOptions, roleOptions, specialtyOptions }
+export { daysOfWeekOptions, roleOptions, specialtyOptions }

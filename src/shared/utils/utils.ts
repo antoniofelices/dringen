@@ -79,12 +79,12 @@ export function normalizeFileName(fileName: string): string {
 }
 
 export const getLabelFromOptions = (
-    options: { value: string; label: string }[],
+    options: ReadonlyArray<{ value: string; label: string }>,
     value: string | undefined
 ): string => options.find((o) => o.value === value)?.label ?? ''
 
 export const getValueFromOptions = (
-    options: { value: string; label: string }[],
+    options: ReadonlyArray<{ value: string; label: string }>,
     label: string | undefined
 ): string => options.find((o) => o.label === label)?.value ?? ''
 

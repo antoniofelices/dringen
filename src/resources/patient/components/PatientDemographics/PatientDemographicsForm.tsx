@@ -1,12 +1,14 @@
 import type { PatientType } from '@resources/patient/types/patient.model'
 import { usePatientDemographicsForm } from '@resources/patient/hooks/usePatientDemographicsForm'
+import { GENDER_OPTIONS } from '@shared/fhir/valueSets.domain'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import content from './PatientDemographics.content'
 
-const { genderOptions, maritalStatusOptions } = content
+const { maritalStatusOptions } = content
 
 const PatientDemographicsForm = ({
     patientData,
@@ -15,7 +17,10 @@ const PatientDemographicsForm = ({
     patientData: PatientType
     onSuccess: () => void
 }) => {
-    const { form, onSubmit } = usePatientDemographicsForm({ patientData, onSuccess })
+    const { form, onSubmit } = usePatientDemographicsForm({
+        patientData,
+        onSuccess,
+    })
 
     return (
         <Form {...form}>
@@ -35,11 +40,11 @@ const PatientDemographicsForm = ({
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <FormFieldCombobox
+                    <FormFieldSelect
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={genderOptions}
+                        options={GENDER_OPTIONS.map((o) => o.value)}
                     />
                     <FormFieldCombobox
                         control={form.control}

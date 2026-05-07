@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { GENDER_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './addNewPatient.content'
 
 export const addNewPatientSchema = z.object({
@@ -26,7 +27,7 @@ export const addNewPatientSchema = z.object({
         .length(8, content.errorUserDniLength)
         .regex(/^\d{8}$/, content.errorUserDniInvalidFormat),
 
-    gender: z.enum(['male', 'female', 'other', 'unknown'], {
+    gender: z.enum(GENDER_VALUES, {
         error: content.errorGenderRequired,
     }),
 
