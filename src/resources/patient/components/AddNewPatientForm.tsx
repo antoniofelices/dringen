@@ -1,11 +1,13 @@
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import { useAddNewPatientForm } from '@resources/patient/hooks/useAddNewPatientForm'
-import { GENDER_OPTIONS } from '@shared/fhir/valueSets.domain'
+import {
+    GENDER_OPTIONS,
+    MARITAL_STATUS_OPTIONS,
+} from '@shared/fhir/valueSets.domain'
 import content from './AddNewPatientForm.content'
 
 const AddNewPatientForm = () => {
@@ -49,23 +51,11 @@ const AddNewPatientForm = () => {
                         label={content.labelGender}
                         options={GENDER_OPTIONS.map((o) => o.value)}
                     />
-                    <FormFieldCombobox
+                    <FormFieldSelect
                         control={form.control}
                         fieldName="maritalStatus"
                         label={content.labelMaritalStatus}
-                        options={[
-                            { label: 'Annulled', value: 'A' },
-                            { label: 'Divorced', value: 'D' },
-                            { label: 'Interlocutory', value: 'I' },
-                            { label: 'Legally Separated', value: 'L' },
-                            { label: 'Married', value: 'M' },
-                            { label: 'Polygamous', value: 'P' },
-                            { label: 'Never Married', value: 'S' },
-                            { label: 'Domestic Partner', value: 'T' },
-                            { label: 'Unmarried', value: 'U' },
-                            { label: 'Widowed', value: 'W' },
-                            { label: 'Unknown', value: 'UNK' },
-                        ]}
+                        options={MARITAL_STATUS_OPTIONS.map((o) => o.value)}
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">

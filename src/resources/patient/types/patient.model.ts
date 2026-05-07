@@ -1,20 +1,7 @@
 import type { z } from 'zod'
-import type { GenderValue } from '@shared/fhir/valueSets.domain'
+import type { GenderValue, MaritalStatusValue } from '@shared/fhir/valueSets.domain'
 import type { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
 import type { patientDemographicsSchema } from '@resources/patient/schemas/patientDemographics.schema'
-
-export type MaritalStatusCode =
-    | 'A'
-    | 'D'
-    | 'I'
-    | 'L'
-    | 'M'
-    | 'P'
-    | 'S'
-    | 'T'
-    | 'U'
-    | 'W'
-    | 'UNK'
 
 export type PatientType = {
     id: string
@@ -26,7 +13,7 @@ export type PatientType = {
     address: string
     dni: string
     gender: GenderValue
-    maritalStatus: MaritalStatusCode | undefined
+    maritalStatus: MaritalStatusValue | undefined
 }
 
 export type PatientDemographicsFormType = z.infer<
