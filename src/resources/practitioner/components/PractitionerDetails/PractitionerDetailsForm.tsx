@@ -6,7 +6,7 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
-import { daysOfWeekOptions } from '@resources/practitioner/config/config'
+import { DAYS_OF_WEEK_OPTIONS } from '@shared/fhir/valueSets.domain'
 import { usePractitionerDetailsForm } from '@resources/practitioner/hooks/usePractitionerDetailsForm'
 import content from './PractitionerDetails.content'
 
@@ -73,7 +73,7 @@ const PractitionerDetailsForm = ({
                                 control={form.control}
                                 fieldName={`availableTime.${index}.daysOfWeek`}
                                 label={content.labelDaysOfWeek}
-                                options={daysOfWeekOptions}
+                                options={DAYS_OF_WEEK_OPTIONS}
                                 placeholder={content.labelDaysOfWeek}
                             />
                             <FormFieldInput
