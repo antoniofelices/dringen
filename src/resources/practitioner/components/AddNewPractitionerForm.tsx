@@ -67,8 +67,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={GENDER_OPTIONS.map(o => o.value)}
-                        placeholder={content.labelGender}
+                        options={GENDER_OPTIONS}
                     />
                 </div>
                 <FormFieldSelect
@@ -76,7 +75,6 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                     fieldName="role"
                     label={content.labelRole}
                     options={roleOptions}
-                    placeholder={content.labelRole}
                 />
                 {role === 'doctor' && (
                     <div className="grid grid-cols-2 gap-8">

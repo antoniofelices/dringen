@@ -44,13 +44,13 @@ const PatientDemographicsForm = ({
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={GENDER_OPTIONS.map((o) => o.value)}
+                        options={GENDER_OPTIONS}
                     />
                     <FormFieldSelect
                         control={form.control}
                         fieldName="maritalStatus"
                         label={content.labelMaritalStatus}
-                        options={MARITAL_STATUS_OPTIONS.map((o) => o.value)}
+                        options={MARITAL_STATUS_OPTIONS}
                     />
                 </div>
                 <Button

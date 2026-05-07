@@ -78,6 +78,13 @@ export function normalizeFileName(fileName: string): string {
     )
 }
 
+export const normalizeOptions = (
+    options: readonly string[] | ReadonlyArray<{ label: string; value: string }>
+): { label: string; value: string }[] =>
+    (options as ReadonlyArray<string | { label: string; value: string }>).map(
+        (o) => (typeof o === 'string' ? { label: o, value: o } : o)
+    )
+
 export const getLabelFromOptions = (
     options: ReadonlyArray<{ value: string; label: string }>,
     value: string | undefined
