@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import {
     daysOfWeekOptions,
-    genderOptions,
     roleOptions,
     specialtyOptions,
 } from '@resources/practitioner/config/config'
+import { GENDER_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './addNewPractitionerForm.content'
 
 export const addNewPractitionerFormSchema = z.object({
@@ -22,7 +22,7 @@ export const addNewPractitionerFormSchema = z.object({
         .min(1, content.errorEmailRequired),
     phone: z.string().optional(),
     birthDate: z.date().optional(),
-    gender: z.enum(genderOptions).optional(),
+    gender: z.enum(GENDER_VALUES).optional(),
     role: z.enum(roleOptions, { error: content.errorRoleRequired }),
     availableTime: z.array(
         z.object({

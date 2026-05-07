@@ -2,8 +2,10 @@ import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import { useAddNewPatientForm } from '@resources/patient/hooks/useAddNewPatientForm'
+import { GENDER_OPTIONS } from '@shared/fhir/valueSets.domain'
 import content from './AddNewPatientForm.content'
 
 const AddNewPatientForm = () => {
@@ -41,16 +43,11 @@ const AddNewPatientForm = () => {
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <FormFieldCombobox
+                    <FormFieldSelect
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={[
-                            { label: 'Male', value: 'male' },
-                            { label: 'Female', value: 'female' },
-                            { label: 'Other', value: 'other' },
-                            { label: 'Unknown', value: 'unknown' },
-                        ]}
+                        options={GENDER_OPTIONS.map((o) => o.value)}
                     />
                     <FormFieldCombobox
                         control={form.control}

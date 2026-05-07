@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { GENDER_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './patientDemographics.content'
 
 export const patientDemographicsSchema = z.object({
@@ -14,7 +15,7 @@ export const patientDemographicsSchema = z.object({
         .max(20, content.errorLastNameTooLong)
         .trim(),
 
-    gender: z.enum(['male', 'female', 'other', 'unknown'], {
+    gender: z.enum(GENDER_VALUES, {
         error: content.errorGenderRequired,
     }),
 

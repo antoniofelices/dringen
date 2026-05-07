@@ -1,4 +1,5 @@
 import type { z } from 'zod'
+import type { GenderValue } from '@shared/fhir/valueSets.domain'
 import type { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
 import type { patientDemographicsSchema } from '@resources/patient/schemas/patientDemographics.schema'
 
@@ -24,7 +25,7 @@ export type PatientType = {
     email: string
     address: string
     dni: string
-    gender: 'male' | 'female' | 'other' | 'unknown'
+    gender: GenderValue
     maritalStatus: MaritalStatusCode | undefined
 }
 

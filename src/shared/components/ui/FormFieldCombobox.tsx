@@ -33,7 +33,7 @@ type FormFieldProps<T extends FieldValues> = {
     label: string
     modal?: boolean
     placeholder?: string
-    options: OptionType[]
+    options: readonly OptionType[]
     textCommandEmpty?: string
     isSrOnlyLabel?: boolean
 }
