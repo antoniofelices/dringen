@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { GENDER_VALUES } from '@shared/fhir/valueSets.domain'
+import { GENDER_VALUES, MARITAL_STATUS_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './addNewPatient.content'
 
 export const addNewPatientSchema = z.object({
@@ -39,7 +39,7 @@ export const addNewPatientSchema = z.object({
         .min(new Date('1900-01-01'), content.errorBirthDateTooOld),
 
     maritalStatus: z
-        .enum(['A', 'D', 'I', 'L', 'M', 'P', 'S', 'T', 'U', 'W', 'UNK'], {
+        .enum(MARITAL_STATUS_VALUES, {
             error: content.errorMaritalStatusRequired,
         })
         .optional(),

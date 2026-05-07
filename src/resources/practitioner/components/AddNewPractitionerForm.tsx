@@ -5,11 +5,11 @@ import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import { roleOptions } from '@resources/practitioner/config/config'
 import {
-    daysOfWeekOptions,
-    roleOptions,
-} from '@resources/practitioner/config/config'
-import { GENDER_OPTIONS } from '@shared/fhir/valueSets.domain'
+    GENDER_OPTIONS,
+    DAYS_OF_WEEK_OPTIONS,
+} from '@shared/fhir/valueSets.domain'
 import { useAddNewPractitionerForm } from '@resources/practitioner/hooks/useAddNewPractitionerForm'
 import type { AddNewPractitionerFormProps } from '@resources/practitioner/types/practitioner.model'
 import content from './AddNewPractitionerForm.content'
@@ -29,7 +29,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-4">
                     <FormFieldInput
                         control={form.control}
                         fieldName="firstName"
@@ -43,7 +43,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                         type="text"
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-4">
                     <FormFieldInput
                         control={form.control}
                         fieldName="email"
@@ -57,7 +57,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                         type="tel"
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-4">
                     <FormFieldCalendar
                         control={form.control}
                         fieldName="birthDate"
@@ -67,8 +67,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={GENDER_OPTIONS.map(o => o.value)}
-                        placeholder={content.labelGender}
+                        options={GENDER_OPTIONS}
                     />
                 </div>
                 <FormFieldSelect
@@ -76,10 +75,9 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                     fieldName="role"
                     label={content.labelRole}
                     options={roleOptions}
-                    placeholder={content.labelRole}
                 />
                 {role === 'doctor' && (
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-2 gap-4">
                         <FormFieldCombobox
                             control={form.control}
                             fieldName="locationId"
@@ -111,7 +109,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                                 control={form.control}
                                 fieldName={`availableTime.${index}.daysOfWeek`}
                                 label={content.labelDaysOfWeek}
-                                options={daysOfWeekOptions}
+                                options={DAYS_OF_WEEK_OPTIONS}
                                 placeholder={content.labelDaysOfWeek}
                             />
                             <FormFieldInput

@@ -9,19 +9,6 @@ const content = {
     textButtonSending: 'Saving',
     textToastSuccess: 'Patient general data updated successfully',
     textToastFail: 'Failed to update patient general info',
-    maritalStatusOptions: [
-        { label: 'Annulled', value: 'A' },
-        { label: 'Divorced', value: 'D' },
-        { label: 'Interlocutory', value: 'I' },
-        { label: 'Legally Separated', value: 'L' },
-        { label: 'Married', value: 'M' },
-        { label: 'Polygamous', value: 'P' },
-        { label: 'Never Married', value: 'S' },
-        { label: 'Domestic Partner', value: 'T' },
-        { label: 'Unmarried', value: 'U' },
-        { label: 'Widowed', value: 'W' },
-        { label: 'Unknown', value: 'UNK' },
-    ],
 }
 
 export default content

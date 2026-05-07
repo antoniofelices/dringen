@@ -1,5 +1,6 @@
 import type { Control, FieldValues, Path } from 'react-hook-form'
 import type { LucideIcon } from 'lucide-react'
+import { normalizeOptions } from '@shared/utils/utils'
 import {
     FormControl,
     FormDescription,
@@ -16,6 +17,8 @@ import {
     SelectValue,
 } from '@shared/components/ui/base/select'
 
+type OptionType = { label: string; value: string }
+
 type FormFieldProps<T extends FieldValues> = {
     className?: string
     control: Control<T>
@@ -24,7 +27,7 @@ type FormFieldProps<T extends FieldValues> = {
     icon?: LucideIcon
     label: string
     placeholder?: string
-    options: string[] | readonly string[]
+    options: readonly string[] | readonly OptionType[]
 }
 
 const FormFieldSelect = <T extends FieldValues>({
@@ -37,6 +40,8 @@ const FormFieldSelect = <T extends FieldValues>({
     placeholder,
     options,
 }: FormFieldProps<T>) => {
+    const normalized = normalizeOptions(options)
+
     return (
         <div className={className}>
             <FormField
@@ -58,9 +63,9 @@ const FormFieldSelect = <T extends FieldValues>({
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                {options.map((option) => (
-                                    <SelectItem value={option} key={option}>
-                                        {option}
+                                {normalized.map((option) => (
+                                    <SelectItem value={option.value} key={option.value}>
+                                        {option.label}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
