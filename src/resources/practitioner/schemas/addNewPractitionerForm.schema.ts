@@ -1,10 +1,9 @@
 import { z } from 'zod'
 import {
-    daysOfWeekOptions,
     roleOptions,
     specialtyOptions,
 } from '@resources/practitioner/config/config'
-import { GENDER_VALUES } from '@shared/fhir/valueSets.domain'
+import { GENDER_VALUES, DAYS_OF_WEEK_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './addNewPractitionerForm.content'
 
 export const addNewPractitionerFormSchema = z.object({
@@ -26,7 +25,7 @@ export const addNewPractitionerFormSchema = z.object({
     role: z.enum(roleOptions, { error: content.errorRoleRequired }),
     availableTime: z.array(
         z.object({
-            daysOfWeek: z.enum(daysOfWeekOptions, { error: content.errorDaysOfWeekRequired }),
+            daysOfWeek: z.enum(DAYS_OF_WEEK_VALUES, { error: content.errorDaysOfWeekRequired }),
             startTime: z.string().min(1, content.errorStartTimeRequired),
             endTime: z.string().min(1, content.errorEndTimeRequired),
         })
