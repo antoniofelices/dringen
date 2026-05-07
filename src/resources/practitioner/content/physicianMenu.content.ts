@@ -21,7 +21,7 @@ export const physicianMenu = (practitionerId: string): RoutesProps[] => [
     {
         id: 4,
         icon: PlusCircle,
-        url: 'patient/add',
+        url: '/patient/add',
         text: 'Add Patient',
         orderMenu: 4,
     },

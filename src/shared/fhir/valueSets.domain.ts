@@ -40,3 +40,31 @@ export const DAYS_OF_WEEK_OPTIONS = [
 export type DayOfWeekValue = (typeof DAYS_OF_WEEK_OPTIONS)[number]['value']
 
 export const DAYS_OF_WEEK_VALUES = DAYS_OF_WEEK_OPTIONS.map(o => o.value) as [DayOfWeekValue, ...DayOfWeekValue[]]
+
+export const RELATIONSHIP_OPTIONS = [
+    { label: 'Father', value: 'FTH' },
+    { label: 'Mother', value: 'MTH' },
+    { label: 'Brother', value: 'BRO' },
+    { label: 'Sister', value: 'SIS' },
+    { label: 'Grandfather', value: 'GRFTH' },
+    { label: 'Grandmother', value: 'GRMTH' },
+    { label: 'Son', value: 'SON' },
+    { label: 'Daughter', value: 'DAU' },
+    { label: 'Uncle', value: 'UNCLE' },
+    { label: 'Aunt', value: 'AUNT' },
+    { label: 'Half-brother', value: 'NBRO' },
+    { label: 'Half-sister', value: 'NSIS' },
+] as const
+
+export type RelationshipValue = (typeof RELATIONSHIP_OPTIONS)[number]['value']
+
+export const FAMILY_MEMBER_HISTORY_STATUS_OPTIONS = [
+    { label: 'Partial', value: 'partial' },
+    { label: 'Completed', value: 'completed' },
+    { label: 'Entered in error', value: 'entered-in-error' },
+    { label: 'Health unknown', value: 'health-unknown' },
+] as const
+
+export type FamilyMemberHistoryStatusValue = (typeof FAMILY_MEMBER_HISTORY_STATUS_OPTIONS)[number]['value']
+
+export const FAMILY_MEMBER_HISTORY_STATUS_VALUES = FAMILY_MEMBER_HISTORY_STATUS_OPTIONS.map(o => o.value) as [FamilyMemberHistoryStatusValue, ...FamilyMemberHistoryStatusValue[]]

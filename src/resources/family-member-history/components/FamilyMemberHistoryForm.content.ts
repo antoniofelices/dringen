@@ -15,26 +15,6 @@ const content = {
     textButtonSaving: 'Saving...',
     textToastSuccess: 'Family member history saved successfully',
     textToastFail: 'Failed to save family member history',
-    relationshipOptions: [
-        { label: 'Father', value: 'FTH' },
-        { label: 'Mother', value: 'MTH' },
-        { label: 'Brother', value: 'BRO' },
-        { label: 'Sister', value: 'SIS' },
-        { label: 'Grandfather', value: 'GRFTH' },
-        { label: 'Grandmother', value: 'GRMTH' },
-        { label: 'Son', value: 'SON' },
-        { label: 'Daughter', value: 'DAU' },
-        { label: 'Uncle', value: 'UNCLE' },
-        { label: 'Aunt', value: 'AUNT' },
-        { label: 'Half-brother', value: 'NBRO' },
-        { label: 'Half-sister', value: 'NSIS' },
-    ],
-    statusOptions: [
-        { label: 'Partial', value: 'partial' },
-        { label: 'Completed', value: 'completed' },
-        { label: 'Entered in error', value: 'entered-in-error' },
-        { label: 'Health unknown', value: 'health-unknown' },
-    ],
 }
 
 export default content

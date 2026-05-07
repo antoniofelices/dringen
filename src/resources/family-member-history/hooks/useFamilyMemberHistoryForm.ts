@@ -9,6 +9,7 @@ import { familyMemberHistorySchema } from '@resources/family-member-history/sche
 import { useCreateFamilyMemberHistory } from '@resources/family-member-history/hooks/useCreateFamilyMemberHistory'
 import { useUpdateFamilyMemberHistory } from '@resources/family-member-history/hooks/useUpdateFamilyMemberHistory'
 import { getValueFromOptions } from '@shared/utils/utils'
+import { RELATIONSHIP_OPTIONS } from '@shared/fhir/valueSets.domain'
 import content from '@resources/family-member-history/components/FamilyMemberHistoryForm.content'
 
 export const useFamilyMemberHistoryForm = ({
@@ -32,7 +33,10 @@ export const useFamilyMemberHistoryForm = ({
             noKnownFamilyHistory: isNoKnownHistory,
             relationship: isNoKnownHistory
                 ? ''
-                : (getValueFromOptions(content.relationshipOptions, historyData?.relationship) ?? ''),
+                : (getValueFromOptions(
+                      RELATIONSHIP_OPTIONS,
+                      historyData?.relationship
+                  ) ?? ''),
             condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),
             status:
                 (historyData?.status as FamilyMemberHistoryFormType['status']) ||
