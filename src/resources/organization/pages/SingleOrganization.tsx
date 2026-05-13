@@ -17,7 +17,11 @@ const SingleOrganization = ({ id }: { id: string }) => {
 
     return (
         <>
-            <HeaderArticle title={content.title} />
+            <HeaderArticle title={content.title}>
+                <div className="flex gap-2 items-center">
+                    {organization.name}
+                </div>
+            </HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
