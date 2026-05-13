@@ -1,6 +1,5 @@
 import { Calendar } from 'lucide-react'
 import { theDateAndTime } from '@shared/utils/utils'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import NotesPractitioner from '@resources/basic/physician-note/components/NotesPractitioner'
@@ -22,7 +21,6 @@ const ScheduleSinglePhysician = ({ id }: { id: string }) => {
                     <NotesPractitioner practitionerId={id} />
                 </div>
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }

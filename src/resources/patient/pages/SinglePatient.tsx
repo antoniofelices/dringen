@@ -1,7 +1,6 @@
 import { Phone } from 'lucide-react'
 import RoleGuard from '@auth/components/RoleGuard'
 import { getAgeFromDate } from '@shared/utils/utils'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import { useSinglePatient } from '@resources/patient/hooks/useGetPatient'
@@ -49,7 +48,6 @@ const SinglePatient = ({ id }: { id: string }) => {
                     </div>
                 </div>
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }

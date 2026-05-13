@@ -3,10 +3,9 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from '@/components/ui/base/card'
-import ButtonBack from '@components/ui/ButtonBack'
-import ContentArticle from '@components/ui/ContentArticle'
-import content from '@/config/data/pages/accountInactive'
+} from '@shared/components/ui/base/card'
+import ContentArticle from '@shared/components/ui/ContentArticle'
+import content from './AccountInactive.content'
 
 const AccountInactive = () => {
     return (
@@ -25,7 +24,6 @@ const AccountInactive = () => {
                     </Card>
                 </div>
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }

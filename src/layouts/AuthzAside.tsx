@@ -19,6 +19,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarTrigger,
     SidebarSeparator,
     SidebarRail,
 } from '@shared/components/ui/base/sidebar'
@@ -41,14 +42,15 @@ const AuthzAside = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to={'/dashboard'}>
-                                <Home className="stroke-blue-600" />
+                                <Home className="stroke-green-700" />
                                 {content.textHome}
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarSeparator className="m-0" />
+            <SidebarContent className="overflow-x-hidden">
                 {groups.map((group, index) => {
                     const isVisible =
                         !group.allowedRoles ||
@@ -66,12 +68,18 @@ const AuthzAside = () => {
                                     </SidebarMenu>
                                 </SidebarGroupContent>
                             </SidebarGroup>
-                            {index < groups.length - 1 && <SidebarSeparator />}
+                            {index < groups.length - 1 && (
+                                <SidebarSeparator className="m-0" />
+                            )}
                         </div>
                     )
                 })}
+                <SidebarSeparator className="m-0" />
+                <SidebarGroup>
+                    <SidebarTrigger className="text-green-700" />
+                </SidebarGroup>
             </SidebarContent>
-            <SidebarSeparator />
+            <SidebarSeparator className="m-0" />
 
             <SidebarFooter>
                 <SidebarMenu>
@@ -79,7 +87,7 @@ const AuthzAside = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
-                                    <Circle className="stroke-blue-600" />
+                                    <Circle className="stroke-green-700" />
                                     {user?.firstName}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>

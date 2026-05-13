@@ -1,5 +1,4 @@
 import { Phone } from 'lucide-react'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import PractitionerDetails from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails'
@@ -25,7 +24,6 @@ const SinglePractitioner = ({ id }: { id: string }) => {
                 <div className="my-4"></div>
                 <AppointmentSelector practitionerId={id} />
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }
