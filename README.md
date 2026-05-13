@@ -1,66 +1,99 @@
-<div align="center">
-    <h1>Dringen</h1>
-    <br/>
-    <p>This app is designed for managing patients and their clinical histories.</p>
-    <br/>
-</div>
+# Dringen
 
-<div align="center">
-    <img src="src/assets/images/preview-01.webp" alt="Preview" />
-</div>
+## Overview
 
----
+Dringen is a React webapp that provides healthcare professionals with tools to manage patients, clinical records, and appointments. It follows HL7 FHIR standards via Medplum as the backend.
+
+### Roles
+
+| Role             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `admin`          | Full system access                                 |
+| `physician`      | Clinical records, appointments, patient management |
+| `medical_office` | Administrative tasks, scheduling                   |
+| `user`           | Read-only access                                   |
+
+Patients are not modeled as users — they are FHIR `Patient` resources.
 
 ## Features
 
-- Create and manage users. The following roles are currently available: 'user', 'medical office', 'physician' and 'admin'. Each role has its own capabilities. Patients are not included as users.
-- Create and manage patients. Each patient has their own clinical history, statistics and related attachment files.
-- Create and manage appointments.
-- Use charts to display statistics about patients, such as their place of residence, gender, and diagnosis.
-- The backend is built using Medplum.
+- **User management** — create and manage staff accounts with role-based access policies
+- **Patient management** — full clinical histories, demographics, and attachment files per patient
+- **Appointments** — calendar-based scheduling with React Big Calendar
+- **Statistics** — charts for patient demographics (residence, gender, diagnosis)
+- **FHIR-native** — all data stored as FHIR resources via Medplum
 
-## Technologies
+## Tech Stack
 
-- React.
-- Typescript.
-- Vite.
-- Vitest.
-- TanStack Query.
-- TanStack Router.
-- TanStack Table.
-- Taildwind.
-- Shadcn/ui.
-- React hook form.
-- React Big Calendar.
-- Medplum.
+| Layer         | Library                           |
+| ------------- | --------------------------------- |
+| Framework     | React + TypeScript + Vite         |
+| Routing       | TanStack Router (file-based)      |
+| Data fetching | TanStack Query                    |
+| Tables        | TanStack Table                    |
+| Forms         | React Hook Form + Zod             |
+| UI            | Shadcn/ui + Tailwind CSS          |
+| Backend       | Medplum (self-hosted FHIR server) |
+| Tests         | Vitest                            |
 
-## Documentation
+## Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 18
+- A running Medplum instance (self-hosted or cloud)
 
 ### Installation
 
-1. Clone this repo
-
 ```bash
-$ git clone git@github.com:antoniofelices/dringen.git .
+git clone git@github.com:antoniofelices/dringen.git
+cd dringen
+npm install
 ```
 
-2. Install packages
+### Configuration
+
+Copy the example env file and fill in your Medplum credentials:
 
 ```bash
-$ npm install
+cp .env.example .env
 ```
 
-3. Run develop
+| Variable                      | Description                   |
+| ----------------------------- | ----------------------------- |
+| `APP_MEDPLUM_BASE_URL`        | Medplum server URL            |
+| `APP_MEDPLUM_CLIENT_ID`       | OAuth2 client ID              |
+| `APP_MEDPLUM_CLIENT_SECRET`   | OAuth2 client secret          |
+| `APP_MEDPLUM_PROJECT_ID`      | Medplum project ID            |
+| `APP_MEDPLUM_ORGANIZATION_ID` | FHIR Organization resource ID |
+
+### Running
 
 ```bash
-$ npm run dev
+npm run dev        # Start dev server
+npm run build      # Type-check and build for production
+npm run lint       # Run ESLint
+npm run test       # Run all tests
 ```
 
-## Future Improvements
+## Architecture
 
-- The database structure should be refactored.
-- Implement some standard, such as HL7 FHIR, to ensure data is shared securely and efficiently.
-- Improve dashboard screen.
+The project follows a **domain-driven folder structure** where each FHIR resource lives under `src/resources/<resource-name>/`:
+
+```
+components/   Pure UI components — props and handlers only
+config/       Readonly constants (option arrays, system URLs)
+domain/       Adapters (fhirTo*, *ToFhir) and domain maps
+hooks/        All component logic (useQuery, useMutation, form state)
+pages/        Route-level page components
+schemas/      Zod schemas + validation error messages
+services/     Async functions that call Medplum directly
+types/        TypeScript types from Zod schemas
+```
+
+Multi-resource business flows live in `src/workflows/<workflow-name>/` using the same structure.
+
+See `CLAUDE.md` for full architecture documentation, path aliases, and contribution conventions.
 
 ## Contributing
 
