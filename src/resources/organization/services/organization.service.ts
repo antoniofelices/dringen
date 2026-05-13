@@ -34,6 +34,22 @@ export const getOrganizationById = async (
     }
 }
 
+export const updateOrganization = async (
+    id: string,
+    organization: Organization
+): Promise<Organization> => {
+    try {
+        await authenticateMedplum()
+        return await medplum.updateResource({ ...organization, id })
+    } catch (error) {
+        logger.error('Error updating organization in Medplum', error, {
+            component: 'organization.service',
+            action: 'updateOrganization',
+        })
+        throw error
+    }
+}
+
 export const getListOrganizations = async (): Promise<Organization[]> => {
     try {
         await authenticateMedplum()

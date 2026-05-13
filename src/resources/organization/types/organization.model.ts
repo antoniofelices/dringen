@@ -1,3 +1,6 @@
+import type { z } from 'zod'
+import type { organizationDetailsSchema } from '@resources/organization/schemas/organizationDetails.schema'
+
 export type OrganizationType = {
     id: string
     name: string
@@ -10,3 +13,7 @@ export type OrganizationType = {
     adminPhone: string
     adminEmail: string
 }
+
+export type OrganizationDetailsFormType = z.infer<
+    typeof organizationDetailsSchema
+>
