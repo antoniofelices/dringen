@@ -1,4 +1,6 @@
 import type { FamilyMemberHistory } from '@medplum/fhirtypes'
+import { getLabelFromOptions } from '@shared/utils/utils'
+import { RELATIONSHIP_OPTIONS } from '@shared/fhir/valueSets.domain'
 import type {
     FamilyMemberHistoryType,
     FamilyMemberHistoryFormType,
@@ -66,7 +68,7 @@ export function familyMemberHistoryToFhir(
                 system: 'http://terminology.hl7.org/CodeSystem/v3-RoleCode',
                 code: formData.relationship,
                 display:
-                    relationshipDisplayMap[formData.relationship] ??
+                    getLabelFromOptions(RELATIONSHIP_OPTIONS, formData.relationship) ||
                     formData.relationship,
             },
         ],
@@ -104,17 +106,3 @@ export function familyMemberHistoryFormToFhir(
     }
 }
 
-const relationshipDisplayMap: Record<string, string> = {
-    FTH: 'Father',
-    MTH: 'Mother',
-    BRO: 'Brother',
-    SIS: 'Sister',
-    GRFTH: 'Grandfather',
-    GRMTH: 'Grandmother',
-    SON: 'Son',
-    DAU: 'Daughter',
-    UNCLE: 'Uncle',
-    AUNT: 'Aunt',
-    NBRO: 'Half-brother',
-    NSIS: 'Half-sister',
-}

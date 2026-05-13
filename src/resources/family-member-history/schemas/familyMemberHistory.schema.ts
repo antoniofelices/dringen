@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { FAMILY_MEMBER_HISTORY_STATUS_VALUES } from '@shared/fhir/valueSets.domain'
 import content from './familyMemberHistory.content'
 
 export const familyMemberHistorySchema = z
@@ -6,10 +7,9 @@ export const familyMemberHistorySchema = z
         noKnownFamilyHistory: z.boolean(),
         relationship: z.string(),
         condition: z.string(),
-        status: z.enum(
-            ['partial', 'completed', 'entered-in-error', 'health-unknown'],
-            { error: content.errorStatusRequired }
-        ),
+        status: z.enum(FAMILY_MEMBER_HISTORY_STATUS_VALUES, {
+            error: content.errorStatusRequired,
+        }),
         deceasedBoolean: z.boolean(),
         note: z.string().optional(),
     })

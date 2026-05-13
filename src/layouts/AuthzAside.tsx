@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronUp, Circle, Home } from 'lucide-react'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
-import RoleGuard from '@auth/components/RoleGuard'
+import { useAuthContext } from '@auth/hooks/useAuthContext'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -23,25 +23,15 @@ import {
     SidebarRail,
 } from '@shared/components/ui/base/sidebar'
 import Logo from '@shared/components/ui/Logo'
-import MenuItems from '@shared/components/ui/Menutems'
-import {
-    physicianMenuTitle,
-    physicianMenu,
-} from '@resources/practitioner/content/physicianMenu.content'
-import {
-    administrativeTitleMenu,
-    administrativeMenu,
-} from '@resources/practitioner/content/administrativeMenu.content'
-import {
-    organizationMenuTitle,
-    organizationMenu,
-} from '@resources/practitioner/content/organizationMenu.content'
-import { administrativeHrMenu } from '@resources/practitioner/content/administrativeHrMenu.content'
+import MenuItems from '@shared/navigation/components/MenuItems'
+import { sidebarMenu } from '@shared/navigation/content/sidebarMenu.content'
 import ButtonSignOut from '@auth/components/ButtonSignOut'
 import content from './AuthzAside.content'
 
 const AuthzAside = () => {
     const { user } = useCurrentUser()
+    const { role } = useAuthContext()
+    const groups = sidebarMenu(user?.id ?? '')
 
     return (
         <Sidebar collapsible="icon">
@@ -59,48 +49,27 @@ const AuthzAside = () => {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                <RoleGuard allowedRoles={['doctor']}>
-                    <SidebarGroup>
-                        <SidebarGroupLabel>
-                            {physicianMenuTitle}
-                        </SidebarGroupLabel>
-                        <SidebarGroupContent>
-                            <SidebarMenu>
-                                <MenuItems
-                                    content={physicianMenu(user?.id ?? '')}
-                                />
-                            </SidebarMenu>
-                        </SidebarGroupContent>
-                    </SidebarGroup>
-                    <SidebarSeparator />
-                </RoleGuard>
-                <RoleGuard
-                    allowedRoles={['administrative', 'administrative_hr']}
-                >
-                    <SidebarGroup>
-                        <SidebarGroupLabel>
-                            {administrativeTitleMenu}
-                        </SidebarGroupLabel>
-                        <SidebarGroupContent>
-                            <SidebarMenu>
-                                <MenuItems content={administrativeMenu} />
-                            </SidebarMenu>
-                        </SidebarGroupContent>
-                    </SidebarGroup>
-                </RoleGuard>
-                <SidebarGroup>
-                    <SidebarGroupLabel>
-                        {organizationMenuTitle}
-                    </SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <MenuItems content={organizationMenu} />
-                            <RoleGuard allowedRoles={['administrative_hr']}>
-                                <MenuItems content={administrativeHrMenu} />
-                            </RoleGuard>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                {groups.map((group, index) => {
+                    const isVisible =
+                        !group.allowedRoles ||
+                        (role && group.allowedRoles.includes(role))
+                    if (!isVisible) return null
+                    return (
+                        <div key={group.id}>
+                            <SidebarGroup>
+                                <SidebarGroupLabel>
+                                    {group.title}
+                                </SidebarGroupLabel>
+                                <SidebarGroupContent>
+                                    <SidebarMenu>
+                                        <MenuItems content={group.items} />
+                                    </SidebarMenu>
+                                </SidebarGroupContent>
+                            </SidebarGroup>
+                            {index < groups.length - 1 && <SidebarSeparator />}
+                        </div>
+                    )
+                })}
             </SidebarContent>
             <SidebarSeparator />
 
