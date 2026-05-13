@@ -4,7 +4,7 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
-import OrganizationDetails from '@resources/organization/components/OrganizationDetails'
+import OrganizationDetails from '@resources/organization/components/OrganizationDetails/OrganizationDetails'
 import { useOrganizationById } from '@resources/organization/hooks/useOrganizationById'
 import content from './SingleOrganization.content'
 

@@ -9,6 +9,10 @@ const content = {
     labelAdminPhone: 'Admin Phone',
     labelAdminEmail: 'Admin Email',
     textButtonEdit: 'Edit',
+    textButtonSend: 'Save',
+    textButtonSending: 'Saving',
+    textToastSuccess: 'Organization details updated successfully',
+    textToastFail: 'Failed to update organization details',
 }
 
 export default content
