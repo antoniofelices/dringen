@@ -1,5 +1,4 @@
 import RoleGuard from '@auth/components/RoleGuard'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
@@ -17,7 +16,11 @@ const SingleOrganization = ({ id }: { id: string }) => {
 
     return (
         <>
-            <HeaderArticle title={content.title} />
+            <HeaderArticle title={content.title}>
+                <div className="flex gap-2 items-center">
+                    {organization.name}
+                </div>
+            </HeaderArticle>
             <ContentArticle>
                 <div className="grid lg:grid-cols-6 gap-6 place-content-between">
                     <div className="col-span-3">
@@ -32,7 +35,6 @@ const SingleOrganization = ({ id }: { id: string }) => {
                     </RoleGuard>
                 </div>
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }
