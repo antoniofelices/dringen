@@ -19,6 +19,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarTrigger,
     SidebarSeparator,
     SidebarRail,
 } from '@shared/components/ui/base/sidebar'
@@ -41,14 +42,15 @@ const AuthzAside = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to={'/dashboard'}>
-                                <Home className="stroke-blue-600" />
+                                <Home className="stroke-green-700" />
                                 {content.textHome}
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarSeparator />
+            <SidebarContent className="overflow-x-hidden">
                 {groups.map((group, index) => {
                     const isVisible =
                         !group.allowedRoles ||
@@ -70,6 +72,10 @@ const AuthzAside = () => {
                         </div>
                     )
                 })}
+                <SidebarSeparator />
+                <SidebarGroup>
+                    <SidebarTrigger />
+                </SidebarGroup>
             </SidebarContent>
             <SidebarSeparator />
 
@@ -79,7 +85,7 @@ const AuthzAside = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
-                                    <Circle className="stroke-blue-600" />
+                                    <Circle className="stroke-green-700" />
                                     {user?.firstName}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>

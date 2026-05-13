@@ -7,7 +7,8 @@ const Logo = ({
     size?: string
     variant?: string
 }) => {
-    const fillColor = variant === 'white' ? '#ffffff' : '#00b3e5'
+    const fillColor =
+        variant === 'white' ? '#ffffff' : 'oklch(52.7% 0.154 150.069)'
 
     return (
         <div className={`${customClasses} ${size}`}>
