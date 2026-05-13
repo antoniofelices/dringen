@@ -49,7 +49,7 @@ const AuthzAside = () => {
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
-            <SidebarSeparator />
+            <SidebarSeparator className="m-0" />
             <SidebarContent className="overflow-x-hidden">
                 {groups.map((group, index) => {
                     const isVisible =
@@ -68,16 +68,18 @@ const AuthzAside = () => {
                                     </SidebarMenu>
                                 </SidebarGroupContent>
                             </SidebarGroup>
-                            {index < groups.length - 1 && <SidebarSeparator />}
+                            {index < groups.length - 1 && (
+                                <SidebarSeparator className="m-0" />
+                            )}
                         </div>
                     )
                 })}
-                <SidebarSeparator />
+                <SidebarSeparator className="m-0" />
                 <SidebarGroup>
-                    <SidebarTrigger />
+                    <SidebarTrigger className="text-green-700" />
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarSeparator />
+            <SidebarSeparator className="m-0" />
 
             <SidebarFooter>
                 <SidebarMenu>
