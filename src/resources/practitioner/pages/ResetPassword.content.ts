@@ -1,5 +1,6 @@
 const content = {
     title: 'Security',
+    textDescription: 'A place to reset your password',
     errorPasswordTooShort:
         'The password must contain at least eight characters',
     errorPasswordMustContain:
