@@ -39,10 +39,15 @@ export function organizationDetailsToFhir(
     const phoneIdx = telecom.findIndex((t) => t.system === 'phone')
     const emailIdx = telecom.findIndex((t) => t.system === 'email')
 
-    if (phoneIdx >= 0) telecom[phoneIdx] = { ...telecom[phoneIdx], value: formData.phone }
+    if (phoneIdx >= 0)
+        telecom[phoneIdx] = { ...telecom[phoneIdx], value: formData.phone }
     else telecom.push({ system: 'phone', value: formData.phone })
 
-    if (emailIdx >= 0) telecom[emailIdx] = { ...telecom[emailIdx], value: formData.email ?? '' }
+    if (emailIdx >= 0)
+        telecom[emailIdx] = {
+            ...telecom[emailIdx],
+            value: formData.email ?? '',
+        }
     else telecom.push({ system: 'email', value: formData.email ?? '' })
 
     const contacts = [...(existing.contact ?? [])]
@@ -51,26 +56,40 @@ export function organizationDetailsToFhir(
     const adminPhoneIdx = adminTelecom.findIndex((t) => t.system === 'phone')
     const adminEmailIdx = adminTelecom.findIndex((t) => t.system === 'email')
 
-    if (adminPhoneIdx >= 0) adminTelecom[adminPhoneIdx] = { ...adminTelecom[adminPhoneIdx], value: formData.adminPhone }
+    if (adminPhoneIdx >= 0)
+        adminTelecom[adminPhoneIdx] = {
+            ...adminTelecom[adminPhoneIdx],
+            value: formData.adminPhone,
+        }
     else adminTelecom.push({ system: 'phone', value: formData.adminPhone })
 
-    if (adminEmailIdx >= 0) adminTelecom[adminEmailIdx] = { ...adminTelecom[adminEmailIdx], value: formData.adminEmail ?? '' }
-    else adminTelecom.push({ system: 'email', value: formData.adminEmail ?? '' })
+    if (adminEmailIdx >= 0)
+        adminTelecom[adminEmailIdx] = {
+            ...adminTelecom[adminEmailIdx],
+            value: formData.adminEmail ?? '',
+        }
+    else
+        adminTelecom.push({ system: 'email', value: formData.adminEmail ?? '' })
 
     adminContact.telecom = adminTelecom
     contacts[0] = adminContact
 
     const identifier = [...(existing.identifier ?? [])]
-    if (identifier.length > 0) identifier[0] = { ...identifier[0], value: formData.identifier }
+    if (identifier.length > 0)
+        identifier[0] = { ...identifier[0], value: formData.identifier }
     else identifier.push({ value: formData.identifier })
 
     const address = [...(existing.address ?? [])]
-    if (address.length > 0) address[0] = { ...address[0], text: formData.address }
+    if (address.length > 0)
+        address[0] = { ...address[0], text: formData.address }
     else address.push({ text: formData.address })
 
     const type = [...(existing.type ?? [])]
     if (type.length > 0 && type[0].coding && type[0].coding.length > 0) {
-        type[0] = { ...type[0], coding: [{ ...type[0].coding[0], display: formData.type }] }
+        type[0] = {
+            ...type[0],
+            coding: [{ ...type[0].coding[0], display: formData.type }],
+        }
     }
 
     return {
