@@ -18,7 +18,7 @@ export const allergyIntoleranceSchema = z
         verificationStatus: z
             .enum(['unconfirmed', 'confirmed', 'refuted', 'entered-in-error'])
             .optional(),
-        onsetDateTime: z.string().optional(),
+        onsetDateTime: z.date().optional(),
         manifestation: z.string().optional(),
         severity: z.enum(['mild', 'moderate', 'severe']).optional(),
         note: z.string().optional(),

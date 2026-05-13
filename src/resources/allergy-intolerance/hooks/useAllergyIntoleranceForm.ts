@@ -44,7 +44,9 @@ export const useAllergyIntoleranceForm = ({
             verificationStatus:
                 (allergyData?.verificationStatus as AllergyIntoleranceFormType['verificationStatus']) ||
                 undefined,
-            onsetDateTime: allergyData?.onsetDateTime || undefined,
+            onsetDateTime: allergyData?.onsetDateTime
+                ? new Date(allergyData.onsetDateTime)
+                : undefined,
             manifestation: allergyData?.manifestation || undefined,
             severity:
                 (allergyData?.severity as AllergyIntoleranceFormType['severity']) ||
