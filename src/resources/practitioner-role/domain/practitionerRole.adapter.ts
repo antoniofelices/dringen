@@ -1,12 +1,13 @@
 import type { PractitionerRole } from '@medplum/fhirtypes'
 import { toFhirTime } from '@shared/fhir/utils'
+import type { DayOfWeekValue } from '@shared/fhir/valueSets.domain'
 import type { PractitionerRoleCode } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 import type {
     PractitionerRoleDetailType,
     PractitionerDetailsFormData,
 } from '@resources/practitioner-role/types/practitionerRole.model'
 import { PRACTITIONER_ROLE_TO_SNOMED } from '@resources/practitioner-role/domain/practitionerRole.domain'
-import { accessPolicyToUserRole } from '@auth/domain/auth.adapter'
+import { policyNameToUserRole } from '@auth/domain/auth.adapter'
 
 export function practitionerRoleCodeToFhirDisplay(
     roleCode: PractitionerRoleCode
@@ -26,7 +27,7 @@ export function practitionerDetailsToFhir(
     ]
 
     const availableTime = formData.availableTime.map((time) => ({
-        daysOfWeek: [time.daysOfWeek],
+        daysOfWeek: [time.daysOfWeek as DayOfWeekValue],
         availableStartTime: toFhirTime(time.startTime),
         availableEndTime: toFhirTime(time.endTime),
     }))
@@ -51,7 +52,8 @@ export function practitionerDetailsToFhir(
 export function fhirToPractitionerRoleDetail(
     role: PractitionerRole
 ): PractitionerRoleDetailType {
-    const roleCode = accessPolicyToUserRole(role) ?? ''
+    const policyName = (role as unknown as { basedOn?: { display?: string }[] }).basedOn?.[0]?.display
+    const roleCode = policyNameToUserRole(policyName) ?? ''
     const specialty = role.specialty?.[0]?.coding?.[0]?.display ?? ''
 
     const availableTime = (role.availableTime ?? []).map((time) => ({
