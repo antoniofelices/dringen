@@ -3,7 +3,7 @@ import { useAllergyIntoleranceForm } from '@resources/allergy-intolerance/hooks/
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
+import FormFieldSelect from '@/shared/components/ui/FormFieldSelect'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
 import content from './AllergyIntoleranceForm.content'
@@ -38,14 +38,14 @@ const AllergyIntoleranceForm = ({
                             label={content.labelSubstance}
                             placeholder={content.placeholderSubstance}
                         />
-                        <FormFieldCombobox
+                        <FormFieldSelect
                             control={form.control}
                             fieldName="type"
                             label={content.labelType}
                             placeholder={content.placeholderSelect}
                             options={content.typeOptions}
                         />
-                        <FormFieldCombobox
+                        <FormFieldSelect
                             control={form.control}
                             fieldName="category"
                             label={content.labelCategory}
@@ -54,7 +54,7 @@ const AllergyIntoleranceForm = ({
                         />
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                        <FormFieldCombobox
+                        <FormFieldSelect
                             control={form.control}
                             fieldName="criticality"
                             label={content.labelCriticality}
@@ -67,7 +67,7 @@ const AllergyIntoleranceForm = ({
                             label={content.labelManifestation}
                             placeholder={content.placeholderManifestation}
                         />
-                        <FormFieldCombobox
+                        <FormFieldSelect
                             control={form.control}
                             fieldName="severity"
                             label={content.labelSeverity}
@@ -83,14 +83,14 @@ const AllergyIntoleranceForm = ({
                         label={content.labelOnsetDateTime}
                         type="date"
                     />
-                    <FormFieldCombobox
+                    <FormFieldSelect
                         control={form.control}
                         fieldName="clinicalStatus"
                         label={content.labelClinicalStatus}
                         placeholder={content.placeholderSelect}
                         options={content.clinicalStatusOptions}
                     />
-                    <FormFieldCombobox
+                    <FormFieldSelect
                         control={form.control}
                         fieldName="verificationStatus"
                         label={content.labelVerificationStatus}
