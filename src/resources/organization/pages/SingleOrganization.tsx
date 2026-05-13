@@ -1,5 +1,4 @@
 import RoleGuard from '@auth/components/RoleGuard'
-import ButtonBack from '@shared/components/ui/ButtonBack'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
@@ -36,7 +35,6 @@ const SingleOrganization = ({ id }: { id: string }) => {
                     </RoleGuard>
                 </div>
             </ContentArticle>
-            <ButtonBack />
         </>
     )
 }
