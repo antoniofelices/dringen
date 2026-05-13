@@ -1,10 +1,8 @@
 import type { UserRoleType, AuthMeAccessPolicy } from '@auth/types/auth.model'
 
-export function accessPolicyToUserRole(
-    accessPolicy: AuthMeAccessPolicy | undefined
+export function policyNameToUserRole(
+    policyName: string | undefined
 ): UserRoleType | null {
-    const policyName = accessPolicy?.basedOn?.[0]?.display
-
     switch (policyName) {
         case 'Doctor Policy':
             return 'doctor'
@@ -15,4 +13,10 @@ export function accessPolicyToUserRole(
         default:
             return null
     }
+}
+
+export function accessPolicyToUserRole(
+    accessPolicy: AuthMeAccessPolicy | undefined
+): UserRoleType | null {
+    return policyNameToUserRole(accessPolicy?.basedOn?.[0]?.display)
 }
