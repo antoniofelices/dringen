@@ -3,6 +3,7 @@ import type {
     AllergyIntoleranceType,
     AllergyIntoleranceFormType,
 } from '@resources/allergy-intolerance/types/allergyIntolerance.model'
+import { SNOMED_SYSTEM, HL7_TERMINOLOGY_BASE_URL } from '@shared/fhir/config'
 
 export function fhirToAllergyIntolerance(
     resource: AllergyIntolerance
@@ -10,24 +11,18 @@ export function fhirToAllergyIntolerance(
     return {
         id: resource.id ?? '',
         substance:
-            resource.code?.coding?.[0]?.display ??
-            resource.code?.text ??
-            '',
+            resource.code?.coding?.[0]?.display ?? resource.code?.text ?? '',
         type: resource.type ?? '',
         category: resource.category?.[0] ?? '',
         criticality: resource.criticality ?? '',
-        clinicalStatus:
-            resource.clinicalStatus?.coding?.[0]?.code ?? '',
+        clinicalStatus: resource.clinicalStatus?.coding?.[0]?.code ?? '',
         verificationStatus:
             resource.verificationStatus?.coding?.[0]?.code ?? '',
         onsetDateTime:
-            (resource.onset as { dateTime?: string })?.dateTime ??
-            (typeof resource.onset === 'string' ? resource.onset : '') ??
-            (resource as Record<string, unknown>).onsetDateTime as string ??
-            '',
+            ((resource as unknown as Record<string, unknown>)
+                .onsetDateTime as string) ?? '',
         manifestation:
-            resource.reaction?.[0]?.manifestation?.[0]?.coding?.[0]
-                ?.display ??
+            resource.reaction?.[0]?.manifestation?.[0]?.coding?.[0]?.display ??
             resource.reaction?.[0]?.manifestation?.[0]?.text ??
             '',
         severity: resource.reaction?.[0]?.severity ?? '',
@@ -48,7 +43,7 @@ export function allergyIntoleranceToFhir(
         resource.code = {
             coding: [
                 {
-                    system: 'http://snomed.info/sct',
+                    system: SNOMED_SYSTEM,
                     code: '716186003',
                     display: 'No known allergy',
                 },
@@ -57,7 +52,7 @@ export function allergyIntoleranceToFhir(
         resource.clinicalStatus = {
             coding: [
                 {
-                    system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical',
+                    system: `${HL7_TERMINOLOGY_BASE_URL}/allergyintolerance-clinical`,
                     code: formData.clinicalStatus,
                 },
             ],
@@ -84,7 +79,7 @@ export function allergyIntoleranceToFhir(
     resource.clinicalStatus = {
         coding: [
             {
-                system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical',
+                system: `${HL7_TERMINOLOGY_BASE_URL}/allergyintolerance-clinical`,
                 code: formData.clinicalStatus,
             },
         ],
@@ -94,7 +89,7 @@ export function allergyIntoleranceToFhir(
         resource.verificationStatus = {
             coding: [
                 {
-                    system: 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification',
+                    system: `${HL7_TERMINOLOGY_BASE_URL}/allergyintolerance-verification`,
                     code: formData.verificationStatus,
                 },
             ],
@@ -102,17 +97,15 @@ export function allergyIntoleranceToFhir(
     }
 
     if (formData.onsetDateTime) {
-        ;(resource as Record<string, unknown>).onsetDateTime =
-            formData.onsetDateTime
+        ;(resource as unknown as Record<string, unknown>).onsetDateTime =
+            formData.onsetDateTime.toISOString().split('T')[0]
     }
 
     if (formData.manifestation) {
         resource.reaction = [
             {
                 manifestation: [{ text: formData.manifestation }],
-                ...(formData.severity
-                    ? { severity: formData.severity }
-                    : {}),
+                ...(formData.severity ? { severity: formData.severity } : {}),
             },
         ]
     } else if (formData.severity) {
@@ -135,8 +128,7 @@ export function allergyIntoleranceFormToFhir(
     formData: AllergyIntoleranceFormType,
     existing: AllergyIntolerance
 ): AllergyIntolerance {
-    const patientId =
-        existing.patient?.reference?.replace('Patient/', '') ?? ''
+    const patientId = existing.patient?.reference?.replace('Patient/', '') ?? ''
     const updated = allergyIntoleranceToFhir(formData, patientId)
     return {
         ...existing,

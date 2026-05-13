@@ -3,6 +3,7 @@ import { useAllergyIntoleranceForm } from '@resources/allergy-intolerance/hooks/
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
+import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import FormFieldSelect from '@/shared/components/ui/FormFieldSelect'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
@@ -77,11 +78,10 @@ const AllergyIntoleranceForm = ({
                     </div>
                 </fieldset>
                 <div className="grid grid-cols-3 gap-4">
-                    <FormFieldInput
+                    <FormFieldCalendar
                         control={form.control}
                         fieldName="onsetDateTime"
                         label={content.labelOnsetDateTime}
-                        type="date"
                     />
                     <FormFieldSelect
                         control={form.control}
