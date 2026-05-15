@@ -1,7 +1,9 @@
-const COMMUNICATION_TAG_SYSTEM = 'https://codiceclinico.app/fhir/tags'
+import { APP_FHIR_BASE_URL } from '@shared/fhir/config'
+
+const COMMUNICATION_TAG_SYSTEM = `${APP_FHIR_BASE_URL}/tags`
 const COMMUNICATION_TAG_CODE = 'internal-announcement'
 const COMMUNICATION_CATEGORY_SYSTEM =
-    'https://codiceclinico.app/fhir/communication-category'
+    `${APP_FHIR_BASE_URL}/communication-category`
 const COMMUNICATION_CATEGORY_CODE = 'clinic-announcement'
 
 export {

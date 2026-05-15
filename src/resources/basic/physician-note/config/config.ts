@@ -1,7 +1,9 @@
-const PHYSICIAN_NOTE_CODE_SYSTEM = 'https://codiceclinico.app/fhir/basic-types'
+import { APP_FHIR_BASE_URL } from '@shared/fhir/config'
+
+const PHYSICIAN_NOTE_CODE_SYSTEM = `${APP_FHIR_BASE_URL}/basic-types`
 const PHYSICIAN_NOTE_CODE = 'physician-note'
 const PHYSICIAN_NOTE_TEXT_URL =
-    'https://codiceclinico.app/fhir/StructureDefinition/physician-note-text'
+    `${APP_FHIR_BASE_URL}/StructureDefinition/physician-note-text`
 
 export {
     PHYSICIAN_NOTE_CODE_SYSTEM,

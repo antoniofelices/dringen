@@ -11,6 +11,8 @@ const MEDPLUM_CONFIG = {
     organizationId: import.meta.env.APP_MEDPLUM_ORGANIZATION_ID,
 }
 
+const APP_FHIR_BASE_URL = 'https://codiceclinico.app/fhir'
+
 const LOINC_SYSTEM = 'http://loinc.org'
 const SNOMED_SYSTEM = 'http://snomed.info/sct'
 const ICD10_SYSTEM = 'http://hl7.org/fhir/sid/icd-10'
@@ -19,6 +21,7 @@ const HL7_TERMINOLOGY_BASE_URL = 'http://terminology.hl7.org/CodeSystem'
 export {
     HEADERSCONFIG,
     MEDPLUM_CONFIG,
+    APP_FHIR_BASE_URL,
     LOINC_SYSTEM,
     SNOMED_SYSTEM,
     ICD10_SYSTEM,
