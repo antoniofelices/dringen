@@ -20,10 +20,10 @@ const TermsOfUse = () => {
                     <ScrollArea className="h-[600px] w-[50vw] rounded-md border dark:border-gray-600 p-4">
                         <h2 className="my-4">Who we are</h2>
                         <p>
-                            Our website address is: https://dringen.io
-                            <br /> We are Dringen Company Registration No: 000.
-                            Registered Office: 42 Crecy Court, 8 Hotspur Street,
-                            London, United Kingdom SE11 6BS.
+                            Our website address is: https://codiceclinico.com
+                            <br /> We are Códice Clínico Company Registration
+                            No: 000. Registered Office: 42 Crecy Court, 8
+                            Hotspur Street, London, United Kingdom SE11 6BS.
                         </p>
 
                         <h2 className="my-4">
@@ -81,7 +81,7 @@ const TermsOfUse = () => {
                             the contracted services, novelties and value-added
                             improvements and related activities and training.
                             This processing is based on the legitimate interest
-                            of Dringen to carry out such processing in
+                            of Códice Clínico to carry out such processing in
                             accordance with the regulations in force.
                         </p>
 

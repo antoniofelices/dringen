@@ -1,8 +1,8 @@
-# Dringen
+# Códice Clínico
 
 ## Overview
 
-Dringen is a React webapp that provides healthcare professionals with tools to manage patients, clinical records, and appointments. It follows HL7 FHIR standards via Medplum as the backend.
+Códice Clínico is a React webapp that provides healthcare professionals with tools to manage patients, clinical records, and appointments. It follows HL7 FHIR standards via Medplum as the backend.
 
 ### Roles
 
@@ -46,8 +46,8 @@ Patients are not modeled as users — they are FHIR `Patient` resources.
 ### Installation
 
 ```bash
-git clone git@github.com:antoniofelices/dringen.git
-cd dringen
+git clone git@github.com:antoniofelices/codice-clinico.git
+cd codice-clinico
 npm install
 ```
 
