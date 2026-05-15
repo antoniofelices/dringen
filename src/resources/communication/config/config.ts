@@ -1,7 +1,7 @@
-const COMMUNICATION_TAG_SYSTEM = 'https://dringen.app/fhir/tags'
+const COMMUNICATION_TAG_SYSTEM = 'https://codiceclinico.app/fhir/tags'
 const COMMUNICATION_TAG_CODE = 'internal-announcement'
 const COMMUNICATION_CATEGORY_SYSTEM =
-    'https://dringen.app/fhir/communication-category'
+    'https://codiceclinico.app/fhir/communication-category'
 const COMMUNICATION_CATEGORY_CODE = 'clinic-announcement'
 
 export {
