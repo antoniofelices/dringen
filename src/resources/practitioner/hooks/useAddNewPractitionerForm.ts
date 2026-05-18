@@ -2,7 +2,7 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { SNOMED_SYSTEM } from '@shared/fhir/config'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { toFhirTime } from '@shared/fhir/utils'
 import { useLogger } from '@shared/hooks/useLogger'
 import { useProject } from '@auth/hooks/useProject'
@@ -74,8 +74,6 @@ export const useAddNewPractitionerForm = ({
 
     const onSubmit = async (formData: AddNewPractitionerFormType) => {
         try {
-            await authenticateMedplum()
-
             const policyName = ROLE_PRACTITIONER_TO_POLICY_NAME[formData.role]
             const policy = accessPolicies.find((p) => p.name === policyName)
             const policyId = policy?.id

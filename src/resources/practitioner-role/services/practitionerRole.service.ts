@@ -1,5 +1,5 @@
 import type { PractitionerRole } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import type { PractitionerRoleCode } from '@resourcesmedplum/access-policy/types/accessPolicy.model'
 import type { PractitionerRoleInfo } from '@resources/practitioner-role/types/practitionerRole.model'
@@ -9,9 +9,7 @@ export const getPractitionerIdsByRole = async (
     roleCode: PractitionerRoleCode
 ): Promise<PractitionerRoleInfo[]> => {
     try {
-        await authenticateMedplum()
-
-        const roles = await medplum.searchResources('PractitionerRole', {
+const roles = await medplum.searchResources('PractitionerRole', {
             role: practitionerRoleCodeToFhirDisplay(roleCode),
             _count: 1000,
         })
@@ -42,9 +40,7 @@ export const updatePractitionerRole = async (
     role: PractitionerRole
 ): Promise<PractitionerRole> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...role, id })
+return await medplum.updateResource({ ...role, id })
     } catch (error) {
         logger.error('Error updating practitioner role in Server', error, {
             component: 'practitionerRole.service',
@@ -58,9 +54,7 @@ export const getPractitionerRoleByPractitioner = async (
     practitionerId: string
 ): Promise<PractitionerRole | undefined> => {
     try {
-        await authenticateMedplum()
-
-        const roles = await medplum.searchResources('PractitionerRole', {
+const roles = await medplum.searchResources('PractitionerRole', {
             practitioner: `Practitioner/${practitionerId}`,
         })
 

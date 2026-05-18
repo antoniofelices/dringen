@@ -1,14 +1,12 @@
 import type { AppointmentResponse } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const createAppointmentResponse = async (
     response: AppointmentResponse
 ): Promise<AppointmentResponse> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.createResource(response)
+return await medplum.createResource(response)
     } catch (error) {
         logger.error('Error creating appointment response in Server', error, {
             component: 'appointmentResponse.service',
@@ -22,9 +20,7 @@ export const getAppointmentResponses = async (
     appointmentId: string
 ): Promise<AppointmentResponse[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('AppointmentResponse', {
+return await medplum.searchResources('AppointmentResponse', {
             appointment: `Appointment/${appointmentId}`,
         })
     } catch (error) {

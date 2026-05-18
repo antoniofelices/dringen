@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import type { Appointment } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { CALLED_EXTENSION_URL } from '@resources/appointment/config/config'
 import { updateAppointment } from '@resources/appointment/services/appointment.service'
 import content from './useToggleAppointmentCalled.content'
@@ -17,7 +17,6 @@ export const useToggleAppointmentCalled = () => {
             appointmentId: string
             called: boolean
         }) => {
-            await authenticateMedplum()
             const appointment = await medplum.readResource(
                 'Appointment',
                 appointmentId

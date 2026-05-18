@@ -1,14 +1,12 @@
 import type { Appointment } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const createAppointment = async (
     appointment: Appointment
 ): Promise<Appointment> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.createResource(appointment)
+return await medplum.createResource(appointment)
     } catch (error) {
         logger.error('Error creating appointment in Server', error, {
             component: 'appointment.service',
@@ -23,9 +21,7 @@ export const updateAppointment = async (
     appointment: Appointment
 ): Promise<Appointment> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...appointment, id })
+return await medplum.updateResource({ ...appointment, id })
     } catch (error) {
         logger.error('Error updating appointment in Server', error, {
             component: 'appointment.service',
@@ -39,9 +35,7 @@ export const getAppointmentsByPatient = async (
     patientId: string
 ): Promise<Appointment[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('Appointment', {
+return await medplum.searchResources('Appointment', {
             actor: `Patient/${patientId}`,
             _count: 1000,
         })
@@ -59,9 +53,7 @@ export const getAppointmentsByPractitionerForDate = async (
     date: string
 ): Promise<Appointment[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('Appointment', {
+return await medplum.searchResources('Appointment', {
             actor: `Practitioner/${practitionerId}`,
             date: `ge${date}`,
             _count: 1000,
@@ -79,9 +71,7 @@ export const getListAppointments = async (params?: {
     date?: string
 }): Promise<Appointment[]> => {
     try {
-        await authenticateMedplum()
-
-        const bundle = await medplum.searchResources('Appointment', {
+const bundle = await medplum.searchResources('Appointment', {
             _count: 1000,
             ...(params?.date ? { date: `ge${params.date}` } : {}),
         })

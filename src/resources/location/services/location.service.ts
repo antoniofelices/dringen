@@ -1,12 +1,11 @@
 import type { Location } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import { HL7_TERMINOLOGY_BASE_URL } from '@shared/fhir/config'
 
 export const getLocationsByIds = async (ids: string[]): Promise<Location[]> => {
     try {
-        await authenticateMedplum()
-        return await medplum.searchResources('Location', {
+return await medplum.searchResources('Location', {
             _id: ids.join(','),
         })
     } catch (error) {
@@ -22,8 +21,7 @@ export const getLocationsByParent = async (
     parentId: string
 ): Promise<Location[]> => {
     try {
-        await authenticateMedplum()
-        return await medplum.searchResources('Location', {
+return await medplum.searchResources('Location', {
             partof: `Location/${parentId}`,
         })
     } catch (error) {
@@ -37,8 +35,7 @@ export const getLocationsByParent = async (
 
 export const getClinicLocation = async (): Promise<Location[]> => {
     try {
-        await authenticateMedplum()
-        const locations = await medplum.searchResources('Location', {
+const locations = await medplum.searchResources('Location', {
             type: `${HL7_TERMINOLOGY_BASE_URL}/v3-RoleCode|HOSP`,
         })
         if (locations.length === 0)

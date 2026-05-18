@@ -1,14 +1,12 @@
 import type { AllergyIntolerance } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const getAllergyIntolerancesByPatient = async (
     patientId: string
 ): Promise<AllergyIntolerance[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('AllergyIntolerance', {
+return await medplum.searchResources('AllergyIntolerance', {
             patient: `Patient/${patientId}`,
         })
     } catch (error) {
@@ -28,9 +26,7 @@ export const getAllergyIntoleranceById = async (
     id: string
 ): Promise<AllergyIntolerance> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.readResource('AllergyIntolerance', id)
+return await medplum.readResource('AllergyIntolerance', id)
     } catch (error) {
         logger.error(
             'Error fetching allergy intolerance from Server',
@@ -48,9 +44,7 @@ export const createAllergyIntolerance = async (
     resource: AllergyIntolerance
 ): Promise<AllergyIntolerance> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.createResource(resource)
+return await medplum.createResource(resource)
     } catch (error) {
         logger.error(
             'Error creating allergy intolerance in Server',
@@ -69,9 +63,7 @@ export const updateAllergyIntolerance = async (
     resource: AllergyIntolerance
 ): Promise<AllergyIntolerance> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...resource, id })
+return await medplum.updateResource({ ...resource, id })
     } catch (error) {
         logger.error(
             'Error updating allergy intolerance in Server',

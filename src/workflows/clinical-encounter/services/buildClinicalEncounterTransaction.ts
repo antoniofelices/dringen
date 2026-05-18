@@ -1,13 +1,11 @@
 import type { Bundle } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const executeClinicalEncounterTransaction = async (
     bundle: Bundle
 ): Promise<Bundle> => {
     try {
-        await authenticateMedplum()
-
         return await medplum.executeBatch(bundle)
     } catch (error) {
         logger.error(

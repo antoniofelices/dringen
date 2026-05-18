@@ -1,14 +1,12 @@
 import type { Appointment } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const getAppointmentsByPractitioner = async (
     practitionerId: string
 ): Promise<Appointment[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('Appointment', {
+return await medplum.searchResources('Appointment', {
             actor: `Practitioner/${practitionerId}`,
             status: 'booked',
             _count: '1000',
@@ -31,9 +29,7 @@ export const bookAppointment = async (
     notes?: string
 ): Promise<Appointment> => {
     try {
-        await authenticateMedplum()
-
-        const appointment: Appointment = {
+const appointment: Appointment = {
             resourceType: 'Appointment',
             status: 'booked',
             start,

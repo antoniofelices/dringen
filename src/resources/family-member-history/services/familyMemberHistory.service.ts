@@ -1,14 +1,12 @@
 import type { FamilyMemberHistory } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const getFamilyMemberHistoriesByPatient = async (
     patientId: string
 ): Promise<FamilyMemberHistory[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('FamilyMemberHistory', {
+return await medplum.searchResources('FamilyMemberHistory', {
             patient: `Patient/${patientId}`,
         })
     } catch (error) {
@@ -28,9 +26,7 @@ export const getFamilyMemberHistoryById = async (
     id: string
 ): Promise<FamilyMemberHistory> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.readResource('FamilyMemberHistory', id)
+return await medplum.readResource('FamilyMemberHistory', id)
     } catch (error) {
         logger.error(
             'Error fetching family member history from Server',
@@ -48,9 +44,7 @@ export const createFamilyMemberHistory = async (
     resource: FamilyMemberHistory
 ): Promise<FamilyMemberHistory> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.createResource(resource)
+return await medplum.createResource(resource)
     } catch (error) {
         logger.error(
             'Error creating family member history in Server',
@@ -69,9 +63,7 @@ export const updateFamilyMemberHistory = async (
     resource: FamilyMemberHistory
 ): Promise<FamilyMemberHistory> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...resource, id })
+return await medplum.updateResource({ ...resource, id })
     } catch (error) {
         logger.error(
             'Error updating family member history in Server',

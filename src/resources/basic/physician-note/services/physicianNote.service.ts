@@ -1,5 +1,5 @@
 import type { Basic } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import { PHYSICIAN_NOTE_CODE } from '@resources/basic/physician-note/config/config'
 
@@ -7,8 +7,7 @@ export const getPhysicianNotesByPractitioner = async (
     practitionerId: string
 ): Promise<Basic[]> => {
     try {
-        await authenticateMedplum()
-        return await medplum.searchResources('Basic', {
+return await medplum.searchResources('Basic', {
             subject: `Practitioner/${practitionerId}`,
             code: PHYSICIAN_NOTE_CODE,
             _count: 1000,
@@ -25,8 +24,7 @@ export const getPhysicianNotesByPractitioner = async (
 
 export const createPhysicianNote = async (note: Basic): Promise<Basic> => {
     try {
-        await authenticateMedplum()
-        return await medplum.createResource(note)
+return await medplum.createResource(note)
     } catch (error) {
         logger.error('Error creating physician note in Server', error, {
             component: 'physicianNote.service',
@@ -41,8 +39,7 @@ export const updatePhysicianNote = async (
     note: Basic
 ): Promise<Basic> => {
     try {
-        await authenticateMedplum()
-        return await medplum.updateResource({ ...note, id })
+return await medplum.updateResource({ ...note, id })
     } catch (error) {
         logger.error('Error updating physician note in Server', error, {
             component: 'physicianNote.service',
@@ -54,8 +51,7 @@ export const updatePhysicianNote = async (
 
 export const deletePhysicianNote = async (id: string): Promise<void> => {
     try {
-        await authenticateMedplum()
-        await medplum.deleteResource('Basic', id)
+await medplum.deleteResource('Basic', id)
     } catch (error) {
         logger.error('Error deleting physician note in Server', error, {
             component: 'physicianNote.service',

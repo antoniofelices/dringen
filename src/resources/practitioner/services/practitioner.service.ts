@@ -1,5 +1,5 @@
 import type { Practitioner } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import type { PractitionerRoleInfo } from '@resources/practitioner-role/types/practitionerRole.model'
 import type { PractitionerWithSpecialty } from '@resources/practitioner/types/practitioner.model'
@@ -7,9 +7,7 @@ import { getPractitionerIdsByRole } from '@resources/practitioner-role/services/
 
 export const getListPractitioners = async (): Promise<Practitioner[]> => {
     try {
-        await authenticateMedplum()
-
-        const bundle = await medplum.searchResources('Practitioner', {
+const bundle = await medplum.searchResources('Practitioner', {
             _count: 1000,
         })
 
@@ -27,9 +25,7 @@ export const getListPhysicians = async (): Promise<
     PractitionerWithSpecialty[]
 > => {
     try {
-        await authenticateMedplum()
-
-        const roleInfos = await getPractitionerIdsByRole('doctor')
+const roleInfos = await getPractitionerIdsByRole('doctor')
 
         if (roleInfos.length === 0) return []
 
@@ -66,9 +62,7 @@ export const updatePractitioner = async (
     practitioner: Practitioner
 ): Promise<Practitioner> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...practitioner, id })
+return await medplum.updateResource({ ...practitioner, id })
     } catch (error) {
         logger.error('Error updating practitioner in Server', error, {
             component: 'practitioner.service',
@@ -82,9 +76,7 @@ export const getSinglePractitionerById = async (
     id: string
 ): Promise<Practitioner> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.readResource('Practitioner', id)
+return await medplum.readResource('Practitioner', id)
     } catch (error) {
         logger.error('Error fetching practitioner from Server', error, {
             component: 'practitioner.service',

@@ -1,12 +1,10 @@
 import type { Patient } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const createPatient = async (patient: Patient): Promise<Patient> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.createResource(patient)
+return await medplum.createResource(patient)
     } catch (error) {
         logger.error('Error creating patient in Server', error, {
             component: 'patient.service',
@@ -18,9 +16,7 @@ export const createPatient = async (patient: Patient): Promise<Patient> => {
 
 export const getListPatients = async (): Promise<Patient[]> => {
     try {
-        await authenticateMedplum()
-
-        const bundle = await medplum.searchResources('Patient', {
+const bundle = await medplum.searchResources('Patient', {
             _count: 1000,
         })
 
@@ -38,9 +34,7 @@ export const getPatientsByPractitioner = async (
     practitionerId: string
 ): Promise<Patient[]> => {
     try {
-        await authenticateMedplum()
-
-        const bundle = await medplum.searchResources('Patient', {
+const bundle = await medplum.searchResources('Patient', {
             'general-practitioner': `Practitioner/${practitionerId}`,
             _count: 1000,
         })
@@ -57,9 +51,7 @@ export const getPatientsByPractitioner = async (
 
 export const getSinglePatientById = async (id: string): Promise<Patient> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.readResource('Patient', id)
+return await medplum.readResource('Patient', id)
     } catch (error) {
         logger.error('Error fetching patient from Server', error, {
             component: 'patient.service',
@@ -74,9 +66,7 @@ export const updatePatient = async (
     patient: Patient
 ): Promise<Patient> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...patient, id })
+return await medplum.updateResource({ ...patient, id })
     } catch (error) {
         logger.error('Error updating patient in Server', error, {
             component: 'patient.service',

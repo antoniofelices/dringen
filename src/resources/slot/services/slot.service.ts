@@ -1,14 +1,12 @@
 import type { Slot } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 
 export const getAvailableSlots = async (
     practitionerId: string
 ): Promise<Slot[]> => {
     try {
-        await authenticateMedplum()
-
-        const schedules = await medplum.searchResources('Schedule', {
+const schedules = await medplum.searchResources('Schedule', {
             actor: `Practitioner/${practitionerId}`,
             _count: '10',
         })
@@ -34,9 +32,7 @@ export const getSlotsBySchedule = async (
     scheduleId: string
 ): Promise<Slot[]> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.searchResources('Slot', {
+return await medplum.searchResources('Slot', {
             schedule: `Schedule/${scheduleId}`,
             _count: '200',
             _sort: 'start',
@@ -55,9 +51,7 @@ export const updateSlot = async (
     slot: Slot
 ): Promise<Slot> => {
     try {
-        await authenticateMedplum()
-
-        return await medplum.updateResource({ ...slot, id })
+return await medplum.updateResource({ ...slot, id })
     } catch (error) {
         logger.error('Error updating slot in Server', error, {
             component: 'slot.service',

@@ -6,7 +6,7 @@ import type {
     Observation,
     ServiceRequest,
 } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import type { ClinicalEncounterReadResponseType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 
@@ -14,8 +14,6 @@ export const fetchClinicalEncounter = async (
     encounterId: string
 ): Promise<ClinicalEncounterReadResponseType> => {
     try {
-        await authenticateMedplum()
-
         const batch: Bundle = {
             resourceType: 'Bundle',
             type: 'batch',

@@ -1,5 +1,5 @@
 import type { Bundle, Condition, Encounter } from '@medplum/fhirtypes'
-import { medplum, authenticateMedplum } from '@shared/fhir/medplum'
+import { medplum } from '@shared/fhir/medplum'
 import { logger } from '@shared/utils/Logger'
 import type { EncounterListResponseType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
 
@@ -7,8 +7,6 @@ export const fetchEncounterList = async (
     patientId: string
 ): Promise<EncounterListResponseType> => {
     try {
-        await authenticateMedplum()
-
         const batch: Bundle = {
             resourceType: 'Bundle',
             type: 'batch',
