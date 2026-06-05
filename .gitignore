@@ -12,8 +12,9 @@ dist
 dist-ssr
 *.local
 .env
-.env.dev
+.env.demo
 .env.local
+.env.staging
 .env.prod
 
 # Editor directories and files
