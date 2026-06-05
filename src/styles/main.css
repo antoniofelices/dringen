@@ -58,27 +58,11 @@
     --color-indigo-900: oklch(0.1641 0.0609 256.95);
     --color-indigo-950: oklch(0.1291 0.0457 256.95);
 
+    --radius: 8px;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
-
-    --color-chart-1: oklch(0.707 0.165 254.624);
-    --color-chart-2: oklch(0.623 0.214 259.815);
-    --color-chart-3: oklch(0.546 0.245 262.881);
-    --color-chart-4: oklch(0.488 0.243 264.376);
-    --color-chart-5: oklch(0.424 0.199 265.638);
-    --color-chart-6: oklch(0.379 0.146 265.522);
-    --color-chart-7: oklch(0.248 0.078 268.2);
-
-    --calendar-today-bg: oklch(0.488 0.243 264.376);
-    --calendar-event-bg: oklch(0.379 0.146 265.522);
-
-    --calendar-bg: var(--color-white);
-    --calendar-header-bg: var(--color-gray-100);
-    --calendar-header-text: var(--color-gray-700);
-    --calendar-event-text: var(--color-white);
-    --calendar-hover-bg: var(--color-gray-50);
 }
 
 @layer base {
@@ -96,19 +80,6 @@
         --sidebar-accent-foreground: var(--color-gray-900);
         --sidebar-border: var(--color-border);
         --sidebar-ring: var(--color-blue-500);
-
-        --calendar-bg: var(--color-background-up);
-        --calendar-bg-off: var(--color-background);
-        --calendar-border: var(--color-border);
-        --calendar-header-bg: var(--color-background);
-        --calendar-header-text: var(--color-foreground);
-        --calendar-today-bg: var(--color-indigo-700);
-        --calendar-today-text: var(--color-white);
-        --calendar-event-bg: var(--color-blue-600);
-        --calendar-event-text: var(--color-background-up);
-        --calendar-button-bg: var(--color-background-up);
-        --calendar-button-text: var(--color-foreground);
-        --calendar-hover-bg: var(--color-background-up);
     }
 
     .dark {
@@ -125,19 +96,6 @@
         --sidebar-accent-foreground: var(--color-gray-100);
         --sidebar-border: var(--color-border);
         --sidebar-ring: var(--color-blue-400);
-
-        --calendar-bg: var(--color-background-up);
-        --calendar-bg-off: var(--color-background);
-        --calendar-border: var(--color-border);
-        --calendar-header-bg: var(--color-background);
-        --calendar-header-text: var(--color-foreground);
-        --calendar-today-bg: var(--color-indigo-700);
-        --calendar-today-text: var(--color-white);
-        --calendar-event-bg: var(--color-indigo-300);
-        --calendar-event-text: var(--color-black);
-        --calendar-button-bg: var(--color-background-up);
-        --calendar-button-text: var(--color-white);
-        --calendar-hover-bg: var(--color-black);
     }
     *,
     ::after,
