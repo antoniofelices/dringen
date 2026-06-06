@@ -5,6 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
+import { Button } from '@shared/components/ui/base/button'
 import content from './WelcomeDetails.content'
 
 const WelcomeDetail = () => {
@@ -14,6 +15,7 @@ const WelcomeDetail = () => {
             <Card>
                 <CardHeader>
                     <CardTitle>
+                        <p>{content.textIntro}</p>
                         <h1>
                             {content.title} {user?.firstName}
                         </h1>
@@ -21,6 +23,7 @@ const WelcomeDetail = () => {
                 </CardHeader>
                 <CardContent>
                     <p>{content.textWelcome}</p>
+                    <Button size="sm">{content.accessPatients}</Button>
                 </CardContent>
             </Card>
         </>

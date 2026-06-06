@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from 'lucide-react'
+import { ChevronDownIcon, Megaphone } from 'lucide-react'
 import { transformDateTime } from '@shared/utils/utils'
 import { Button } from '@shared/components/ui/base/button'
 import {
@@ -22,7 +22,8 @@ const CommunicationDetails = () => {
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>
+                    <CardTitle className="flex gap-4">
+                        <Megaphone size={16} />
                         <h2 className="font-extrabold">{content.title}</h2>
                     </CardTitle>
                 </CardHeader>

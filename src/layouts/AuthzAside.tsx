@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { ChevronUp, Circle, Home } from 'lucide-react'
+import { ChevronUp, Circle, Home, Sun } from 'lucide-react'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
 import { useAuthContext } from '@auth/hooks/useAuthContext'
 import {
@@ -37,12 +37,12 @@ const AuthzAside = () => {
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
-                <Logo customClasses="ml-2" />
-                <SidebarMenu className="mt-8">
+                <Logo customClasses="ml-2 max-w-25" />
+                <SidebarMenu className="mt-4">
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to={'/dashboard'}>
-                                <Home className="stroke-green-700" />
+                                <Home className="stroke-indigo-500 dark:stroke-indigo-300" />
                                 {content.textHome}
                             </Link>
                         </SidebarMenuButton>
@@ -74,20 +74,24 @@ const AuthzAside = () => {
                         </div>
                     )
                 })}
-                <SidebarSeparator className="m-0" />
-                <SidebarGroup>
-                    <SidebarTrigger className="text-green-700" />
-                </SidebarGroup>
             </SidebarContent>
             <SidebarSeparator className="m-0" />
 
             <SidebarFooter>
+                <SidebarSeparator className="m-0" />
+                <SidebarGroup className="inline-flex flex-row items-center gap-4">
+                    <SidebarTrigger
+                        className="text-indigo-500 dark:text-indigo-300"
+                        size="xs"
+                    />
+                    <Sun />
+                </SidebarGroup>
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
-                                    <Circle className="stroke-green-700" />
+                                    <Circle className="stroke-indigo-500 dark:stroke-indigo-300" />
                                     {user?.firstName}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
