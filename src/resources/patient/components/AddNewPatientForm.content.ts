@@ -24,6 +24,7 @@ const content = {
     labelPhone: 'Phone',
     labelBirthday: 'Birthday',
     labelBirthplace: 'Birthplace',
+    labelAddress: 'Address',
     labelStreet: 'Street and number',
     labelDistrict: 'District',
     labelCity: 'City',

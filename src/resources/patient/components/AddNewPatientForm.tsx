@@ -72,6 +72,10 @@ const AddNewPatientForm = () => {
                         type="text"
                     />
                 </div>
+                <div className="flex items-center gap-4 my-2">
+                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">{content.labelAddress}</span>
+                    <div className="flex-1 border-t" />
+                </div>
                 <FormFieldInput
                     control={form.control}
                     fieldName="street"

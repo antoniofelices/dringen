@@ -15,14 +15,14 @@ const WelcomeDetail = () => {
             <Card>
                 <CardHeader>
                     <CardTitle>
-                        <p>{content.textIntro}</p>
+                        <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">{content.textIntro}</p>
                         <h1>
                             {content.title} {user?.firstName}
                         </h1>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p>{content.textWelcome}</p>
+                    <p className="mb-4">{content.textWelcome}</p>
                     <Button size="sm">{content.accessPatients}</Button>
                 </CardContent>
             </Card>
