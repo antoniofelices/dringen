@@ -19,7 +19,7 @@ const ActionsPractitioner = () => {
             <Card className="mt-4">
                 <CardHeader>
                     <CardTitle>
-                        <h2 className="mb-8">{content.title}</h2>
+                        <h2 className="font-bold text-gray-700 dark:text-gray-300 mb-8">{content.title}</h2>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

@@ -57,7 +57,7 @@ const NotesPractitioner = ({ practitionerId }: { practitionerId: string }) => {
             <Card>
                 <CardHeader>
                     <CardTitle>
-                        <h2 className="font-extrabold">{content.title}</h2>
+                        <h2 className="font-bold text-gray-700 dark:text-gray-300">{content.title}</h2>
                     </CardTitle>
                     <CardAction>
                         <Button

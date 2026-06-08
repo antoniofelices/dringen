@@ -11,13 +11,13 @@ const badgeVariants = cva(
       variant: {
         default: "bg-gray-900 text-gray-50 [a&]:hover:bg-gray-900/90 dark:bg-gray-50 dark:text-gray-900 dark:[a&]:hover:bg-gray-50/90",
         secondary:
-          "bg-gray-100 text-gray-900 [a&]:hover:bg-gray-100/90 dark:bg-gray-800 dark:text-gray-50 dark:[a&]:hover:bg-gray-800/90",
+          "bg-gray-100 text-gray-900 [a&]:hover:bg-gray-100/90 dark:bg-gray-800 dark:text-gray-300 dark:[a&]:hover:bg-gray-800/90",
         destructive:
           "bg-red-500 text-white [a&]:hover:bg-red-500/90 focus-visible:ring-red-500/20 dark:focus-visible:ring-red-500/40 dark:bg-red-500/60 dark:bg-red-900 dark:[a&]:hover:bg-red-900/90 dark:focus-visible:ring-red-900/20 dark:dark:focus-visible:ring-red-900/40 dark:dark:bg-red-900/60",
         outline:
-          "border-gray-200 text-gray-950 [a&]:hover:bg-gray-100 [a&]:hover:text-gray-900 dark:border-gray-800 dark:text-gray-50 dark:[a&]:hover:bg-gray-800 dark:[a&]:hover:text-gray-50",
+          "border-gray-200 text-gray-950 [a&]:hover:bg-gray-100 [a&]:hover:text-gray-900 dark:border-gray-800 dark:text-gray-300 dark:[a&]:hover:bg-gray-800 dark:[a&]:hover:text-gray-50",
         ghost: "[a&]:hover:bg-gray-100 [a&]:hover:text-gray-900 dark:[a&]:hover:bg-gray-800 dark:[a&]:hover:text-gray-50",
-        link: "text-gray-900 underline-offset-4 [a&]:hover:underline dark:text-gray-50",
+        link: "text-gray-900 underline-offset-4 [a&]:hover:underline dark:text-gray-300",
       },
     },
     defaultVariants: {
