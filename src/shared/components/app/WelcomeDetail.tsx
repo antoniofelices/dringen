@@ -19,7 +19,7 @@ const WelcomeDetail = () => {
                         <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
                             {content.textIntro}
                         </p>
-                        <h2 className="font-bold text-gray-700 dark:text-gray-300">
+                        <h2 className="font-bold text-xl  md:text-2xl  lg:text-3xl  2xl:text-4xl text-gray-700 dark:text-gray-300">
                             {content.title} {user?.firstName}
                         </h2>
                     </CardTitle>

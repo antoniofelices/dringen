@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { ChevronUp, Circle, Home, Moon, Sun } from 'lucide-react'
+import { ChevronUp, Home, Moon, Sun } from 'lucide-react'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
 import { useAuthContext } from '@auth/hooks/useAuthContext'
 import { useThemeContext } from '@shared/hooks/useThemeContext'
@@ -84,7 +84,7 @@ const AuthzAside = () => {
 
             <SidebarFooter>
                 <SidebarSeparator className="m-0" />
-                <SidebarGroup className="inline-flex md:flex-row items-center gap-4">
+                <SidebarGroup className="inline-flex flex-row items-center gap-4 group-data-[collapsible=icon]:flex-col">
                     <SidebarTrigger
                         className="text-indigo-500 dark:text-indigo-300"
                         size="xs"
@@ -107,7 +107,10 @@ const AuthzAside = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <SidebarMenuButton>
-                                    <Circle className="stroke-indigo-500 dark:stroke-indigo-300" />
+                                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-indigo-500 dark:bg-indigo-400 text-white text-xs font-bold leading-none">
+                                        {user?.firstName?.[0]?.toUpperCase()}
+                                        {user?.lastName?.[0]?.toUpperCase()}
+                                    </span>
                                     {user?.firstName}
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
