@@ -43,7 +43,10 @@ const AuthzAside = () => {
                 <SidebarMenu className="mt-4">
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to={'/dashboard'} activeProps={{ "data-active": "true" }}>
+                            <Link
+                                to={'/dashboard'}
+                                activeProps={{ 'data-active': 'true' }}
+                            >
                                 <Home className="stroke-indigo-500 dark:stroke-indigo-300" />
                                 {content.textHome}
                             </Link>
@@ -81,16 +84,22 @@ const AuthzAside = () => {
 
             <SidebarFooter>
                 <SidebarSeparator className="m-0" />
-                <SidebarGroup className="inline-flex flex-row items-center gap-4">
+                <SidebarGroup className="inline-flex md:flex-row items-center gap-4">
                     <SidebarTrigger
                         className="text-indigo-500 dark:text-indigo-300"
                         size="xs"
                     />
                     <button
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                        onClick={() =>
+                            setTheme(theme === 'dark' ? 'light' : 'dark')
+                        }
                         className="text-sidebar-foreground hover:text-sidebar-accent-foreground"
                     >
-                        {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+                        {theme === 'dark' ? (
+                            <Sun className="size-4" />
+                        ) : (
+                            <Moon className="size-4" />
+                        )}
                     </button>
                 </SidebarGroup>
                 <SidebarMenu>
