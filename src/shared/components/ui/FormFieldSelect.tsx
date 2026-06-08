@@ -64,7 +64,10 @@ const FormFieldSelect = <T extends FieldValues>({
                             </FormControl>
                             <SelectContent>
                                 {normalized.map((option) => (
-                                    <SelectItem value={option.value} key={option.value}>
+                                    <SelectItem
+                                        value={option.value}
+                                        key={option.value}
+                                    >
                                         {option.label}
                                     </SelectItem>
                                 ))}

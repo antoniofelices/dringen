@@ -13,8 +13,12 @@ const DataDisplayList = ({ items, className = '' }: DataDisplayListProps) => {
         <ul className={className}>
             {items.map((item, index) => (
                 <li key={index} className="my-2">
-                    <span>{item.label}</span>:
-                    <span className="font-bold"> {item.value || ''}</span>
+                    <span className="block text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">
+                        {item.label}
+                    </span>
+                    <span className="font-bold text-sm text-gray-700 dark:text-gray-300">
+                        {item.value || ''}
+                    </span>
                 </li>
             ))}
         </ul>

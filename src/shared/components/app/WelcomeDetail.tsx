@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useCurrentUser } from '@auth/hooks/useCurrentUser'
 import {
     Card,
@@ -15,15 +16,23 @@ const WelcomeDetail = () => {
             <Card>
                 <CardHeader>
                     <CardTitle>
-                        <p>{content.textIntro}</p>
-                        <h1>
+                        <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
+                            {content.textIntro}
+                        </p>
+                        <h2 className="font-bold text-xl  md:text-2xl  lg:text-3xl  2xl:text-4xl text-gray-700 dark:text-gray-300">
                             {content.title} {user?.firstName}
-                        </h1>
+                        </h2>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p>{content.textWelcome}</p>
-                    <Button size="sm">{content.accessPatients}</Button>
+                    <p className="text-gray-700 dark:text-gray-300 mb-8">
+                        {content.textWelcome}
+                    </p>
+                    <Button size="sm">
+                        <Link to="/patient/patient-list">
+                            {content.accessPatients}
+                        </Link>
+                    </Button>
                 </CardContent>
             </Card>
         </>

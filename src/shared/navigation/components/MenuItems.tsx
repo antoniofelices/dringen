@@ -31,9 +31,9 @@ const MenuItems = ({
                     className={`${classesListElement}`}
                 >
                     <SidebarMenuButton asChild>
-                        <Link to={item.url as any}>
+                        <Link to={item.url as any} activeProps={{ "data-active": "true" }}>
                             {item.icon && (
-                                <item.icon className="stroke-green-700" />
+                                <item.icon className="stroke-indigo-500 dark:stroke-indigo-300" />
                             )}
                             {item.text}
                         </Link>
