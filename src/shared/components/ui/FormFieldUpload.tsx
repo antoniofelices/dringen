@@ -8,7 +8,7 @@ import {
     FormMessage,
 } from '@shared/components/ui/base/form'
 import { Input } from '@shared/components/ui/base/input'
-import content from './FormFieldUpload.content'
+import { contentES as content } from './FormFieldUpload.content'
 
 type FormFieldProps<T extends FieldValues> = {
     className?: string

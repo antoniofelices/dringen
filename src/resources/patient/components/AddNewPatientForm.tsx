@@ -8,7 +8,7 @@ import {
     GENDER_OPTIONS,
     MARITAL_STATUS_OPTIONS,
 } from '@shared/fhir/valueSets.domain'
-import content from './AddNewPatientForm.content'
+import { contentES as content } from './AddNewPatientForm.content'
 
 const AddNewPatientForm = () => {
     const { form, onSubmit } = useAddNewPatientForm()
@@ -73,7 +73,9 @@ const AddNewPatientForm = () => {
                     />
                 </div>
                 <div className="flex items-center gap-4 my-2">
-                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">{content.labelAddress}</span>
+                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                        {content.labelAddress}
+                    </span>
                     <div className="flex-1 border-t" />
                 </div>
                 <FormFieldInput

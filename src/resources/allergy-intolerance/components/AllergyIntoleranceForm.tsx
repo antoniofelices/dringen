@@ -7,7 +7,7 @@ import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import FormFieldSelect from '@/shared/components/ui/FormFieldSelect'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
-import content from './AllergyIntoleranceForm.content'
+import { contentES as content } from './AllergyIntoleranceForm.content'
 
 const AllergyIntoleranceForm = ({
     patientId,

@@ -6,7 +6,7 @@ import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import { useAddNewAppointmentFormByPatient } from '@resources/appointment/hooks/useAddNewAppointmentFormByPatient'
 import type { AddNewAppointmentFormByPatientProps } from '@resources/appointment/types/appointment.model'
-import content from './AddNewAppointmentFormByPatient.content'
+import { contentES as content } from './AddNewAppointmentFormByPatient.content'
 
 const AddNewAppointmentFormByPatient = ({
     patientId,

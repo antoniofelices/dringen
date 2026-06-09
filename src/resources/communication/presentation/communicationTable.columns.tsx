@@ -2,7 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { CommunicationType } from '@resources/communication/types/communication.model'
 import { ArrowUpDown } from 'lucide-react'
 import { transformDate } from '@shared/utils/utils'
-import content from './communicationTable.content'
+import { contentES as content } from './communicationTable.content'
 
 const communicationTableColumns = (): ColumnDef<CommunicationType>[] => [
     {

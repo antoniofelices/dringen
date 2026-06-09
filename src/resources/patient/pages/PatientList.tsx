@@ -10,7 +10,7 @@ import Loading from '@shared/components/ui/Loading'
 import type { PatientType } from '@resources/patient/types/patient.model.ts'
 import { usePatients } from '@/resources/patient/hooks/useGetPatient'
 import patientTableColumns from '@resources/patient/presentation/patientTable.columns'
-import content from './PatientList.content'
+import { contentES as content } from './PatientList.content'
 
 const PatientList = () => {
     const { patients, isPending, isError, error } = usePatients()

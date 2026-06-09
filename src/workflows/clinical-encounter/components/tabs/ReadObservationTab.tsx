@@ -3,7 +3,7 @@ import {
     OBSERVATION_FIELDS,
     BIOLOGICAL_FIELDS,
 } from '@workflows/clinical-encounter/config/config'
-import content from './ReadObservationTab.content'
+import { contentES as content } from './ReadObservationTab.content'
 
 type Props = {
     observations: Observation[]

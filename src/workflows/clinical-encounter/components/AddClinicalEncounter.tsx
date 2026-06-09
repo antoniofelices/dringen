@@ -11,7 +11,7 @@ import ObservationTab from './tabs/ObservationTab'
 import ConditionTab from './tabs/ConditionTab'
 import ServiceRequestTab from './tabs/ServiceRequestTab'
 import MedicationRequestTab from './tabs/MedicationRequestTab'
-import content from './AddClinicalEncounter.content'
+import { contentES as content } from './AddClinicalEncounter.content'
 
 type Props = {
     patientId: string

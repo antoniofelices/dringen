@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     title: 'Dashboard',
 }
 
-export default content
+export type DashboardContent = typeof contentEN
+
+export const contentES: DashboardContent = {
+    title: 'Panel de control',
+}

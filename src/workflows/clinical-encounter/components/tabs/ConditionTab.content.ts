@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelCIE: 'CIE',
     labelCondition: 'Condition',
     labelCertainty: 'Certainty',
@@ -10,4 +10,16 @@ const content = {
     textSave: 'Save',
 }
 
-export default content
+type ConditionTabContent = typeof contentEN
+
+export const contentES: ConditionTabContent = {
+    labelCIE: 'CIE',
+    labelCondition: 'Condición',
+    labelCertainty: 'Certeza',
+    placeholderCertainty: 'Certeza',
+    textMedicationRequest: 'Medication Request',
+    textToastSuccess: 'El encuentro y otros recursos se registraron con éxito',
+    textToastFail: 'Error al registrar el encuentro',
+    textSaving: 'Guardando',
+    textSave: 'Guardar',
+}

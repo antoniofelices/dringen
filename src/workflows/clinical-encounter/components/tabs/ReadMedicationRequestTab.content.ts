@@ -1,6 +1,11 @@
-const content = {
+export const contentEN = {
     labelTreatment: 'Treatment',
     textNoData: '-',
 }
 
-export default content
+type ReadMedicationRequestTabContent = typeof contentEN
+
+export const contentES: ReadMedicationRequestTabContent = {
+    labelTreatment: 'Tratamiento',
+    textNoData: '-',
+}

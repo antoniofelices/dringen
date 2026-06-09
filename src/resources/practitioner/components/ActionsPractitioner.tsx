@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import content from './ActionsPractitioner.content'
+import { contentES as content } from './ActionsPractitioner.content'
 
 const ActionsPractitioner = () => {
     const handleResetPassword = () => {

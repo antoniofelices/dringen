@@ -1,7 +1,10 @@
 import { getLabelFromOptions } from '@shared/utils/utils'
-import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS } from '@shared/fhir/valueSets.domain'
+import {
+    GENDER_OPTIONS,
+    MARITAL_STATUS_OPTIONS,
+} from '@shared/fhir/valueSets.domain'
 import type { PatientType } from '@resources/patient/types/patient.model'
-import content from './PatientDemographics.content'
+import { contentES as content } from './PatientDemographics.content'
 
 export const buildDataItems = (patientData: PatientType) => [
     {

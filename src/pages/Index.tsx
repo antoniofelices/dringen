@@ -5,7 +5,7 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import SignInForm from '@auth/components/SignInForm'
-import content from './Index.content.ts'
+import { contentES as content } from './Index.content.ts'
 
 const Index = () => {
     return (

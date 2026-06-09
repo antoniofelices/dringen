@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './addNewAppointment.content'
+import { contentES as content } from './addNewAppointment.content'
 
 export const addNewAppointmentSchema = z.object({
     patient: z.string().min(1, content.errorPatientRequired),

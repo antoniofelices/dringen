@@ -5,7 +5,7 @@ import {
     isSameDay,
     getKey,
 } from '@resources/appointment/utils/clinicalAppointment.utils'
-import content from './MiniCalendar.content'
+import { contentES as content } from './MiniCalendar.content'
 
 const MiniCalendar = ({
     today,

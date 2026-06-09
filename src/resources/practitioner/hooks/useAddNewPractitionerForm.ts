@@ -19,7 +19,7 @@ import type {
     AddNewPractitionerFormType,
     AddNewPractitionerFormProps,
 } from '@resources/practitioner/types/practitioner.model'
-import content from '@resources/practitioner/components/AddNewPractitionerForm.content'
+import { contentES as content } from '@resources/practitioner/components/AddNewPractitionerForm.content'
 
 export const useAddNewPractitionerForm = ({
     onSuccess,
@@ -65,7 +65,11 @@ export const useAddNewPractitionerForm = ({
     )
 
     const addTimeHandler = () => {
-        append({ daysOfWeek: DAYS_OF_WEEK_OPTIONS[0].value, startTime: '', endTime: '' })
+        append({
+            daysOfWeek: DAYS_OF_WEEK_OPTIONS[0].value,
+            startTime: '',
+            endTime: '',
+        })
     }
 
     const removeTimeHandler = (index: number) => {

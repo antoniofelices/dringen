@@ -1,8 +1,15 @@
-const content = {
+export const contentEN = {
     textObservation: 'Observation',
     textCondition: 'Condition',
     textServiceRequest: 'Service Request',
     textMedicationRequest: 'Medication Request',
 }
 
-export default content
+type ReadClinicalEncounterContent = typeof contentEN
+
+export const contentES: ReadClinicalEncounterContent = {
+    textObservation: 'Observación',
+    textCondition: 'Condición',
+    textServiceRequest: 'Pruebas adicionales',
+    textMedicationRequest: 'Tratamiento',
+}

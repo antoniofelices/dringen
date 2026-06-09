@@ -10,7 +10,7 @@ import {
 } from '@shared/fhir/valueSets.domain'
 import type { FamilyMemberHistoryFormProps } from '@resources/family-member-history/types/familyMemberHistory.model'
 import { useFamilyMemberHistoryForm } from '@resources/family-member-history/hooks/useFamilyMemberHistoryForm'
-import content from './FamilyMemberHistoryForm.content'
+import { contentES as content } from './FamilyMemberHistoryForm.content'
 
 const FamilyMemberHistoryForm = ({
     patientId,

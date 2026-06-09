@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     textLoading: 'Loading',
 }
 
-export default content
+export type LoadingContent = typeof contentEN
+
+export const contentES: LoadingContent = {
+    textLoading: 'Cargando',
+}

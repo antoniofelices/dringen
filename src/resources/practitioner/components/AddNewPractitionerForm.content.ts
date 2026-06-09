@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register Practitioner',
     labelFirstName: 'First Name',
     labelLastName: 'Last Name',
@@ -21,4 +21,27 @@ const content = {
     errorNoAccessPolicy: 'Access policy not found for role',
 }
 
-export default content
+export type AddNewPractitionerFormContent = typeof contentEN
+
+export const contentES: AddNewPractitionerFormContent = {
+    title: 'Registrar profesional',
+    labelFirstName: 'Nombre',
+    labelLastName: 'Apellido',
+    labelEmail: 'Correo electrónico',
+    labelPhone: 'Teléfono',
+    labelBirthDate: 'Fecha de nacimiento',
+    labelGender: 'Género',
+    labelRole: 'Rol',
+    labelAvailableTime: 'Horario disponible',
+    labelDaysOfWeek: 'Día',
+    labelStartTime: 'Inicio',
+    labelEndTime: 'Fin',
+    labelLocation: 'Ubicación',
+    labelSpecialty: 'Especialidad',
+    textButtonSend: 'Registrar profesional',
+    textButtonSending: 'Registrando...',
+    textButtonAddTime: 'Añadir franja horaria',
+    textToastSuccess: 'Profesional registrado correctamente',
+    textToastFail: 'Error al registrar el profesional',
+    errorNoAccessPolicy: 'Política de acceso no encontrada para el rol',
+}

@@ -8,7 +8,7 @@ import type { OptionType } from '@shared/types/FormFieldCombobox.model'
 import type { PractitionerDetailsFormType } from '@resources/practitioner/types/practitioner.model'
 import { DAYS_OF_WEEK_OPTIONS } from '@shared/fhir/valueSets.domain'
 import { usePractitionerDetailsForm } from '@resources/practitioner/hooks/usePractitionerDetailsForm'
-import content from './PractitionerDetails.content'
+import { contentES as content } from './PractitionerDetails.content'
 
 const PractitionerDetailsForm = ({
     practitionerId,

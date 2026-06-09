@@ -1,7 +1,13 @@
-const content = {
+export const contentEN = {
     labelName: 'Name',
     labelType: 'Type',
     labelIdentifier: 'RUC',
 }
 
-export default content
+export type OrganizationTableContent = typeof contentEN
+
+export const contentES: OrganizationTableContent = {
+    labelName: 'Nombre',
+    labelType: 'Tipo',
+    labelIdentifier: 'RUC',
+}

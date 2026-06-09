@@ -3,7 +3,7 @@ import type { NavigateFn } from '@tanstack/react-router'
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
 import { transformTime } from '@shared/utils/utils'
-import content from './appointmentByPractitionerTable.content'
+import { contentES as content } from './appointmentByPractitionerTable.content'
 
 const appointmentByPractitionerTableColumns = (
     navigate: NavigateFn

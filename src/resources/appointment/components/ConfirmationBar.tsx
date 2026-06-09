@@ -4,7 +4,7 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import { useConfirmationBar } from '@resources/appointment/hooks/useConfirmationBar'
 import { DAYS, MONTHS } from '@resources/appointment/config/config'
 import type { ConfirmationBarProps } from '@resources/appointment/types/appointment.model'
-import content from './ConfirmationBar.content'
+import { contentES as content } from './ConfirmationBar.content'
 
 const ConfirmationBar = ({
     selected,

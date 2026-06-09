@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Communications',
     textStartDate: 'Start Date',
     textEndDate: 'End Date',
@@ -6,4 +6,12 @@ const content = {
     textEmpty: 'No communication yet',
 }
 
-export default content
+type CommunicationDetailsContent = typeof contentEN
+
+export const contentES: CommunicationDetailsContent = {
+    title: 'Comunicados',
+    textStartDate: 'Fecha de inicio',
+    textEndDate: 'Fecha de fin',
+    textLocation: 'Ubicación',
+    textEmpty: 'Sin comunicados aún',
+}

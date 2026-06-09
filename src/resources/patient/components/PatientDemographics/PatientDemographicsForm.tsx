@@ -8,7 +8,7 @@ import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
-import content from './PatientDemographics.content'
+import { contentES as content } from './PatientDemographics.content'
 
 const PatientDemographicsForm = ({
     patientData,

@@ -7,7 +7,7 @@ import { clinicalEncounterSchema } from '@workflows/clinical-encounter/schemas/c
 import { buildClinicalEncounterBundle } from '@workflows/clinical-encounter/domain/clinicalEncounter.aggregate'
 import { executeClinicalEncounterTransaction } from '@workflows/clinical-encounter/services/buildClinicalEncounterTransaction'
 import type { ClinicalEncounterFormType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
-import content from '@workflows/clinical-encounter/components/AddClinicalEncounter.content'
+import { contentES as content } from '@workflows/clinical-encounter/components/AddClinicalEncounter.content'
 
 const defaultValues: ClinicalEncounterFormType = {
     description: '',

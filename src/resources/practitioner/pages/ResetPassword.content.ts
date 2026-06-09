@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Security',
     textDescription: 'A place to reset your password',
     errorPasswordTooShort:
@@ -15,4 +15,21 @@ const content = {
     textToastFail: 'Failed to update user password',
 }
 
-export default content
+export type ResetPasswordContent = typeof contentEN
+
+export const contentES: ResetPasswordContent = {
+    title: 'Seguridad',
+    textDescription: 'Aquí puedes restablecer tu contraseña',
+    errorPasswordTooShort:
+        'La contraseña debe contener al menos ocho caracteres',
+    errorPasswordMustContain:
+        'Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
+    errorConfirmPassword: 'Por favor, confirma tu contraseña',
+    errorPasswordNoMatch: 'Las contraseñas no coinciden',
+    labelPassword: 'Contraseña',
+    labelConfirmPassword: 'Confirmar contraseña',
+    textButtonSend: 'Restablecer contraseña',
+    textButtonSending: 'Enviando',
+    textToastSuccess: 'Contraseña del usuario actualizada correctamente',
+    textToastFail: 'Error al actualizar la contraseña del usuario',
+}

@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register patient',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
@@ -37,4 +37,43 @@ const content = {
     textToastFail: 'Failed to register patient',
 }
 
-export default content
+export type AddNewPatientFormContent = typeof contentEN
+
+export const contentES: AddNewPatientFormContent = {
+    title: 'Registrar paciente',
+    errorUserNameTooShort: 'El nombre debe tener al menos 3 caracteres',
+    errorUserNameTooLong: 'El nombre no puede tener más de 20 caracteres',
+    errorUserNameDisallowedCharacters: 'Solo letras, números y guiones bajos',
+    errorUserLastNameTooShort:
+        'El apellido debe tener al menos 3 caracteres',
+    errorUserLastNameTooLong:
+        'El apellido no puede tener más de 20 caracteres',
+    errorUserLastNameDisallowedCharacters:
+        'Solo letras, números y guiones bajos',
+    errorEmailInvalid: 'Por favor, introduzca una dirección de correo válida',
+    errorEmailRequired: 'La dirección de correo es obligatoria',
+    errorPasswordNoMatch: 'Las contraseñas no coinciden',
+    errorUserDniTooShort: 'DNI demasiado corto',
+    errorUserDniTooLong: 'DNI demasiado largo',
+    errorUserDniInvalidFormat: 'Formato de DNI no válido',
+    labelUserName: 'Nombre',
+    labelUserLastName: 'Apellido',
+    labelDNI: 'DNI',
+    labelEmail: 'Correo electrónico',
+    labelGender: 'Sexo',
+    labelMaritalStatus: 'Estado civil',
+    labelPhone: 'Teléfono',
+    labelBirthday: 'Fecha de nacimiento',
+    labelBirthplace: 'Lugar de nacimiento',
+    labelAddress: 'Dirección',
+    labelStreet: 'Calle y número',
+    labelDistrict: 'Distrito',
+    labelCity: 'Ciudad',
+    labelPostcode: 'Código postal',
+    labelCountry: 'País',
+    labelOccupation: 'Ocupación',
+    textButtonSend: 'Registrar nuevo',
+    textButtonSending: 'Enviando',
+    textToastSuccess: 'Paciente registrado correctamente',
+    textToastFail: 'Error al registrar el paciente',
+}

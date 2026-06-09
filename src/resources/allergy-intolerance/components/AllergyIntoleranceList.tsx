@@ -15,7 +15,7 @@ import AllergyIntoleranceForm from './AllergyIntoleranceForm'
 import { criticalityColor } from '@resources/allergy-intolerance/presentation/AllergyIntoleranceList.colors'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './AllergyIntoleranceList.content'
+import { contentES as content } from './AllergyIntoleranceList.content'
 
 const AllergyIntoleranceList = ({ patientId }: { patientId: string }) => {
     const { allergyIntolerances, isPending, isError, error } =

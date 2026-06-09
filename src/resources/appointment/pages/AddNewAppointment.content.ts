@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     title: 'Add new Appointment',
 }
 
-export default content
+export type AddNewAppointmentContent = typeof contentEN
+
+export const contentES: AddNewAppointmentContent = {
+    title: 'Añadir nueva cita',
+}

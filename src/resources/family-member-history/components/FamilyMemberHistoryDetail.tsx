@@ -10,7 +10,7 @@ import FamilyMemberHistoryForm from './FamilyMemberHistoryForm'
 import type { FamilyMemberHistoryDetailProps } from '@resources/family-member-history/types/familyMemberHistory.model'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './FamilyMemberHistoryDetail.content'
+import { contentES as content } from './FamilyMemberHistoryDetail.content'
 
 const FamilyMemberHistoryDetail = ({
     historyId,

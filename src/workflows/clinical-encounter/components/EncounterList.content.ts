@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Encounters',
     headerDate: 'Date',
     headerCondition: 'Condition',
@@ -11,4 +11,17 @@ const content = {
     textButtonAdd: '+ Add',
 }
 
-export default content
+type EncounterListContent = typeof contentEN
+
+export const contentES: EncounterListContent = {
+    title: 'Encuentros',
+    headerDate: 'Fecha',
+    headerCondition: 'Condición',
+    headerActions: '',
+    textEmpty: 'No se encontraron encuentros',
+    textNoCondition: '-',
+    textReadEncounter: 'Ver encuentro clínico',
+    textAddDrawerTitle: 'Añadir encuentro clínico',
+    textAddDrawerDescription: 'Añadir encuentro clínico',
+    textButtonAdd: '+ Añadir',
+}

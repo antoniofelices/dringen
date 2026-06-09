@@ -12,7 +12,7 @@ import {
 } from '@shared/fhir/valueSets.domain'
 import { useAddNewPractitionerForm } from '@resources/practitioner/hooks/useAddNewPractitionerForm'
 import type { AddNewPractitionerFormProps } from '@resources/practitioner/types/practitioner.model'
-import content from './AddNewPractitionerForm.content'
+import { contentES as content } from './AddNewPractitionerForm.content'
 
 const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
     const {

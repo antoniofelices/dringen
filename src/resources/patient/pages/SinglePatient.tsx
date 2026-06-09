@@ -9,7 +9,7 @@ import AllergyIntoleranceList from '@resources/allergy-intolerance/components/Al
 import FamilyMemberHistoryList from '@resources/family-member-history/components/FamilyMemberHistoryList'
 import { EncounterList } from '@workflows/clinical-encounter/index'
 import AppointmentListByPatient from '@resources/appointment/components/AppointmentListByPatient'
-import content from './SinglePatient.content'
+import { contentES as content } from './SinglePatient.content'
 
 const SinglePatient = ({ id }: { id: string }) => {
     const { patient } = useSinglePatient(id)

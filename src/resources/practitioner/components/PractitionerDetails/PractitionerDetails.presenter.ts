@@ -1,6 +1,6 @@
 import type { AvailableTimeType } from '@shared/fhir/availableTime.model'
 import type { PractitionerDetailsData } from '@resources/practitioner/types/practitioner.model'
-import content from './PractitionerDetails.content'
+import { contentES as content } from './PractitionerDetails.content'
 
 export const formatAvailableTime = (availableTime: AvailableTimeType[]) =>
     availableTime

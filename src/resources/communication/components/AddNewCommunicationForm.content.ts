@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register communication',
     labelTitle: 'Title',
     labelContent: 'Content',
@@ -12,4 +12,18 @@ const content = {
     errorNoUser: 'No authenticated user found',
 }
 
-export default content
+type AddNewCommunicationFormContent = typeof contentEN
+
+export const contentES: AddNewCommunicationFormContent = {
+    title: 'Registrar comunicación',
+    labelTitle: 'Título',
+    labelContent: 'Contenido',
+    labelStartDate: 'Fecha de inicio',
+    labelEndDate: 'Fecha de fin',
+    labelLocation: 'Ubicación',
+    textButtonSend: 'Enviar',
+    textButtonSending: 'Enviando...',
+    textToastSuccess: 'Comunicación enviada con éxito',
+    textToastFail: 'Error al enviar la comunicación',
+    errorNoUser: 'No se encontró un usuario autenticado',
+}

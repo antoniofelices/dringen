@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
 import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
-import content from './ObservationTab.content'
+import { contentES as content } from './ObservationTab.content'
 
 const ObservationTab = ({ control }: TabPropsType) => {
     const fcInputs = [
@@ -62,7 +62,7 @@ const ObservationTab = ({ control }: TabPropsType) => {
                         <Fragment key={item}>
                             <FormFieldInput
                                 fieldName={item}
-                                label={item}
+                                label={content[item]}
                                 control={control}
                                 type="number"
                             />
@@ -79,7 +79,7 @@ const ObservationTab = ({ control }: TabPropsType) => {
                         <Fragment key={item}>
                             <FormFieldInput
                                 fieldName={item}
-                                label={item}
+                                label={content[item]}
                                 control={control}
                             />
                         </Fragment>

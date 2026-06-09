@@ -13,7 +13,7 @@ import {
     CollapsibleTrigger,
 } from '@shared/components/ui/base/collapsible'
 import { useCommunicationDetails } from '@resources/communication/hooks/useCommunicationDetails'
-import content from './CommunicationDetails.content'
+import { contentES as content } from './CommunicationDetails.content'
 
 const CommunicationDetails = () => {
     const { visibleCommunications } = useCommunicationDetails()

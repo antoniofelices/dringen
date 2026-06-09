@@ -10,7 +10,7 @@ import { useCreateFamilyMemberHistory } from '@resources/family-member-history/h
 import { useUpdateFamilyMemberHistory } from '@resources/family-member-history/hooks/useUpdateFamilyMemberHistory'
 import { getValueFromOptions } from '@shared/utils/utils'
 import { RELATIONSHIP_OPTIONS } from '@shared/fhir/valueSets.domain'
-import content from '@resources/family-member-history/components/FamilyMemberHistoryForm.content'
+import { contentES as content } from '@resources/family-member-history/components/FamilyMemberHistoryForm.content'
 
 export const useFamilyMemberHistoryForm = ({
     patientId,

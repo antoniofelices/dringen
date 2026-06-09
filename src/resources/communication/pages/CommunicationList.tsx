@@ -10,7 +10,7 @@ import Loading from '@shared/components/ui/Loading'
 import type { CommunicationType } from '@resources/communication/types/communication.model'
 import { useCommunications } from '@resources/communication/hooks/useGetCommunication'
 import communicationTableColumns from '@resources/communication/presentation/communicationTable.columns'
-import content from './CommunicationList.content'
+import { contentES as content } from './CommunicationList.content'
 
 const CommunicationList = () => {
     const { communications, isPending, isError, error } = useCommunications()

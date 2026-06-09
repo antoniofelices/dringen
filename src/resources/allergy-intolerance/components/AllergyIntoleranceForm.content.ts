@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelNoKnownAllergies: 'No known allergies',
     descriptionNoKnownAllergies:
         'Toggle if the patient has no known allergies',
@@ -53,4 +53,59 @@ const content = {
     ],
 }
 
-export default content
+export type AllergyIntoleranceFormContent = typeof contentEN
+
+export const contentES: AllergyIntoleranceFormContent = {
+    labelNoKnownAllergies: 'Sin alergias conocidas',
+    descriptionNoKnownAllergies:
+        'Activar si el paciente no tiene alergias conocidas',
+    labelSubstance: 'Sustancia',
+    labelType: 'Tipo',
+    labelCategory: 'Categoría',
+    labelCriticality: 'Criticidad',
+    labelClinicalStatus: 'Estado clínico',
+    labelVerificationStatus: 'Estado de verificación',
+    labelOnsetDateTime: 'Fecha de inicio',
+    labelManifestation: 'Manifestación',
+    labelSeverity: 'Gravedad',
+    labelNote: 'Nota',
+    placeholderSubstance: 'Ej. Cacahuetes, Penicilina...',
+    placeholderManifestation: 'Ej. Urticaria, Anafilaxia...',
+    placeholderNote: 'Notas adicionales...',
+    placeholderSelect: 'Seleccionar...',
+    textButtonSave: 'Guardar',
+    textButtonSaving: 'Guardando...',
+    textToastSuccess: 'Alergia guardada correctamente',
+    textToastFail: 'Error al guardar la alergia',
+    typeOptions: [
+        { label: 'Alergia', value: 'allergy' },
+        { label: 'Intolerancia', value: 'intolerance' },
+    ],
+    categoryOptions: [
+        { label: 'Alimentos', value: 'food' },
+        { label: 'Medicamento', value: 'medication' },
+        { label: 'Medioambiente', value: 'environment' },
+        { label: 'Biológico', value: 'biologic' },
+    ],
+    criticalityOptions: [
+        { label: 'Baja', value: 'low' },
+        { label: 'Alta', value: 'high' },
+        { label: 'No se puede evaluar', value: 'unable-to-assess' },
+    ],
+    clinicalStatusOptions: [
+        { label: 'Activo', value: 'active' },
+        { label: 'Inactivo', value: 'inactive' },
+        { label: 'Resuelto', value: 'resolved' },
+    ],
+    verificationStatusOptions: [
+        { label: 'No confirmado', value: 'unconfirmed' },
+        { label: 'Confirmado', value: 'confirmed' },
+        { label: 'Refutado', value: 'refuted' },
+        { label: 'Registrado por error', value: 'entered-in-error' },
+    ],
+    severityOptions: [
+        { label: 'Leve', value: 'mild' },
+        { label: 'Moderado', value: 'moderate' },
+        { label: 'Grave', value: 'severe' },
+    ],
+}

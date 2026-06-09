@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register patient',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
     errorUserNameTooLong: 'The username cannot be longer than 20 characters',
@@ -38,4 +38,44 @@ const content = {
     textToastFail: 'Failed to register patient',
 }
 
-export default content
+export type AddNewPatientContent = typeof contentEN
+
+export const contentES: AddNewPatientContent = {
+    title: 'Registrar paciente',
+    errorUserNameTooShort: 'El nombre debe tener al menos 3 caracteres',
+    errorUserNameTooLong: 'El nombre no puede tener más de 20 caracteres',
+    errorUserNameDisallowedCharacters: 'Solo letras, números y guiones bajos',
+    errorUserLastNameTooShort:
+        'El apellido debe tener al menos 3 caracteres',
+    errorUserLastNameTooLong:
+        'El apellido no puede tener más de 20 caracteres',
+    errorUserLastNameDisallowedCharacters:
+        'Solo letras, números y guiones bajos',
+    errorEmailInvalid: 'Por favor, introduzca una dirección de correo válida',
+    errorEmailRequired: 'La dirección de correo es obligatoria',
+    errorPasswordNoMatch: 'Las contraseñas no coinciden',
+    errorUserDniTooShort: 'DNI demasiado corto',
+    errorUserDniTooLong: 'DNI demasiado largo',
+    errorUserDniLength: 'El DNI debe tener 8 dígitos sin letra',
+    errorUserDniInvalidFormat: 'Formato de DNI no válido',
+    errorGenderRequired: 'Por favor, seleccione un sexo',
+    errorBirthDateRequired: 'Por favor, seleccione una fecha de nacimiento',
+    errorBirthDateFuture: 'Esto es imposible',
+    errorBirthDateTooOld: 'Demasiado mayor',
+    errorPhoneInvalid: 'Teléfono no válido',
+    errorMaritalStatusRequired: 'Por favor, seleccione un estado civil',
+    labelUserName: 'Nombre',
+    labelUserLastName: 'Apellido',
+    labelDNI: 'DNI',
+    labelEmail: 'Correo electrónico',
+    labelGender: 'Seleccionar sexo',
+    labelPhone: 'Teléfono',
+    labelBirthday: 'Fecha de nacimiento',
+    labelBirthplace: 'Lugar de nacimiento',
+    labelPlaceOfResidence: 'Lugar de residencia',
+    labelOccupation: 'Ocupación',
+    textButtonSend: 'Registrar nuevo',
+    textButtonSending: 'Enviando',
+    textToastSuccess: 'Paciente registrado correctamente',
+    textToastFail: 'Error al registrar el paciente',
+}

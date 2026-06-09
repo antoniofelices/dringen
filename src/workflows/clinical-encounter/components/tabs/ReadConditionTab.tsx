@@ -1,6 +1,6 @@
 import type { Condition } from '@medplum/fhirtypes'
 import { ICD10_SYSTEM } from '@shared/fhir/config'
-import content from './ReadConditionTab.content'
+import { contentES as content } from './ReadConditionTab.content'
 
 const ReadConditionTab = ({ conditions }: { conditions: Condition[] }) => {
     if (conditions.length === 0) {

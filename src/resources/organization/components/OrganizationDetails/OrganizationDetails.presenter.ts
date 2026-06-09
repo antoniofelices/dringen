@@ -1,5 +1,5 @@
 import type { OrganizationType } from '@resources/organization/types/organization.model'
-import content from './OrganizationDetails.content'
+import { contentES as content } from './OrganizationDetails.content'
 
 export const buildDataItems = (organization: OrganizationType) => [
     { label: content.labelName, value: organization.name },

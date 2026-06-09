@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { GENDER_VALUES, MARITAL_STATUS_VALUES } from '@shared/fhir/valueSets.domain'
-import content from './addNewPatient.content'
+import { contentES as content } from './addNewPatient.content'
 
 export const addNewPatientSchema = z.object({
     userName: z

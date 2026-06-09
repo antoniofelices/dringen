@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     title: 'Add new Communication',
 }
 
-export default content
+type AddNewCommunicationContent = typeof contentEN
+
+export const contentES: AddNewCommunicationContent = {
+    title: 'Añadir nueva comunicación',
+}

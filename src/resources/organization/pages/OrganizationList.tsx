@@ -7,7 +7,7 @@ import Loading from '@shared/components/ui/Loading'
 import type { OrganizationType } from '@resources/organization/types/organization.model'
 import { useOrganizations } from '@resources/organization/hooks/useOrganizations'
 import organizationTableColumns from '@resources/organization/presentation/organizationTable.columns'
-import content from './OrganizationList.content'
+import { contentES as content } from './OrganizationList.content'
 
 const OrganizationList = () => {
     const { organizations, isPending, isError, error } = useOrganizations()

@@ -12,7 +12,7 @@ import DataDisplayList from '@shared/components/ui/DataDisplayList'
 import { useEditableForm } from '@shared/hooks/useEditableForm'
 import PatientDemographicsForm from './PatientDemographicsForm'
 import { buildDataItems } from './PatientDemographics.presenter'
-import content from './PatientDemographics.content'
+import { contentES as content } from './PatientDemographics.content'
 
 const completenessCheck = (data: PatientType) =>
     Boolean(data.firstName || data.lastName)

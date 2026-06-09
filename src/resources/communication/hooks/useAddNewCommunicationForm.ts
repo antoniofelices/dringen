@@ -10,7 +10,7 @@ import type {
     AddNewCommunicationType,
     AddNewCommunicationFormProps,
 } from '@resources/communication/types/communication.model'
-import content from '@resources/communication/components/AddNewCommunicationForm.content'
+import { contentES as content } from '@resources/communication/components/AddNewCommunicationForm.content'
 
 export const useAddNewCommunicationForm = ({
     onSuccess,

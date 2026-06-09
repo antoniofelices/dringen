@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './addNewPractitioner.content'
+import { contentES as content } from './addNewPractitioner.content'
 
 export const addNewPractitionerSchema = z
     .object({

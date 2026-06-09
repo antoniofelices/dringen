@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './allergyIntolerance.content'
+import { contentES as content } from './allergyIntolerance.content'
 
 export const allergyIntoleranceSchema = z
     .object({

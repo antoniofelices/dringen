@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Notes',
     textButtonEdit: '+ Add',
     textEmpty: 'No notes yet.',
@@ -8,4 +8,14 @@ const content = {
     textButtonSave: 'Save',
 }
 
-export default content
+export type NotesPractitionerContent = typeof contentEN
+
+export const contentES: NotesPractitionerContent = {
+    title: 'Notas',
+    textButtonEdit: '+ Añadir',
+    textEmpty: 'Sin notas aún.',
+    textDialogTitle: 'Añadir nota',
+    textDialogPlaceholder: 'Escribe tu nota aquí...',
+    textButtonCancel: 'Cancelar',
+    textButtonSave: 'Guardar',
+}

@@ -1,5 +1,5 @@
 import type { MedicationRequest } from '@medplum/fhirtypes'
-import content from './ReadMedicationRequestTab.content'
+import { contentES as content } from './ReadMedicationRequestTab.content'
 
 const ReadMedicationRequestTab = ({
     medicationRequests,

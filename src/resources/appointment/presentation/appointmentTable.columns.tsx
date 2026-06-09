@@ -11,7 +11,7 @@ import {
 } from '@shared/components/ui/base/select'
 import { Toggle } from '@shared/components/ui/base/toggle'
 import { STATUS_OPTIONS } from '@resources/appointment/config/config'
-import content from './appointmentTable.content'
+import { contentES as content } from './appointmentTable.content'
 
 const appointmentTableColumns = (
     onStatusChange: (appointmentId: string, newStatus: string) => void,

@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelId: 'Id',
     labelPatientName: 'Patient',
     labelPatientPhone: 'Contact',
@@ -9,4 +9,15 @@ const content = {
     labelConfirmed: 'Called',
 }
 
-export default content
+export type AppointmentTableContent = typeof contentEN
+
+export const contentES: AppointmentTableContent = {
+    labelId: 'Id',
+    labelPatientName: 'Paciente',
+    labelPatientPhone: 'Contacto',
+    labelHour: 'Hora',
+    labelDay: 'Día',
+    labelPractitionerName: 'Profesional',
+    labelStatus: 'Estado',
+    labelConfirmed: 'Llamado',
+}

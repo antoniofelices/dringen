@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Reset Password',
     confirmPassword: 'Please confirm your password',
     labelEmail: 'Email',
@@ -17,4 +17,23 @@ const content = {
     textButtonSending: 'Sending',
 }
 
-export default content
+export type ResetPasswordFormContent = typeof contentEN
+
+export const contentES: ResetPasswordFormContent = {
+    title: 'Restablecer contraseña',
+    confirmPassword: 'Por favor, confirma tu contraseña',
+    labelEmail: 'Correo electrónico',
+    labelPassword: 'Nueva contraseña',
+    labelConfirmPassword: 'Confirmar contraseña',
+    errorEmailInvalid: 'Por favor, utiliza una dirección de correo electrónico válida',
+    errorEmailRequired: 'La dirección de correo electrónico es obligatoria',
+    errorPasswordTooShort:
+        'La contraseña debe contener al menos ocho caracteres',
+    errorPasswordMustContain:
+        'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
+    errorPasswordNoMatch: 'Las contraseñas no coinciden',
+    textToastSuccess: 'Contraseña restablecida correctamente',
+    textToastFail: 'Error al restablecer la contraseña',
+    textButtonSend: 'Actualizar contraseña',
+    textButtonSending: 'Enviando',
+}

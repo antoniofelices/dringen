@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import Main from '@layouts/AuthnMain'
 import { Button } from '@shared/components/ui/base/button'
-import content from './Error.content'
+import { contentES as content } from './Error.content'
 import pictureColleDelleFinestre from '@/assets/images/error404-finestre.webp'
 
 const Error404 = () => {

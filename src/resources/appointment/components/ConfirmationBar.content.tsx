@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     textAppointment: 'Appointment',
     labelPatient: 'Patient',
     placeholderPatient: 'Patient',
@@ -7,4 +7,13 @@ const content = {
     textButtonConfirm: 'Confirm',
 }
 
-export default content
+export type ConfirmationBarContent = typeof contentEN
+
+export const contentES: ConfirmationBarContent = {
+    textAppointment: 'Cita',
+    labelPatient: 'Paciente',
+    placeholderPatient: 'Paciente',
+    textNoPatientFound: 'No se encontró ningún paciente',
+    textButtonCancel: 'Cancelar',
+    textButtonConfirm: 'Confirmar',
+}

@@ -7,7 +7,7 @@ import type {
 } from '@resources/organization/types/organization.model'
 import { organizationDetailsSchema } from '@resources/organization/schemas/organizationDetails.schema'
 import { useUpdateOrganization } from '@resources/organization/hooks/useUpdateOrganization'
-import content from '@resources/organization/components/OrganizationDetails/OrganizationDetails.content'
+import { contentES as content } from '@resources/organization/components/OrganizationDetails/OrganizationDetails.content'
 
 export const useOrganizationDetailsForm = ({
     organization,

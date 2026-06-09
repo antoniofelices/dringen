@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import { Button } from '@shared/components/ui/base/button'
-import content from './WelcomeDetails.content'
+import { contentES as content } from './WelcomeDetails.content'
 
 const WelcomeDetail = () => {
     const { user } = useCurrentUser()

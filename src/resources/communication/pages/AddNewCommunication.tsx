@@ -2,7 +2,7 @@ import { Card, CardContent } from '@shared/components/ui/base/card'
 import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import AddNewCommunicationForm from '@resources/communication/components/AddNewCommunicationForm'
-import content from './AddNewCommunication.content'
+import { contentES as content } from './AddNewCommunication.content'
 
 const AddNewCommunication = () => {
     return (

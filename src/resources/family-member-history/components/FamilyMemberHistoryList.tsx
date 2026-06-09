@@ -26,7 +26,7 @@ import {
 } from '@resources/family-member-history/presentation/familyMemberHistoryList.colors'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './FamilyMemberHistoryList.content'
+import { contentES as content } from './FamilyMemberHistoryList.content'
 
 const FamilyMemberHistoryList = ({ patientId }: { patientId: string }) => {
     const { familyMemberHistories, isPending, isError, error } =

@@ -23,7 +23,7 @@ import { useAppointmentsByPatient } from '@resources/appointment/hooks/useAppoin
 import { useUpdateAppointmentStatus } from '@resources/appointment/hooks/useUpdateAppointmentStatus'
 import { useToggleAppointmentCalled } from '@resources/appointment/hooks/useToggleAppointmentCalled'
 import appointmentByPatientTableColumns from '@resources/appointment/presentation/appointmentByPatientTable.columns'
-import content from './AppointmentListByPatient.content'
+import { contentES as content } from './AppointmentListByPatient.content'
 
 const AppointmentListByPatient = ({ patientId }: { patientId: string }) => {
     const { bookedAppointments, pastAppointments, isPending, isError, error } =

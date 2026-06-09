@@ -5,7 +5,7 @@ import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import Loading from '@shared/components/ui/Loading'
 import OrganizationDetails from '@resources/organization/components/OrganizationDetails/OrganizationDetails'
 import { useOrganizationById } from '@resources/organization/hooks/useOrganizationById'
-import content from './SingleOrganization.content'
+import { contentES as content } from './SingleOrganization.content'
 
 const SingleOrganization = ({ id }: { id: string }) => {
     const { organization, isPending, isError, error } = useOrganizationById(id)

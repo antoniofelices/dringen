@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import type { PatientType, PatientDemographicsFormType } from '@resources/patient/types/patient.model'
 import { patientDemographicsSchema } from '@resources/patient/schemas/patientDemographics.schema'
 import { useUpdatePatientDemographics } from '@resources/patient/hooks/useUpdatePatient'
-import content from '@resources/patient/components/PatientDemographics/PatientDemographics.content'
+import { contentES as content } from '@resources/patient/components/PatientDemographics/PatientDemographics.content'
 
 export const usePatientDemographicsForm = ({
     patientData,

@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelDay: 'Day',
     labelHour: 'Hour',
     labelPatientName: 'Patient',
@@ -6,4 +6,12 @@ const content = {
     labelEdit: 'Edit',
 }
 
-export default content
+export type AppointmentByPractitionerTableContent = typeof contentEN
+
+export const contentES: AppointmentByPractitionerTableContent = {
+    labelDay: 'Día',
+    labelHour: 'Hora',
+    labelPatientName: 'Paciente',
+    labelStatus: 'Estado',
+    labelEdit: 'Editar',
+}

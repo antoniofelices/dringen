@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register user',
     confirmPassword: 'Please confirm your password',
     errorUserNameTooShort: 'The username must be at least 3 characters long',
@@ -30,4 +30,36 @@ const content = {
     textToastFail: 'Failed to register user',
 }
 
-export default content
+export type AddNewPractitionerContent = typeof contentEN
+
+export const contentES: AddNewPractitionerContent = {
+    title: 'Registrar usuario',
+    confirmPassword: 'Por favor, confirma tu contraseña',
+    errorUserNameTooShort: 'El nombre de usuario debe tener al menos 3 caracteres',
+    errorUserNameTooLong: 'El nombre de usuario no puede superar los 20 caracteres',
+    errorUserLastNameTooShort:
+        'El nombre de usuario debe tener al menos 3 caracteres',
+    errorUserLastNameTooLong:
+        'El nombre de usuario no puede superar los 20 caracteres',
+    errorEmailInvalid: 'Por favor, utiliza una dirección de correo electrónico válida',
+    errorEmailRequired: 'La dirección de correo electrónico es obligatoria',
+    errorPasswordTooShort:
+        'La contraseña debe contener al menos ocho caracteres',
+    errorPasswordMustContain:
+        'Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.',
+    errorPasswordNoMatch: 'Las contraseñas no coinciden',
+    errorUserDniTooShort: 'DNI demasiado corto',
+    errorUserDniTooLong: 'DNI demasiado largo',
+    errorUserDniInvalidFormat: 'Formato de DNI no válido',
+    labelUserName: 'Nombre',
+    labelUserLastName: 'Apellido',
+    labelDNI: 'DNI',
+    labelEmail: 'Correo electrónico',
+    labelPassword: 'Contraseña',
+    labelConfirmPassword: 'Confirmar contraseña',
+    labelSelectRole: 'Seleccionar rol',
+    textButtonSend: 'Registrar nuevo usuario',
+    textButtonSending: 'Enviando',
+    textToastSuccess: 'Usuario registrado correctamente',
+    textToastFail: 'Error al registrar el usuario',
+}

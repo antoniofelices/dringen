@@ -18,7 +18,7 @@ import { useAppointments } from '@resources/appointment/hooks/useAppointment'
 import { useUpdateAppointmentStatus } from '@resources/appointment/hooks/useUpdateAppointmentStatus'
 import { useToggleAppointmentCalled } from '@resources/appointment/hooks/useToggleAppointmentCalled'
 import appointmentTableColumns from '@resources/appointment/presentation/appointmentTable.columns'
-import content from './AppointmentList.content'
+import { contentES as content } from './AppointmentList.content'
 
 const AppointmentList = () => {
     const {

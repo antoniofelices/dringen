@@ -6,10 +6,7 @@ import {
 import { familyMemberHistoryFormToFhir } from '@resources/family-member-history/domain/familyMemberHistory.adapter'
 import type { FamilyMemberHistoryFormType } from '@resources/family-member-history/types/familyMemberHistory.model'
 
-export const useUpdateFamilyMemberHistory = (
-    id: string,
-    patientId: string
-) => {
+export const useUpdateFamilyMemberHistory = (id: string, patientId: string) => {
     const queryClient = useQueryClient()
 
     return useMutation({

@@ -4,7 +4,7 @@ import { Button } from '@shared/components/ui/base/button'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import { signOut } from '@auth/services/auth.service'
 import type { ButtonSignOutType } from '@auth/types/auth.model'
-import content from './ButtonSignOut.content'
+import { contentES as content } from './ButtonSignOut.content'
 
 const ButtonSignOut = ({
     asbutton = true,
