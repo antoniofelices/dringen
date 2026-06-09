@@ -8,7 +8,7 @@ import { useAppointmentSelector } from '@resources/appointment/hooks/useAppointm
 import ConfirmationBar from '@resources/appointment/components/ConfirmationBar'
 import MiniCalendar from '@resources/appointment/components/MiniCalendar'
 import SlotsButtons from '@resources/appointment/components/SlotsButtons'
-import content from './AppointmentSelector.content'
+import { contentES as content } from './AppointmentSelector.content'
 
 const AppointmentSelector = ({
     practitionerId,

@@ -11,7 +11,7 @@ import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import { useAddNewAppointmentForm } from '@resources/appointment/hooks/useAddNewAppointmentForm'
-import content from './AddNewAppointmentForm.content'
+import { contentES as content } from './AddNewAppointmentForm.content'
 
 type AddNewAppointmentFormProps = {
     onSuccess?: () => void

@@ -1,5 +1,5 @@
 import type { AllergyIntoleranceType } from '@resources/allergy-intolerance/types/allergyIntolerance.model'
-import content from './AllergyIntoleranceDetail.content'
+import { contentES as content } from './AllergyIntoleranceDetail.content'
 
 export const buildDataItems = (allergyIntolerance: AllergyIntoleranceType) => [
     { label: content.labelSubstance, value: allergyIntolerance.substance },

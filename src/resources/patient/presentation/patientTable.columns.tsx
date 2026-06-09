@@ -2,6 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { NavigateFn } from '@tanstack/react-router'
 import type { PatientType } from '@resources/patient/types/patient.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
+import { contentES as content } from './patientTable.content'
 
 const patientTableColumns = (
     navigate: NavigateFn
@@ -16,7 +17,7 @@ const patientTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        Name
+                        {content.labelName}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -33,7 +34,7 @@ const patientTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        Last Name
+                        {content.labelLastName}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -50,7 +51,7 @@ const patientTableColumns = (
                     }
                 >
                     <span className="flex items-center gap-2">
-                        DNI
+                        {content.labelDni}
                         <ArrowUpDown size="12" />
                     </span>
                 </button>
@@ -59,7 +60,7 @@ const patientTableColumns = (
     },
     {
         accessorKey: 'id',
-        header: 'Edit',
+        header: content.labelEdit,
         cell: ({ row }) => {
             const id = row.original.id
             return (

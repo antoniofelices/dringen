@@ -16,7 +16,7 @@ import { usePractitionerDetails } from '@resources/practitioner/hooks/usePractit
 import type { PractitionerDetailsData } from '@resources/practitioner/types/practitioner.model'
 import PractitionerDetailsForm from './PractitionerDetailsForm'
 import { buildDataItems } from './PractitionerDetails.presenter'
-import content from './PractitionerDetails.content'
+import { contentES as content } from './PractitionerDetails.content'
 
 const completenessCheck = (data: PractitionerDetailsData) =>
     Boolean(data.specialty)

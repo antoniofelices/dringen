@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     title: 'Terms of use',
 }
 
-export default content
+export type TermsOfUseContent = typeof contentEN
+
+export const contentES: TermsOfUseContent = {
+    title: 'Términos de uso',
+}

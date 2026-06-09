@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Appointments',
     textButtonAdd: 'Add Appointment',
     titleDialogAppointment: 'Add appointment',
@@ -15,4 +15,21 @@ const content = {
     textRest: 'Rest of the days',
 }
 
-export default content
+export type AppointmentListContent = typeof contentEN
+
+export const contentES: AppointmentListContent = {
+    title: 'Citas',
+    textButtonAdd: 'Añadir cita',
+    titleDialogAppointment: 'Añadir cita',
+    titleDialogEvent: 'Detalles del evento',
+    labelPatient: 'Paciente',
+    labelPhysician: 'Médico',
+    labelSchedule: 'Horario',
+    textButtonDeleteEvent: 'Eliminar',
+    textToastSuccessDelete: 'Cita eliminada correctamente',
+    textCaptionTable: 'Listado de citas',
+    textFilterPlaceholder: 'Filtrar por apellido del paciente…',
+    textToday: 'Hoy',
+    textTomorrow: 'Mañana',
+    textRest: 'Resto de días',
+}

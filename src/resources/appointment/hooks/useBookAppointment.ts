@@ -10,7 +10,7 @@ import type {
     BookAppointmentFormType,
     SelectedSlot,
 } from '@resources/appointment/types/appointment.model'
-import content from '@resources/appointment/hooks/useBookAppointment.content'
+import { contentES as content } from '@resources/appointment/hooks/useBookAppointment.content'
 
 const defaultValues: BookAppointmentFormType = {
     patient: '',

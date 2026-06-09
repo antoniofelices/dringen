@@ -11,7 +11,7 @@ import { useAccessPolicyList } from '@resourcesmedplum/access-policy/hooks/useAc
 import { useClinicLocation } from '@resources/location/hooks/useClinicLocation'
 import { useLocationsByParent } from '@resources/location/hooks/useLocationsByParent'
 import { useOrganization } from '@resources/organization/hooks/useOrganization'
-import { DAYS_OF_WEEK_OPTIONS } from '@shared/fhir/valueSets.domain'
+import { getDaysOfWeekOptions } from '@shared/fhir/valueSets.domain'
 import { SPECIALTY_TO_SNOMED } from '@resources/practitioner/domain/practitioner.domain'
 import { PRACTITIONER_ROLE_TO_SNOMED } from '@resources/practitioner-role/domain/practitionerRole.domain'
 import { addNewPractitionerFormSchema } from '@resources/practitioner/schemas/addNewPractitionerForm.schema'
@@ -19,7 +19,7 @@ import type {
     AddNewPractitionerFormType,
     AddNewPractitionerFormProps,
 } from '@resources/practitioner/types/practitioner.model'
-import content from '@resources/practitioner/components/AddNewPractitionerForm.content'
+import { contentES as content } from '@resources/practitioner/components/AddNewPractitionerForm.content'
 
 export const useAddNewPractitionerForm = ({
     onSuccess,
@@ -65,7 +65,7 @@ export const useAddNewPractitionerForm = ({
     )
 
     const addTimeHandler = () => {
-        append({ daysOfWeek: DAYS_OF_WEEK_OPTIONS[0].value, startTime: '', endTime: '' })
+        append({ daysOfWeek: getDaysOfWeekOptions(content)[0].value, startTime: '', endTime: '' })
     }
 
     const removeTimeHandler = (index: number) => {

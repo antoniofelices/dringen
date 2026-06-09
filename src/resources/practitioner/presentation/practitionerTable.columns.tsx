@@ -2,7 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { NavigateFn } from '@tanstack/react-router'
 import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
-import content from './practitionerTable.content'
+import { contentES as content } from './practitionerTable.content'
 
 const practitionerTableColumns = (
     navigate: NavigateFn
@@ -60,7 +60,7 @@ const practitionerTableColumns = (
     },
     {
         accessorKey: 'id',
-        header: 'Edit',
+        header: content.labelEdit,
         cell: ({ row }) => {
             const id = row.original.id
             return (

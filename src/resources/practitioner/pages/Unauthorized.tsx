@@ -5,7 +5,7 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import ContentArticle from '@shared/components/ui/ContentArticle'
-import content from './Unauthorized.content'
+import { contentES as content } from './Unauthorized.content'
 
 const Unauthorized = () => {
     return (

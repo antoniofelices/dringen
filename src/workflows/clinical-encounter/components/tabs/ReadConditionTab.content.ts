@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelCIE: 'CIE',
     labelCondition: 'Condition',
     labelCertainty: 'Certainty',
@@ -6,4 +6,12 @@ const content = {
     textNoData: '-',
 }
 
-export default content
+type ReadConditionTabContent = typeof contentEN
+
+export const contentES: ReadConditionTabContent = {
+    labelCIE: 'CIE',
+    labelCondition: 'Condición',
+    labelCertainty: 'Certeza',
+    textNoConditions: 'No hay condiciones registradas',
+    textNoData: '-',
+}

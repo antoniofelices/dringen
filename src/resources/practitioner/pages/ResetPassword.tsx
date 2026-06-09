@@ -5,7 +5,7 @@ import {
     CardTitle,
 } from '@shared/components/ui/base/card'
 import ResetPasswordForm from '@resources/practitioner/components/ResetPasswordForm'
-import content from './ResetPassword.content'
+import { contentES as content } from './ResetPassword.content'
 
 const ResetPassword = () => {
     return (

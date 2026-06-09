@@ -1,5 +1,5 @@
 import type { ServiceRequest } from '@medplum/fhirtypes'
-import content from './ReadServiceRequestTab.content'
+import { contentES as content } from './ReadServiceRequestTab.content'
 
 const ReadServiceRequestTab = ({
     serviceRequests,

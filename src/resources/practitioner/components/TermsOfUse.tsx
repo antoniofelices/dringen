@@ -4,7 +4,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@shared/components/ui/base/card'
-import content from './TermsOfUse.content'
+import { contentES as content } from './TermsOfUse.content'
 
 const TermsOfUse = () => {
     return (

@@ -6,7 +6,7 @@ import { useLogger } from '@shared/hooks/useLogger'
 import { addNewPatientSchema } from '@resources/patient/schemas/addNewPatient.schema'
 import { useCreatePatient } from '@resources/patient/hooks/useCreatePatient'
 import type { AddNewPatientType } from '@resources/patient/types/patient.model'
-import content from '@resources/patient/components/AddNewPatientForm.content'
+import { contentES as content } from '@resources/patient/components/AddNewPatientForm.content'
 
 export const useAddNewPatientForm = () => {
     const { logError, logSuccess } = useLogger('RegisterPatientForm')

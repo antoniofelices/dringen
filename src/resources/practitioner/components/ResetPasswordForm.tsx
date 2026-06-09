@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import content from './ResetPasswordForm.content'
+import { contentES as content } from './ResetPasswordForm.content'
 import { resetPasswordSchema } from '@resources/practitioner/schemas/resetPasswordSchema.schema'
 
 type FormData = z.infer<typeof resetPasswordSchema>

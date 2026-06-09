@@ -1,7 +1,15 @@
-const content = {
+export const contentEN = {
     labelUserName: 'Name',
     labelUserLastName: 'Last Name',
     labelSpecialty: 'Specialty',
+    labelEdit: 'Edit',
 }
 
-export default content
+export type PractitionerTableContent = typeof contentEN
+
+export const contentES: PractitionerTableContent = {
+    labelUserName: 'Nombre',
+    labelUserLastName: 'Apellido',
+    labelSpecialty: 'Especialidad',
+    labelEdit: 'Editar',
+}

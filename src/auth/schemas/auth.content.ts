@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelEmail: 'Email',
     labelPassword: 'Password',
     errorEmailInvalid: 'Please use a valid email address',
@@ -9,4 +9,15 @@ const content = {
     textToastFail: 'Error',
 }
 
-export default content
+export type AuthContent = typeof contentEN
+
+export const contentES: AuthContent = {
+    labelEmail: 'Correo electrónico',
+    labelPassword: 'Contraseña',
+    errorEmailInvalid: 'Por favor, utilice una dirección de correo electrónico válida',
+    errorEmailRequired: 'El correo electrónico es obligatorio',
+    errorPasswordTooShort: 'La contraseña debe contener al menos seis caracteres',
+    textButtonSend: 'Iniciar sesión',
+    textButtonSending: 'Enviando',
+    textToastFail: 'Error',
+}

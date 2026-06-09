@@ -1,6 +1,11 @@
-const content = {
+export const contentEN = {
     labelAdditionalTests: 'Additional tests',
     textNoData: '-',
 }
 
-export default content
+type ReadServiceRequestTabContent = typeof contentEN
+
+export const contentES: ReadServiceRequestTabContent = {
+    labelAdditionalTests: 'Pruebas adicionales',
+    textNoData: '-',
+}

@@ -10,7 +10,7 @@ import AllergyIntoleranceForm from './AllergyIntoleranceForm'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
 import { buildDataItems } from './AllergyIntoleranceDetail.presenter'
-import content from './AllergyIntoleranceDetail.content'
+import { contentES as content } from './AllergyIntoleranceDetail.content'
 
 type AllergyIntoleranceDetailProps = {
     allergyId: string

@@ -8,7 +8,7 @@ import type {
 import { allergyIntoleranceSchema } from '@resources/allergy-intolerance/schemas/allergyIntolerance.schema'
 import { useCreateAllergyIntolerance } from '@resources/allergy-intolerance/hooks/useCreateAllergyIntolerance'
 import { useUpdateAllergyIntolerance } from '@resources/allergy-intolerance/hooks/useUpdateAllergyIntolerance'
-import content from '@resources/allergy-intolerance/components/AllergyIntoleranceForm.content'
+import { contentES as content } from '@resources/allergy-intolerance/components/AllergyIntoleranceForm.content'
 
 export const useAllergyIntoleranceForm = ({
     patientId,

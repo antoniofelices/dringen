@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 import { signInSchema } from '@auth/schemas/auth.schema'
 import { signIn } from '@auth/services/auth.service'
 import type { SignInFormType } from '@auth/types/auth.model'
-import content from '@auth/components/SignInForm.content'
+import { contentES as content } from '@auth/components/SignInForm.content'
 import { useProject } from '@auth/hooks/useProject'
 
 export const useSignInForm = () => {

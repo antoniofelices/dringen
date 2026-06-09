@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Add Clinical History',
     textObservation: 'Observation',
     textCondition: 'Condition',
@@ -10,4 +10,16 @@ const content = {
     textSave: 'Save',
 }
 
-export default content
+type AddClinicalEncounterContent = typeof contentEN
+
+export const contentES: AddClinicalEncounterContent = {
+    title: 'Añadir historia clínica',
+    textObservation: 'Observación',
+    textCondition: 'Condición',
+    textServiceRequest: 'Pruebas adicionales',
+    textMedicationRequest: 'Tratamiento',
+    textToastSuccess: 'El encuentro y otros recursos se registraron con éxito',
+    textToastFail: 'Error al registrar el encuentro',
+    textSaving: 'Guardando',
+    textSave: 'Guardar',
+}

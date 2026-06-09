@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelNoKnownFamilyHistory: 'No known family history',
     descriptionNoKnownFamilyHistory:
         'Toggle if the patient has no known family history of disorder',
@@ -17,4 +17,23 @@ const content = {
     textToastFail: 'Failed to save family member history',
 }
 
-export default content
+export type FamilyMemberHistoryFormContent = typeof contentEN
+
+export const contentES: FamilyMemberHistoryFormContent = {
+    labelNoKnownFamilyHistory: 'Sin historial familiar conocido',
+    descriptionNoKnownFamilyHistory:
+        'Activar si el paciente no tiene historial familiar conocido de enfermedades',
+    labelRelationship: 'Parentesco',
+    labelCondition: 'Condición',
+    labelStatus: 'Estado',
+    labelDeceased: 'Fallecido',
+    descriptionDeceased: '¿Este familiar ha fallecido?',
+    labelNote: 'Nota',
+    placeholderCondition: 'Ej. Diabetes mellitus tipo 2',
+    placeholderNote: 'Notas adicionales...',
+    placeholderSelect: 'Seleccionar...',
+    textButtonSave: 'Guardar',
+    textButtonSaving: 'Guardando...',
+    textToastSuccess: 'Historial familiar guardado correctamente',
+    textToastFail: 'Error al guardar el historial familiar',
+}

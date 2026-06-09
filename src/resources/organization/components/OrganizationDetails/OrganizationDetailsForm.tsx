@@ -3,7 +3,7 @@ import { useOrganizationDetailsForm } from '@resources/organization/hooks/useOrg
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import content from './OrganizationDetails.content'
+import { contentES as content } from './OrganizationDetails.content'
 
 const OrganizationDetailsForm = ({
     organization,

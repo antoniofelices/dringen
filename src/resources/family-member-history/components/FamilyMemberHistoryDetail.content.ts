@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     tabView: 'View',
     tabEdit: 'Edit',
     labelRelationship: 'Relationship',
@@ -10,4 +10,16 @@ const content = {
     textNo: 'No',
 }
 
-export default content
+export type FamilyMemberHistoryDetailContent = typeof contentEN
+
+export const contentES: FamilyMemberHistoryDetailContent = {
+    tabView: 'Ver',
+    tabEdit: 'Editar',
+    labelRelationship: 'Parentesco',
+    labelCondition: 'Condición',
+    labelStatus: 'Estado',
+    labelDeceased: 'Fallecido',
+    labelNote: 'Notas',
+    textYes: 'Sí',
+    textNo: 'No',
+}

@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     labelDescription: 'Description',
     labelExamination: 'Examination',
     labelWeight: 'Weight',
@@ -9,4 +9,15 @@ const content = {
     textNoData: '-',
 }
 
-export default content
+type ReadObservationTabContent = typeof contentEN
+
+export const contentES: ReadObservationTabContent = {
+    labelDescription: 'Descripción',
+    labelExamination: 'Exploración',
+    labelWeight: 'Peso',
+    labelHeight: 'Talla',
+    textGeneral: 'General',
+    textVitals: 'Signos vitales',
+    textBiologicalBasic: 'Datos biológicos básicos',
+    textNoData: '-',
+}

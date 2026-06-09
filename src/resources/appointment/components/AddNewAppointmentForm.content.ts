@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Form',
     errorPatientRequired: 'Please use a valid patient',
     errorPhysicianRequired: 'Please use a valid physician',
@@ -19,4 +19,25 @@ const content = {
     textButtonSending: 'Sending',
 }
 
-export default content
+export type AddNewAppointmentFormContent = typeof contentEN
+
+export const contentES: AddNewAppointmentFormContent = {
+    title: 'Formulario',
+    errorPatientRequired: 'Por favor, seleccione un paciente válido',
+    errorPhysicianRequired: 'Por favor, seleccione un médico válido',
+    errorInvalidTime: 'Formato de hora no válido',
+    labelPatient: 'Paciente',
+    labelPhysician: 'Médico',
+    labelDate: 'Fecha de la cita',
+    labelTime: 'Hora',
+    labelNotes: 'Notas',
+    placeholderPatient: 'Seleccionar paciente por nombre',
+    placeholderPhysician: 'Seleccionar médico por nombre',
+    textNoCommandPatientFound: 'No se encontró ningún paciente',
+    textNoCommandPhysicianFound: 'No se encontró ningún médico',
+    placeholderTime: 'Seleccionar un horario disponible',
+    textToastSuccess: 'Cita añadida correctamente',
+    textToastFail: 'Error al añadir la cita',
+    textButtonSend: 'Añadir cita',
+    textButtonSending: 'Enviando',
+}

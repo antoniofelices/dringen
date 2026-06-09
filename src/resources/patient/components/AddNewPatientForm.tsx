@@ -5,10 +5,10 @@ import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import { useAddNewPatientForm } from '@resources/patient/hooks/useAddNewPatientForm'
 import {
-    GENDER_OPTIONS,
-    MARITAL_STATUS_OPTIONS,
+    getGenderOptions,
+    getMaritalStatusOptions,
 } from '@shared/fhir/valueSets.domain'
-import content from './AddNewPatientForm.content'
+import { contentES as content } from './AddNewPatientForm.content'
 
 const AddNewPatientForm = () => {
     const { form, onSubmit } = useAddNewPatientForm()
@@ -49,13 +49,13 @@ const AddNewPatientForm = () => {
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={GENDER_OPTIONS}
+                        options={getGenderOptions(content)}
                     />
                     <FormFieldSelect
                         control={form.control}
                         fieldName="maritalStatus"
                         label={content.labelMaritalStatus}
-                        options={MARITAL_STATUS_OPTIONS}
+                        options={getMaritalStatusOptions(content)}
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">

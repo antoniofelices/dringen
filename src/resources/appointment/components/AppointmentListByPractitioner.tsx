@@ -11,7 +11,7 @@ import {
 import type { AppointmentType } from '@resources/appointment/types/appointment.model'
 import { useAppointmentsByPractitioner } from '@resources/appointment/hooks/useAppointmentsByPractitioner'
 import appointmentByPractitionerTableColumns from '@resources/appointment/presentation/appointmentByPractitionerTable.columns'
-import content from './AppointmentListByPractitioner.content'
+import { contentES as content } from './AppointmentListByPractitioner.content'
 
 const AppointmentListByPractitioner = ({
     practitionerId,

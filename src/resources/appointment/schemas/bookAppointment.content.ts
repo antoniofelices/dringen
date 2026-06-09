@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     errorPatientRequired: 'Patient is required',
 }
 
-export default content
+export type BookAppointmentContent = typeof contentEN
+
+export const contentES: BookAppointmentContent = {
+    errorPatientRequired: 'El paciente es obligatorio',
+}

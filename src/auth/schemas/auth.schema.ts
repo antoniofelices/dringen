@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './auth.content'
+import { contentES as content } from './auth.content'
 
 export const signInSchema = z.object({
     email: z

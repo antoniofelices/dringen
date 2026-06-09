@@ -1,8 +1,15 @@
-const content = {
+export const contentEN = {
     title: 'Single User',
     textButtonAddEncounter: 'Add encounter',
     textButtonAddAllergy: 'Add allergy',
     textYears: 'years',
 }
 
-export default content
+export type SinglePatientContent = typeof contentEN
+
+export const contentES: SinglePatientContent = {
+    title: 'Paciente',
+    textButtonAddEncounter: 'Añadir consulta',
+    textButtonAddAllergy: 'Añadir alergia',
+    textYears: 'años',
+}

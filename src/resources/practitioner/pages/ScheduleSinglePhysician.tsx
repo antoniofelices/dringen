@@ -4,7 +4,7 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import NotesPractitioner from '@resources/basic/physician-note/components/NotesPractitioner'
 import AppointmentListByPractitioner from '@resources/appointment/components/AppointmentListByPractitioner'
-import content from './ScheduleSinglePhysician.content'
+import { contentES as content } from './ScheduleSinglePhysician.content'
 
 const ScheduleSinglePhysician = ({ id }: { id: string }) => {
     return (

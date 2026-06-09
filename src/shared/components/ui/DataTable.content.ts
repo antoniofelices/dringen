@@ -1,5 +1,9 @@
-const content = {
+export const contentEN = {
     textNoResult: 'No results',
 }
 
-export default content
+export type DataTableContent = typeof contentEN
+
+export const contentES: DataTableContent = {
+    textNoResult: 'Sin resultados',
+}

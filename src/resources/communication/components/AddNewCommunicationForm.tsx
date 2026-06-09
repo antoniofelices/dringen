@@ -5,7 +5,7 @@ import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import { useAddNewCommunicationForm } from '@resources/communication/hooks/useAddNewCommunicationForm'
 import type { AddNewCommunicationFormProps } from '@resources/communication/types/communication.model'
-import content from './AddNewCommunicationForm.content'
+import { contentES as content } from './AddNewCommunicationForm.content'
 
 const AddNewCommunicationForm = ({
     onSuccess,

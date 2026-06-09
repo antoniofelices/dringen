@@ -2,7 +2,7 @@ import ContentArticle from '@shared/components/ui/ContentArticle'
 import HeaderArticle from '@shared/components/ui/HeaderArticle'
 import WelcomeDetail from '@shared/components/app/WelcomeDetail'
 import CommunicationDetails from '@resources/communication/components/CommunicationDetails'
-import content from './Dashboard.content'
+import { contentES as content } from './Dashboard.content'
 
 const Dashboard = () => {
     return (

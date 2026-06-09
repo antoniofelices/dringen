@@ -24,7 +24,7 @@ import { Textarea } from '@shared/components/ui/base/textarea'
 import { useNotesPractitioner } from '@resources/basic/physician-note/hooks/useNotesPractitioner'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './NotesPractitioner.content'
+import { contentES as content } from './NotesPractitioner.content'
 
 const NotesPractitioner = ({ practitionerId }: { practitionerId: string }) => {
     const {

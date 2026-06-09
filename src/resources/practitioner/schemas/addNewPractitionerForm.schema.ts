@@ -4,7 +4,7 @@ import {
     specialtyOptions,
 } from '@resources/practitioner/config/config'
 import { GENDER_VALUES, DAYS_OF_WEEK_VALUES } from '@shared/fhir/valueSets.domain'
-import content from './addNewPractitionerForm.content'
+import { contentES as content } from './addNewPractitionerForm.content'
 
 export const addNewPractitionerFormSchema = z.object({
     firstName: z

@@ -3,7 +3,7 @@ import { useSignInForm } from '@auth/hooks/useSignInForm'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
 import FormFieldInput from '@shared/components/ui/FormFieldInput'
-import content from './SignInForm.content'
+import { contentES as content } from './SignInForm.content'
 
 const SignInForm = () => {
     const { form, onSubmit } = useSignInForm()

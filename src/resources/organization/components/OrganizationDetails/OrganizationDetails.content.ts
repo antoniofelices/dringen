@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Details',
     labelName: 'Name',
     labelType: 'Type',
@@ -15,4 +15,21 @@ const content = {
     textToastFail: 'Failed to update organization details',
 }
 
-export default content
+export type OrganizationDetailsContent = typeof contentEN
+
+export const contentES: OrganizationDetailsContent = {
+    title: 'Detalles',
+    labelName: 'Nombre',
+    labelType: 'Tipo',
+    labelIdentifier: 'RUC',
+    labelAddress: 'Dirección',
+    labelGeneralPhone: 'Teléfono general',
+    labelGeneralEmail: 'Correo electrónico general',
+    labelAdminPhone: 'Teléfono de administración',
+    labelAdminEmail: 'Correo electrónico de administración',
+    textButtonEdit: 'Editar',
+    textButtonSend: 'Guardar',
+    textButtonSending: 'Guardando',
+    textToastSuccess: 'Los detalles de la organización se actualizaron correctamente',
+    textToastFail: 'Error al actualizar los detalles de la organización',
+}

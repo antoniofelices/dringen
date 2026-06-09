@@ -26,9 +26,9 @@ import {
 } from '@shared/components/ui/base/sidebar'
 import Logo from '@shared/components/ui/Logo'
 import MenuItems from '@shared/navigation/components/MenuItems'
-import { sidebarMenu } from '@shared/navigation/content/sidebarMenu.content'
+import { sidebarMenu } from '@shared/navigation/content/sidebarMenu.presenter'
 import ButtonSignOut from '@auth/components/ButtonSignOut'
-import content from './AuthzAside.content'
+import { contentES as content } from './AuthzAside.content'
 
 const AuthzAside = () => {
     const { user } = useCurrentUser()

@@ -1,6 +1,7 @@
 import type { FamilyMemberHistory } from '@medplum/fhirtypes'
 import { getLabelFromOptions } from '@shared/utils/utils'
-import { RELATIONSHIP_OPTIONS } from '@shared/fhir/valueSets.domain'
+import { getRelationshipOptions } from '@shared/fhir/valueSets.domain'
+import type { ValueSetsContent } from '@shared/fhir/valueSets.content'
 import type {
     FamilyMemberHistoryType,
     FamilyMemberHistoryFormType,
@@ -27,7 +28,8 @@ export function fhirToFamilyMemberHistory(
 
 export function familyMemberHistoryToFhir(
     formData: FamilyMemberHistoryFormType,
-    patientId: string
+    patientId: string,
+    content: ValueSetsContent
 ): FamilyMemberHistory {
     const resource: FamilyMemberHistory = {
         resourceType: 'FamilyMemberHistory',
@@ -68,7 +70,7 @@ export function familyMemberHistoryToFhir(
                 system: 'http://terminology.hl7.org/CodeSystem/v3-RoleCode',
                 code: formData.relationship,
                 display:
-                    getLabelFromOptions(RELATIONSHIP_OPTIONS, formData.relationship) ||
+                    getLabelFromOptions(getRelationshipOptions(content), formData.relationship) ||
                     formData.relationship,
             },
         ],
@@ -95,10 +97,11 @@ export function familyMemberHistoryToFhir(
 
 export function familyMemberHistoryFormToFhir(
     formData: FamilyMemberHistoryFormType,
-    existing: FamilyMemberHistory
+    existing: FamilyMemberHistory,
+    content: ValueSetsContent
 ): FamilyMemberHistory {
     const patientId = existing.patient?.reference?.replace('Patient/', '') ?? ''
-    const updated = familyMemberHistoryToFhir(formData, patientId)
+    const updated = familyMemberHistoryToFhir(formData, patientId, content)
     return {
         ...existing,
         ...updated,

@@ -7,7 +7,7 @@ import type {
 } from '@resources/practitioner/types/practitioner.model'
 import { practitionerDetailsSchema } from '@resources/practitioner/schemas/practitionerDetails.schema'
 import { useUpdatePractitionerDetails } from '@resources/practitioner/hooks/useUpdatePractitionerDetails'
-import content from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails.content'
+import { contentES as content } from '@resources/practitioner/components/PractitionerDetails/PractitionerDetails.content'
 
 export const usePractitionerDetailsForm = ({
     practitionerId,

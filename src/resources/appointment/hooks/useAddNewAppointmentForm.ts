@@ -17,7 +17,7 @@ import type {
     AddNewAppointmentType,
     UseAddNewAppointmentFormProps,
 } from '@resources/appointment/types/appointment.model'
-import content from '@resources/appointment/components/AddNewAppointmentForm.content'
+import { contentES as content } from '@resources/appointment/components/AddNewAppointmentForm.content'
 
 export const useAddNewAppointmentForm = ({
     initialDate,

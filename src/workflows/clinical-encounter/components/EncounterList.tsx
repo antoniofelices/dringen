@@ -22,7 +22,7 @@ import ReadClinicalEncounter from './ReadClinicalEncounter'
 import AddClinicalEncounter from './AddClinicalEncounter'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './EncounterList.content'
+import { contentES as content } from './EncounterList.content'
 
 const EncounterList = ({ patientId }: { patientId: string }) => {
     const { items, loading, error } = useEncounterList(patientId)

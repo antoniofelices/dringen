@@ -11,7 +11,7 @@ import ReadServiceRequestTab from './tabs/ReadServiceRequestTab'
 import ReadMedicationRequestTab from './tabs/ReadMedicationRequestTab'
 import Loading from '@shared/components/ui/Loading'
 import ErrorApi from '@shared/components/ui/ErrorApi'
-import content from './ReadClinicalEncounter.content'
+import { contentES as content } from './ReadClinicalEncounter.content'
 
 const ReadClinicalEncounter = ({ encounterId }: { encounterId: string }) => {
     const { data, loading, error } = useReadClinicalEncounter(encounterId)

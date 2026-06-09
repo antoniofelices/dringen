@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './organizationDetails.content'
+import { contentES as content } from './organizationDetails.content'
 
 export const organizationDetailsSchema = z.object({
     name: z.string().min(1, content.errorNameRequired).trim(),

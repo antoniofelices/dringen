@@ -9,7 +9,7 @@ import Loading from '@shared/components/ui/Loading'
 import type { PhysicianType } from '@resources/practitioner/types/practitioner.model'
 import { usePhysicians } from '@resources/practitioner/hooks/useGetPractitioner'
 import practitionerTableColumns from '@resources/practitioner/presentation/practitionerTable.columns'
-import content from './PhysicianList.content'
+import { contentES as content } from './PhysicianList.content'
 
 const PhysicianList = () => {
     const { physicians, isPending, isError, error } = usePhysicians()

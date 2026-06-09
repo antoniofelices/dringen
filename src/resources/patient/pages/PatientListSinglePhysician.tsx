@@ -10,7 +10,7 @@ import Loading from '@shared/components/ui/Loading'
 import type { PatientType } from '@resources/patient/types/patient.model.ts'
 import { usePatientsByPractitioner } from '@resources/patient/hooks/useGetPatient'
 import patientTableColumns from '@resources/patient/presentation/patientTable.columns'
-import content from './PatientListSinglePhysician.content'
+import { contentES as content } from './PatientListSinglePhysician.content'
 
 const PatientListSinglePhysician = ({ id }: { id: string }) => {
     const { patients, isPending, isError, error } =

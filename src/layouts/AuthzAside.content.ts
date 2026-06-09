@@ -1,7 +1,13 @@
-const content = {
+export const contentEN = {
     title: 'Sidebar',
     textHome: 'Home',
     titleSettings: 'Settings',
 }
 
-export default content
+export type AuthzAsideContent = typeof contentEN
+
+export const contentES: AuthzAsideContent = {
+    title: 'Barra lateral',
+    textHome: 'Inicio',
+    titleSettings: 'Configuración',
+}

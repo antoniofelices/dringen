@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import content from './addNewCommunication.content'
+import { contentES as content } from './addNewCommunication.content'
 
 export const addNewCommunicationSchema = z.object({
     title: z.string().min(1, content.errorTitleRequired).trim(),

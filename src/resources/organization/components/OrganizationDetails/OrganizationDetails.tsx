@@ -13,7 +13,7 @@ import { useEditableForm } from '@shared/hooks/useEditableForm'
 import type { OrganizationType } from '@resources/organization/types/organization.model'
 import OrganizationDetailsForm from './OrganizationDetailsForm'
 import { buildDataItems } from './OrganizationDetails.presenter'
-import content from './OrganizationDetails.content'
+import { contentES as content } from './OrganizationDetails.content'
 
 const completenessCheck = (data: OrganizationType) => Boolean(data.name)
 

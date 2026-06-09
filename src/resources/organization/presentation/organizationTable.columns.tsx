@@ -2,7 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { NavigateFn } from '@tanstack/react-router'
 import type { OrganizationType } from '@resources/organization/types/organization.model'
 import { ArrowUpDown, ArrowRight } from 'lucide-react'
-import content from './organizationTable.content'
+import { contentES as content } from './organizationTable.content'
 
 const organizationTableColumns = (
     navigate: NavigateFn

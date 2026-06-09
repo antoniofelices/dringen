@@ -8,7 +8,7 @@ import {
 import dark from '@/assets/images/dark.webp'
 import light from '@/assets/images/light.webp'
 import system from '@/assets/images/system.svg'
-import content from './Appearance.content'
+import { contentES as content } from './Appearance.content'
 
 const Appearance = () => {
     const { setTheme } = useThemeContext()

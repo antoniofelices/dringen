@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Allergies & Intolerances',
     textEmpty: 'No allergies recorded',
     textDialogTitle: 'Allergy detail',
@@ -8,4 +8,14 @@ const content = {
     textButtonAdd: '+ Add',
 }
 
-export default content
+export type AllergyIntoleranceListContent = typeof contentEN
+
+export const contentES: AllergyIntoleranceListContent = {
+    title: 'Alergias e Intolerancias',
+    textEmpty: 'No hay alergias registradas',
+    textDialogTitle: 'Detalle de alergia',
+    textDialogDescription: 'Ver o editar el registro de alergia o intolerancia',
+    textAddDrawerTitle: 'Añadir alergia o intolerancia',
+    textAddDrawerDescription: 'Registrar una alergia o intolerancia',
+    textButtonAdd: '+ Añadir',
+}

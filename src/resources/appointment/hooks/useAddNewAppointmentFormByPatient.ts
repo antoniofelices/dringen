@@ -13,7 +13,7 @@ import type {
     AddNewAppointmentByPatientType,
     UseAddNewAppointmentFormByPatientProps,
 } from '@resources/appointment/types/appointment.model'
-import content from '@resources/appointment/components/AddNewAppointmentFormByPatient.content'
+import { contentES as content } from '@resources/appointment/components/AddNewAppointmentFormByPatient.content'
 
 export const useAddNewAppointmentFormByPatient = ({
     patientId,

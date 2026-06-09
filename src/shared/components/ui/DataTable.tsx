@@ -22,7 +22,7 @@ import {
     TableRow,
 } from '@shared/components/ui/base/table'
 
-import content from './DataTable.content'
+import { contentES as content } from './DataTable.content'
 
 type DataTableProps<TData> = {
     columns: ColumnDef<TData>[]

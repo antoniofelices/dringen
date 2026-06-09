@@ -4,7 +4,7 @@ import FormFieldInput from '@shared/components/ui/FormFieldInput'
 import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import { Button } from '@shared/components/ui/base/button'
 import type { TabPropsType } from '@workflows/clinical-encounter/types/clinicalEncounter.model'
-import content from './ConditionTab.content'
+import { contentES as content } from './ConditionTab.content'
 
 const ConditionTab = ({ control }: TabPropsType) => {
     const { fields, append, remove } = useFieldArray({

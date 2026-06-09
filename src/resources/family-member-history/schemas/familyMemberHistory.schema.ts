@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { FAMILY_MEMBER_HISTORY_STATUS_VALUES } from '@shared/fhir/valueSets.domain'
-import content from './familyMemberHistory.content'
+import { contentES as content } from './familyMemberHistory.content'
 
 export const familyMemberHistorySchema = z
     .object({

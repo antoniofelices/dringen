@@ -1,4 +1,4 @@
-const content = {
+export const contentEN = {
     title: 'Register Appointment Form',
     errorPatientRequired: 'Please use a valid email address',
     errorPhysicianRequired: 'The email address is required',
@@ -18,4 +18,24 @@ const content = {
     textButtonSending: 'Sending',
 }
 
-export default content
+export type AddNewAppointmentContent = typeof contentEN
+
+export const contentES: AddNewAppointmentContent = {
+    title: 'Formulario de registro de cita',
+    errorPatientRequired: 'Por favor, use una dirección de correo electrónico válida',
+    errorPhysicianRequired: 'La dirección de correo electrónico es obligatoria',
+    errorInvalidTime: 'Formato de hora no válido',
+    labelPatient: 'Paciente',
+    labelPhysician: 'Médico',
+    labelDate: 'Fecha de la cita',
+    labelTime: 'Hora',
+    labelNotes: 'Notas',
+    placeholderPatient: 'Seleccionar paciente por nombre',
+    placeholderPhysician: 'Seleccionar médico por nombre',
+    textNoCommandPatientFound: 'No se encontró ningún paciente',
+    textNoCommandPhysicianFound: 'No se encontró ningún médico',
+    textToastSuccess: 'Cita añadida correctamente',
+    textToastFail: 'Error al añadir la cita',
+    textButtonSend: 'Añadir cita',
+    textButtonSending: 'Enviando',
+}
