@@ -5,8 +5,8 @@ import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCalendar from '@shared/components/ui/FormFieldCalendar'
 import { useAddNewPatientForm } from '@resources/patient/hooks/useAddNewPatientForm'
 import {
-    getGenderOptions,
-    getMaritalStatusOptions,
+    GENDER_OPTIONS,
+    MARITAL_STATUS_OPTIONS,
 } from '@shared/fhir/valueSets.domain'
 import { contentES as content } from './AddNewPatientForm.content'
 
@@ -49,13 +49,13 @@ const AddNewPatientForm = () => {
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={getGenderOptions(content)}
+                        options={GENDER_OPTIONS}
                     />
                     <FormFieldSelect
                         control={form.control}
                         fieldName="maritalStatus"
                         label={content.labelMaritalStatus}
-                        options={getMaritalStatusOptions(content)}
+                        options={MARITAL_STATUS_OPTIONS}
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -73,7 +73,9 @@ const AddNewPatientForm = () => {
                     />
                 </div>
                 <div className="flex items-center gap-4 my-2">
-                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">{content.labelAddress}</span>
+                    <span className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                        {content.labelAddress}
+                    </span>
                     <div className="flex-1 border-t" />
                 </div>
                 <FormFieldInput

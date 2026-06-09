@@ -1,8 +1,8 @@
 import type { PatientType } from '@resources/patient/types/patient.model'
 import { usePatientDemographicsForm } from '@resources/patient/hooks/usePatientDemographicsForm'
 import {
-    getGenderOptions,
-    getMaritalStatusOptions,
+    GENDER_OPTIONS,
+    MARITAL_STATUS_OPTIONS,
 } from '@shared/fhir/valueSets.domain'
 import { Button } from '@shared/components/ui/base/button'
 import { Form } from '@shared/components/ui/base/form'
@@ -44,13 +44,13 @@ const PatientDemographicsForm = ({
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={getGenderOptions(content)}
+                        options={GENDER_OPTIONS}
                     />
                     <FormFieldSelect
                         control={form.control}
                         fieldName="maritalStatus"
                         label={content.labelMaritalStatus}
-                        options={getMaritalStatusOptions(content)}
+                        options={MARITAL_STATUS_OPTIONS}
                     />
                 </div>
                 <Button

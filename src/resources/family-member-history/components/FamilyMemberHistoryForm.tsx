@@ -5,8 +5,8 @@ import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldSwitch from '@shared/components/ui/FormFieldSwitch'
 import FormFieldTextarea from '@shared/components/ui/FormFieldTextarea'
 import {
-    getRelationshipOptions,
-    getFamilyMemberHistoryStatusOptions,
+    RELATIONSHIP_OPTIONS,
+    FAMILY_MEMBER_HISTORY_STATUS_OPTIONS,
 } from '@shared/fhir/valueSets.domain'
 import type { FamilyMemberHistoryFormProps } from '@resources/family-member-history/types/familyMemberHistory.model'
 import { useFamilyMemberHistoryForm } from '@resources/family-member-history/hooks/useFamilyMemberHistoryForm'
@@ -42,14 +42,14 @@ const FamilyMemberHistoryForm = ({
                             control={form.control}
                             fieldName="relationship"
                             label={content.labelRelationship}
-                            options={getRelationshipOptions(content)}
+                            options={RELATIONSHIP_OPTIONS}
                             placeholder={content.placeholderSelect}
                         />
                         <FormFieldSelect
                             control={form.control}
                             fieldName="status"
                             label={content.labelStatus}
-                            options={getFamilyMemberHistoryStatusOptions(content)}
+                            options={FAMILY_MEMBER_HISTORY_STATUS_OPTIONS}
                             placeholder={content.placeholderSelect}
                         />
                         <FormFieldInput

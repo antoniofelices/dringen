@@ -5,19 +5,14 @@ import {
 } from '@resources/family-member-history/services/familyMemberHistory.service'
 import { familyMemberHistoryFormToFhir } from '@resources/family-member-history/domain/familyMemberHistory.adapter'
 import type { FamilyMemberHistoryFormType } from '@resources/family-member-history/types/familyMemberHistory.model'
-import type { ValueSetsContent } from '@shared/fhir/valueSets.content'
 
-export const useUpdateFamilyMemberHistory = (
-    id: string,
-    patientId: string,
-    content: ValueSetsContent
-) => {
+export const useUpdateFamilyMemberHistory = (id: string, patientId: string) => {
     const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: async (formData: FamilyMemberHistoryFormType) => {
             const existing = await getFamilyMemberHistoryById(id)
-            const updated = familyMemberHistoryFormToFhir(formData, existing, content)
+            const updated = familyMemberHistoryFormToFhir(formData, existing)
             return updateFamilyMemberHistory(id, updated)
         },
         onSuccess: () => {

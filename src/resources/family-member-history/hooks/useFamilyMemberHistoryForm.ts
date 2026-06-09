@@ -9,7 +9,7 @@ import { familyMemberHistorySchema } from '@resources/family-member-history/sche
 import { useCreateFamilyMemberHistory } from '@resources/family-member-history/hooks/useCreateFamilyMemberHistory'
 import { useUpdateFamilyMemberHistory } from '@resources/family-member-history/hooks/useUpdateFamilyMemberHistory'
 import { getValueFromOptions } from '@shared/utils/utils'
-import { getRelationshipOptions } from '@shared/fhir/valueSets.domain'
+import { RELATIONSHIP_OPTIONS } from '@shared/fhir/valueSets.domain'
 import { contentES as content } from '@resources/family-member-history/components/FamilyMemberHistoryForm.content'
 
 export const useFamilyMemberHistoryForm = ({
@@ -18,11 +18,10 @@ export const useFamilyMemberHistoryForm = ({
     mode,
     onSuccess,
 }: FamilyMemberHistoryFormProps) => {
-    const createMutation = useCreateFamilyMemberHistory(patientId, content)
+    const createMutation = useCreateFamilyMemberHistory(patientId)
     const updateMutation = useUpdateFamilyMemberHistory(
         historyData?.id ?? '',
-        patientId,
-        content
+        patientId
     )
 
     const isNoKnownHistory =
@@ -35,7 +34,7 @@ export const useFamilyMemberHistoryForm = ({
             relationship: isNoKnownHistory
                 ? ''
                 : (getValueFromOptions(
-                      getRelationshipOptions(content),
+                      RELATIONSHIP_OPTIONS,
                       historyData?.relationship
                   ) ?? ''),
             condition: isNoKnownHistory ? '' : (historyData?.condition ?? ''),

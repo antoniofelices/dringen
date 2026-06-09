@@ -7,8 +7,8 @@ import FormFieldSelect from '@shared/components/ui/FormFieldSelect'
 import FormFieldCombobox from '@shared/components/ui/FormFieldCombobox'
 import { roleOptions } from '@resources/practitioner/config/config'
 import {
-    getGenderOptions,
-    getDaysOfWeekOptions,
+    GENDER_OPTIONS,
+    DAYS_OF_WEEK_OPTIONS,
 } from '@shared/fhir/valueSets.domain'
 import { useAddNewPractitionerForm } from '@resources/practitioner/hooks/useAddNewPractitionerForm'
 import type { AddNewPractitionerFormProps } from '@resources/practitioner/types/practitioner.model'
@@ -67,7 +67,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                         control={form.control}
                         fieldName="gender"
                         label={content.labelGender}
-                        options={getGenderOptions(content)}
+                        options={GENDER_OPTIONS}
                     />
                 </div>
                 <FormFieldSelect
@@ -109,7 +109,7 @@ const AddNewPractitionerForm = ({ onSuccess }: AddNewPractitionerFormProps) => {
                                 control={form.control}
                                 fieldName={`availableTime.${index}.daysOfWeek`}
                                 label={content.labelDaysOfWeek}
-                                options={getDaysOfWeekOptions(content)}
+                                options={DAYS_OF_WEEK_OPTIONS}
                                 placeholder={content.labelDaysOfWeek}
                             />
                             <FormFieldInput
